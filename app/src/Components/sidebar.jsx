@@ -8,7 +8,7 @@ import {
 export function Sidebar() {
   return (
     <>
-      <div className="bg-slate-950 text-white ">
+      <div className="bg-primary text-white ">
         <div className="flex flex-col items-center gap-10 sticky top-0">
           <FontAwesomeIcon
             icon={faCircleArrowDown}

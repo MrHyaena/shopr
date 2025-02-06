@@ -23,14 +23,15 @@ export function Subscriptions() {
           key={"sub" + index}
         >
           <div>
-            <p className="text-slate-600 text-sm">ID: 48494521894564</p>
+            <p className="text-p text-sm mb-2">ID: 48494521894564</p>
 
-            <div className="flex gap-10 items-center">
-              <h2 className="text-2xl text-slate-800 font-bold ">
+            <div className="flex gap-5 items-center">
+              <img src="https://google.cz/favicon.ico" alt="icon"></img>
+              <h2 className="text-2xl text-heading font-bold mr-5 mt-[-8px]">
                 www.aktin.cz
               </h2>
               <Link to={editURL}>
-                <button className="bg-slate-100 p-2 text-md font-semibold rounded-md">
+                <button className="bg-slate-100 text-slate-00 p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-slate-200">
                   Upravit
                 </button>
               </Link>
@@ -44,7 +45,7 @@ export function Subscriptions() {
             >
               <FontAwesomeIcon
                 icon={faChevronUp}
-                className="text-3xl text-gray-600"
+                className="text-3xl text-subIcon hover:rounded-full hover:bg-slate-200 p-2 transition-all ease-in-out"
               />
             </button>
           ) : (
@@ -55,21 +56,18 @@ export function Subscriptions() {
             >
               <FontAwesomeIcon
                 icon={faChevronDown}
-                className="text-3xl text-gray-600"
+                className="text-3xl text-subIcon hover:rounded-full hover:bg-slate-200 p-2  transition-all ease-in-out"
               />
             </button>
           )}
 
           {toggle ? (
-            <div className="col-span-2 grid grid-cols-[1fr_500px] gap-y-5 gap-x-10 border-t pt-10 mt-4 border-slate-200">
-              <h3 className="text-xl font-bold mb-3 text-slate-800">
-                Produkty
-              </h3>
-              <h3 className="text-xl font-bold mb-3 text-slate-800">
-                Informace o předplatném
-              </h3>
+            <div className="col-span-2 grid grid-cols-[1fr_500px] gap-y-5 gap-x-15 border-t border-slate-200">
               <div>
-                <ul className="text-md font-semibold text-slate-700 flex flex-col">
+                <h3 className="text-xl font-bold mb-3 text-heading py-5 mt-10">
+                  Produkty
+                </h3>
+                <ul className="text-md font-semibold text-subItem flex flex-col">
                   {arraySub.map((item, index) => {
                     if (index % 2 == 0) {
                       return (
@@ -90,26 +88,64 @@ export function Subscriptions() {
                 </ul>
               </div>
               <div className="pr-5 flex flex-col">
+                <h3 className="text-xl font-bold mb-3 text-heading py-5 mt-10">
+                  Cílový zákazník
+                </h3>
                 <div className="grid grid-cols-2 border-slate-300 p-2 bg-slate-100">
-                  <h4 className="text-slate-800 font-bold">E-shop:</h4>
+                  <h4 className="text-heading font-bold">E-shop:</h4>
                   <p>www.aktin.cz</p>
                 </div>
                 <div className="grid grid-cols-2 border-slate-300 p-2 ">
-                  <h4 className="text-slate-800 font-bold">Způsob doručení:</h4>
+                  <h4 className="text-heading font-bold">Způsob doručení:</h4>
                   <p>Kurýr</p>
                 </div>
                 <div className="grid grid-cols-2 border-slate-300 p-2 bg-slate-100">
-                  <h4 className="text-slate-800 font-bold">
+                  <h4 className="text-heading font-bold">
                     Preferovaný den objednání:
                   </h4>
                   <p>Pondělí</p>
                 </div>
                 <div className="grid grid-cols-2 border-slate-300 p-2 ">
-                  <h4 className="text-slate-800 font-bold">Frekvence:</h4>
+                  <h4 className="text-heading font-bold">Frekvence:</h4>
+                  <p>Měsíc</p>
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-heading py-5 mt-10">
+                  Cílový zákazník
+                </h3>
+                <div className="grid grid-cols-2 border-slate-300 p-2 bg-slate-100">
+                  <h4 className="text-heading font-bold">Jméno:</h4>
+                  <p>Pondělí</p>
+                </div>
+                <div className="grid grid-cols-2 border-slate-300 p-2 ">
+                  <h4 className="text-heading font-bold">Příjmení:</h4>
+                  <p>Měsíc</p>
+                </div>
+                <div className="grid grid-cols-2 border-slate-300 p-2 bg-slate-100">
+                  <h4 className="text-heading font-bold">Telefon:</h4>
+                  <p>Pondělí</p>
+                </div>
+                <div className="grid grid-cols-2 border-slate-300 p-2 ">
+                  <h4 className="text-heading font-bold">Email:</h4>
+                  <p>Měsíc</p>
+                </div>
+                <div className="grid grid-cols-2 border-slate-300 p-2 bg-slate-100">
+                  <h4 className="text-heading font-bold">Adresa:</h4>
+                  <p>Pondělí</p>
+                </div>
+                <div className="grid grid-cols-2 border-slate-300 p-2 ">
+                  <h4 className="text-heading font-bold">ČP:</h4>
+                  <p>Měsíc</p>
+                </div>
+                <div className="grid grid-cols-2 border-slate-300 p-2 bg-slate-100">
+                  <h4 className="text-heading font-bold">Město:</h4>
+                  <p>Pondělí</p>
+                </div>
+                <div className="grid grid-cols-2 border-slate-300 p-2 ">
+                  <h4 className="text-heading font-bold">PSČ:</h4>
                   <p>Měsíc</p>
                 </div>
                 <div className="mt-5 flex justify-end">
-                  <button className="font-semibold text-slate-600 bg-slate-100 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-red-300 hover:text-slate-800 cursor-pointer">
+                  <button className="font-semibold text-slate-600 bg-slate-100 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-primary cursor-pointer">
                     Zrušit předplatné
                   </button>
                 </div>
@@ -129,10 +165,10 @@ export function Subscriptions() {
     <>
       <div className="bg-slate-50 p-10 flex flex-col gap-5">
         <div className="flex justify-between">
-          <h1 className="text-3xl font-bold text-slate-800 pl-10">
+          <h1 className="text-3xl font-bold text-primary pl-10">
             Vaše předplatné
           </h1>
-          <button className="bg-emerald-300 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-emerald-400">
+          <button className="bg-tertiary p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-emerald-500">
             Aktualizovat
           </button>
         </div>
