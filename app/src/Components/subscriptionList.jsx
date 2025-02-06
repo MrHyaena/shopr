@@ -1,28 +1,39 @@
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-export function Board() {
+export function Subscriptions() {
   const arraySub = [1, 2, 3, 4];
 
   // FUNCTION FOR GENERATING SUBSCRIPTION TABS
 
-  function SubscriptionTabs() {
+  function SubscriptionTabs({ index }) {
     const [toggle, setToggle] = useState(false);
+
+    let user = "peter";
+    let subID = "54594516";
+
+    let editURL = "/form/?user=" + user + "&subID=" + subID;
 
     return (
       <>
-        <div className="bg-white p-10 rounded-lg border border-slate-200 shadow-lg shadow-slate-100 grid grid-cols-[1fr_80px] gap-4">
+        <div
+          className="bg-white p-10 rounded-lg border border-slate-200 shadow-lg shadow-slate-100 grid grid-cols-[1fr_80px] gap-4"
+          key={"sub" + index}
+        >
           <div>
-            <p1 className="text-slate-600 text-sm">ID: 48494521894564</p1>
+            <p className="text-slate-600 text-sm">ID: 48494521894564</p>
 
-            <div className="flex gap-5 items-center">
+            <div className="flex gap-10 items-center">
               <h2 className="text-2xl text-slate-800 font-bold ">
                 www.aktin.cz
               </h2>
-              <button className="bg-slate-100 p-2 text-md font-semibold rounded-md">
-                Upravit
-              </button>
+              <Link to={editURL}>
+                <button className="bg-slate-100 p-2 text-md font-semibold rounded-md">
+                  Upravit
+                </button>
+              </Link>
             </div>
           </div>
           {toggle ? (
@@ -126,8 +137,8 @@ export function Board() {
           </button>
         </div>
 
-        {arraySub.map(() => {
-          return <SubscriptionTabs />;
+        {arraySub.map((item, index) => {
+          return <SubscriptionTabs index={index} />;
         })}
       </div>
     </>
