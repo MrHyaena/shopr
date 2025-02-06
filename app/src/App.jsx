@@ -1,11 +1,16 @@
 import { useState } from "react";
+import { Sidebar } from "./sidebar";
+import { Board } from "./board";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <h1 className="text-red-500">Hello</h1>
+      <div className="grid grid-cols-[100px_1fr] min-h-screen">
+        <Sidebar />
+        <Board />
+      </div>
     </>
   );
 }
