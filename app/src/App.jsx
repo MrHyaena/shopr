@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <div className="grid grid-cols-[100px_1fr] min-h-screen">
+      <div className="grid grid-cols-[200px_1fr] min-h-screen">
         <Sidebar />
         <Board />
       </div>
