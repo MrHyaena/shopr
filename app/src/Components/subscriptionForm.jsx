@@ -5,10 +5,12 @@ import {
   faDeleteLeft,
   faPlus,
   faPlusSquare,
+  faSquareXmark,
+  faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 
 export function SubscriptionForm() {
   const [step, setStep] = useState(1);
@@ -60,28 +62,28 @@ export function SubscriptionForm() {
             Adresa dodání / Fakturační údaje
           </legend>
           <div className="grid grid-cols-2 gap-5">
-            <label className="flex flex-col text-primary text-lg font-semibold">
+            <label className="flex flex-col text--textDark text-lg font-semibold">
               Adresa
               <input
                 type="text"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
             </label>
-            <label className="flex flex-col text-primary text-lg font-semibold">
+            <label className="flex flex-col text--textDark text-lg font-semibold">
               Číslo popisné
               <input
                 type="text"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
             </label>
-            <label className="flex flex-col text-primary text-lg font-semibold">
+            <label className="flex flex-col text--textDark text-lg font-semibold">
               Město
               <input
                 type="text"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
             </label>
-            <label className="flex flex-col text-primary text-lg font-semibold">
+            <label className="flex flex-col text--textDark text-lg font-semibold">
               PSČ
               <input
                 type="email"
@@ -92,7 +94,7 @@ export function SubscriptionForm() {
         </fieldset>
         <div className="mx-auto">
           <button
-            className="bg-tertiary p-3 rounded-md text-lg font-semibold text-white min-w-[150px]"
+            className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
             onClick={() => {
               setStep(2);
             }}
@@ -111,7 +113,7 @@ export function SubscriptionForm() {
           <h2 className="text-xl font-semibold mb-4 text-heading">
             Proč potřebujeme tyto údaje?
           </h2>
-          <p className="text-md font-semibold text-p">
+          <p className="text-md font-semibold text-textMedium">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dolorum
             quam quasi odio asperiores dicta, ut accusamus pariatur error itaque
             vero, dignissimos, quidem atque consequuntur aspernatur nemo quae
@@ -130,6 +132,26 @@ export function SubscriptionForm() {
             Parametry předplatného
           </legend>
           <div className="grid gap-5">
+            <label className="flex flex-col text-heading text-lg font-semibold">
+              Název předplatného
+              <input
+                type="text"
+                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                placeholder="Moje první předplatné"
+              ></input>
+            </label>
+            <div className="text-md font-semibold text-textDark flex items-center gap-3 bg-quad p-2 rounded-lg">
+              <FontAwesomeIcon
+                icon={faTriangleExclamation}
+                className="text-2xl"
+              />
+              <p>
+                Název předplatného musí být stejný jako ten, který budete
+                zadávat při platbě. Pouze tak můžeme poznat, zda je předplatné
+                platné či nikoliv.
+              </p>
+            </div>
+
             <label className="flex flex-col text-heading text-lg font-semibold">
               Webová stránka eshopu
               <input
@@ -204,7 +226,7 @@ export function SubscriptionForm() {
 
         <div className="mx-auto flex gap-3">
           <button
-            className="bg-tertiary p-3 rounded-md text-lg font-semibold text-white min-w-[150px]"
+            className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
             onClick={() => {
               setStep(1);
             }}
@@ -212,7 +234,7 @@ export function SubscriptionForm() {
             <FontAwesomeIcon icon={faArrowLeft} /> Zpět
           </button>
           <button
-            className="bg-tertiary p-3 rounded-md text-lg font-semibold text-white min-w-[150px]"
+            className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
             onClick={() => {
               setStep(3);
             }}
@@ -231,7 +253,7 @@ export function SubscriptionForm() {
           <h2 className="text-xl font-semibold mb-4 text-heading">
             Nastavte si parametry vašeho předplatného
           </h2>
-          <p className="text-md font-semibold text-p">
+          <p className="text-md font-semibold text-textMedium">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dolorum
             quam quasi odio asperiores dicta, ut accusamus pariatur error itaque
             vero, dignissimos, quidem atque consequuntur aspernatur nemo quae
@@ -274,7 +296,7 @@ export function SubscriptionForm() {
             {inputs.map((item, index) => {
               return (
                 <div className="grid grid-cols-12 gap-2 maw-w-full">
-                  <label className="flex flex-col text-primary text-lg font-semibold col-span-6">
+                  <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
                     Odkaz na položku
                     <input
                       name="url"
@@ -287,7 +309,7 @@ export function SubscriptionForm() {
                       }}
                     ></input>
                   </label>
-                  <label className="flex flex-col text-primary text-lg font-semibold col-span-2">
+                  <label className="flex flex-col text--textDark text-lg font-semibold col-span-2">
                     Množství
                     <input
                       name="amount"
@@ -316,8 +338,8 @@ export function SubscriptionForm() {
                     </select>
                   </label>
                   <FontAwesomeIcon
-                    icon={faDeleteLeft}
-                    className="text-xl text-red-400 self-end mb-[14px] cursor-pointer"
+                    icon={faSquareXmark}
+                    className="text-xl text-red-400 self-end mb-[14px] cursor-textMediumointer cursor-pointer"
                     onClick={(e) => {
                       e.preventDefault();
                       handleDeleteInput(index);
@@ -329,19 +351,19 @@ export function SubscriptionForm() {
           </div>
 
           <button
-            className="flex justify-center items-center rounded-sm my-4 text-3xl cursor-pointer hover:scale-105 ease-in-out transition-all"
+            className="flex justify-center items-center rounded-sm my-4 text-3xl hover:scale-105 ease-in-out transition-all cursor-pointer"
             onClick={(e) => {
               e.preventDefault();
               handleAddInput();
             }}
           >
-            <FontAwesomeIcon icon={faPlusSquare} className="text-tertiary" />
+            <FontAwesomeIcon icon={faPlusSquare} className=" text-textDark" />
           </button>
         </fieldset>
 
         <div className="mx-auto flex gap-3">
           <button
-            className="bg-tertiary p-3 rounded-md text-lg font-semibold text-white min-w-[150px]"
+            className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
             onClick={() => {
               setStep(2);
             }}
@@ -349,7 +371,7 @@ export function SubscriptionForm() {
             Zpět <FontAwesomeIcon icon={faArrowLeft} />
           </button>
           <button
-            className="bg-tertiary p-3 rounded-md text-lg font-semibold text-white min-w-[150px]"
+            className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
             onClick={(e) => {
               e.preventDefault();
             }}
@@ -368,7 +390,7 @@ export function SubscriptionForm() {
           <h2 className="text-xl font-semibold mb-4 text-heading">
             Vyberte produkty, které chcete objednávat
           </h2>
-          <p className="text-md font-semibold text-p">
+          <p className="text-md font-semibold text-textMedium">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dolorum
             quam quasi odio asperiores dicta, ut accusamus pariatur error itaque
             vero, dignissimos, quidem atque consequuntur aspernatur nemo quae
@@ -386,9 +408,12 @@ export function SubscriptionForm() {
           <h1 className="text-3xl font-bold text-heading pl-10">
             Nastavení předplatného
           </h1>
-          <button className="bg-emerald-300 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-emerald-500">
-            Uložit
-          </button>
+          <Link
+            to="/"
+            className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+          >
+            Zpět
+          </Link>
         </div>
         <div className="grid grid-cols-[1fr_1fr]">
           {step == 1 && <StepOne />}

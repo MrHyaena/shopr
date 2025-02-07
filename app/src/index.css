@@ -4,14 +4,16 @@
 }
 
 @theme {
-  --color-primary: var(--color-slate-950);
-  --color-secondary: var(--color-slate-900);
-  --color-tertiary: var(--color-emerald-400);
+  --color-primary: var(--color-zinc-950);
+  --color-secondary: var(--color-zinc-900);
+  --color-tertiary: var(--color-yellow-300);
+  --color-quad: var(--color-yellow-200);
+  --color-textDark: var(--color-zinc-900);
+  --color-textMedium: var(--color-zinc-700);
+  --color-textLighter: var(--color-zinc-400);
+  --color-textLight: var(--color-zinc-100);
+
   --color-deleteButton: var(--color-red-200);
-  --color-heading: var(--color-slate-800);
-  --color-headingTwo: var(--color-slate-700);
-  --color-label: var(--color-slate-800);
-  --color-p: var(--color-slate-800);
   --color-input: var(--color-slate-700);
   --color-subIcon: var(--color-slate-500);
   --color-subItem: var(--color-slate-800);
