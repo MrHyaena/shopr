@@ -8,11 +8,15 @@ const Schema = mongoose.Schema;
 
 const subscriptionSchema = new Schema(
   {
+    userId: {
+      type: String,
+      required: true,
+    },
     contact: {
       type: Object,
       required: true,
     },
-    adress: {
+    address: {
       type: Object,
       required: true,
     },
@@ -45,4 +49,4 @@ const subscriptionSchema = new Schema(
 );
 
 //module export
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Subscription", subscriptionSchema);
