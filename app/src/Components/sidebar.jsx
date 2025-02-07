@@ -12,9 +12,9 @@ import { Link } from "react-router-dom";
 export function Sidebar() {
   return (
     <>
-      <div>
-        <div className="bg-primary min-h-full border-slate-200 shadow-lg shadow-slate-200 text-white">
-          <div className="sticky top-0 grid grid-rows-7">
+      <div className="min-h-screen">
+        <div className="bg-primary h-screen border-slate-200 shadow-xl shadow-slate-200 text-white sticky top-0">
+          <div className=" grid grid-rows-7">
             <FontAwesomeIcon
               icon={faCircleArrowDown}
               className="text-[30px] my-10 row-span-1 self-start justify-self-center"

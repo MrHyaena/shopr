@@ -1,11 +1,30 @@
-const express = require("express");
+//basic server settings with all the required functions
+//and variables/constants from different files
 
+//requirements
+const express = require("express");
+const userRouter = require("./routes/userRouter");
+const subscriptionRouter = require("./routes/subscriptionRouter");
+const mongoose = require("mongoose");
+require("dotenv").config();
+
+//express application
 const app = express();
 
-app.use("/test", (req, res) => {
-  console.log("test works");
-});
+//router for handling user api calls
+app.use("/api/user", userRouter);
 
-app.listen(4000, () => {
-  console.log("listening on port 4000");
-});
+//router for handling subscription api calls
+app.use("/api/subscription", subscriptionRouter);
+
+//starting server and connecting to database
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    app.listen(process.env.PORT, () => {
+      console.log("listeing on port", process.env.PORT);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
