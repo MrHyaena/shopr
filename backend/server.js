@@ -11,6 +11,9 @@ require("dotenv").config();
 //express application
 const app = express();
 
+//middleware
+app.use(express.json());
+
 //router for handling user api calls
 app.use("/api/user", userRouter);
 

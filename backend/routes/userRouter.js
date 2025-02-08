@@ -5,6 +5,11 @@
 const express = require("express");
 
 //controller functions
+const {
+  loginUser,
+  signupUser,
+  deleteUser,
+} = require("../controllers/userController");
 
 //creating router
 const router = express.Router();
@@ -12,18 +17,12 @@ const router = express.Router();
 // ---------------------- SERVER ROUTES ----------------------
 
 //login route
-router.post("/login", express.json(), (req, res) => {
-  res.json("login");
-});
+router.post("/login", loginUser);
 
 //signup route
-router.post("/signup", express.json(), (req, res) => {
-  res.json("signup");
-});
+router.post("/signup", signupUser);
 
 //delete user
-router.post("/delete", express.json(), (req, res) => {
-  res.json("delete");
-});
+router.post("/delete", deleteUser);
 
 module.exports = router;

@@ -30,7 +30,7 @@ const loginUser = async (req, res) => {
   try {
     const user = await User.signup(email, password);
 
-    //creat token
+    //create token
     const token = createToken(user._id);
 
     res.status(200).json({ email, token });
@@ -39,4 +39,20 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { signupUser, loginUser };
+//delete user controller function
+const deleteUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.delete(email, password);
+
+    //delete user
+    const token = createToken(user._id);
+
+    res.status(200).json({ email, token });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+module.exports = { signupUser, loginUser, deleteUser };

@@ -3,6 +3,13 @@
 
 //requirements
 const express = require("express");
+const {
+  createSubscription,
+  getSubscriptions,
+  getSubscription,
+  deleteSubscription,
+  updateSubscription,
+} = require("../controllers/subscriptionController");
 
 //controller functions
 
@@ -11,19 +18,19 @@ const router = express.Router();
 
 // ---------------------- SERVER ROUTES ----------------------
 
-//login route
-router.post("/create", express.json(), (req, res) => {
-  res.json("create");
-});
+//create subscription route
+router.post("/create", createSubscription);
 
-//signup route
-router.post("/edit", express.json(), (req, res) => {
-  res.json("edit");
-});
+//update subscription route
+router.patch("/update", updateSubscription);
 
-//delete user
-router.post("/delete", express.json(), (req, res) => {
-  res.json("delete");
-});
+//delete subscription route
+router.delete("/:id", deleteSubscription);
+
+//get all subscriptions route
+router.get("/", getSubscriptions);
+
+//get one subscription route
+router.get("/:id", getSubscription);
 
 module.exports = router;

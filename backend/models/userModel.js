@@ -71,5 +71,28 @@ userSchema.statics.login = async function (email, password) {
   return user;
 };
 
+userSchema.statics.delete = async function (email, password) {
+  if (!email || !password) {
+    throw Error("Musíte vyplnit všechna pole");
+  }
+
+  const user = await this.findOne({ email });
+
+  if (!user) {
+    throw Error("Nesprávný email");
+  }
+
+  //testing if password is matching
+  const match = await bcrypt.compare(password, user.password);
+
+  if (!match) {
+    throw Error("Nesprávné heslo");
+  }
+
+  const deletedUser = await this.findByIdAndDelete({ _id: user.id });
+
+  return deletedUser;
+};
+
 //module export
 module.exports = mongoose.model("User", userSchema);
