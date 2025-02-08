@@ -2,6 +2,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
+const { emit } = require("./userModel");
 
 //user schema for mongoDB
 const Schema = mongoose.Schema;

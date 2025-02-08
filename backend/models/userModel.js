@@ -25,15 +25,11 @@ const userSchema = new Schema(
 userSchema.statics.signup = async function (email, password) {
   //validation
   if (!email || !password) {
-    throw Error({
-      error: "Musíte vyplnit všechna pole",
-    });
+    throw Error("Musíte vyplnit všechna pole");
   }
 
   if (!validator.isEmail(email)) {
-    throw Error({
-      error: "Emailová adresa není platná",
-    });
+    throw Error("Emailová adresa není platná");
   }
 
   const exists = await this.findOne({ email });
@@ -48,6 +44,31 @@ userSchema.statics.signup = async function (email, password) {
 
   //creating new record of user into Users database
   const user = await this.create({ email, password: hash });
+
+  return user;
+};
+
+//static login method
+userSchema.statics.login = async function (email, password) {
+  //validation
+  if (!email || !password) {
+    throw Error("Musíte vyplnit všechna pole");
+  }
+
+  const user = await this.findOne({ email });
+
+  if (!user) {
+    throw Error("Nesprávný email");
+  }
+
+  //testing if password is matching
+  const match = await bcrypt.compare(password, user.password);
+
+  if (!match) {
+    throw Error("Nesprávné heslo");
+  }
+
+  return user;
 };
 
 //module export
