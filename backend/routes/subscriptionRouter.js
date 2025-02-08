@@ -19,10 +19,10 @@ const router = express.Router();
 // ---------------------- SERVER ROUTES ----------------------
 
 //create subscription route
-router.post("/create", createSubscription);
+router.post("/", createSubscription);
 
 //update subscription route
-router.patch("/update", updateSubscription);
+router.patch("/:id", updateSubscription);
 
 //delete subscription route
 router.delete("/:id", deleteSubscription);
