@@ -1,16 +1,18 @@
 const Subscription = require("../models/subscriptionModel");
 const mongoose = require("mongoose");
 
-//get all workouts
+//get all subscriptions
 const getSubscriptions = async (req, res) => {
   const user_id = req.user_id;
 
-  const workouts = await Subscription.find({ user_id }).sort({ createdAt: -1 });
+  const subscriptions = await Subscription.find({ user_id }).sort({
+    createdAt: -1,
+  });
 
-  res.status(200).json(workouts);
+  res.status(200).json(subscriptions);
 };
 
-//get a single workout
+//get a single subscription
 const getSubscription = async (req, res) => {
   const { id } = req.params;
 
@@ -18,13 +20,13 @@ const getSubscription = async (req, res) => {
     return res.status(404).json({ error: "Takové předplatné neexistuje" });
   }
 
-  const workout = await Subscription.findById(id);
+  const subscription = await Subscription.findById(id);
 
-  if (!workout) {
+  if (!subscription) {
     return res.status(404).json({ error: "Takové předplatné neexistuje" });
   }
 
-  res.status(200).json(workout);
+  res.status(200).json(subscription);
 };
 
 //create new subscription
@@ -43,7 +45,7 @@ const createSubscription = async (req, res) => {
   //validation
   let emptyFields = [];
 
-  if (!contact) {
+  if (!contact.email) {
     emptyFields.push("Kontaktní údaje");
   }
   if (!address) {
@@ -75,7 +77,8 @@ const createSubscription = async (req, res) => {
   //Creating subscription
   try {
     const user_id = req.user_id;
-    const workout = await Workout.create({
+    const subscription = await Subscription.create({
+      user_id,
       contact,
       address,
       name,
@@ -85,7 +88,7 @@ const createSubscription = async (req, res) => {
       deliveryMethod,
       items,
     });
-    res.status(200).json(workout);
+    res.status(200).json(subscription);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
