@@ -9,23 +9,62 @@ import {
   faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useCreateWorkout } from "../hooks/useCreateWorkout";
 
 export function SubscriptionForm() {
   //step state is for changing steps in form
   const [step, setStep] = useState(1);
 
+  //data from form
+  const [formData, setFormData] = useState({
+    firstName: "",
+    secondName: "",
+    phone: "",
+    email: "",
+    address: "",
+    addressNumber: "",
+    city: "",
+    cityNumber: "",
+    subName: "",
+    subWebsite: "",
+    subFrequency: 1,
+    subDay: "monday",
+    subDeliveryMethod: "courier",
+    subDeliveryAddress: "",
+    items: [
+      { url: "", amount: "", changable: "" },
+      { url: "", amount: "", changable: "" },
+    ],
+  });
+
   //step one of form
-  function StepOne({}) {
-    const [firstName, setFirstName] = useState("");
-    const [secondName, setSecondName] = useState("");
-    const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("");
-    const [address, setAddress] = useState("");
-    const [addressNumber, setAddressNumber] = useState("");
-    const [city, setCity] = useState("");
-    const [cityNumber, setCityNumber] = useState("");
+  function StepOne() {
+    const [firstName, setFirstName] = useState(formData.firstName);
+    const [secondName, setSecondName] = useState(formData.secondName);
+    const [phone, setPhone] = useState(formData.phone);
+    const [email, setEmail] = useState(formData.email);
+    const [address, setAddress] = useState(formData.address);
+    const [addressNumber, setAddressNumber] = useState(formData.addressNumber);
+    const [city, setCity] = useState(formData.city);
+    const [cityNumber, setCityNumber] = useState(formData.cityNumber);
+
+    function handleNext() {
+      const object = {
+        ...formData,
+        firstName,
+        secondName,
+        phone,
+        email,
+        address,
+        addressNumber,
+        city,
+        cityNumber,
+      };
+
+      setFormData(object);
+    }
 
     return (
       <form className="flex flex-col gap-5 p-10 bg-white border border-slate-200 rounded-lg">
@@ -136,6 +175,7 @@ export function SubscriptionForm() {
             className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
             onClick={() => {
               setStep(2);
+              handleNext();
             }}
           >
             Pokračovat <FontAwesomeIcon icon={faArrowRight} />
@@ -165,12 +205,30 @@ export function SubscriptionForm() {
 
   //step two of form
   function StepTwo() {
-    const [subName, setSubName] = useState("");
-    const [subWebsite, setSubWebsite] = useState("");
-    const [subFrequency, setSubFrequency] = useState("");
-    const [subDay, setSubDay] = useState("");
-    const [subDeliveryMethod, setSubDeliveryMethod] = useState(0);
-    const [subDeliveryAdress, setSubDeliveryAdress] = useState("");
+    const [subName, setSubName] = useState(formData.subName);
+    const [subWebsite, setSubWebsite] = useState(formData.subWebsite);
+    const [subFrequency, setSubFrequency] = useState(formData.subFrequency);
+    const [subDay, setSubDay] = useState(formData.subDay);
+    const [subDeliveryMethod, setSubDeliveryMethod] = useState(
+      formData.subDeliveryMethod
+    );
+    const [subDeliveryAddress, setSubDeliveryAddress] = useState(
+      formData.subDeliveryAddress
+    );
+
+    function handleNext() {
+      const object = {
+        ...formData,
+        subName,
+        subWebsite,
+        subFrequency,
+        subDay,
+        subDeliveryMethod,
+        subDeliveryAddress,
+      };
+
+      setFormData(object);
+    }
 
     return (
       <form className="flex flex-col gap-5 p-10 bg-white border border-slate-200 rounded-lg">
@@ -260,11 +318,11 @@ export function SubscriptionForm() {
                 id="delivery"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               >
-                <option value="0">Nejlevnější kurýr</option>
-                <option value="1">Zásilkovna</option>
+                <option value="courier">Nejlevnější kurýr</option>
+                <option value="dropbox">Zásilkovna</option>
               </select>
             </label>
-            {subDeliveryMethod == 1 && (
+            {subDeliveryMethod == "dropbox" && (
               <label className="flex flex-col text-heading text-lg font-semibold">
                 Vložte odkaz na zásilkovnu
                 <div className="flex gap-2 justify-evenly">
@@ -276,9 +334,9 @@ export function SubscriptionForm() {
                     Najít zásilkovnu
                   </a>
                   <input
-                    value={subDeliveryAdress}
+                    value={subDeliveryAddress}
                     onChange={(e) => {
-                      setSubDeliveryAdress(e.target.value);
+                      setSubDeliveryAddress(e.target.value);
                     }}
                     type="text"
                     className="bg-slate-50 border border-slate-300 rounded-md p-2 text-md font-semibold text-input w-[75%]"
@@ -304,6 +362,7 @@ export function SubscriptionForm() {
             className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
             onClick={() => {
               setStep(3);
+              handleNext();
             }}
           >
             Pokračovat <FontAwesomeIcon icon={faArrowRight} />
@@ -333,9 +392,9 @@ export function SubscriptionForm() {
 
   //step three of form
   function StepThree() {
-    const [items, setItems] = useState([
-      { url: "", amount: "", changable: "" },
-    ]);
+    const [items, setItems] = useState([...formData.items]);
+
+    const { createWorkout, error, isLoading } = useCreateWorkout();
 
     const handleAddInput = () => {
       setItems([...items, { url: "", amount: "", changable: "" }]);
@@ -354,6 +413,13 @@ export function SubscriptionForm() {
       setItems(newArray);
     };
 
+    function handleBack() {
+      const object = { ...formData };
+      object.items = items;
+      console.log(object);
+      setFormData(object);
+    }
+
     return (
       <form className="flex flex-col gap-5 p-10 bg-white border border-slate-200 rounded-lg">
         <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
@@ -363,7 +429,10 @@ export function SubscriptionForm() {
           <div className="flex flex-col gap-3">
             {items.map((item, index) => {
               return (
-                <div className="grid grid-cols-12 gap-2 maw-w-full">
+                <div
+                  className="grid grid-cols-12 gap-2 maw-w-full"
+                  key={"item" + index}
+                >
                   <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
                     Odkaz na položku
                     <input
@@ -434,39 +503,44 @@ export function SubscriptionForm() {
             className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
             onClick={() => {
               setStep(2);
+              handleBack();
             }}
           >
             Zpět <FontAwesomeIcon icon={faArrowLeft} />
           </button>
           <button
+            disabled={isLoading}
             className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
             onClick={(e) => {
               e.preventDefault();
               const subscription = {
-                contact: {
-                  firstName: firstName,
-                  secondName: secondName,
-                  phone: phone,
-                  email: email,
-                },
-                address: {
-                  address: address,
-                  addressNumber: addressNumber,
-                  city: city,
-                  cityNumber: cityNumber,
-                },
-                subName: subName,
-                subWebsite: subWebsite,
-                subFrequency: subFrequency,
-                subDeliveryMethod: subDeliveryMethod,
-                subDeliveryAdress: subDeliveryAdress,
+                firstName: formData.firstName,
+                secondName: formData.secondName,
+                phone: formData.phone,
+                email: formData.email,
+                address: formData.address,
+                addressNumber: formData.addressNumber,
+                city: formData.city,
+                cityNumber: formData.cityNumber,
+                subName: formData.subName,
+                subWebsite: formData.subWebsite,
+                subFrequency: formData.subFrequency,
+                subDay: formData.subDay,
+                subDeliveryMethod: formData.subDeliveryMethod,
+                subDeliveryAddress: formData.subDeliveryAddress,
                 items: items,
               };
-              console.log(subscription);
+
+              createWorkout(subscription);
             }}
           >
             Uložit <FontAwesomeIcon icon={faCheck} />
           </button>
+          {error && (
+            <h2 className="font-bold text-center p-2 bg-red-200 rounded-lg border-2 border-red-300">
+              {error}
+            </h2>
+          )}
         </div>
       </form>
     );

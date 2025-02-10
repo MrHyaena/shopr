@@ -9,20 +9,37 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 
 export function Subscriptions() {
   const arraySub = [1, 2, 3, 4, 5, 6, 7];
+  const { subscriptions } = useSubscriptionContext();
+
+  // FUNCTION FOR DELETING SUBSCRIPTIONS
+  function handleDelete() {}
 
   // FUNCTION FOR GENERATING SUBSCRIPTION TABS
 
-  function SubscriptionTabs({ index }) {
+  function SubscriptionTabs({
+    subId,
+    firstName,
+    secondName,
+    phone,
+    email,
+    address,
+    addressNumber,
+    city,
+    cityNumber,
+    subName,
+    subWebsite,
+    subFrequency,
+    subDay,
+    subDeliveryMethod,
+    subDeliveryAddress,
+    items,
+  }) {
     const [toggle, setToggle] = useState(false);
     const [active, setActive] = useState(true);
-
-    let user = "peter";
-    let subID = "54594516";
-
-    let editURL = "/form/?user=" + user + "&subID=" + subID;
 
     return (
       <>
@@ -33,17 +50,17 @@ export function Subscriptions() {
           <div>
             <div className="flex gap-10">
               <p className="text-textLighter text-sm mb-2 font-semibold">
-                ID: 48494521894564
+                ID: {subId}
               </p>
               <p className="text-textLighter text-sm mb-2 font-semibold">
-                www.aktin.cz
+                {subName}
               </p>
             </div>
 
             <div className="flex gap-5 items-center">
               <img src="https://google.cz/favicon.ico" alt="icon"></img>
               <h2 className="text-2xl text-textMedium font-bold mr-5 mt-[-8px]">
-                www.aktin.cz
+                {subWebsite}
               </h2>
               <Link
                 to={editURL}
@@ -94,27 +111,29 @@ export function Subscriptions() {
                   <p className="col-span-1 justify-self-center">Nahraditelné</p>
                 </div>
                 <ul className="text-md font-semibold text-textMedium flex flex-col">
-                  {arraySub.map((item, index) => {
+                  {items.map((item, index) => {
                     if (index % 2 == 0) {
                       return (
                         <li className="bg-slate-100 py-2 px-4 grid grid-cols-7">
-                          <p className="col-span-5">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit.
+                          <p className="col-span-5">{item.url}</p>
+                          <p className="col-span-1 justify-self-center">
+                            {item.amount}
                           </p>
-                          <p className="col-span-1 justify-self-center">5</p>
-                          <p className="col-span-1 justify-self-center">Ano</p>
+                          <p className="col-span-1 justify-self-center">
+                            {item.changable}
+                          </p>
                         </li>
                       );
                     } else {
                       return (
                         <li className="py-2 px-4 grid grid-cols-7">
-                          <p className="col-span-5">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit.
+                          <p className="col-span-5">{item.url}</p>
+                          <p className="col-span-1 justify-self-center">
+                            {item.amount}
                           </p>
-                          <p className="col-span-1 justify-self-center">5</p>
-                          <p className="col-span-1 justify-self-center">Ano</p>
+                          <p className="col-span-1 justify-self-center">
+                            {item.changable}
+                          </p>
                         </li>
                       );
                     }
@@ -136,31 +155,31 @@ export function Subscriptions() {
                       <h4 className="text-heading font-bold text-textDark">
                         Název předplatného:
                       </h4>
-                      <p>www.aktin.cz</p>
+                      <p>{subName}</p>
                     </div>
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
                       <h4 className="text-heading font-bold text-textDark">
                         E-shopr:
                       </h4>
-                      <p>Kurýr</p>
+                      <p>{subWebsite}</p>
                     </div>
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
                       <h4 className="text-heading font-bold text-textDark">
                         Den objednání:
                       </h4>
-                      <p>Pondělí</p>
+                      <p>{subDay}</p>
                     </div>
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
                       <h4 className="text-heading font-bold text-textDark">
                         Frekvence:
                       </h4>
-                      <p>Měsíc</p>
+                      <p>{subFrequency}</p>
                     </div>
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
                       <h4 className="text-heading font-bold text-textDark">
                         Způsob doručení:
                       </h4>
-                      <p>Pondělí</p>
+                      <p>{subDeliveryMethod}</p>
                     </div>
                   </div>
                 </div>
@@ -178,55 +197,58 @@ export function Subscriptions() {
                       <h4 className="text-heading font-bold text-textDark">
                         Jméno:
                       </h4>
-                      <p>Pondělí</p>
+                      <p>{firstName}</p>
                     </div>
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
                       <h4 className="text-heading font-bold text-textDark">
                         Příjmení:
                       </h4>
-                      <p>Měsíc</p>
+                      <p>{secondName}</p>
                     </div>
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
                       <h4 className="text-heading font-bold text-textDark">
                         Telefon:
                       </h4>
-                      <p>Pondělí</p>
+                      <p>{phone}</p>
                     </div>
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
                       <h4 className="text-heading font-bold text-textDark">
                         Email:
                       </h4>
-                      <p>Měsíc</p>
+                      <p>{email}</p>
                     </div>
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
                       <h4 className="text-heading font-bold text-textDark">
                         Adresa:
                       </h4>
-                      <p>Pondělí</p>
+                      <p>{address}</p>
                     </div>
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
                       <h4 className="text-heading font-bold text-textDark">
                         ČP:
                       </h4>
-                      <p>Měsíc</p>
+                      <p>{addressNumber}</p>
                     </div>
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
                       <h4 className="text-heading font-bold  text-textDark">
                         Město:
                       </h4>
-                      <p>Pondělí</p>
+                      <p>{city}</p>
                     </div>
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
                       <h4 className="text-heading font-bold text-textDark">
                         PSČ:
                       </h4>
-                      <p>Měsíc</p>
+                      <p>{cityNumber}</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="mt-5 flex justify-end">
-                  <button className="font-semibold text-slate-600 bg-slate-100 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text--textDark cursor-textMediumointer">
+                  <button
+                    className="font-semibold text-slate-600 bg-slate-100 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text--textDark cursor-textMediumointer"
+                    onClick={handleDelete}
+                  >
                     Zrušit předplatné
                   </button>
                 </div>
@@ -255,9 +277,13 @@ export function Subscriptions() {
           </button>
         </div>
 
-        {arraySub.map((item, index) => {
-          return <SubscriptionTabs index={index} />;
-        })}
+        {subscriptions ? (
+          subscriptions.map((items, index) => {
+            return <SubscriptionTabs index={index} />;
+          })
+        ) : (
+          <h1>Hello</h1>
+        )}
       </div>
     </>
   );

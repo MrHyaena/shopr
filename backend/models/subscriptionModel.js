@@ -13,36 +13,63 @@ const subscriptionSchema = new Schema(
       type: String,
       required: true,
     },
-    contact: {
-      type: Object,
+    firstName: {
+      type: String,
+      required: true,
+    },
+    secondName: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: Number,
+      required: true,
+    },
+    email: {
+      type: String,
       required: true,
     },
     address: {
-      type: Object,
-      required: true,
-    },
-    name: {
       type: String,
       required: true,
     },
-    website: {
+    addressNumber: {
       type: String,
       required: true,
     },
-    frequency: {
+    city: {
       type: String,
       required: true,
     },
-    day: {
+    cityNumber: {
       type: String,
       required: true,
     },
-    deliveryMethod: {
+    subName: {
       type: String,
       required: true,
+    },
+    subWebsite: {
+      type: String,
+      required: true,
+    },
+    subFrequency: {
+      type: String,
+      required: true,
+    },
+    subDay: {
+      type: String,
+      required: true,
+    },
+    subDeliveryMethod: {
+      type: String,
+      required: true,
+    },
+    subDeliveryAddress: {
+      type: String,
     },
     items: {
-      type: Object,
+      type: Array,
       required: true,
     },
   },

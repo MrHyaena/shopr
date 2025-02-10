@@ -1,20 +1,27 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 
-export function useLogin() {
+export function useCreateWorkout() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
+  const { user } = useAuthContext();
 
-  const { setUser } = useAuthContext();
-
-  async function login(data) {
+  async function createWorkout(data) {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("http://localhost:4000/api/user/login", {
+    if (!user) {
+      setError("Musíte být přihlášení");
+      return;
+    }
+
+    const response = await fetch("http://localhost:4000/api/subscription", {
       mode: "cors",
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
+      },
       body: JSON.stringify({ ...data }),
     });
 
@@ -26,17 +33,13 @@ export function useLogin() {
     }
 
     if (response.ok) {
-      // save the user to local storage
-
-      localStorage.setItem("user", JSON.stringify(json));
       console.log(json);
 
-      // update the auth context
       setUser(json);
 
       setIsLoading(false);
     }
   }
 
-  return { login, isLoading, error };
+  return { createWorkout, isLoading, error };
 }

@@ -3,6 +3,9 @@
 
 //requirements
 const express = require("express");
+const requireAuth = require("../middleware/requireAuth");
+
+//controller functions
 const {
   createSubscription,
   getSubscriptions,
@@ -11,10 +14,12 @@ const {
   updateSubscription,
 } = require("../controllers/subscriptionController");
 
-//controller functions
-
 //creating router
 const router = express.Router();
+
+// -------------------- middleware function -------------------
+//authentication of the user
+router.use(requireAuth);
 
 // ---------------------- SERVER ROUTES ----------------------
 

@@ -1,11 +1,11 @@
 import { useAuthContext } from "./useAuthContext";
 
 export function useLogout() {
-  const { setLogin } = useAuthContext();
+  const { setUser } = useAuthContext();
 
   function logout() {
     localStorage.removeItem("user");
-    setLogin(null);
+    setUser(null);
   }
 
   return { logout };

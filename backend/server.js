@@ -19,7 +19,7 @@ app.use(cors());
 app.use("/api/user", express.json(), userRouter);
 
 //router for handling subscription api calls
-app.use("/api/subscription", subscriptionRouter);
+app.use("/api/subscription", express.json(), subscriptionRouter);
 
 //starting server and connecting to database
 mongoose

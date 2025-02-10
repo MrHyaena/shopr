@@ -5,7 +5,7 @@ export function useSignup() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
 
-  const { setLogin } = useAuthContext();
+  const { setUser } = useAuthContext();
 
   async function signup(data) {
     setIsLoading(true);
@@ -33,7 +33,7 @@ export function useSignup() {
       localStorage.setItem("user", JSON.stringify(json));
 
       // update the auth context
-      setLogin(json);
+      setUser(json);
 
       setIsLoading(false);
     }

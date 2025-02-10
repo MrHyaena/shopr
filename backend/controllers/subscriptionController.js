@@ -32,38 +32,67 @@ const getSubscription = async (req, res) => {
 //create new subscription
 const createSubscription = async (req, res) => {
   const {
-    contact,
+    userId,
+    firstName,
+    secondName,
+    phone,
+    email,
     address,
-    name,
-    website,
-    frequency,
-    day,
-    deliveryMethod,
+    addressNumber,
+    city,
+    cityNumber,
+    subName,
+    subWebsite,
+    subFrequency,
+    subDay,
+    subDeliveryMethod,
+    subDeliveryAddress,
     items,
   } = req.body;
 
   //validation
   let emptyFields = [];
 
-  if (!contact.email) {
-    emptyFields.push("Kontaktní údaje");
+  if (!firstName) {
+    emptyFields.push("Jméno");
+  }
+  if (!secondName) {
+    emptyFields.push("Příjmení");
+  }
+  if (!phone) {
+    emptyFields.push("Telefon");
+  }
+  if (!email) {
+    emptyFields.push("Email");
   }
   if (!address) {
-    emptyFields.push("Adresa");
+    emptyFields.push("Ulice");
   }
-  if (!name) {
+  if (!addressNumber) {
+    emptyFields.push("Číslo popisné");
+  }
+  if (!city) {
+    emptyFields.push("Město");
+  }
+  if (!cityNumber) {
+    emptyFields.push("PSČ");
+  }
+  if (!subName) {
     emptyFields.push("Název předplatného");
   }
-  if (!website) {
+  if (!subWebsite) {
     emptyFields.push("Webová stránka");
   }
-  if (!frequency) {
+  if (!subFrequency) {
     emptyFields.push("Frekvence doručování");
   }
-  if (!day) {
+  if (!subDay) {
     emptyFields.push("Preferovaný den objednání");
   }
-  if (!deliveryMethod) {
+  if (!subDeliveryMethod) {
+    emptyFields.push("Způsob doručení");
+  }
+  if (!subDeliveryAddress) {
     emptyFields.push("Způsob doručení");
   }
   if (!items) {
@@ -71,21 +100,30 @@ const createSubscription = async (req, res) => {
   }
 
   if (emptyFields.length > 0) {
-    return res.status(400).json({ error: "Prosím, vyplňte pole", emptyFields });
+    return res
+      .status(400)
+      .json({ error: "Prosím, vyplňte pole" + emptyFields });
   }
 
   //Creating subscription
   try {
-    const user_id = req.user_id;
+    //const userId = req.user_id;
     const subscription = await Subscription.create({
-      user_id,
-      contact,
+      userId,
+      firstName,
+      secondName,
+      phone,
+      email,
       address,
-      name,
-      website,
-      frequency,
-      day,
-      deliveryMethod,
+      addressNumber,
+      city,
+      cityNumber,
+      subName,
+      subWebsite,
+      subFrequency,
+      subDay,
+      subDeliveryMethod,
+      subDeliveryAddress,
       items,
     });
     res.status(200).json(subscription);
