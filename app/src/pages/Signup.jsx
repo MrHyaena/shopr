@@ -39,7 +39,7 @@ export function SignupPage() {
   return (
     <>
       <div className="bg-slate-50 flex justify-center items-center min-h-screen">
-        <div className="bg-white flex gap-5 p-10 border rounded-xl border-slate-200">
+        <div className="bg-white flex gap-5 p-5 border rounded-xl border-slate-200">
           <form className="flex flex-col gap-5 p-2" onSubmit={handleSubmit}>
             <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
               <legend className="text-xl font-semibold text-slate-900 mb-5">

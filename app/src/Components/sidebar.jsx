@@ -8,8 +8,15 @@ import {
 
 import { faComments } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
+import { useLogout } from "../hooks/useLogout";
 
 export function Sidebar() {
+  const { logout } = useLogout();
+
+  function handleClick() {
+    logout();
+  }
+
   return (
     <>
       <div className="min-h-screen">
@@ -53,7 +60,12 @@ export function Sidebar() {
               </Link>
             </div>
             <div className="flex justify-center row-span-1 self-end">
-              <button className="text-center font-semibold">Odhlásit</button>
+              <button
+                className="text-center font-semibold cursor-pointer transition-all ease-in-out hover:bg-white hover:text-textDark p-2 rounded-lg"
+                onClick={handleClick}
+              >
+                Odhlásit
+              </button>
             </div>
           </div>
         </div>
