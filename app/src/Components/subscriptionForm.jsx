@@ -13,13 +13,20 @@ import { useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 
 export function SubscriptionForm() {
+  //step state is for changing steps in form
   const [step, setStep] = useState(1);
-  let [user] = useSearchParams();
-  const [packeta, setPacketa] = useState(0);
 
-  console.log(user);
+  //step one of form
+  function StepOne({}) {
+    const [firstName, setFirstName] = useState("");
+    const [secondName, setSecondName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+    const [address, setAddress] = useState("");
+    const [addressNumber, setAddressNumber] = useState("");
+    const [city, setCity] = useState("");
+    const [cityNumber, setCityNumber] = useState("");
 
-  function StepOne() {
     return (
       <form className="flex flex-col gap-5 p-10 bg-white border border-slate-200 rounded-lg">
         <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
@@ -30,6 +37,10 @@ export function SubscriptionForm() {
             <label className="flex flex-col text-heading text-lg font-semibold">
               Jméno
               <input
+                value={firstName}
+                onChange={(e) => {
+                  setFirstName(e.target.value);
+                }}
                 type="text"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
@@ -37,6 +48,10 @@ export function SubscriptionForm() {
             <label className="flex flex-col text-heading text-lg font-semibold">
               Příjmení
               <input
+                value={secondName}
+                onChange={(e) => {
+                  setSecondName(e.target.value);
+                }}
                 type="text"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
@@ -44,6 +59,10 @@ export function SubscriptionForm() {
             <label className="flex flex-col text-heading text-lg font-semibold">
               Telefon
               <input
+                value={phone}
+                onChange={(e) => {
+                  setPhone(e.target.value);
+                }}
                 type="text"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
@@ -51,6 +70,10 @@ export function SubscriptionForm() {
             <label className="flex flex-col text-heading text-lg font-semibold">
               Email
               <input
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
                 type="email"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
@@ -65,6 +88,10 @@ export function SubscriptionForm() {
             <label className="flex flex-col text--textDark text-lg font-semibold">
               Adresa
               <input
+                value={address}
+                onChange={(e) => {
+                  setAddress(e.target.value);
+                }}
                 type="text"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
@@ -72,6 +99,10 @@ export function SubscriptionForm() {
             <label className="flex flex-col text--textDark text-lg font-semibold">
               Číslo popisné
               <input
+                value={addressNumber}
+                onChange={(e) => {
+                  setAddressNumber(e.target.value);
+                }}
                 type="text"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
@@ -79,6 +110,10 @@ export function SubscriptionForm() {
             <label className="flex flex-col text--textDark text-lg font-semibold">
               Město
               <input
+                value={city}
+                onChange={(e) => {
+                  setCity(e.target.value);
+                }}
                 type="text"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
@@ -86,6 +121,10 @@ export function SubscriptionForm() {
             <label className="flex flex-col text--textDark text-lg font-semibold">
               PSČ
               <input
+                value={cityNumber}
+                onChange={(e) => {
+                  setCityNumber(e.target.value);
+                }}
                 type="email"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
@@ -124,7 +163,15 @@ export function SubscriptionForm() {
     );
   }
 
+  //step two of form
   function StepTwo() {
+    const [subName, setSubName] = useState("");
+    const [subWebsite, setSubWebsite] = useState("");
+    const [subFrequency, setSubFrequency] = useState("");
+    const [subDay, setSubDay] = useState("");
+    const [subDeliveryMethod, setSubDeliveryMethod] = useState(0);
+    const [subDeliveryAdress, setSubDeliveryAdress] = useState("");
+
     return (
       <form className="flex flex-col gap-5 p-10 bg-white border border-slate-200 rounded-lg">
         <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
@@ -135,6 +182,10 @@ export function SubscriptionForm() {
             <label className="flex flex-col text-heading text-lg font-semibold">
               Název předplatného
               <input
+                value={subName}
+                onChange={(e) => {
+                  setSubName(e.target.value);
+                }}
                 type="text"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                 placeholder="Moje první předplatné"
@@ -155,6 +206,10 @@ export function SubscriptionForm() {
             <label className="flex flex-col text-heading text-lg font-semibold">
               Webová stránka eshopu
               <input
+                value={subWebsite}
+                onChange={(e) => {
+                  setSubWebsite(e.target.value);
+                }}
                 type="text"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                 placeholder="www.eshop.cz"
@@ -163,6 +218,10 @@ export function SubscriptionForm() {
             <label className="flex flex-col text-heading text-lg font-semibold">
               Frekvence doručování
               <select
+                value={subFrequency}
+                onChange={(e) => {
+                  setSubFrequency(e.target.value);
+                }}
                 name="frekvence"
                 id="frekvence"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
@@ -175,6 +234,10 @@ export function SubscriptionForm() {
             <label className="flex flex-col text-heading text-lg font-semibold">
               Preferovaný den objednání
               <select
+                value={subDay}
+                onChange={(e) => {
+                  setSubDay(e.target.value);
+                }}
                 name="den"
                 id="den"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
@@ -189,19 +252,19 @@ export function SubscriptionForm() {
             <label className="flex flex-col text-heading text-lg font-semibold">
               Způsob doručení
               <select
+                value={subDeliveryMethod}
+                onChange={(e) => {
+                  setSubDeliveryMethod(e.target.value);
+                }}
                 name="delivery"
                 id="delivery"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
-                value={packeta}
-                onChange={(e) => {
-                  setPacketa(e.target.value);
-                }}
               >
                 <option value="0">Nejlevnější kurýr</option>
                 <option value="1">Zásilkovna</option>
               </select>
             </label>
-            {packeta == 1 && (
+            {subDeliveryMethod == 1 && (
               <label className="flex flex-col text-heading text-lg font-semibold">
                 Vložte odkaz na zásilkovnu
                 <div className="flex gap-2 justify-evenly">
@@ -213,6 +276,10 @@ export function SubscriptionForm() {
                     Najít zásilkovnu
                   </a>
                   <input
+                    value={subDeliveryAdress}
+                    onChange={(e) => {
+                      setSubDeliveryAdress(e.target.value);
+                    }}
                     type="text"
                     className="bg-slate-50 border border-slate-300 rounded-md p-2 text-md font-semibold text-input w-[75%]"
                     placeholder="https://www.zasilkovna.cz/pobocky/z-box-golcuv-jenikov-5-kvetna-8
@@ -264,26 +331,27 @@ export function SubscriptionForm() {
     );
   }
 
+  //step three of form
   function StepThree() {
-    const [inputs, setInputs] = useState([
-      { url: "", amount: "", exchange: "" },
+    const [items, setItems] = useState([
+      { url: "", amount: "", changable: "" },
     ]);
 
     const handleAddInput = () => {
-      setInputs([...inputs, { url: "", amount: "", exchange: "" }]);
+      setItems([...items, { url: "", amount: "", changable: "" }]);
     };
 
     const handleChange = (event, index) => {
       let { name, value } = event.target;
-      let onChangeValue = [...inputs];
+      let onChangeValue = [...items];
       onChangeValue[index][name] = value;
-      setInputs(onChangeValue);
+      setItems(onChangeValue);
     };
 
     const handleDeleteInput = (index) => {
-      const newArray = [...inputs];
+      const newArray = [...items];
       newArray.splice(index, 1);
-      setInputs(newArray);
+      setItems(newArray);
     };
 
     return (
@@ -293,7 +361,7 @@ export function SubscriptionForm() {
             Zboží do objednávky
           </legend>
           <div className="flex flex-col gap-3">
-            {inputs.map((item, index) => {
+            {items.map((item, index) => {
               return (
                 <div className="grid grid-cols-12 gap-2 maw-w-full">
                   <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
@@ -328,7 +396,7 @@ export function SubscriptionForm() {
                       name="exchange"
                       id="exchange"
                       className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
-                      value={item.exchange}
+                      value={item.changable}
                       onChange={(e) => {
                         handleChange(e, index);
                       }}
@@ -374,6 +442,27 @@ export function SubscriptionForm() {
             className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
             onClick={(e) => {
               e.preventDefault();
+              const subscription = {
+                contact: {
+                  firstName: firstName,
+                  secondName: secondName,
+                  phone: phone,
+                  email: email,
+                },
+                address: {
+                  address: address,
+                  addressNumber: addressNumber,
+                  city: city,
+                  cityNumber: cityNumber,
+                },
+                subName: subName,
+                subWebsite: subWebsite,
+                subFrequency: subFrequency,
+                subDeliveryMethod: subDeliveryMethod,
+                subDeliveryAdress: subDeliveryAdress,
+                items: items,
+              };
+              console.log(subscription);
             }}
           >
             Uložit <FontAwesomeIcon icon={faCheck} />

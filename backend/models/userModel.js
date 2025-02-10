@@ -17,6 +17,30 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    firstName: {
+      type: String,
+    },
+    secondName: {
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
+    contactEmail: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
+    addressNumber: {
+      type: String,
+    },
+    city: {
+      type: String,
+    },
+    cityNumber: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

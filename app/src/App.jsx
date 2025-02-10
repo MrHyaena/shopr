@@ -2,30 +2,58 @@ import { useState } from "react";
 import { Sidebar } from "./Components/sidebar";
 import { Subscriptions } from "./Components/subscriptionList";
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Routes,
   Route,
   Navigate,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+  Outlet,
 } from "react-router-dom";
 import { SubscriptionForm } from "./Components/subscriptionForm";
+import { LoginPage } from "./pages/Login";
+import { SignupPage } from "./pages/Signup";
 
-function App() {
-  const [count, setCount] = useState(0);
+function RootLayout() {
+  return (
+    <div className="grid grid-cols-[150px_1fr] gap-5 min-h-screen bg-slate-50">
+      <Sidebar />
+      <div>
+        <main>
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
+}
 
+function LoginLayout() {
   return (
     <>
-      <Router>
-        <div className="grid grid-cols-[150px_1fr] gap-5 min-h-screen bg-slate-50">
-          <Sidebar />
-          <div>
-            <Routes>
-              <Route exact path="/" element={<Subscriptions />} />
-              <Route exact path="/form/" element={<SubscriptionForm />} />
-              <Route path="/" element={<Navigate to="/" />} />
-            </Routes>
-          </div>
-        </div>
-      </Router>
+      <LoginPage />
+    </>
+  );
+}
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route path="/app" element={<RootLayout />}>
+        <Route index element={<Subscriptions />} />
+        <Route path="form" element={<SubscriptionForm />} />
+      </Route>
+      <Route path="/login" element={<LoginLayout />}></Route>
+      <Route path="/signup" element={<SignupPage />}></Route>
+      <Route path="/" element={<Navigate to="/app" />} />
+    </>
+  )
+);
+
+function App() {
+  return (
+    <>
+      <RouterProvider router={router} />
     </>
   );
 }

@@ -1,6 +1,7 @@
 //requirements
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
+const { use } = require("../routes/userRouter");
 require("dotenv").config();
 
 //create token function
@@ -11,13 +12,12 @@ function createToken(_id) {
 //signup user controller function
 const signupUser = async (req, res) => {
   const { email, password } = req.body;
-
   try {
     const user = await User.signup(email, password);
     //create token
     const token = createToken(user._id);
 
-    res.status(200).json({ msg: "signup", email, token });
+    res.status(200).json({ msg: "signup", email, token, id: user._id });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -33,7 +33,7 @@ const loginUser = async (req, res) => {
     //create token
     const token = createToken(user._id);
 
-    res.status(200).json({ msg: "login", email, token });
+    res.status(200).json({ msg: "login", email, token, id: user._id });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
