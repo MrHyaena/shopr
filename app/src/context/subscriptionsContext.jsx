@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 export const SubscriptionContext = createContext();
 
 export const SubscriptionContextProvider = ({ children }) => {
-  const [subscriptions, setSubscription] = useState(null);
+  const [subscriptions, setSubscriptions] = useState(null);
 
   //useEffect(() => {
   //  const fetchSubscription = async () => {
@@ -22,7 +22,10 @@ export const SubscriptionContextProvider = ({ children }) => {
   //
   return (
     <SubscriptionContext.Provider
-      value={{ subscriptions: subscriptions, setSubscription: setSubscription }}
+      value={{
+        subscriptions: subscriptions,
+        setSubscriptions: setSubscriptions,
+      }}
     >
       {children}
     </SubscriptionContext.Provider>

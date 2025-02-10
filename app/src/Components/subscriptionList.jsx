@@ -21,6 +21,7 @@ export function Subscriptions() {
   // FUNCTION FOR GENERATING SUBSCRIPTION TABS
 
   function SubscriptionTabs({
+    index,
     subId,
     firstName,
     secondName,
@@ -41,10 +42,12 @@ export function Subscriptions() {
     const [toggle, setToggle] = useState(false);
     const [active, setActive] = useState(true);
 
+    const editURL = "/app/form/" + subId;
+
     return (
       <>
         <div
-          className="bg-white p-7 rounded-lg border border-slate-200 shadow-md shadow-slate-200 grid grid-cols-[1fr_150px] gap-4"
+          className="bg-white p-7 rounded-lg border border-slate-200 shadow-md shadow-slate-200 grid grid-cols-2 gap-4"
           key={"sub" + index}
         >
           <div>
@@ -53,25 +56,25 @@ export function Subscriptions() {
                 ID: {subId}
               </p>
               <p className="text-textLighter text-sm mb-2 font-semibold">
-                {subName}
+                {subWebsite}
               </p>
             </div>
 
             <div className="flex gap-5 items-center">
               <img src="https://google.cz/favicon.ico" alt="icon"></img>
               <h2 className="text-2xl text-textMedium font-bold mr-5 mt-[-8px]">
-                {subWebsite}
+                {subName}
               </h2>
-              <Link
-                to={editURL}
-                className=" text-textDark p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad flex gap-2 items-center border border-slate-100 hover:border-white"
-              >
-                <FontAwesomeIcon icon={faPen} />
-                Upravit
-              </Link>
             </div>
           </div>
-          <div className="flex gap-5 items-center ">
+          <div className="flex gap-5 items-center justify-end">
+            <Link
+              to={editURL}
+              className=" text-textDark p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad flex gap-2 items-center border border-slate-100 hover:border-white"
+            >
+              <FontAwesomeIcon icon={faPen} />
+              Upravit
+            </Link>
             <h2 className="font-bold text-lg text-emerald-700 p-2">Aktivní</h2>
             {toggle ? (
               <button
@@ -278,8 +281,28 @@ export function Subscriptions() {
         </div>
 
         {subscriptions ? (
-          subscriptions.map((items, index) => {
-            return <SubscriptionTabs index={index} />;
+          subscriptions.map((item, index) => {
+            return (
+              <SubscriptionTabs
+                index={index}
+                subId={item._id}
+                firstName={item.firstName}
+                secondName={item.secondName}
+                phone={item.phone}
+                email={item.email}
+                address={item.address}
+                addressNumber={item.addressNumber}
+                city={item.city}
+                cityNumber={item.cityNumber}
+                subName={item.subName}
+                subWebsite={item.subWebsite}
+                subFrequency={item.subFrequency}
+                subDay={item.subDay}
+                subDeliveryMethod={item.subDeliveryMethod}
+                subDeliveryAddress={item.subDeliveryAddress}
+                items={item.items}
+              />
+            );
           })
         ) : (
           <h1>Hello</h1>

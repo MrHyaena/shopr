@@ -10,12 +10,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useCreateWorkout } from "../hooks/useCreateWorkout";
+import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 
 export function SubscriptionForm() {
   //step state is for changing steps in form
   const [step, setStep] = useState(1);
+  const { id } = useParams();
+  const { subscriptions } = useSubscriptionContext();
 
   //data from form
   const [formData, setFormData] = useState({
@@ -38,6 +41,35 @@ export function SubscriptionForm() {
       { url: "", amount: "", changable: "" },
     ],
   });
+
+  useEffect(() => {
+    if (id) {
+      function hasID(item) {
+        return item._id == id;
+      }
+
+      const sub = subscriptions[0];
+      const newData = {
+        firstName: sub.firstName,
+        secondName: sub.secondName,
+        phone: sub.phone,
+        email: sub.email,
+        address: sub.address,
+        addressNumber: sub.addressNumber,
+        city: sub.city,
+        cityNumber: sub.cityNumber,
+        subName: sub.subName,
+        subWebsite: sub.subWebsite,
+        subFrequency: sub.subFrequency,
+        subDay: sub.subDay,
+        subDeliveryMethod: sub.subDeliveryMethod,
+        subDeliveryAddress: sub.subDeliveryAddress,
+        items: sub.items,
+      };
+
+      setFormData({ ...newData });
+    }
+  }, []);
 
   //step one of form
   function StepOne() {

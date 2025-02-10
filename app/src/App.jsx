@@ -23,9 +23,9 @@ function RootLayout() {
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      const response = await fetch("http://localhost:4000/api/subscriptions", {
+      const response = await fetch("http://localhost:4000/api/subscription", {
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          authorization: `Bearer ${user.token}`,
         },
       });
       const json = await response.json();
@@ -65,7 +65,7 @@ const router = createBrowserRouter(
     <>
       <Route path="/app" element={<RootLayout />}>
         <Route index element={<Subscriptions />} />
-        <Route path="form" element={<SubscriptionForm />} />
+        <Route path="form/:id" element={<SubscriptionForm />} />
       </Route>
       <Route path="/login" element={<LoginLayout />}></Route>
       <Route path="/signup" element={<SignupPage />}></Route>
