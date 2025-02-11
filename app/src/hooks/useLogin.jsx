@@ -5,7 +5,7 @@ export function useLogin() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
 
-  const { setUser } = useAuthContext();
+  const { user, setUser } = useAuthContext();
 
   async function login(data) {
     setIsLoading(true);
@@ -29,10 +29,9 @@ export function useLogin() {
       // save the user to local storage
 
       localStorage.setItem("user", JSON.stringify(json));
-      console.log(json);
 
       // update the auth context
-      setUser(json);
+      setUser({ ...json });
 
       setIsLoading(false);
     }

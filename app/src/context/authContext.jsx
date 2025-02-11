@@ -8,11 +8,11 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
-      setUser(user);
+      setUser({ ...user });
     }
   }, []);
 
-  console.log("AuthContext state: ", user);
+  //  console.log("AuthContext state: ", user);
 
   return (
     <AuthContext.Provider value={{ user: user, setUser: setUser }}>

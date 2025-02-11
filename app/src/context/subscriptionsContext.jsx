@@ -1,25 +1,34 @@
 import { createContext, useEffect, useState } from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export const SubscriptionContext = createContext();
 
 export const SubscriptionContextProvider = ({ children }) => {
-  const [subscriptions, setSubscriptions] = useState(null);
+  const [subscriptions, setSubscriptions] = useState([]);
+  const { user } = useAuthContext();
 
-  //useEffect(() => {
-  //  const fetchSubscription = async () => {
-  //    const response = await fetch("http://localhost:4000/api/subscription", {
-  //      method: "GET",
-  //    });
-  //    const json = await response.json();
-  //
-  //    if (response.ok) {
-  //      setSubscription(json);
-  //    }
-  //  };
-  //
-  //  fetchSubscription();
-  //}, []);
-  //
+  useEffect(() => {
+    console.log(user);
+    const fetchSubscription = async () => {
+      const response = await fetch("http://localhost:4000/api/subscriptions", {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      const json = await response.json();
+      console.log(json);
+
+      if (response.ok) {
+        setSubscriptions(json);
+      }
+    };
+
+    fetchSubscription();
+  }, [user]);
+
   return (
     <SubscriptionContext.Provider
       value={{

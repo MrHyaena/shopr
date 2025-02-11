@@ -92,8 +92,10 @@ const createSubscription = async (req, res) => {
   if (!subDeliveryMethod) {
     emptyFields.push("Způsob doručení");
   }
-  if (!subDeliveryAddress) {
-    emptyFields.push("Způsob doručení");
+  if (subDeliveryMethod == "dropbox") {
+    if (!subDeliveryAddress) {
+      emptyFields.push("Adresu zásilkovny");
+    }
   }
   if (!items) {
     emptyFields.push("Položky");
@@ -107,7 +109,6 @@ const createSubscription = async (req, res) => {
 
   //Creating subscription
   try {
-    //const userId = req.user_id;
     const subscription = await Subscription.create({
       userId,
       firstName,

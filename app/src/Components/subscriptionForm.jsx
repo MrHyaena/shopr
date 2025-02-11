@@ -11,17 +11,20 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useCreateWorkout } from "../hooks/useCreateWorkout";
+import { createSubscriptionHandler } from "../functions/createSubscriptionHandler";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export function SubscriptionForm() {
   //step state is for changing steps in form
   const [step, setStep] = useState(1);
   const { id } = useParams();
-  const { subscriptions } = useSubscriptionContext();
+  const { subscriptions, setSubscriptions } = useSubscriptionContext();
+  const { user } = useAuthContext();
 
   //data from form
   const [formData, setFormData] = useState({
+    userId: "",
     firstName: "",
     secondName: "",
     phone: "",
@@ -36,18 +39,11 @@ export function SubscriptionForm() {
     subDay: "monday",
     subDeliveryMethod: "courier",
     subDeliveryAddress: "",
-    items: [
-      { url: "", amount: "", changable: "" },
-      { url: "", amount: "", changable: "" },
-    ],
+    items: [{ url: "", amount: "", changable: "" }],
   });
 
   useEffect(() => {
     if (id) {
-      function hasID(item) {
-        return item._id == id;
-      }
-
       const sub = subscriptions[0];
       const newData = {
         firstName: sub.firstName,
@@ -134,7 +130,7 @@ export function SubscriptionForm() {
                 onChange={(e) => {
                   setPhone(e.target.value);
                 }}
-                type="text"
+                type="number"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
             </label>
@@ -425,8 +421,19 @@ export function SubscriptionForm() {
   //step three of form
   function StepThree() {
     const [items, setItems] = useState([...formData.items]);
+    const { createSubscription, error, isLoading } =
+      createSubscriptionHandler();
 
-    const { createWorkout, error, isLoading } = useCreateWorkout();
+    //handler update
+    async function handleSend(subscription, id) {
+      if (id) {
+        patchSubscription();
+      }
+
+      if (!id) {
+        createSubscription(subscription);
+      }
+    }
 
     const handleAddInput = () => {
       setItems([...items, { url: "", amount: "", changable: "" }]);
@@ -546,6 +553,7 @@ export function SubscriptionForm() {
             onClick={(e) => {
               e.preventDefault();
               const subscription = {
+                userId: user.id,
                 firstName: formData.firstName,
                 secondName: formData.secondName,
                 phone: formData.phone,
@@ -563,7 +571,7 @@ export function SubscriptionForm() {
                 items: items,
               };
 
-              createWorkout(subscription);
+              handleSend(subscription, id);
             }}
           >
             Uložit <FontAwesomeIcon icon={faCheck} />

@@ -28,14 +28,14 @@ export function Sidebar() {
             />
             <div className="flex flex-col items-center gap-10  p-5 row-span-5 self-center">
               <Link
-                to="/"
+                to="/app"
                 className="text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
               >
                 <FontAwesomeIcon icon={faArrowsSpin} className="text-3xl" />
                 Předplatné
               </Link>
               <Link
-                to="/form"
+                to="/app/form"
                 className="text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
               >
                 <FontAwesomeIcon icon={faNewspaper} className="text-3xl" />

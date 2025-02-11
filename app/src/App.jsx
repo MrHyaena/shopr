@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { Sidebar } from "./Components/sidebar";
 import { Subscriptions } from "./Components/subscriptionList";
 import {
-  BrowserRouter,
-  Routes,
   Route,
   Navigate,
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
   Outlet,
+  BrowserRouter,
+  Routes,
 } from "react-router-dom";
 import { SubscriptionForm } from "./Components/subscriptionForm";
 import { LoginPage } from "./pages/Login";
@@ -17,67 +17,71 @@ import { SignupPage } from "./pages/Signup";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { useSubscriptionContext } from "./hooks/useSubscriptionContext";
 
-function RootLayout() {
-  const { subscriptions, setSubscriptions } = useSubscriptionContext();
+function App() {
   const { user } = useAuthContext();
 
-  useEffect(() => {
-    const fetchWorkouts = async () => {
-      const response = await fetch("http://localhost:4000/api/subscriptions", {
-        headers: {
-          authorization: `Bearer ${user.token}`,
-        },
-      });
-      const json = await response.json();
-
-      if (response.ok) {
-        setSubscriptions(json);
-      }
-    };
-
-    if (user) {
-      fetchWorkouts();
-    }
-  }, [user]);
-
-  return (
-    <div className="grid grid-cols-[150px_1fr] gap-5 min-h-screen bg-slate-50">
-      <Sidebar />
-      <div>
-        <main>
-          <Outlet />
-        </main>
+  function ProtectedRoute() {
+    return (
+      <div className="grid grid-cols-[150px_1fr] gap-5 min-h-screen bg-slate-50">
+        <Sidebar />
+        <div>
+          <main>
+            <Routes>
+              <Route path="*" element={<Subscriptions />} />
+              <Route path="/form" element={<SubscriptionForm />} />
+              <Route path="/form/:id" element={<SubscriptionForm />} />
+            </Routes>
+          </main>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
-function LoginLayout() {
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <>
+        <Route
+          path="/app"
+          element={user != null ? <ProtectedRoute /> : <Navigate to="/login" />}
+        >
+          <Route index element={<Subscriptions />} />
+          <Route path="form/:id" element={<SubscriptionForm />} />
+          <Route path="form/" element={<SubscriptionForm />} />
+        </Route>
+
+        <Route
+          path="/login"
+          element={!user ? <LoginPage /> : <Navigate to="/app" />}
+        ></Route>
+
+        <Route
+          path="/signup"
+          element={!user ? <SignupPage /> : <Navigate to="/app" />}
+        ></Route>
+
+        <Route path="/" element={<Navigate to="/app" />} />
+      </>
+    )
+  );
+
   return (
     <>
-      <LoginPage />
-    </>
-  );
-}
-
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <>
-      <Route path="/app" element={<RootLayout />}>
-        <Route index element={<Subscriptions />} />
-        <Route path="form/:id" element={<SubscriptionForm />} />
-      </Route>
-      <Route path="/login" element={<LoginLayout />}></Route>
-      <Route path="/signup" element={<SignupPage />}></Route>
-      <Route path="/" element={<Navigate to="/app" />} />
-    </>
-  )
-);
-
-function App() {
-  return (
-    <>
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/app/*"
+            element={user ? <ProtectedRoute /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/login"
+            element={!user ? <LoginPage /> : <Navigate to="/app" />}
+          />
+          <Route
+            path="/signup"
+            element={!user ? <SignupPage /> : <Navigate to="/app" />}
+          />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

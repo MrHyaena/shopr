@@ -7,7 +7,7 @@ import {
   faPen,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -16,6 +16,30 @@ export function Subscriptions() {
   const arraySub = [1, 2, 3, 4, 5, 6, 7];
   const { subscriptions, setSubscriptions } = useSubscriptionContext();
   const { user, setUser } = useAuthContext();
+
+  //useEffect(() => {
+  //  console.log(user.token);
+  //  const fetchSubscription = async () => {
+  //    const response = await fetch("http://localhost:4000/api/subscriptions", {
+  //      method: "GET",
+  //      mode: "cors",
+  //      headers: {
+  //        "Content-Type": "application/json",
+  //        Authorization: `Bearer ${user.token}`,
+  //      },
+  //    });
+  //    const json = await response.json();
+  //    if (response.ok) {
+  //      return setSubscriptions(json);
+  //    }
+  //
+  //    if (!response.ok) {
+  //      return console.log("error");
+  //    }
+  //  };
+  //
+  //  fetchSubscription();
+  //}, []);
 
   // FUNCTION FOR DELETING SUBSCRIPTIONS
   async function handleDelete(subId) {
@@ -310,7 +334,7 @@ export function Subscriptions() {
           </button>
         </div>
 
-        {subscriptions ? (
+        {subscriptions !== 0 &&
           subscriptions.map((item, index) => {
             return (
               <SubscriptionTabs
@@ -333,10 +357,8 @@ export function Subscriptions() {
                 items={item.items}
               />
             );
-          })
-        ) : (
-          <h1>Hello</h1>
-        )}
+          })}
+        {subscriptions == 0 && <h1>Zatím nemáte žádné předplatné</h1>}
       </div>
     </>
   );
