@@ -10,13 +10,41 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export function Subscriptions() {
   const arraySub = [1, 2, 3, 4, 5, 6, 7];
-  const { subscriptions } = useSubscriptionContext();
+  const { subscriptions, setSubscriptions } = useSubscriptionContext();
+  const { user, setUser } = useAuthContext();
 
   // FUNCTION FOR DELETING SUBSCRIPTIONS
-  function handleDelete() {}
+  async function handleDelete(subId) {
+    const response = await fetch(
+      "http://localhost:4000/api/subscriptions/" + subId,
+      {
+        method: "DELETE",
+        mode: "cors",
+        headers: {
+          authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+
+    const json = await response.json();
+
+    if (response.ok) {
+      console.log("deleted");
+      const subArray = subscriptions;
+      const newSubscriptions = subArray.filter(
+        (element) => element._id != subId
+      );
+      setSubscriptions(newSubscriptions);
+    }
+
+    if (!response.ok) {
+      console.log(response);
+    }
+  }
 
   // FUNCTION FOR GENERATING SUBSCRIPTION TABS
 
@@ -250,7 +278,9 @@ export function Subscriptions() {
                 <div className="mt-5 flex justify-end">
                   <button
                     className="font-semibold text-slate-600 bg-slate-100 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text--textDark cursor-textMediumointer"
-                    onClick={handleDelete}
+                    onClick={() => {
+                      handleDelete(subId);
+                    }}
                   >
                     Zrušit předplatné
                   </button>

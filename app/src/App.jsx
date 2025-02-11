@@ -23,7 +23,7 @@ function RootLayout() {
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      const response = await fetch("http://localhost:4000/api/subscription", {
+      const response = await fetch("http://localhost:4000/api/subscriptions", {
         headers: {
           authorization: `Bearer ${user.token}`,
         },
