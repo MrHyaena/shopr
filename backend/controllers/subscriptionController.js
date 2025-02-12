@@ -6,7 +6,7 @@ const getSubscriptions = async (req, res) => {
   const user_id = req.user_id;
 
   const subscriptions = await Subscription.find({ user_id }).sort({
-    createdAt: -1,
+    createdAt: 1,
   });
 
   res.status(200).json(subscriptions);

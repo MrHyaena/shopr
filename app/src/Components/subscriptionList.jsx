@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { handleDelete } from "../functions/deleteSubscriptionHandler";
 
 export function Subscriptions() {
   const arraySub = [1, 2, 3, 4, 5, 6, 7];
@@ -41,39 +42,9 @@ export function Subscriptions() {
   //  fetchSubscription();
   //}, []);
 
-  // FUNCTION FOR DELETING SUBSCRIPTIONS
-  async function handleDelete(subId) {
-    const response = await fetch(
-      "http://localhost:4000/api/subscriptions/" + subId,
-      {
-        method: "DELETE",
-        mode: "cors",
-        headers: {
-          authorization: `Bearer ${user.token}`,
-        },
-      }
-    );
-
-    const json = await response.json();
-
-    if (response.ok) {
-      console.log("deleted");
-      const subArray = subscriptions;
-      const newSubscriptions = subArray.filter(
-        (element) => element._id != subId
-      );
-      setSubscriptions(newSubscriptions);
-    }
-
-    if (!response.ok) {
-      console.log(response);
-    }
-  }
-
   // FUNCTION FOR GENERATING SUBSCRIPTION TABS
 
   function SubscriptionTabs({
-    index,
     subId,
     firstName,
     secondName,
@@ -98,10 +69,7 @@ export function Subscriptions() {
 
     return (
       <>
-        <div
-          className="bg-white p-7 rounded-lg border border-slate-200 shadow-md shadow-slate-200 grid grid-cols-2 gap-4"
-          key={"sub" + index}
-        >
+        <div className="bg-white p-7 rounded-lg border border-slate-200 shadow-md shadow-slate-200 grid grid-cols-2 gap-4">
           <div>
             <div className="flex gap-10">
               <p className="text-textLighter text-sm mb-2 font-semibold">
@@ -303,7 +271,12 @@ export function Subscriptions() {
                   <button
                     className="font-semibold text-slate-600 bg-slate-100 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text--textDark cursor-textMediumointer"
                     onClick={() => {
-                      handleDelete(subId);
+                      handleDelete(
+                        subId,
+                        user,
+                        subscriptions,
+                        setSubscriptions
+                      );
                     }}
                   >
                     Zrušit předplatné
@@ -323,7 +296,10 @@ export function Subscriptions() {
 
   return (
     <>
-      <div className="bg-slate-50 p-10 flex flex-col gap-5 rounded-2xl min-h-full">
+      <div
+        className="bg-slate-50 p-10 flex flex-col gap-5 rounded-2xl min-h-full"
+        key="subList"
+      >
         <div className="flex justify-between">
           <h1 className="text-3xl font-bold text-textDark pl-10">
             Vaše předplatné
@@ -355,10 +331,13 @@ export function Subscriptions() {
                 subDeliveryMethod={item.subDeliveryMethod}
                 subDeliveryAddress={item.subDeliveryAddress}
                 items={item.items}
+                key={"subItem" + item._id}
               />
             );
           })}
-        {subscriptions == 0 && <h1>Zatím nemáte žádné předplatné</h1>}
+        {subscriptions == 0 && (
+          <h1 key={"subMissing"}>Zatím nemáte žádné předplatné</h1>
+        )}
       </div>
     </>
   );

@@ -14,6 +14,7 @@ import { Link, useParams } from "react-router-dom";
 import { createSubscriptionHandler } from "../functions/createSubscriptionHandler";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { patchSubscriptionHandler } from "../functions/patchSubscriptionHandler";
 
 export function SubscriptionForm() {
   //step state is for changing steps in form
@@ -44,7 +45,7 @@ export function SubscriptionForm() {
 
   useEffect(() => {
     if (id) {
-      const sub = subscriptions[0];
+      const sub = subscriptions.find((element) => element._id == id);
       const newData = {
         firstName: sub.firstName,
         secondName: sub.secondName,
@@ -423,11 +424,12 @@ export function SubscriptionForm() {
     const [items, setItems] = useState([...formData.items]);
     const { createSubscription, error, isLoading } =
       createSubscriptionHandler();
+    const { patchSubscription } = patchSubscriptionHandler();
 
     //handler update
     async function handleSend(subscription, id) {
       if (id) {
-        patchSubscription();
+        patchSubscription(subscription, id);
       }
 
       if (!id) {

@@ -40,7 +40,7 @@ export function createSubscriptionHandler() {
       console.log(json);
       setIsLoading(false);
       const newObject = subscriptions;
-      newObject.push({ ...data });
+      newObject.splice(newObject.length, 0, { ...json });
       setSubscriptions(newObject);
       return <Navigate to="/" />;
     }
