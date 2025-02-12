@@ -18,8 +18,11 @@ export function LoginPage() {
   return (
     <>
       <div className="bg-slate-50 flex justify-center items-center min-h-screen">
-        <div className="bg-white flex gap-5 p-10 border rounded-xl border-slate-200">
-          <form className="flex flex-col gap-5 p-2" onSubmit={handleSubmit}>
+        <div className="bg-white flex border rounded-xl border-slate-200 shadow-lg">
+          <form
+            className="flex flex-col gap-5 py-10 pl-10"
+            onSubmit={handleSubmit}
+          >
             <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
               <legend className="text-xl font-semibold text-slate-900 mb-5">
                 Přihlaste se
@@ -68,7 +71,10 @@ export function LoginPage() {
               </h2>
             )}
           </form>
-          <div className="min-w-[300px]"></div>
+          <div className="xl:w-[300px] flex flex-col items-center gap-3 justify-center bg-white rounded-r-xl text-textDark p-10 overflow-clip">
+            <h2 className="text-2xl font-semibold">Vítejte zpět!</h2>
+            <p className="text-center font-semibold"></p>
+          </div>
         </div>
       </div>
     </>

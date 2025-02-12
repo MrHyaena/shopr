@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faExclamation,
+  faTriangleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 
 export function SignupPage() {
   const [step, setStep] = useState(1);
@@ -98,31 +103,32 @@ export function SignupPage() {
                   ></input>
                 </label>
               </div>
-
-              <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
-                Heslo
-                <input
-                  name="password"
-                  type="password"
-                  className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                  value={password}
-                ></input>
-              </label>
-              <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
-                Heslo znovu
-                <input
-                  name="passwordCheck"
-                  type="password"
-                  className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
-                  onChange={(e) => {
-                    setPasswordCheck(e.target.value);
-                  }}
-                  value={passwordCheck}
-                ></input>
-              </label>
+              <div className="flex gap-3">
+                <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+                  Heslo
+                  <input
+                    name="password"
+                    type="password"
+                    className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                    value={password}
+                  ></input>
+                </label>
+                <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+                  Heslo znovu
+                  <input
+                    name="passwordCheck"
+                    type="password"
+                    className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                    onChange={(e) => {
+                      setPasswordCheck(e.target.value);
+                    }}
+                    value={passwordCheck}
+                  ></input>
+                </label>
+              </div>
             </fieldset>
 
             <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
@@ -201,7 +207,42 @@ export function SignupPage() {
               </h2>
             )}
           </form>
-          <div className="min-w-[500px]"></div>
+          <div className="xl:w-[500px] flex flex-col justify-center items-center gap-4 text-start">
+            <div className="flex flex-col gap-3 p-4">
+              <h2 className="text-xl font-semibold">
+                Děkujeme, že to s námi chcete vyzkoušet!
+              </h2>
+              <p className="text-md font-semibold text-textDarker">
+                Jakmile vyplníte formulář na levé straně, vytvoříme pro Vás v
+                našem systému uživatelský účet. V něm si následně můžete
+                vytvořit předplatné v jakémkoliv eshopu budete chtít.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 p-4">
+              <h2 className="text-lg font-semibold">
+                Proč potřebujeme tyto údaje?
+              </h2>
+              <p className="text-md font-semibold text-textDarker">
+                Každé předplatné vyžaduje kontaktní a dodací údaje. Abychom Vám
+                usnadnili v budoucnu práci, přiřadíme je k vašemu uživatelskému
+                účtu. Budete je poté moci nastavit na jedno kliknutí.
+              </p>
+              <p className="text-md font-semibold text-textDarker">
+                Údaje lze samozřejmě kdykoliv změnit.
+              </p>
+            </div>
+            <div className="text-sm font-semibold text-textDark flex items-center gap-3 bg-quad m-4 p-4 rounded-lg">
+              <p className="flex items-center gap-4">
+                <FontAwesomeIcon
+                  icon={faTriangleExclamation}
+                  className="text-xl"
+                />
+                Tento formulář slouží pouze pro registraci účtu. Nejde o
+                založení předplatného. Registrace účtu a jeho vedení je celé
+                zdarma.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </>

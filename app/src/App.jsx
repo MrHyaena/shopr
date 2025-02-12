@@ -69,7 +69,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route
-            path="/app/*"
+            path="/app*"
             element={user ? <ProtectedRoute /> : <Navigate to="/login" />}
           />
           <Route

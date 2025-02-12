@@ -3,7 +3,9 @@ import {
   faArrowsSpin,
   faCircleArrowDown,
   faClipboardQuestion,
+  faComment,
   faNewspaper,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faComments } from "@fortawesome/free-regular-svg-icons";
@@ -26,36 +28,43 @@ export function Sidebar() {
               icon={faCircleArrowDown}
               className="text-[30px] my-10 row-span-1 self-start justify-self-center"
             />
-            <div className="flex flex-col items-center gap-10  p-5 row-span-5 self-center">
+            <div className="flex flex-col items-center gap-2  p-5 row-span-5 self-center">
               <Link
                 to="/app"
                 className="text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
               >
-                <FontAwesomeIcon icon={faArrowsSpin} className="text-3xl" />
+                <FontAwesomeIcon icon={faArrowsSpin} className="text-2xl" />
                 Předplatné
               </Link>
               <Link
                 to="/app/form"
                 className="text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
               >
-                <FontAwesomeIcon icon={faNewspaper} className="text-3xl" />
+                <FontAwesomeIcon icon={faNewspaper} className="text-2xl" />
                 Nové předplatné
               </Link>
               <Link
-                to="/jak-to-funguje"
+                to="app/jak-to-funguje"
                 className="text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
               >
                 <FontAwesomeIcon
                   icon={faClipboardQuestion}
-                  className="text-3xl"
+                  className="text-2xl"
                 />
                 Jak to funguje?
               </Link>
               <Link
-                to="/kontakt"
+                to="app/kontakt"
                 className="text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
               >
-                <FontAwesomeIcon icon={faComments} className="text-3xl" />
+                <FontAwesomeIcon icon={faUser} className="text-2xl" />
+                Osobní údaje
+              </Link>
+              <Link
+                to="app/kontakt"
+                className="text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
+              >
+                <FontAwesomeIcon icon={faComment} className="text-2xl" />
                 Kontakt
               </Link>
             </div>

@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { handleDelete } from "../functions/deleteSubscriptionHandler";
+import { SubscriptionMissing } from "./subscriptionMissing";
 
 export function Subscriptions() {
   const arraySub = [1, 2, 3, 4, 5, 6, 7];
@@ -65,6 +66,8 @@ export function Subscriptions() {
     const [toggle, setToggle] = useState(false);
     const [active, setActive] = useState(true);
     const [toggleDelete, setToggleDelete] = useState(false);
+    const [checkDelete, setCheckDelete] = useState("");
+    const [errorDelete, setErrorDelete] = useState(false);
 
     const editURL = "/app/form/" + subId;
 
@@ -73,10 +76,10 @@ export function Subscriptions() {
         <div className="bg-white p-7 rounded-lg border border-slate-200 shadow-md shadow-slate-200 grid grid-cols-2 gap-4">
           <div>
             <div className="flex gap-10">
-              <p className="text-textMedium text-sm mb-2 font-medium">
+              <p className="text-textDarker text-[12px] mb-2 font-medium">
                 ID: <span className="text-textLighter">{subId}</span>
               </p>
-              <p className="text-textMedium text-sm mb-2 font-medium">
+              <p className="text-textDarker text-[12px] mb-2 font-medium">
                 Webová stránka:{" "}
                 <span className="text-textLighter">{subWebsite}</span>
               </p>
@@ -84,7 +87,7 @@ export function Subscriptions() {
 
             <div className="flex gap-5 items-center">
               <img src="https://google.cz/favicon.ico" alt="icon"></img>
-              <h2 className="text-2xl text-textMedium font-bold mr-5 mt-[-8px]">
+              <h2 className="text-2xl text-textDark font-bold mr-5 mt-[-8px]">
                 {subName}
               </h2>
             </div>
@@ -126,7 +129,7 @@ export function Subscriptions() {
           {toggle ? (
             <div className="col-span-2 grid grid-cols-[1fr_500px] gap-y-5 gap-x-15 ">
               <div>
-                <h3 className="text-xl font-bold text-quad py-5 mt-10 bg-secondary rounded-t-xl px-5 flex gap-3 items-center">
+                <h3 className="text-xl font-bold text-quad py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
                   <FontAwesomeIcon icon={faCartShopping} />
                   Produkty
                 </h3>
@@ -135,7 +138,7 @@ export function Subscriptions() {
                   <p className="col-span-1 justify-self-center">Množství</p>
                   <p className="col-span-1 justify-self-center">Nahraditelné</p>
                 </div>
-                <ul className="text-md font-semibold text-textMedium flex flex-col">
+                <ul className="text-md font-semibold text-textDarker flex flex-col">
                   {items.map((item, index) => {
                     if (index % 2 == 0) {
                       return (
@@ -167,11 +170,11 @@ export function Subscriptions() {
               </div>
               <div className=" flex flex-col">
                 <div>
-                  <h3 className="text-xl font-bold text-quad py-5 mt-10 bg-secondary rounded-t-xl px-5 flex gap-3 items-center">
+                  <h3 className="text-xl font-bold text-quad py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
                     <FontAwesomeIcon icon={faGears} />
                     Nastavení předplatného
                   </h3>
-                  <div className="flex flex-col font-semibold text-textMedium">
+                  <div className="flex flex-col font-semibold text-textDarker">
                     <div className="grid grid-cols-2 py-2 px-4 text-md font-semibold text-textLight bg-zinc-700">
                       <p className="col-span-1">Údaj</p>
                       <p className="col-span-1">Hodnota</p>
@@ -200,7 +203,7 @@ export function Subscriptions() {
                         {subDay == "friday" && "Pátek"}
                       </p>
                     </div>
-                    <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
+                    <div className="grid grid-cols-2 py-2 px-4 ">
                       <h4 className="text-heading font-bold text-textDark">
                         Frekvence:
                       </h4>
@@ -232,10 +235,20 @@ export function Subscriptions() {
                         </a>
                       </div>
                     )}
+                    <div className="mt-5 flex justify-end">
+                      <button
+                        className="font-semibold text-slate-600 bg-slate-100 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
+                        onClick={() => {
+                          setToggleDelete(true);
+                        }}
+                      >
+                        Zrušit předplatné
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-quad py-5 mt-10 bg-secondary rounded-t-xl px-5 flex gap-3 items-center">
+                  <h3 className="text-xl font-bold text-quad py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
                     <FontAwesomeIcon icon={faHouseUser} />
                     Cílový zákazník
                   </h3>
@@ -243,7 +256,7 @@ export function Subscriptions() {
                     <p className="col-span-1">Údaj</p>
                     <p className="col-span-1">Hodnota</p>
                   </div>
-                  <div className="text-textMedium font-semibold">
+                  <div className="text-textDarker font-semibold">
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
                       <h4 className="text-heading font-bold text-textDark">
                         Jméno:
@@ -294,17 +307,6 @@ export function Subscriptions() {
                     </div>
                   </div>
                 </div>
-
-                <div className="mt-5 flex justify-end">
-                  <button
-                    className="font-semibold text-slate-600 bg-slate-100 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
-                    onClick={() => {
-                      setToggleDelete(true);
-                    }}
-                  >
-                    Zrušit předplatné
-                  </button>
-                </div>
               </div>
             </div>
           ) : (
@@ -313,22 +315,59 @@ export function Subscriptions() {
         </div>
         {toggleDelete && (
           <div className="fixed top-0 right-0 w-full h-full bg-primary/15 m-auto flex justify-center items-center">
-            <div className="m-auto gap-5 flex flex-col justify-center items-center bg-zinc-50 p-10 rounded-xl">
-              <p className="text-textDark">
+            <div className="m-auto gap-5 flex flex-col justify-center items-center bg-white p-10 rounded-xl">
+              <p className="text-textDark font-semibold">
                 Opravdu chcete zrušit předplatné s názvem:{" "}
-                <span>{subName}</span>?
+                <span className="text-textHighlightYellow">{subName}</span>?
               </p>
+              <label className="flex flex-col gap-2 font-semibold">
+                Pro potvrzení smazání napište jméno vašeho předplatného
+                <input
+                  type="text"
+                  className="bg-zinc-50 p-3 rounded-lg border border-slate-200"
+                  value={checkDelete}
+                  onChange={(e) => {
+                    if (errorDelete) {
+                      setErrorDelete(false);
+                    }
+                    setCheckDelete(e.target.value);
+                  }}
+                />
+              </label>
+              {errorDelete && (
+                <p className="p-2 bg-red-100 rounded-md font-semibold text-medium">
+                  Vložený text se neshoduje se jménem.
+                </p>
+              )}
               <div className="flex gap-3 justify-center">
                 <button
-                  className="p-3 rounded-md bg-zinc-200 hover:bg-deleteButton transition-all ease-in-out cursor-pointer"
+                  className="p-3 rounded-md bg-red-400 hover:bg-red-500 transition-all ease-in-out cursor-pointer font-semibold text-textLight"
                   onClick={() => {
-                    setToggleDelete(false);
-                    handleDelete(subId, user, subscriptions, setSubscriptions);
+                    if (checkDelete == subName) {
+                      setToggleDelete(false);
+                      handleDelete(
+                        subId,
+                        user,
+                        subscriptions,
+                        setSubscriptions
+                      );
+                    }
+
+                    if (checkDelete !== subName) {
+                      setErrorDelete(true);
+                    }
                   }}
                 >
                   Zrušit předplatné
                 </button>
-                <button className="p-3 rounded-md bg-emerald-200">Zpět</button>
+                <button
+                  className="p-3 rounded-md bg-zinc-200 font-semibold text-textDarker cursor-pointer transition-all ease-in-out hover:bg-zinc-300"
+                  onClick={() => {
+                    setToggleDelete(false);
+                  }}
+                >
+                  Zpět
+                </button>
               </div>
             </div>
           </div>
@@ -342,7 +381,7 @@ export function Subscriptions() {
   return (
     <>
       <div
-        className="bg-slate-50 p-10 flex flex-col gap-5 rounded-2xl min-h-full"
+        className="bg-slate-50 p-10 flex flex-col gap-5 rounded-2xl min-h-screen"
         key="subList"
       >
         <div className="flex justify-between">
@@ -381,7 +420,9 @@ export function Subscriptions() {
             );
           })}
         {subscriptions == 0 && (
-          <h1 key={"subMissing"}>Zatím nemáte žádné předplatné</h1>
+          <div className="min-h-[800px]">
+            <SubscriptionMissing />
+          </div>
         )}
       </div>
     </>
