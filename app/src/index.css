@@ -8,10 +8,12 @@
   --color-secondary: var(--color-zinc-900);
   --color-tertiary: var(--color-yellow-300);
   --color-quad: var(--color-yellow-200);
+
   --color-textDark: var(--color-zinc-900);
   --color-textMedium: var(--color-zinc-700);
   --color-textLighter: var(--color-zinc-400);
   --color-textLight: var(--color-zinc-100);
+  --color-textA: var(--color-yellow-500);
 
   --color-deleteButton: var(--color-red-200);
   --color-input: var(--color-slate-700);

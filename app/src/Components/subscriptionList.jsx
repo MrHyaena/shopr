@@ -64,6 +64,7 @@ export function Subscriptions() {
   }) {
     const [toggle, setToggle] = useState(false);
     const [active, setActive] = useState(true);
+    const [toggleDelete, setToggleDelete] = useState(false);
 
     const editURL = "/app/form/" + subId;
 
@@ -72,11 +73,12 @@ export function Subscriptions() {
         <div className="bg-white p-7 rounded-lg border border-slate-200 shadow-md shadow-slate-200 grid grid-cols-2 gap-4">
           <div>
             <div className="flex gap-10">
-              <p className="text-textLighter text-sm mb-2 font-semibold">
-                ID: {subId}
+              <p className="text-textMedium text-sm mb-2 font-medium">
+                ID: <span className="text-textLighter">{subId}</span>
               </p>
-              <p className="text-textLighter text-sm mb-2 font-semibold">
-                {subWebsite}
+              <p className="text-textMedium text-sm mb-2 font-medium">
+                Webová stránka:{" "}
+                <span className="text-textLighter">{subWebsite}</span>
               </p>
             </div>
 
@@ -182,7 +184,7 @@ export function Subscriptions() {
                     </div>
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
                       <h4 className="text-heading font-bold text-textDark">
-                        E-shopr:
+                        E-shop:
                       </h4>
                       <p>{subWebsite}</p>
                     </div>
@@ -190,20 +192,46 @@ export function Subscriptions() {
                       <h4 className="text-heading font-bold text-textDark">
                         Den objednání:
                       </h4>
-                      <p>{subDay}</p>
+                      <p>
+                        {subDay == "monday" && "Pondělí"}
+                        {subDay == "tuesday" && "Úterý"}
+                        {subDay == "wednesday" && "Středa"}
+                        {subDay == "thursday" && "Čtvrtek"}
+                        {subDay == "friday" && "Pátek"}
+                      </p>
                     </div>
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
                       <h4 className="text-heading font-bold text-textDark">
                         Frekvence:
                       </h4>
-                      <p>{subFrequency}</p>
+                      <p>
+                        {subFrequency == 1 && "Jednou za měsíc"}
+                        {subFrequency == 2 && "Dvakrát za měsíc"}
+                        {subFrequency == 3 && "Třikrát za měsíc"}
+                      </p>
                     </div>
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
                       <h4 className="text-heading font-bold text-textDark">
                         Způsob doručení:
                       </h4>
-                      <p>{subDeliveryMethod}</p>
+                      <p>
+                        {subDeliveryMethod == "courier" && "Nejlevnější kurýr"}
+                        {subDeliveryMethod == "dropbox" && "Box/výdejní místé"}
+                      </p>
                     </div>
+                    {subDeliveryMethod !== "courier" && (
+                      <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
+                        <h4 className="text-heading font-bold text-textDark">
+                          Výdejní místo:
+                        </h4>
+                        <a
+                          href={subDeliveryAddress}
+                          className="text-textA hover:text-yellow-700"
+                        >
+                          {subDeliveryAddress}
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div>
@@ -269,14 +297,9 @@ export function Subscriptions() {
 
                 <div className="mt-5 flex justify-end">
                   <button
-                    className="font-semibold text-slate-600 bg-slate-100 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text--textDark cursor-textMediumointer"
+                    className="font-semibold text-slate-600 bg-slate-100 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
                     onClick={() => {
-                      handleDelete(
-                        subId,
-                        user,
-                        subscriptions,
-                        setSubscriptions
-                      );
+                      setToggleDelete(true);
                     }}
                   >
                     Zrušit předplatné
@@ -288,6 +311,28 @@ export function Subscriptions() {
             <></>
           )}
         </div>
+        {toggleDelete && (
+          <div className="fixed top-0 right-0 w-full h-full bg-primary/15 m-auto flex justify-center items-center">
+            <div className="m-auto gap-5 flex flex-col justify-center items-center bg-zinc-50 p-10 rounded-xl">
+              <p className="text-textDark">
+                Opravdu chcete zrušit předplatné s názvem:{" "}
+                <span>{subName}</span>?
+              </p>
+              <div className="flex gap-3 justify-center">
+                <button
+                  className="p-3 rounded-md bg-zinc-200 hover:bg-deleteButton transition-all ease-in-out cursor-pointer"
+                  onClick={() => {
+                    setToggleDelete(false);
+                    handleDelete(subId, user, subscriptions, setSubscriptions);
+                  }}
+                >
+                  Zrušit předplatné
+                </button>
+                <button className="p-3 rounded-md bg-emerald-200">Zpět</button>
+              </div>
+            </div>
+          </div>
+        )}
       </>
     );
   }

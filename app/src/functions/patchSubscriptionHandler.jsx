@@ -14,6 +14,7 @@ export function patchSubscriptionHandler() {
   const [isLoading, setIsLoading] = useState(null);
   const { user, setUser } = useAuthContext();
   const { subscriptions, setSubscriptions } = useSubscriptionContext();
+  const navigate = useNavigate();
 
   async function patchSubscription(data, id) {
     setIsLoading(true);
@@ -59,6 +60,7 @@ export function patchSubscriptionHandler() {
         }
       });
       setSubscriptions([...newSubscription]);
+      navigate("/app");
       return;
     }
   }

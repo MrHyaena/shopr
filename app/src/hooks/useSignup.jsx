@@ -11,8 +11,6 @@ export function useSignup() {
     setIsLoading(true);
     setError(null);
 
-    console.log(JSON.stringify({ email: data.email, password: data.password }));
-
     const response = await fetch("http://localhost:4000/api/user/signup", {
       mode: "cors",
       method: "POST",

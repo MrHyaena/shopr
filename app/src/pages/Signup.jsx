@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
+import { Link } from "react-router-dom";
 
 export function SignupPage() {
   const [step, setStep] = useState(1);
@@ -188,12 +189,19 @@ export function SignupPage() {
             >
               Zaregistrovat se
             </button>
+            <Link
+              to="/login"
+              className="text-center font-semibold hover:scale-105 transition-all ease-in-out"
+            >
+              Přihlásit se
+            </Link>
             {error && (
               <h2 className="font-bold text-center p-2 bg-red-200 rounded-lg border-2 border-red-300">
                 {error}
               </h2>
             )}
           </form>
+          <div className="min-w-[500px]"></div>
         </div>
       </div>
     </>

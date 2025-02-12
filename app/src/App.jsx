@@ -80,6 +80,7 @@ function App() {
             path="/signup"
             element={!user ? <SignupPage /> : <Navigate to="/app" />}
           />
+          <Route path="/" element={<Navigate to="/app" />} />
         </Routes>
       </BrowserRouter>
     </>

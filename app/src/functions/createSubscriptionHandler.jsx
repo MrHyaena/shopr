@@ -8,6 +8,7 @@ export function createSubscriptionHandler() {
   const [isLoading, setIsLoading] = useState(null);
   const { user, setUser } = useAuthContext();
   const { subscriptions, setSubscriptions } = useSubscriptionContext();
+  const navigate = useNavigate();
 
   async function createSubscription(data) {
     setIsLoading(true);
@@ -42,7 +43,8 @@ export function createSubscriptionHandler() {
       const newObject = subscriptions;
       newObject.splice(newObject.length, 0, { ...json });
       setSubscriptions(newObject);
-      return <Navigate to="/" />;
+      navigate("/app");
+      return;
     }
   }
 

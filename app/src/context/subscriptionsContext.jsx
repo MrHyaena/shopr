@@ -16,6 +16,7 @@ export const SubscriptionContextProvider = ({ children }) => {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
+          UserID: user.id,
         },
       });
       const json = await response.json();

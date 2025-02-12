@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 
 //get all subscriptions
 const getSubscriptions = async (req, res) => {
-  const user_id = req.user_id;
+  const user_id = req.user._id;
 
-  const subscriptions = await Subscription.find({ user_id }).sort({
+  const subscriptions = await Subscription.find({ userId: user_id }).sort({
     createdAt: 1,
   });
 
