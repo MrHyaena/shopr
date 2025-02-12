@@ -6,8 +6,6 @@ import {
   Navigate,
   createBrowserRouter,
   createRoutesFromElements,
-  RouterProvider,
-  Outlet,
   BrowserRouter,
   Routes,
 } from "react-router-dom";
@@ -15,7 +13,7 @@ import { SubscriptionForm } from "./Components/subscriptionForm";
 import { LoginPage } from "./pages/Login";
 import { SignupPage } from "./pages/Signup";
 import { useAuthContext } from "./hooks/useAuthContext";
-import { useSubscriptionContext } from "./hooks/useSubscriptionContext";
+import { Contact } from "./Components/contact";
 
 function App() {
   const { user } = useAuthContext();
@@ -30,6 +28,7 @@ function App() {
               <Route path="*" element={<Subscriptions />} />
               <Route path="/form" element={<SubscriptionForm />} />
               <Route path="/form/:id" element={<SubscriptionForm />} />
+              <Route path="/kontakt" element={<Contact />} />
             </Routes>
           </main>
         </div>
@@ -69,15 +68,15 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route
-            path="/app*"
+            path="/app/*"
             element={user ? <ProtectedRoute /> : <Navigate to="/login" />}
           />
           <Route
-            path="/login"
+            path="login"
             element={!user ? <LoginPage /> : <Navigate to="/app" />}
           />
           <Route
-            path="/signup"
+            path="signup"
             element={!user ? <SignupPage /> : <Navigate to="/app" />}
           />
           <Route path="/" element={<Navigate to="/app" />} />

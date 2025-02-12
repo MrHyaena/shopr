@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 import { Link } from "react-router-dom";
+import { faTruck } from "@fortawesome/free-solid-svg-icons";
 
 export function LoginPage() {
   const [email, setEmail] = useState("");
@@ -17,8 +18,8 @@ export function LoginPage() {
 
   return (
     <>
-      <div className="bg-slate-50 flex justify-center items-center min-h-screen">
-        <div className="bg-white flex border rounded-xl border-slate-200 shadow-lg">
+      <div className="bg-slate-50 flex flex-col justify-center items-center min-h-screen">
+        <div className="bg-white flex border rounded-xl border-slate-200 shadow-lg animate-fall-right-faster">
           <form
             className="flex flex-col gap-5 py-10 pl-10"
             onSubmit={handleSubmit}
@@ -71,7 +72,7 @@ export function LoginPage() {
               </h2>
             )}
           </form>
-          <div className="xl:w-[300px] flex flex-col items-center gap-3 justify-center bg-white rounded-r-xl text-textDark p-10 overflow-clip">
+          <div className="xl:w-[300px] flex flex-col items-center gap-3 justify-center bg-yellow-200 m-6 shadow-xl  rounded-xl text-textDark p-10 overflow-clip animate-fall-right">
             <h2 className="text-2xl font-semibold">Vítejte zpět!</h2>
             <p className="text-center font-semibold"></p>
           </div>

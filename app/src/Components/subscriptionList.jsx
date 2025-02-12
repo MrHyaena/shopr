@@ -388,10 +388,17 @@ export function Subscriptions() {
           <h1 className="text-3xl font-bold text-textDark pl-10">
             Vaše předplatné
           </h1>
-
-          <button className="bg-quad shadow-md shadow-slate-200 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary">
-            Aktualizovat
-          </button>
+          <div className="flex gap-5">
+            <button className="bg-quad shadow-md shadow-slate-200 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary">
+              Aktualizovat
+            </button>
+            <Link
+              to="/app/form"
+              className="bg-quad shadow-md shadow-slate-200 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary"
+            >
+              Nové předplatné
+            </Link>
+          </div>
         </div>
 
         {subscriptions !== 0 &&

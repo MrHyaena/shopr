@@ -3,6 +3,8 @@ import { useSignup } from "../hooks/useSignup";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faChevronDown,
+  faChevronRight,
   faExclamation,
   faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
@@ -21,6 +23,8 @@ export function SignupPage() {
   const [addressNumber, setAddressNumber] = useState("");
   const [city, setCity] = useState("");
   const [cityNumber, setCityNumber] = useState("");
+
+  const [question, setQuestion] = useState(0);
 
   const { signup, error, isLoading } = useSignup();
 
@@ -45,7 +49,7 @@ export function SignupPage() {
   return (
     <>
       <div className="bg-slate-50 flex justify-center items-center min-h-screen">
-        <div className="bg-white flex gap-5 p-5 border rounded-xl border-slate-200">
+        <div className="bg-white flex gap-8 p-5 border rounded-xl border-slate-200 shadow-xl animate-fall-down-faster">
           <form className="flex flex-col gap-5 p-2" onSubmit={handleSubmit}>
             <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
               <legend className="text-xl font-semibold text-slate-900 mb-5">
@@ -207,40 +211,126 @@ export function SignupPage() {
               </h2>
             )}
           </form>
-          <div className="xl:w-[500px] flex flex-col justify-center items-center gap-4 text-start">
+          <div className="xl:w-[500px] flex flex-col justify-start items-center gap-4 text-center bg-quad rounded-3xl p-5 shadow-xl animate-fall-down">
             <div className="flex flex-col gap-3 p-4">
               <h2 className="text-xl font-semibold">
                 Děkujeme, že to s námi chcete vyzkoušet!
               </h2>
-              <p className="text-md font-semibold text-textDarker">
+              <p className="text-md font-semibold text-textDark">
                 Jakmile vyplníte formulář na levé straně, vytvoříme pro Vás v
                 našem systému uživatelský účet. V něm si následně můžete
-                vytvořit předplatné v jakémkoliv eshopu budete chtít.
+                vytvořit předplatné k jakémkoliv e-shopu budete chtít.
               </p>
             </div>
-            <div className="flex flex-col gap-3 p-4">
-              <h2 className="text-lg font-semibold">
-                Proč potřebujeme tyto údaje?
+            <div className="flex flex-col items-center gap-3 p-4">
+              <h2 className="text-xl font-semibold">
+                Co jsou nejčastější otázky?
               </h2>
-              <p className="text-md font-semibold text-textDarker">
-                Každé předplatné vyžaduje kontaktní a dodací údaje. Abychom Vám
-                usnadnili v budoucnu práci, přiřadíme je k vašemu uživatelskému
-                účtu. Budete je poté moci nastavit na jedno kliknutí.
-              </p>
-              <p className="text-md font-semibold text-textDarker">
-                Údaje lze samozřejmě kdykoliv změnit.
-              </p>
-            </div>
-            <div className="text-sm font-semibold text-textDark flex items-center gap-3 bg-quad m-4 p-4 rounded-lg">
-              <p className="flex items-center gap-4">
-                <FontAwesomeIcon
-                  icon={faTriangleExclamation}
-                  className="text-xl"
-                />
-                Tento formulář slouží pouze pro registraci účtu. Nejde o
-                založení předplatného. Registrace účtu a jeho vedení je celé
-                zdarma.
-              </p>
+              <div className=" bg-yellow-400 w-full h-0.5"></div>
+
+              <button
+                className="text-lg font-semibold flex items-center gap-3"
+                onClick={() => {
+                  if (question == 1) {
+                    setQuestion(0);
+                  }
+                  if (question == 0 || question == 2 || question == 3) {
+                    setQuestion(1);
+                  }
+                }}
+              >
+                {question == 1 ? (
+                  <FontAwesomeIcon
+                    icon={faChevronDown}
+                    className="text-yellow-500"
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    icon={faChevronRight}
+                    className="text-yellow-500"
+                  />
+                )}
+                Je registrace a vedení účtu zdarma?
+              </button>
+              {question == 1 && (
+                <div className="animate-scale-up">
+                  <p className="text-md font-semibold text-textDarker mb-2">
+                    Vedení i registrace účtu jsou zcela zdarma. Platíme malou
+                    částku pouze v případě, že máte aktivní předplatné.
+                  </p>
+                </div>
+              )}
+
+              <button
+                className="text-lg font-semibold flex items-center gap-3"
+                onClick={() => {
+                  if (question == 2) {
+                    setQuestion(0);
+                  }
+                  if (question == 0 || question == 1 || question == 3) {
+                    setQuestion(2);
+                  }
+                }}
+              >
+                {question == 2 ? (
+                  <FontAwesomeIcon
+                    icon={faChevronDown}
+                    className="text-yellow-500"
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    icon={faChevronRight}
+                    className="text-yellow-500"
+                  />
+                )}{" "}
+                Můžu účet kdykoliv zrušit
+              </button>
+              {question == 2 && (
+                <div className="animate-scale-up">
+                  <p className="text-md font-semibold text-textDarker mb-2">
+                    Samozřejmě. Účet můžete zrušit z klientské sekce. Vaše údaje
+                    okamžitě smažeme společně se všemi předplatnými.
+                  </p>
+                </div>
+              )}
+
+              <button
+                className="text-lg font-semibold flex items-center gap-3"
+                onClick={() => {
+                  if (question == 3) {
+                    setQuestion(0);
+                  }
+                  if (question == 1 || question == 2 || question == 0) {
+                    setQuestion(3);
+                  }
+                }}
+              >
+                {question == 3 ? (
+                  <FontAwesomeIcon
+                    icon={faChevronDown}
+                    className="text-yellow-500"
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    icon={faChevronRight}
+                    className="text-yellow-500"
+                  />
+                )}
+                K čemu potřebujeme tyto údaje?
+              </button>
+              {question == 3 && (
+                <div className="animate-scale-up">
+                  <p className="text-md font-semibold text-textDarker mb-2">
+                    Každé předplatné vyžaduje kontaktní a dodací údaje. Abychom
+                    Vám usnadnili v budoucnu práci, přiřadíme je k vašemu
+                    uživatelskému účtu. Budete je poté moci nastavit na jedno
+                    kliknutí.
+                  </p>
+                  <p className="text-md font-semibold text-textDarker">
+                    Údaje lze samozřejmě kdykoliv změnit.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>

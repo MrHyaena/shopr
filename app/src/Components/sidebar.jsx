@@ -23,28 +23,36 @@ export function Sidebar() {
     <>
       <div className="min-h-screen">
         <div className="bg-primary h-screen border-slate-200 shadow-xl shadow-slate-200 text-white sticky top-0">
-          <div className=" grid grid-rows-7">
+          <div className=" flex flex-col justify-between items-center h-full py-10">
             <FontAwesomeIcon
               icon={faCircleArrowDown}
-              className="text-[30px] my-10 row-span-1 self-start justify-self-center"
+              className="text-[30px] p-4"
             />
-            <div className="flex flex-col items-center gap-2  p-5 row-span-5 self-center">
+            <div className="flex flex-col items-center gap-2  p-4 row-span-5 self-center">
               <Link
                 to="/app"
                 className="text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
               >
                 <FontAwesomeIcon icon={faArrowsSpin} className="text-2xl" />
-                Předplatné
+                Moje předplatné
               </Link>
+
               <Link
-                to="/app/form"
+                to="/app/osobni-udaje"
                 className="text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
               >
-                <FontAwesomeIcon icon={faNewspaper} className="text-2xl" />
-                Nové předplatné
+                <FontAwesomeIcon icon={faUser} className="text-2xl" />
+                Osobní údaje
               </Link>
               <Link
-                to="app/jak-to-funguje"
+                to="/app/kontakt"
+                className="text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
+              >
+                <FontAwesomeIcon icon={faComment} className="text-2xl" />
+                Kontakt
+              </Link>
+              <Link
+                to="/app/jak-to-funguje"
                 className="text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
               >
                 <FontAwesomeIcon
@@ -53,24 +61,10 @@ export function Sidebar() {
                 />
                 Jak to funguje?
               </Link>
-              <Link
-                to="app/kontakt"
-                className="text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
-              >
-                <FontAwesomeIcon icon={faUser} className="text-2xl" />
-                Osobní údaje
-              </Link>
-              <Link
-                to="app/kontakt"
-                className="text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
-              >
-                <FontAwesomeIcon icon={faComment} className="text-2xl" />
-                Kontakt
-              </Link>
             </div>
-            <div className="flex justify-center row-span-1 self-end">
+            <div className="flex justify-center">
               <button
-                className="text-center font-semibold cursor-pointer transition-all ease-in-out hover:bg-white hover:text-textDark p-2 rounded-lg"
+                className="text-center font-semibold cursor-pointer transition-all ease-in-out hover:bg-white hover:text-textDark p-4 rounded-lg"
                 onClick={handleClick}
               >
                 Odhlásit
