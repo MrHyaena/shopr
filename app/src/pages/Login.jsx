@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 import { Link } from "react-router-dom";
-import { faTruck } from "@fortawesome/free-solid-svg-icons";
+import logoBlack from "/public/shopr-logo-black.png";
 
 export function LoginPage() {
   const [email, setEmail] = useState("");
@@ -18,10 +18,16 @@ export function LoginPage() {
 
   return (
     <>
-      <div className="bg-slate-50 flex flex-col justify-center items-center min-h-screen">
-        <div className="bg-white flex border rounded-xl border-slate-200 shadow-lg animate-fall-right-faster">
+      <div className="bg-slate-50 flex flex-col xl:grid xl:grid-rows-[1fr_2fr_1fr] justify-center items-center min-h-screen">
+        <img
+          src={logoBlack}
+          alt="logo"
+          className="xl:max-h-24 xl:mb-0 mb-5 max-h-16 animate-scale-up justify-self-center"
+        />
+
+        <div className="bg-white flex xl:flex-row flex-col-reverse border rounded-xl border-slate-200 shadow-lg animate-fall-right-faster">
           <form
-            className="flex flex-col gap-5 py-10 pl-10"
+            className="flex flex-col gap-5 xl:py-10 py-5 px-5 xl:px-0 xl:pl-10"
             onSubmit={handleSubmit}
           >
             <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
@@ -55,7 +61,7 @@ export function LoginPage() {
             </fieldset>
             <button
               disabled={isLoading}
-              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+              className="bg-quad xl:m-3 m-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
               type="submit"
             >
               Přihlásit se
@@ -72,7 +78,7 @@ export function LoginPage() {
               </h2>
             )}
           </form>
-          <div className="xl:w-[300px] flex flex-col items-center gap-3 justify-center bg-yellow-200 m-6 shadow-xl  rounded-xl text-textDark p-10 overflow-clip animate-fall-right">
+          <div className="xl:w-[300px] xl:flex hidden flex-col items-center gap-3 justify-center bg-yellow-200 m-6 shadow-xl  rounded-xl text-textDark p-10 overflow-clip animate-fall-right">
             <h2 className="text-2xl font-semibold">Vítejte zpět!</h2>
             <p className="text-center font-semibold"></p>
           </div>

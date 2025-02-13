@@ -8,6 +8,7 @@ import {
   faExclamation,
   faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
+import logoBlack from "/public/shopr-logo-black.png";
 
 export function SignupPage() {
   const [step, setStep] = useState(1);
@@ -48,7 +49,7 @@ export function SignupPage() {
 
   return (
     <>
-      <div className="bg-slate-50 flex justify-center items-center min-h-screen">
+      <div className="bg-slate-50 flex flex-col justify-center items-center min-h-screen">
         <div className="bg-white flex gap-8 p-5 border rounded-xl border-slate-200 shadow-xl animate-fall-down-faster">
           <form className="flex flex-col gap-5 p-2" onSubmit={handleSubmit}>
             <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
@@ -212,6 +213,11 @@ export function SignupPage() {
             )}
           </form>
           <div className="xl:w-[500px] flex flex-col justify-start items-center gap-4 text-center bg-quad rounded-3xl p-5 shadow-xl animate-fall-down">
+            <img
+              src={logoBlack}
+              alt="logo"
+              className="max-h-20 animate-scale-up justify-self-center"
+            />
             <div className="flex flex-col gap-3 p-4">
               <h2 className="text-xl font-semibold">
                 Děkujeme, že to s námi chcete vyzkoušet!
@@ -223,13 +229,11 @@ export function SignupPage() {
               </p>
             </div>
             <div className="flex flex-col items-center gap-3 p-4">
-              <h2 className="text-xl font-semibold">
-                Co jsou nejčastější otázky?
-              </h2>
+              <h2 className="text-xl font-semibold">Nejčastější otázky</h2>
               <div className=" bg-yellow-400 w-full h-0.5"></div>
 
               <button
-                className="text-lg font-semibold flex items-center gap-3"
+                className="text-lg font-semibold flex items-center gap-3 cursor-pointer"
                 onClick={() => {
                   if (question == 1) {
                     setQuestion(0);
@@ -254,7 +258,7 @@ export function SignupPage() {
               </button>
               {question == 1 && (
                 <div className="animate-scale-up">
-                  <p className="text-md font-semibold text-textDarker mb-2">
+                  <p className="text-md font-semibold text-textDark mb-2">
                     Vedení i registrace účtu jsou zcela zdarma. Platíme malou
                     částku pouze v případě, že máte aktivní předplatné.
                   </p>
@@ -262,7 +266,7 @@ export function SignupPage() {
               )}
 
               <button
-                className="text-lg font-semibold flex items-center gap-3"
+                className="text-lg font-semibold flex items-center gap-3 cursor-pointer"
                 onClick={() => {
                   if (question == 2) {
                     setQuestion(0);
@@ -282,20 +286,24 @@ export function SignupPage() {
                     icon={faChevronRight}
                     className="text-yellow-500"
                   />
-                )}{" "}
-                Můžu účet kdykoliv zrušit
+                )}
+                Můžu účet kdykoliv zrušit? Můžu změnit údaje?
               </button>
               {question == 2 && (
                 <div className="animate-scale-up">
-                  <p className="text-md font-semibold text-textDarker mb-2">
+                  <p className="text-md font-semibold text-textDark mb-2">
                     Samozřejmě. Účet můžete zrušit z klientské sekce. Vaše údaje
                     okamžitě smažeme společně se všemi předplatnými.
+                  </p>
+                  <p className="text-md font-semibold text-textDark mb-2">
+                    Údaje lze kdykoliv změnit, stačí se jen přihlásit a přejít
+                    do sekce profilu.
                   </p>
                 </div>
               )}
 
               <button
-                className="text-lg font-semibold flex items-center gap-3"
+                className="text-lg font-semibold flex items-center gap-3 cursor-pointer"
                 onClick={() => {
                   if (question == 3) {
                     setQuestion(0);
@@ -320,13 +328,13 @@ export function SignupPage() {
               </button>
               {question == 3 && (
                 <div className="animate-scale-up">
-                  <p className="text-md font-semibold text-textDarker mb-2">
+                  <p className="text-md font-semibold text-textDark mb-2">
                     Každé předplatné vyžaduje kontaktní a dodací údaje. Abychom
                     Vám usnadnili v budoucnu práci, přiřadíme je k vašemu
                     uživatelskému účtu. Budete je poté moci nastavit na jedno
                     kliknutí.
                   </p>
-                  <p className="text-md font-semibold text-textDarker">
+                  <p className="text-md font-semibold text-textDark">
                     Údaje lze samozřejmě kdykoliv změnit.
                   </p>
                 </div>
