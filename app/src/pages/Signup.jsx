@@ -49,14 +49,14 @@ export function SignupPage() {
 
   return (
     <>
-      <div className="bg-slate-50 flex flex-col justify-center items-center min-h-screen">
-        <div className="bg-white flex gap-8 p-5 border rounded-xl border-slate-200 shadow-xl animate-fall-down-faster">
+      <div className="bg-slate-50 flex flex-col justify-center items-center min-h-screen p-3 xl:p-0">
+        <div className="bg-white flex xl:flex-row flex-col-reverse gap-8 p-5 border rounded-xl border-slate-200 shadow-xl animate-fall-down-faster">
           <form className="flex flex-col gap-5 p-2" onSubmit={handleSubmit}>
             <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
               <legend className="text-xl font-semibold text-slate-900 mb-5">
                 Zaregistrovat se
               </legend>
-              <div className="flex gap-3">
+              <div className="flex gap-3 xl:flex-row flex-col">
                 <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
                   Jméno:
                   <input
@@ -82,7 +82,7 @@ export function SignupPage() {
                   ></input>
                 </label>
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-3 xl:flex-row flex-col">
                 <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
                   Telefon:
                   <input
@@ -108,7 +108,7 @@ export function SignupPage() {
                   ></input>
                 </label>
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-3 xl:flex-row flex-col">
                 <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
                   Heslo
                   <input
@@ -140,7 +140,7 @@ export function SignupPage() {
               <legend className="text-xl font-semibold text-slate-900 mb-5">
                 Adresa dodání (lze po registraci změnit)
               </legend>
-              <div className="flex gap-3">
+              <div className="flex gap-3 xl:flex-row flex-col">
                 <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
                   Ulice:
                   <input
@@ -166,7 +166,7 @@ export function SignupPage() {
                   ></input>
                 </label>
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-3 xl:flex-row flex-col">
                 <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
                   Město:
                   <input
@@ -212,7 +212,7 @@ export function SignupPage() {
               </h2>
             )}
           </form>
-          <div className="xl:w-[500px] flex flex-col justify-start items-center gap-4 text-center bg-quad rounded-3xl p-5 shadow-xl animate-fall-down">
+          <div className="xl:w-[500px] max-w-full flex flex-col justify-start items-center gap-4 text-center bg-quad rounded-3xl p-5 shadow-xl animate-fall-down">
             <img
               src={logoBlack}
               alt="logo"
