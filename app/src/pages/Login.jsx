@@ -18,11 +18,11 @@ export function LoginPage() {
 
   return (
     <>
-      <div className="bg-slate-50 flex flex-col xl:grid xl:grid-rows-[1fr_2fr_1fr] justify-center items-center min-h-screen">
+      <div className="bg-slate-50 flex flex-col xl:grid xl:grid-rows-[1fr_2fr_1fr] xl:justify-center pt-20 xl:pt-0 justify-start items-center min-h-screen">
         <img
           src={logoBlack}
           alt="logo"
-          className="xl:max-h-24 xl:mb-0 mb-5 max-h-16 animate-scale-up justify-self-center"
+          className="xl:max-h-24 xl:mb-0 mb-5 max-h-16 animate-scale-up-delay justify-self-center"
         />
 
         <div className="bg-white flex xl:flex-row flex-col-reverse border rounded-xl border-slate-200 shadow-lg animate-fall-right-faster">
@@ -78,7 +78,7 @@ export function LoginPage() {
               </h2>
             )}
           </form>
-          <div className="xl:w-[300px] xl:flex hidden flex-col items-center gap-3 justify-center bg-yellow-200 m-6 shadow-xl  rounded-xl text-textDark p-10 overflow-clip animate-fall-right">
+          <div className="xl:w-[300px] xl:flex hidden flex-col items-center gap-3 justify-center bg-yellow-200 m-6 shadow-xl  rounded-xl text-textDark p-10 overflow-clip animate-fall-up-delay">
             <h2 className="text-2xl font-semibold">Vítejte zpět!</h2>
             <p className="text-center font-semibold"></p>
           </div>

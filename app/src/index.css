@@ -46,6 +46,7 @@
   }
 
   --animate-fall-right: fall-right 0.8s ease-in-out forwards;
+  --animate-fall-right-delay: fall-right 0.8s ease-in-out both 0.5s;
   --animate-fall-right-faster: fall-right 0.7s ease-in-out forwards;
 
   @keyframes fall-right {
@@ -72,7 +73,35 @@
     }
   }
 
+  --animate-fall-up: fall-up 0.8s ease-in-out forwards;
+  --animate-fall-up-delay: fall-up 0.8s ease-in-out both 0.3s;
+
+  @keyframes fall-up {
+    0% {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(30px);
+    }
+    80% {
+      opacity: 1;
+      transform: translateY(-10px);
+    }
+    90% {
+      opacity: 1;
+      transform: translateY(5px);
+    }
+    100% {
+      opacity: 1;
+
+      transform: translateY(0px);
+    }
+  }
+
   --animate-scale-up: scale-up 0.5s forwards;
+  --animate-scale-up-delay: scale-up 0.5s both 0.6s;
 
   @keyframes scale-up {
     0% {
