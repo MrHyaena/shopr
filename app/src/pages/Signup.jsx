@@ -11,8 +11,6 @@ import {
 import logoBlack from "/public/shopr-logo-black.png";
 
 export function SignupPage() {
-  const [step, setStep] = useState(1);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");

@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 
 export function SubscriptionMissing() {
   return (
-    <div className="xl:min-h-[600px] w-full flex justify-center items-center flex-col gap-3 text-center">
-      <h2 className="text-2xl font-semibold text-textMedium">
+    <div className="xl:min-h-[600px] w-full flex justify-center items-center flex-col gap-3 text-center text-textDark font-semibold">
+      <h2 className="text-2xl">
         V tuto chvíli nemáte aktivní žádné předplatné.
       </h2>
-      <h2 className="text-xl font-semibold text-textMedium">
+      <h2 className="text-xl ">
         Pokud si chcete nějaké předplatné založit, klikněte na tlačítko níže.
       </h2>
       <Link
@@ -15,7 +15,7 @@ export function SubscriptionMissing() {
       >
         Založit předplatné
       </Link>
-      <h2 className="text-xl font-semibold text-textMedium">
+      <h2 className="text-xl ">
         Jestli jste v aplikaci poprvé, můžete se podívat na naše návody.
       </h2>
       <Link

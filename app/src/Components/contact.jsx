@@ -99,26 +99,34 @@ export function Contact() {
   }
   return (
     <>
-      <div className="bg-slate-50 p-10 flex flex-col gap-20">
-        <div className="flex justify-between">
-          <h1 className="text-3xl font-bold text-heading pl-10">
+      <div className="bg-slate-50 p-10 flex flex-col xl:gap-20 gap-10 xl:pt-10 pt-30 text-textDark">
+        <div className="flex xl:flex-row justify-between items-center flex-col-reverse gap-5">
+          <h1 className="text-3xl font-bold text-heading0">
             Trápí Vás nějaký problém? Napište nám!
           </h1>
           <Link
             to="/"
-            className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+            className="bg-quad hidden xl:block text-center p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
           >
             Zpět
           </Link>
         </div>
-        <div className="grid grid-cols-[1fr_1fr] gap-10 px-10">
-          <div className="flex flex-col items-start gap-5">
+        <div className="flex xl:flex-row flex-col gap-10 xl:pb-0 pb-20">
+          <div className="flex flex-col items-start gap-5 xl:w-[40%]">
             <h1 className="text-xl font-bold text-heading">
               Kontaktní formulář
             </h1>
             <StepOne />
           </div>
-          <div className="flex flex-col items-start gap-5"></div>
+          <div className="flex flex-col items-start gap-5 max-w-[700px]">
+            <h1 className="text-xl font-bold text-heading">Kontaktní údaje</h1>
+            <p className="text-lg font-semibold ">
+              Pokud nás chcete kontaktovat přímo na emailovou adresu, můžete to
+              udělat skrze <span className="text-textA">info@shopr.cz</span>.
+            </p>
+            <h1 className="text-xl font-bold text-heading">Podnikové údaje</h1>
+            <p className="text-lg font-semibold ">IČO: 10796509</p>
+          </div>
         </div>
       </div>
     </>

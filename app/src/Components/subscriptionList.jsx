@@ -384,10 +384,8 @@ export function Subscriptions() {
         className="bg-slate-50 p-10 flex flex-col gap-5 rounded-2xl min-h-screen xl:pt-10 pt-30"
         key="subList"
       >
-        <div className="xl:flex xl:flex-row flex-col-reverse justify-between xl:gap-0 gap-5 hidden">
-          <h1 className="text-3xl font-bold text-textDark pl-10">
-            Vaše předplatné
-          </h1>
+        <div className="xl:flex xl:flex-row flex-col-reverse items-center justify-between xl:gap-0 gap-5 hidden">
+          <h1 className="text-3xl font-bold text-textDark">Vaše předplatné</h1>
           <Link
             to="/app/form"
             className="bg-quad text-center shadow-md shadow-slate-200 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary"

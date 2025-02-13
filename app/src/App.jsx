@@ -14,6 +14,7 @@ import { LoginPage } from "./pages/Login";
 import { SignupPage } from "./pages/Signup";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { Contact } from "./Components/contact";
+import { Personal } from "./Components/personal";
 
 function App() {
   const { user } = useAuthContext();
@@ -29,6 +30,7 @@ function App() {
               <Route path="/form" element={<SubscriptionForm />} />
               <Route path="/form/:id" element={<SubscriptionForm />} />
               <Route path="/kontakt" element={<Contact />} />
+              <Route path="/osobni-udaje" element={<Personal />} />
             </Routes>
           </main>
         </div>
