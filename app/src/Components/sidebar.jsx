@@ -30,7 +30,9 @@ export function Sidebar() {
       <div className="min-h-screen hidden xl:block">
         <div className="bg-primary h-screen border-slate-200 shadow-xl shadow-slate-200 text-white sticky top-0">
           <div className=" flex flex-col justify-between items-center h-full py-10">
-            <img src={logoBig} alt="logo" className="h-18" />
+            <a href="https://www.shopr.cz">
+              <img src={logo} alt="logo" className="h-18" />
+            </a>
             <div className="flex flex-col items-center gap-2  p-4 row-span-5 self-center">
               {activeButton == 1 ? (
                 <Link
@@ -106,7 +108,7 @@ export function Sidebar() {
                   onClick={() => {
                     setActiveButton();
                   }}
-                  to="/app/navody"
+                  to="/app/otazky"
                   className="cursor-pointer text-sm font-semibold flex flex-col gap-3 bg-white text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
                 >
                   <FontAwesomeIcon
@@ -120,7 +122,7 @@ export function Sidebar() {
                   onClick={() => {
                     setActiveButton(4);
                   }}
-                  to="/app/navody"
+                  to="/app/otazky"
                   className="text-sm cursor-pointer font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
                 >
                   <FontAwesomeIcon
@@ -195,7 +197,7 @@ export function Sidebar() {
                 onClick={() => {
                   setToggleMenu(false);
                 }}
-                to="/app/navody"
+                to="/app/otazky"
                 className="text-xl font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
               >
                 Jak to funguje?

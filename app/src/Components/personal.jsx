@@ -176,7 +176,7 @@ export function Personal() {
 
   return (
     <>
-      <div className="bg-slate-50 p-10 flex flex-col xl:gap-20 gap-10 xl:pt-10 pt-30 text-textDark">
+      <div className="bg-slate-50 p-10 flex flex-col xl:gap-10 gap-10 xl:pt-10 pt-30 text-textDark">
         <div className="flex xl:flex-row justify-between items-start xl:items-center flex-col-reverse gap-5">
           <h1 className="text-3xl font-bold text-heading">Vaše osobní údaje</h1>
           <Link

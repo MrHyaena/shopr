@@ -15,6 +15,7 @@ import { SignupPage } from "./pages/Signup";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { Contact } from "./Components/contact";
 import { Personal } from "./Components/personal";
+import { Faq } from "./Components/faq";
 
 function App() {
   const { user } = useAuthContext();
@@ -31,6 +32,7 @@ function App() {
               <Route path="/form/:id" element={<SubscriptionForm />} />
               <Route path="/kontakt" element={<Contact />} />
               <Route path="/osobni-udaje" element={<Personal />} />
+              <Route path="/otazky" element={<Faq />} />
             </Routes>
           </main>
         </div>
@@ -38,40 +40,13 @@ function App() {
     );
   }
 
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <>
-        <Route
-          path="/app"
-          element={user != null ? <ProtectedRoute /> : <Navigate to="/login" />}
-        >
-          <Route index element={<Subscriptions />} />
-          <Route path="form/:id" element={<SubscriptionForm />} />
-          <Route path="form/" element={<SubscriptionForm />} />
-        </Route>
-
-        <Route
-          path="/login"
-          element={!user ? <LoginPage /> : <Navigate to="/app" />}
-        ></Route>
-
-        <Route
-          path="/signup"
-          element={!user ? <SignupPage /> : <Navigate to="/app" />}
-        ></Route>
-
-        <Route path="/" element={<Navigate to="/app" />} />
-      </>
-    )
-  );
-
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route
             path="/app/*"
-            element={!user ? <ProtectedRoute /> : <Navigate to="/login" />}
+            element={user ? <ProtectedRoute /> : <Navigate to="/login" />}
           />
           <Route
             path="login"

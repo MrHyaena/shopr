@@ -381,7 +381,7 @@ export function Subscriptions() {
   return (
     <>
       <div
-        className="bg-slate-50 p-10 flex flex-col gap-5 rounded-2xl min-h-screen xl:pt-10 pt-30"
+        className="bg-slate-50 p-10 flex flex-col xl:gap-10 gap-5 rounded-2xl min-h-screen xl:pt-10 pt-30"
         key="subList"
       >
         <div className="xl:flex xl:flex-row flex-col-reverse items-center justify-between xl:gap-0 gap-5 hidden">
@@ -393,35 +393,36 @@ export function Subscriptions() {
             Nové předplatné
           </Link>
         </div>
-
-        {subscriptions !== 0 &&
-          subscriptions.map((item, index) => {
-            return (
-              <>
-                <SubscriptionTabs
-                  index={index}
-                  subId={item._id}
-                  firstName={item.firstName}
-                  secondName={item.secondName}
-                  phone={item.phone}
-                  email={item.email}
-                  address={item.address}
-                  addressNumber={item.addressNumber}
-                  city={item.city}
-                  cityNumber={item.cityNumber}
-                  subName={item.subName}
-                  subWebsite={item.subWebsite}
-                  subFrequency={item.subFrequency}
-                  subDay={item.subDay}
-                  subDeliveryMethod={item.subDeliveryMethod}
-                  subDeliveryAddress={item.subDeliveryAddress}
-                  items={item.items}
-                  key={"subItem" + item._id}
-                />
-              </>
-            );
-          })}
-        {subscriptions == 0 && <SubscriptionMissing />}
+        <div className="flex flex-col gap-4">
+          {subscriptions !== 0 &&
+            subscriptions.map((item, index) => {
+              return (
+                <>
+                  <SubscriptionTabs
+                    index={index}
+                    subId={item._id}
+                    firstName={item.firstName}
+                    secondName={item.secondName}
+                    phone={item.phone}
+                    email={item.email}
+                    address={item.address}
+                    addressNumber={item.addressNumber}
+                    city={item.city}
+                    cityNumber={item.cityNumber}
+                    subName={item.subName}
+                    subWebsite={item.subWebsite}
+                    subFrequency={item.subFrequency}
+                    subDay={item.subDay}
+                    subDeliveryMethod={item.subDeliveryMethod}
+                    subDeliveryAddress={item.subDeliveryAddress}
+                    items={item.items}
+                    key={"subItem" + item._id}
+                  />
+                </>
+              );
+            })}
+          {subscriptions == 0 && <SubscriptionMissing />}
+        </div>
       </div>
     </>
   );
