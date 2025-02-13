@@ -96,12 +96,12 @@ export function SubscriptionForm() {
     }
 
     return (
-      <form className="flex flex-col gap-5 p-10 bg-white border border-slate-200 rounded-lg">
+      <form className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg">
         <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
           <legend className="text-xl font-semibold text-heading mb-5">
             Kontaktní údaje
           </legend>
-          <div className="grid grid-cols-2 gap-5">
+          <div className="xl:grid grid-cols-2 gap-5 flex flex-col">
             <label className="flex flex-col text-heading text-lg font-semibold">
               Jméno
               <input
@@ -152,7 +152,7 @@ export function SubscriptionForm() {
           <legend className="text-xl font-semibold text-slate-900 mb-5">
             Adresa dodání / Fakturační údaje
           </legend>
-          <div className="grid grid-cols-2 gap-5">
+          <div className="xl:grid grid-cols-2 gap-5 flex flex-col">
             <label className="flex flex-col text--textDark text-lg font-semibold">
               Adresa
               <input
@@ -260,7 +260,7 @@ export function SubscriptionForm() {
     }
 
     return (
-      <form className="flex flex-col gap-5 p-10 bg-white border border-slate-200 rounded-lg">
+      <form className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg">
         <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
           <legend className="text-xl font-semibold text-heading mb-5">
             Parametry předplatného
@@ -278,11 +278,13 @@ export function SubscriptionForm() {
                 placeholder="Moje první předplatné"
               ></input>
             </label>
-            <div className="text-md font-semibold text-textDark flex items-center gap-3 bg-quad p-2 rounded-lg">
-              <FontAwesomeIcon
-                icon={faTriangleExclamation}
-                className="text-2xl"
-              />
+            <div className="text-md font-semibold text-textDark flex items-center gap-3 bg-quad xl:p-2 p-4 rounded-lg">
+              <div className="hidden xl:block">
+                <FontAwesomeIcon
+                  icon={faTriangleExclamation}
+                  className="text-2xl"
+                />
+              </div>
               <p>
                 Název předplatného musí být stejný jako ten, který budete
                 zadávat při platbě. Pouze tak můžeme poznat, zda je předplatné
@@ -462,7 +464,7 @@ export function SubscriptionForm() {
     }
 
     return (
-      <form className="flex flex-col gap-5 p-10 bg-white border border-slate-200 rounded-lg">
+      <form className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg">
         <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
           <legend className="text-xl font-semibold text-slate-900 mb-5">
             Zboží do objednávky
@@ -471,7 +473,7 @@ export function SubscriptionForm() {
             {items.map((item, index) => {
               return (
                 <div
-                  className="grid grid-cols-12 gap-2 maw-w-full"
+                  className="xl:grid grid-cols-12 flex flex-col gap-2 maw-w-full"
                   key={"item" + index}
                 >
                   <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
@@ -517,7 +519,7 @@ export function SubscriptionForm() {
                   </label>
                   <FontAwesomeIcon
                     icon={faSquareXmark}
-                    className="text-xl text-red-400 self-end mb-[14px] cursor-textMediumointer cursor-pointer"
+                    className="xl:text-xl text-3xl text-red-400 self-end mb-[14px] cursor-textMediumointer cursor-pointer"
                     onClick={(e) => {
                       e.preventDefault();
                       handleDeleteInput(index);
@@ -527,16 +529,21 @@ export function SubscriptionForm() {
               );
             })}
           </div>
-
-          <button
-            className="flex justify-center items-center rounded-sm my-4 text-3xl hover:scale-105 ease-in-out transition-all cursor-pointer"
-            onClick={(e) => {
-              e.preventDefault();
-              handleAddInput();
-            }}
-          >
-            <FontAwesomeIcon icon={faPlusSquare} className=" text-textDark" />
-          </button>
+          <div>
+            <button
+              className="flex justify-center items-center rounded-sm my-4 text-lg font-bold gap-3 hover:scale-105 ease-in-out transition-all cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault();
+                handleAddInput();
+              }}
+            >
+              <FontAwesomeIcon
+                icon={faPlusSquare}
+                className=" text-textDark text-3xl"
+              />
+              <p className="xl:hidden">Přidejte položku</p>
+            </button>
+          </div>
         </fieldset>
 
         <div className="mx-auto flex gap-3">
@@ -609,19 +616,19 @@ export function SubscriptionForm() {
 
   return (
     <>
-      <div className="bg-slate-50 p-10 flex flex-col gap-5">
-        <div className="flex justify-between">
-          <h1 className="text-3xl font-bold text-heading pl-10">
+      <div className="bg-slate-50 p-10 flex flex-col gap-5 xl:pt-10 pt-30">
+        <div className="flex justify-between xl:flex-row flex-col-reverse items-center">
+          <h1 className="text-3xl font-bold text-heading text-center">
             Nastavení předplatného
           </h1>
           <Link
             to="/"
-            className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+            className="bg-quad mb-5 xl:mb-0 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
           >
             Zpět
           </Link>
         </div>
-        <div className="grid grid-cols-[1fr_1fr]">
+        <div className="grid xl:grid-cols-[1fr_1fr]">
           {step == 1 && <StepOne />}
           {step == 1 && <StepOneComment />}
           {step == 2 && <StepTwo />}
