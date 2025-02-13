@@ -20,7 +20,7 @@ function App() {
 
   function ProtectedRoute() {
     return (
-      <div className="grid grid-cols-[150px_1fr] gap-5 min-h-screen bg-slate-50">
+      <div className="grid xl:grid-cols-[150px_1fr] gap-5 min-h-screen bg-slate-50">
         <Sidebar />
         <div>
           <main>
@@ -69,7 +69,7 @@ function App() {
         <Routes>
           <Route
             path="/app/*"
-            element={user ? <ProtectedRoute /> : <Navigate to="/login" />}
+            element={!user ? <ProtectedRoute /> : <Navigate to="/login" />}
           />
           <Route
             path="login"
