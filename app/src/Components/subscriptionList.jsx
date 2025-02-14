@@ -73,9 +73,9 @@ export function Subscriptions() {
 
     return (
       <>
-        <div className="bg-white p-7 rounded-lg border border-slate-200 shadow-md shadow-slate-200 grid grid-cols-2 gap-4">
-          <div>
-            <div className="flex gap-10">
+        <div className="bg-white p-7 rounded-lg border border-slate-200 shadow-md shadow-slate-200 xl:grid grid-cols-2 gap-4">
+          <div className="mb-5 xl:mb-0">
+            <div className="xl:flex gap-10 mb-5 xl:mb-2">
               <p className="text-textDarker text-[12px] mb-2 font-medium">
                 ID: <span className="text-textLighter">{subId}</span>
               </p>
@@ -85,14 +85,18 @@ export function Subscriptions() {
               </p>
             </div>
 
-            <div className="flex gap-5 items-center">
-              <img src="https://google.cz/favicon.ico" alt="icon"></img>
-              <h2 className="text-2xl text-textDark font-bold mr-5 mt-[-8px]">
+            <div className="flex gap-5 items-center justify-center xl:justify-start">
+              <img
+                src="https://google.cz/favicon.ico"
+                alt="icon"
+                className="xl:block hidden"
+              />
+              <h2 className="text-2xl text-textDark font-bold xl:mr-5 mt-[-8px]">
                 {subName}
               </h2>
             </div>
           </div>
-          <div className="flex gap-5 items-center justify-end">
+          <div className="flex xl:flex-row flex-col gap-5 xl:items-center items-center justify-end">
             <Link
               to={editURL}
               className=" text-textDark p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad flex gap-2 items-center border border-slate-100 hover:border-white"
@@ -127,55 +131,91 @@ export function Subscriptions() {
           </div>
 
           {toggle ? (
-            <div className="col-span-2 grid grid-cols-[1fr_500px] gap-y-5 gap-x-15 ">
-              <div>
-                <h3 className="text-xl font-bold text-quad py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
+            <div className="col-span-2 grid xl:grid-cols-3 gap-y-5 gap-x-15 ">
+              <div className="xl:col-span-2">
+                <h3 className="text-xl font-bold text-textLight py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
                   <FontAwesomeIcon icon={faCartShopping} />
                   Produkty
                 </h3>
-                <div className="grid grid-cols-7 py-2 px-4 text-md font-semibold text-textLight bg-zinc-700">
-                  <p className="col-span-5">URL</p>
+                <div className="xl:grid hidden grid-cols-4 py-2 px-4 text-md font-semibold text-textLight bg-zinc-800">
+                  <p className="col-span-2">URL</p>
                   <p className="col-span-1 justify-self-center">Množství</p>
                   <p className="col-span-1 justify-self-center">Nahraditelné</p>
                 </div>
-                <ul className="text-md font-semibold text-textDarker flex flex-col">
+                <ul className="text-md font-semibold text-textDark flex flex-col">
                   {items.map((item, index) => {
                     if (index % 2 == 0) {
                       return (
-                        <li className="bg-slate-100 py-2 px-4 grid grid-cols-7">
-                          <p className="col-span-5">{item.url}</p>
-                          <p className="col-span-1 justify-self-center">
-                            {item.amount}
-                          </p>
-                          <p className="col-span-1 justify-self-center">
-                            {item.changable}
-                          </p>
-                        </li>
+                        <>
+                          <li className="bg-slate-100 py-2 px-4 xl:hidden">
+                            <div className="flex gap-2">
+                              <p className="text-textDark font-bold">URL:</p>
+                              <p className="">{item.url}</p>
+                            </div>
+                            <div className="flex gap-2">
+                              <p className="text-textDark font-bold">Počet:</p>
+                              <p className="">{item.amount}</p>
+                            </div>
+                            <div className="flex gap-2">
+                              <p className="text-textDark font-bold">
+                                Lze změnit:
+                              </p>
+                              <p className="">{item.changable}</p>
+                            </div>
+                          </li>
+                          <li className="bg-slate-100 py-2 px-4 xl:grid hidden grid-cols-4">
+                            <p className="col-span-2">{item.url}</p>
+                            <p className="col-span-1 justify-self-center">
+                              {item.amount}
+                            </p>
+                            <p className="col-span-1 justify-self-center">
+                              {item.changable}
+                            </p>
+                          </li>
+                        </>
                       );
                     } else {
                       return (
-                        <li className="py-2 px-4 grid grid-cols-7">
-                          <p className="col-span-5">{item.url}</p>
-                          <p className="col-span-1 justify-self-center">
-                            {item.amount}
-                          </p>
-                          <p className="col-span-1 justify-self-center">
-                            {item.changable}
-                          </p>
-                        </li>
+                        <>
+                          <li className="py-2 px-4 xl:hidden">
+                            <div className="flex gap-2">
+                              <p className="text-textDark font-bold">URL:</p>
+                              <p className="">{item.url}</p>
+                            </div>
+                            <div className="flex gap-2">
+                              <p className="text-textDark font-bold">Počet:</p>
+                              <p className="">{item.amount}</p>
+                            </div>
+                            <div className="flex gap-2">
+                              <p className="text-textDark font-bold">
+                                Lze změnit:
+                              </p>
+                              <p className="">{item.changable}</p>
+                            </div>
+                          </li>
+                          <li className="py-2 px-4 xl:grid grid-cols-7 hidden">
+                            <p className="col-span-5">{item.url}</p>
+                            <p className="col-span-1 justify-self-center">
+                              {item.amount}
+                            </p>
+                            <p className="col-span-1 justify-self-center">
+                              {item.changable}
+                            </p>
+                          </li>
+                        </>
                       );
                     }
                   })}
                 </ul>
               </div>
-              <div className=" flex flex-col">
+              <div className="col-span-1 flex flex-col">
                 <div>
-                  <h3 className="text-xl font-bold text-quad py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
+                  <h3 className="text-xl font-bold text-textLight py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
                     <FontAwesomeIcon icon={faGears} />
                     Nastavení předplatného
                   </h3>
-                  <div className="flex flex-col font-semibold text-textDarker">
-                    <div className="grid grid-cols-2 py-2 px-4 text-md font-semibold text-textLight bg-zinc-700">
+                  <div className="flex flex-col font-semibold text-textDark">
+                    <div className="grid grid-cols-2 py-2 px-4 text-md font-semibold text-textLight bg-zinc-700 hidden">
                       <p className="col-span-1">Údaj</p>
                       <p className="col-span-1">Hodnota</p>
                     </div>
@@ -235,7 +275,7 @@ export function Subscriptions() {
                         </a>
                       </div>
                     )}
-                    <div className="mt-5 flex justify-end">
+                    <div className="mt-5 flex xl:justify-end justify-center">
                       <button
                         className="font-semibold text-slate-600 bg-slate-100 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
                         onClick={() => {
@@ -248,11 +288,11 @@ export function Subscriptions() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-quad py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
+                  <h3 className="text-xl font-bold text-textLight py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
                     <FontAwesomeIcon icon={faHouseUser} />
                     Cílový zákazník
                   </h3>
-                  <div className="grid grid-cols-2 py-2 px-4 text-md font-semibold text-textLight bg-zinc-700">
+                  <div className="grid grid-cols-2 py-2 px-4 text-md font-semibold text-textLight bg-zinc-700 hidden">
                     <p className="col-span-1">Údaj</p>
                     <p className="col-span-1">Hodnota</p>
                   </div>
