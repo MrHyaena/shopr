@@ -43,6 +43,33 @@ export function Subscriptions() {
   //  fetchSubscription();
   //}, []);
 
+  async function activateSubscription(subId, subFrequency) {
+    const session = await fetch(
+      "http://localhost:4000/api/stripe/activate/" +
+        subId +
+        "/?user=" +
+        user.id +
+        "&frequency=" +
+        subFrequency,
+      {
+        mode: "cors",
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+
+    if (session.ok) {
+      const json = await session.json();
+
+      window.location.href = json;
+    }
+
+    //window.location.href = session;
+  }
+
   // FUNCTION FOR GENERATING SUBSCRIPTION TABS
 
   function SubscriptionTabs({
@@ -73,7 +100,7 @@ export function Subscriptions() {
 
     return (
       <>
-        <div className="bg-white p-7 rounded-lg border border-slate-200 shadow-md shadow-slate-200 xl:grid grid-cols-2 gap-4">
+        <div className="bg-white xl:p-7 p-2 rounded-lg border border-slate-200 shadow-md shadow-slate-200 xl:grid grid-cols-2 gap-4">
           <div className="mb-5 xl:mb-0">
             <div className="xl:flex gap-10 mb-5 xl:mb-2">
               <p className="text-textDarker text-[12px] mb-2 font-medium">
@@ -104,6 +131,32 @@ export function Subscriptions() {
               <FontAwesomeIcon icon={faPen} />
               Upravit
             </Link>
+            <button
+              onClick={() => {
+                activateSubscription(subId, subFrequency);
+              }}
+              className="text-textDark cursor-pointer p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad border border-slate-100 hover:border-white"
+            >
+              Aktivovat
+            </button>
+            <form
+              action={
+                "http://localhost:4000/api/stripe/activate/" +
+                subId +
+                "/?user=" +
+                user.id +
+                "&frequency=" +
+                subFrequency
+              }
+              method="POST"
+            >
+              <button
+                type="submit"
+                className="text-textDark cursor-pointer p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad border border-slate-100 hover:border-white"
+              >
+                Aktivovat form
+              </button>
+            </form>
             <h2 className="font-bold text-lg text-emerald-700 p-2">Aktivní</h2>
             {toggle ? (
               <button
@@ -142,7 +195,7 @@ export function Subscriptions() {
                   <p className="col-span-1 justify-self-center">Množství</p>
                   <p className="col-span-1 justify-self-center">Nahraditelné</p>
                 </div>
-                <ul className="text-md font-semibold text-textDark flex flex-col">
+                <ul className="text-md font-semibold text-textDark flex flex-col border-b border-slate-200">
                   {items.map((item, index) => {
                     if (index % 2 == 0) {
                       return (
@@ -214,7 +267,7 @@ export function Subscriptions() {
                     <FontAwesomeIcon icon={faGears} />
                     Nastavení předplatného
                   </h3>
-                  <div className="flex flex-col font-semibold text-textDark">
+                  <div className="flex flex-col font-semibold text-textDark border-b border-slate-200">
                     <div className="grid grid-cols-2 py-2 px-4 text-md font-semibold text-textLight bg-zinc-700 hidden">
                       <p className="col-span-1">Údaj</p>
                       <p className="col-span-1">Hodnota</p>
@@ -248,9 +301,11 @@ export function Subscriptions() {
                         Frekvence:
                       </h4>
                       <p>
-                        {subFrequency == 1 && "Jednou za měsíc"}
-                        {subFrequency == 2 && "Dvakrát za měsíc"}
-                        {subFrequency == 3 && "Třikrát za měsíc"}
+                        {subFrequency == "weekly" && "Jednou za měsíc"}
+                        {subFrequency == "biWeekly" && "Jednou za měsíc"}
+                        {subFrequency == "monthly" && "Jednou za měsíc"}
+                        {subFrequency == "biMonthly" && "Dvakrát za měsíc"}
+                        {subFrequency == "quarterly" && "Třikrát za měsíc"}
                       </p>
                     </div>
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
@@ -275,7 +330,13 @@ export function Subscriptions() {
                         </a>
                       </div>
                     )}
-                    <div className="mt-5 flex xl:justify-end justify-center">
+                    <div className="p-5 flex xl:justify-center gap-5 justify-center ">
+                      <button
+                        className="font-semibold text-slate-600 bg-slate-100 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
+                        onClick={() => {}}
+                      >
+                        Deaktivovat předplatné
+                      </button>
                       <button
                         className="font-semibold text-slate-600 bg-slate-100 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
                         onClick={() => {
@@ -296,7 +357,7 @@ export function Subscriptions() {
                     <p className="col-span-1">Údaj</p>
                     <p className="col-span-1">Hodnota</p>
                   </div>
-                  <div className="text-textDarker font-semibold">
+                  <div className="text-textDarker font-semibold border-b border-slate-200">
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
                       <h4 className="text-heading font-bold text-textDark">
                         Jméno:

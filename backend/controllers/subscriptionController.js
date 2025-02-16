@@ -111,6 +111,7 @@ const createSubscription = async (req, res) => {
   try {
     const subscription = await Subscription.create({
       userId,
+      active: false,
       firstName,
       secondName,
       phone,
@@ -171,6 +172,9 @@ const updateSubscription = async (req, res) => {
 
   res.status(200).json(subscription);
 };
+
+//activate subscription
+const activateSubscription = async (req, res) => {};
 
 module.exports = {
   getSubscriptions,

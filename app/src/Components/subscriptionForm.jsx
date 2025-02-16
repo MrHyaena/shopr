@@ -315,9 +315,11 @@ export function SubscriptionForm() {
                 id="frekvence"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               >
-                <option value="1">Jednou za měsíc</option>
-                <option value="2">Jednou za dva měsíce</option>
-                <option value="3">Jednou za tři měsíce</option>
+                <option value="weekly">Jednou za týden</option>
+                <option value="biWeekly">Jednou za dva týdny</option>
+                <option value="monthly">Jednou za měsíc</option>
+                <option value="biMonthly">Jednou za dva měsíce</option>
+                <option value="quarterly">Jednou za tři měsíce</option>
               </select>
             </label>
             <label className="flex flex-col text-heading text-lg font-semibold">
