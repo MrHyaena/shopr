@@ -24,10 +24,7 @@ const userSchema = new Schema(
       type: String,
     },
     phone: {
-      type: String,
-    },
-    contactEmail: {
-      type: String,
+      type: Number,
     },
     address: {
       type: String,
@@ -46,9 +43,20 @@ const userSchema = new Schema(
 );
 
 //static signup method
-userSchema.statics.signup = async function (email, password) {
+userSchema.statics.signup = async function (data) {
+  const {
+    email,
+    password,
+    firstName,
+    secondName,
+    phone,
+    address,
+    addressNumber,
+    city,
+    cityNumber,
+  } = data;
   //validation
-  if (!email || !password) {
+  if (!email || !password || !firstName || !secondName || !phone) {
     throw Error("Musíte vyplnit všechna pole");
   }
 
@@ -67,7 +75,17 @@ userSchema.statics.signup = async function (email, password) {
   const hash = await bcrypt.hash(password, salt);
 
   //creating new record of user into Users database
-  const user = await this.create({ email, password: hash });
+  const user = await this.create({
+    email,
+    password: hash,
+    firstName,
+    secondName,
+    phone,
+    address,
+    addressNumber,
+    city,
+    cityNumber,
+  });
 
   return user;
 };
@@ -116,6 +134,47 @@ userSchema.statics.delete = async function (email, password) {
   const deletedUser = await this.findByIdAndDelete({ _id: user.id });
 
   return deletedUser;
+};
+
+userSchema.statics.update = async function (data) {
+  const {
+    email,
+    firstName,
+    secondName,
+    phone,
+    address,
+    addressNumber,
+    city,
+    cityNumber,
+  } = data;
+
+  if (
+    !email ||
+    !firstName ||
+    !secondName ||
+    !phone ||
+    !address ||
+    !addressNumber ||
+    !city ||
+    !cityNumber
+  ) {
+    throw Error("Musíte vyplnit všechna pole");
+  }
+
+  const user = await this.findOne({ email });
+
+  if (!user) {
+    throw Error("Nesprávný email");
+  }
+
+  const updateUser = await this.findByIdAndUpdate(
+    { _id: user.id },
+    { firstName, secondName, phone, address, addressNumber, city, cityNumber }
+  );
+
+  console.log(updateUser);
+
+  return updateUser;
 };
 
 //module export

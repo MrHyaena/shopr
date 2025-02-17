@@ -5,16 +5,20 @@ export function useUpdate() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
 
-  const { setUser } = useAuthContext();
+  const { user, setUser } = useAuthContext();
 
   async function update(data) {
+    console.log("useUpdate");
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("http://localhost:4000/api/user/signup", {
+    const response = await fetch("http://localhost:4000/api/user/update", {
       mode: "cors",
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
+      },
       body: JSON.stringify({ ...data }),
     });
 
@@ -31,9 +35,9 @@ export function useUpdate() {
       localStorage.setItem("user", JSON.stringify(json));
 
       // update the auth context
-      setUser(json);
-
+      console.log(json);
       setIsLoading(false);
+      setUser({ ...user, ...data });
     }
   }
 

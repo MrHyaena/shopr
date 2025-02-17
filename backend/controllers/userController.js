@@ -11,13 +11,36 @@ function createToken(_id) {
 
 //signup user controller function
 const signupUser = async (req, res) => {
-  const { email, password } = req.body;
+  const data = req.body;
+  const {
+    email,
+    password,
+    passwordCheck,
+    firstName,
+    secondName,
+    phone,
+    address,
+    addressNumber,
+    city,
+    cityNumber,
+  } = data;
   try {
-    const user = await User.signup(email, password);
+    const user = await User.signup(data);
     //create token
     const token = createToken(user._id);
 
-    res.status(200).json({ msg: "signup", email, token, id: user._id });
+    res.status(200).json({
+      token,
+      id: user._id,
+      email,
+      phone,
+      firstName,
+      secondName,
+      address,
+      addressNumber,
+      city,
+      cityNumber,
+    });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -33,7 +56,18 @@ const loginUser = async (req, res) => {
     //create token
     const token = createToken(user._id);
 
-    res.status(200).json({ msg: "login", email, token, id: user._id });
+    res.status(200).json({
+      token,
+      id: user._id,
+      email: user.email,
+      phone: user.phone,
+      firstName: user.firstName,
+      secondName: user.secondName,
+      address: user.address,
+      addressNumber: user.addressNumber,
+      city: user.city,
+      cityNumber: user.cityNumber,
+    });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -55,4 +89,27 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { signupUser, loginUser, deleteUser };
+const updateUser = async (req, res) => {
+  console.log("updateUser");
+  const data = req.body;
+  const {
+    firstName,
+    secondName,
+    email,
+    phone,
+    address,
+    addressNumber,
+    city,
+    cityNumber,
+  } = data;
+
+  try {
+    const user = await User.update(data);
+
+    res.status(200).json({ ...data });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+module.exports = { signupUser, loginUser, deleteUser, updateUser };

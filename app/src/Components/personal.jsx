@@ -1,38 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUpdate } from "../hooks/useUpdate";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export function Personal() {
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [secondName, setSecondName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [addressNumber, setAddressNumber] = useState("");
-  const [city, setCity] = useState("");
-  const [cityNumber, setCityNumber] = useState("");
-
-  const { update, isLoading, error } = useUpdate();
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const data = {
-      email,
-      password,
-      passwordCheck,
-      firstName,
-      secondName,
-      phone,
-      address,
-      addressNumber,
-      city,
-      cityNumber,
-    };
-
-    await update(data);
-  }
-
   function PersonalForm() {
+    const { user } = useAuthContext();
+
+    const [email, setEmail] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [secondName, setSecondName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [address, setAddress] = useState("");
+    const [addressNumber, setAddressNumber] = useState("");
+    const [city, setCity] = useState("");
+    const [cityNumber, setCityNumber] = useState("");
+
+    useEffect(() => {
+      setEmail(user.email);
+      setFirstName(user.firstName);
+      setSecondName(user.secondName);
+      setPhone(user.phone);
+      setAddress(user.address);
+      setAddressNumber(user.addressNumber);
+      setCity(user.city);
+      setCityNumber(user.cityNumber);
+    }, []);
+
+    const { update, isLoading, error } = useUpdate();
+
+    async function handleSubmit(e) {
+      console.log("starting submit");
+      e.preventDefault();
+      const data = {
+        email,
+        firstName,
+        secondName,
+        phone,
+        address,
+        addressNumber,
+        city,
+        cityNumber,
+      };
+
+      await update(data);
+    }
     return (
       <>
         <form
@@ -83,11 +95,12 @@ export function Personal() {
                 ></input>
               </label>
               <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
-                Email:
+                Váš email - Nelze změnit
                 <input
+                  disabled={true}
                   name="email"
                   type="text"
-                  className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                  className=" rounded p-2 text-md font-semibold text-input underline"
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}

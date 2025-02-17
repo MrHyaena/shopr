@@ -19,12 +19,12 @@ const router = express.Router();
 // ---------------------- SERVER ROUTES ----------------------
 
 //activate subscription route
-router.get("/activate/:id", async (req, res) => {
+router.get("/activate/:subId", async (req, res) => {
   const user = req.query.user;
   const frequency = req.query.frequency;
-  const { id } = req.params;
+  const { subId } = req.params;
 
-  if (!id) {
+  if (!subId) {
     return res.status(404).json("Plan does not exist");
   }
 
@@ -60,16 +60,11 @@ router.get("/activate/:id", async (req, res) => {
         quantity: 1,
       },
     ],
-    success_url: process.env.PROXY + "app",
+    success_url:
+      process.env.PROXY + "api/stripe/success?session_id={CHECKOUT_SESSION_ID}",
     cancel_url: process.env.PROXY + "app",
+    metadata: { user: user, subId: subId },
   });
-
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "OPTIONS, GET, POST, PUT, PATCH, DELETE"
-  );
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
   if (session) {
     res.status(200).json(session.url);
@@ -81,13 +76,14 @@ router.get("/activate/:id", async (req, res) => {
 });
 
 //stripe success
-router.get("/success/:id", async (req, res) => {
+router.get("/success", async (req, res) => {
+  const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
   res.json("success");
 });
 
 //stripe cancel
 router.get("/cancel", async (req, res) => {
-  res.json("cancel");
+  res.redirect(process.env.PROXY);
 });
 
 module.exports = router;
