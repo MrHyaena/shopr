@@ -46,10 +46,10 @@ export function Subscriptions() {
   async function activateSubscription(subId, subFrequency) {
     const session = await fetch(
       "http://localhost:4000/api/stripe/activate/" +
-        subId +
-        "/?user=" +
         user.id +
-        "&frequency=" +
+        "/" +
+        subId +
+        "/" +
         subFrequency,
       {
         mode: "cors",
@@ -74,6 +74,7 @@ export function Subscriptions() {
 
   function SubscriptionTabs({
     subId,
+    stripeSubId,
     active,
     firstName,
     secondName,
@@ -182,7 +183,7 @@ export function Subscriptions() {
                   <p className="col-span-1 justify-self-center">Množství</p>
                   <p className="col-span-1 justify-self-center">Nahraditelné</p>
                 </div>
-                <ul className="text-md font-semibold text-textDark flex flex-col border-b border-slate-200">
+                <ul className="text-md font-semibold text-textDark flex flex-col ">
                   {items.map((item, index) => {
                     if (index % 2 == 0) {
                       return (
@@ -190,7 +191,13 @@ export function Subscriptions() {
                           <li className="bg-slate-100 py-2 px-4 xl:hidden">
                             <div className="flex gap-2">
                               <p className="text-textDark font-bold">URL:</p>
-                              <p className="">{item.url}</p>
+                              <a
+                                href={"https://" + item.url}
+                                className="text-textA"
+                                target="_blank"
+                              >
+                                {item.url}
+                              </a>
                             </div>
                             <div className="flex gap-2">
                               <p className="text-textDark font-bold">Počet:</p>
@@ -203,8 +210,14 @@ export function Subscriptions() {
                               <p className="">{item.changable}</p>
                             </div>
                           </li>
-                          <li className="bg-slate-100 py-2 px-4 xl:grid hidden grid-cols-4">
-                            <p className="col-span-2">{item.url}</p>
+                          <li className="bg-slate-100 py-2 px-4 xl:grid hidden items-center grid-cols-4">
+                            <a
+                              className="col-span-2 text-textA"
+                              href={"https://" + item.url}
+                              target="_blank"
+                            >
+                              {item.url}
+                            </a>
                             <p className="col-span-1 justify-self-center">
                               {item.amount}
                             </p>
@@ -220,7 +233,13 @@ export function Subscriptions() {
                           <li className="py-2 px-4 xl:hidden">
                             <div className="flex gap-2">
                               <p className="text-textDark font-bold">URL:</p>
-                              <p className="">{item.url}</p>
+                              <a
+                                href={"https://" + item.url}
+                                className="text-textA"
+                                target="_blank"
+                              >
+                                {item.url}
+                              </a>
                             </div>
                             <div className="flex gap-2">
                               <p className="text-textDark font-bold">Počet:</p>
@@ -233,8 +252,14 @@ export function Subscriptions() {
                               <p className="">{item.changable}</p>
                             </div>
                           </li>
-                          <li className="py-2 px-4 xl:grid grid-cols-7 hidden">
-                            <p className="col-span-5">{item.url}</p>
+                          <li className="py-2 px-4 xl:grid grid-cols-4 items-center  hidden">
+                            <a
+                              href={"https://" + item.url}
+                              className="col-span-2 text-textA"
+                              target="_blank"
+                            >
+                              {item.url}
+                            </a>
                             <p className="col-span-1 justify-self-center">
                               {item.amount}
                             </p>
@@ -254,8 +279,8 @@ export function Subscriptions() {
                     <FontAwesomeIcon icon={faGears} />
                     Nastavení předplatného
                   </h3>
-                  <div className="flex flex-col font-semibold text-textDark border-b border-slate-200">
-                    <div className="grid grid-cols-2 py-2 px-4 text-md font-semibold text-textLight bg-zinc-700 hidden">
+                  <div className="flex flex-col font-semibold text-textDark">
+                    <div className="grid-cols-2 py-2 px-4 text-md font-semibold text-textLight bg-zinc-700 hidden">
                       <p className="col-span-1">Údaj</p>
                       <p className="col-span-1">Hodnota</p>
                     </div>
@@ -269,7 +294,13 @@ export function Subscriptions() {
                       <h4 className="text-heading font-bold text-textDark">
                         E-shop:
                       </h4>
-                      <p>{subWebsite}</p>
+                      <a
+                        href={"https://" + subWebsite}
+                        target="_blank"
+                        className="text-textA"
+                      >
+                        {subWebsite}
+                      </a>
                     </div>
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
                       <h4 className="text-heading font-bold text-textDark">
@@ -295,13 +326,25 @@ export function Subscriptions() {
                         {subFrequency == "quarterly" && "Třikrát za měsíc"}
                       </p>
                     </div>
-                    <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
+                    <div className="grid grid-cols-2 py-2 px-4 bg-slate-100">
                       <h4 className="text-heading font-bold text-textDark">
                         Způsob doručení:
                       </h4>
                       <p>
                         {subDeliveryMethod == "courier" && "Nejlevnější kurýr"}
                         {subDeliveryMethod == "dropbox" && "Box/výdejní místé"}
+                      </p>
+                    </div>
+                    <div className="grid grid-cols-2 py-2 px-4 bg-white">
+                      <h4 className="text-heading font-bold text-textDark">
+                        Platební ID:
+                      </h4>
+                      <p>
+                        {stripeSubId ? (
+                          { stripeSubId }
+                        ) : (
+                          <p>Předplatné je neaktivní</p>
+                        )}
                       </p>
                     </div>
                     {subDeliveryMethod !== "courier" && (
@@ -319,13 +362,13 @@ export function Subscriptions() {
                     )}
                     <div className="p-5 flex xl:justify-center gap-5 justify-center ">
                       <button
-                        className="font-semibold text-slate-600 bg-slate-100 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
+                        className="font-semibold text-textDark  border border-slate-200 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
                         onClick={() => {}}
                       >
                         Deaktivovat předplatné
                       </button>
                       <button
-                        className="font-semibold text-slate-600 bg-slate-100 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
+                        className="font-semibold text-textDark  text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
                         onClick={() => {
                           setToggleDelete(true);
                         }}
@@ -340,11 +383,11 @@ export function Subscriptions() {
                     <FontAwesomeIcon icon={faHouseUser} />
                     Cílový zákazník
                   </h3>
-                  <div className="grid grid-cols-2 py-2 px-4 text-md font-semibold text-textLight bg-zinc-700 hidden">
+                  <div className="grid-cols-2 py-2 px-4 text-md font-semibold text-textLight bg-zinc-700 hidden">
                     <p className="col-span-1">Údaj</p>
                     <p className="col-span-1">Hodnota</p>
                   </div>
-                  <div className="text-textDarker font-semibold border-b border-slate-200">
+                  <div className="text-textDark font-semibold ">
                     <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
                       <h4 className="text-heading font-bold text-textDark">
                         Jméno:
@@ -489,6 +532,7 @@ export function Subscriptions() {
                   <SubscriptionTabs
                     index={index}
                     subId={item._id}
+                    stripeSubId={item.stripeSubId}
                     active={item.active}
                     firstName={item.firstName}
                     secondName={item.secondName}

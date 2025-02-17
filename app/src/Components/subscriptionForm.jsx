@@ -27,6 +27,8 @@ export function SubscriptionForm() {
   //data from form
   const [formData, setFormData] = useState({
     userId: "",
+    stripeSubId: "",
+    active: "",
     firstName: "",
     secondName: "",
     phone: "",
@@ -48,6 +50,8 @@ export function SubscriptionForm() {
     if (id) {
       const sub = subscriptions.find((element) => element._id == id);
       const newData = {
+        stripeSubId: sub.stripeSubId,
+        active: sub.active,
         firstName: sub.firstName,
         secondName: sub.secondName,
         phone: sub.phone,
@@ -292,6 +296,33 @@ export function SubscriptionForm() {
     const [error, setError] = useState(null);
 
     function handleNext(e) {
+      let newURL = subWebsite;
+      let oldURL = subWebsite.split("");
+      if (
+        oldURL[0] == "h" &&
+        oldURL[1] == "t" &&
+        oldURL[2] == "t" &&
+        oldURL[3] == "p" &&
+        oldURL[4] == "s" &&
+        oldURL[5] == ":" &&
+        oldURL[6] == "/" &&
+        oldURL[7] == "/"
+      ) {
+        oldURL.splice(0, 8);
+        newURL = oldURL.join("");
+      } else if (
+        oldURL[0] == "h" &&
+        oldURL[1] == "t" &&
+        oldURL[2] == "t" &&
+        oldURL[3] == "p" &&
+        oldURL[4] == ":" &&
+        oldURL[5] == "/" &&
+        oldURL[6] == "/"
+      ) {
+        oldURL.splice(0, 7);
+        newURL = oldURL.join("");
+      }
+
       e.preventDefault();
       if (
         !subName ||
@@ -307,7 +338,7 @@ export function SubscriptionForm() {
         const object = {
           ...formData,
           subName,
-          subWebsite,
+          subWebsite: newURL,
           subFrequency,
           subDay,
           subDeliveryMethod,
@@ -531,7 +562,7 @@ export function SubscriptionForm() {
     }
 
     const handleAddInput = () => {
-      setItems([...items, { url: "", amount: "", changable: "" }]);
+      setItems([...items, { url: "", amount: "", changable: "true" }]);
     };
 
     const handleChange = (event, index) => {
@@ -654,8 +685,44 @@ export function SubscriptionForm() {
               className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
               onClick={(e) => {
                 e.preventDefault();
+
+                const itemsArray = [];
+                items.map((item) => {
+                  let newURL = item.url;
+                  let oldURL = item.url.split("");
+                  if (
+                    oldURL[0] == "h" &&
+                    oldURL[1] == "t" &&
+                    oldURL[2] == "t" &&
+                    oldURL[3] == "p" &&
+                    oldURL[4] == "s" &&
+                    oldURL[5] == ":" &&
+                    oldURL[6] == "/" &&
+                    oldURL[7] == "/"
+                  ) {
+                    oldURL.splice(0, 8);
+                    newURL = oldURL.join("");
+                  } else if (
+                    oldURL[0] == "h" &&
+                    oldURL[1] == "t" &&
+                    oldURL[2] == "t" &&
+                    oldURL[3] == "p" &&
+                    oldURL[4] == ":" &&
+                    oldURL[5] == "/" &&
+                    oldURL[6] == "/"
+                  ) {
+                    oldURL.splice(0, 7);
+                    newURL = oldURL.join("");
+                  }
+
+                  item.url = newURL;
+                  itemsArray.splice(itemsArray.length, 0, item);
+                });
+
                 const subscription = {
                   userId: user.id,
+                  stripeSubId: formData.stripeSubId,
+                  active: formData.active,
                   firstName: formData.firstName,
                   secondName: formData.secondName,
                   phone: formData.phone,
@@ -670,7 +737,7 @@ export function SubscriptionForm() {
                   subDay: formData.subDay,
                   subDeliveryMethod: formData.subDeliveryMethod,
                   subDeliveryAddress: formData.subDeliveryAddress,
-                  items: items,
+                  items: itemsArray,
                 };
 
                 handleSend(subscription, id);

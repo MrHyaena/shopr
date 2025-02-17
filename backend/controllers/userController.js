@@ -90,7 +90,6 @@ const deleteUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  console.log("updateUser");
   const data = req.body;
   const {
     firstName,

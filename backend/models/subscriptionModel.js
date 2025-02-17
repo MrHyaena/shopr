@@ -13,6 +13,9 @@ const subscriptionSchema = new Schema(
       type: String,
       required: true,
     },
+    stripeSubId: {
+      type: String,
+    },
     active: {
       type: Boolean,
       required: true,

@@ -172,8 +172,6 @@ userSchema.statics.update = async function (data) {
     { firstName, secondName, phone, address, addressNumber, city, cityNumber }
   );
 
-  console.log(updateUser);
-
   return updateUser;
 };
 
