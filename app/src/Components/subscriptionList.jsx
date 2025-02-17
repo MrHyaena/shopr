@@ -74,6 +74,7 @@ export function Subscriptions() {
 
   function SubscriptionTabs({
     subId,
+    active,
     firstName,
     secondName,
     phone,
@@ -91,7 +92,6 @@ export function Subscriptions() {
     items,
   }) {
     const [toggle, setToggle] = useState(false);
-    const [active, setActive] = useState(true);
     const [toggleDelete, setToggleDelete] = useState(false);
     const [checkDelete, setCheckDelete] = useState("");
     const [errorDelete, setErrorDelete] = useState(false);
@@ -131,33 +131,20 @@ export function Subscriptions() {
               <FontAwesomeIcon icon={faPen} />
               Upravit
             </Link>
-            <button
-              onClick={() => {
-                activateSubscription(subId, subFrequency);
-              }}
-              className="text-textDark cursor-pointer p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad border border-slate-100 hover:border-white"
-            >
-              Aktivovat
-            </button>
-            <form
-              action={
-                "http://localhost:4000/api/stripe/activate/" +
-                subId +
-                "/?user=" +
-                user.id +
-                "&frequency=" +
-                subFrequency
-              }
-              method="POST"
-            >
+            {active ? (
+              <h2 className="font-bold text-lg text-emerald-700 p-2">
+                Aktivní
+              </h2>
+            ) : (
               <button
-                type="submit"
+                onClick={() => {
+                  activateSubscription(subId, subFrequency);
+                }}
                 className="text-textDark cursor-pointer p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad border border-slate-100 hover:border-white"
               >
-                Aktivovat form
+                Aktivovat
               </button>
-            </form>
-            <h2 className="font-bold text-lg text-emerald-700 p-2">Aktivní</h2>
+            )}
             {toggle ? (
               <button
                 onClick={() => {
@@ -502,6 +489,7 @@ export function Subscriptions() {
                   <SubscriptionTabs
                     index={index}
                     subId={item._id}
+                    active={item.active}
                     firstName={item.firstName}
                     secondName={item.secondName}
                     phone={item.phone}

@@ -37,11 +37,11 @@ export function SubscriptionForm() {
     cityNumber: "",
     subName: "",
     subWebsite: "",
-    subFrequency: 1,
+    subFrequency: "weekly",
     subDay: "monday",
     subDeliveryMethod: "courier",
     subDeliveryAddress: "",
-    items: [{ url: "", amount: "", changable: "" }],
+    items: [{ url: "", amount: "", changable: "true" }],
   });
 
   useEffect(() => {
@@ -80,20 +80,38 @@ export function SubscriptionForm() {
     const [city, setCity] = useState(formData.city);
     const [cityNumber, setCityNumber] = useState(formData.cityNumber);
 
-    function handleNext() {
-      const object = {
-        ...formData,
-        firstName,
-        secondName,
-        phone,
-        email,
-        address,
-        addressNumber,
-        city,
-        cityNumber,
-      };
+    const [error, setError] = useState(null);
 
-      setFormData(object);
+    function handleNext(e) {
+      e.preventDefault();
+      if (
+        !firstName ||
+        !secondName ||
+        !phone ||
+        !email ||
+        !address ||
+        !addressNumber ||
+        !city ||
+        !cityNumber
+      ) {
+        setError("Nejsou vyplněná všechna pole");
+      } else {
+        const object = {
+          ...formData,
+          firstName,
+          secondName,
+          phone,
+          email,
+          address,
+          addressNumber,
+          city,
+          cityNumber,
+        };
+
+        setFormData(object);
+        setError(null);
+        setStep(2);
+      }
     }
 
     function inputUserInfo(e) {
@@ -220,16 +238,21 @@ export function SubscriptionForm() {
             </label>
           </div>
         </fieldset>
-        <div className="mx-auto">
+        <div className="flex flex-col items-center gap-5">
           <button
             className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
-            onClick={() => {
-              setStep(2);
-              handleNext();
+            onClick={(e) => {
+              handleNext(e);
             }}
           >
             Pokračovat <FontAwesomeIcon icon={faArrowRight} />
           </button>
+
+          {error && (
+            <h2 className="font-bold text-center p-2 bg-red-200 rounded-lg border-2 border-red-300">
+              {error}
+            </h2>
+          )}
         </div>
       </form>
     );
@@ -266,18 +289,35 @@ export function SubscriptionForm() {
       formData.subDeliveryAddress
     );
 
-    function handleNext() {
-      const object = {
-        ...formData,
-        subName,
-        subWebsite,
-        subFrequency,
-        subDay,
-        subDeliveryMethod,
-        subDeliveryAddress,
-      };
+    const [error, setError] = useState(null);
 
-      setFormData(object);
+    function handleNext(e) {
+      e.preventDefault();
+      if (
+        !subName ||
+        !subWebsite ||
+        !subFrequency ||
+        !subDay ||
+        !subDeliveryMethod
+      ) {
+        setError("Nejsou vyplněná všechna pole");
+      } else if (subDeliveryMethod == "dropbox" && !subDeliveryAddress) {
+        setError("Není vyplněná adresa zásilkovny");
+      } else {
+        const object = {
+          ...formData,
+          subName,
+          subWebsite,
+          subFrequency,
+          subDay,
+          subDeliveryMethod,
+          subDeliveryAddress,
+        };
+
+        setFormData(object);
+        setError(null);
+        setStep(3);
+      }
     }
 
     return (
@@ -403,24 +443,44 @@ export function SubscriptionForm() {
           </div>
         </fieldset>
 
-        <div className="mx-auto flex gap-3">
-          <button
-            className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
-            onClick={() => {
-              setStep(1);
-            }}
-          >
-            <FontAwesomeIcon icon={faArrowLeft} /> Zpět
-          </button>
-          <button
-            className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
-            onClick={() => {
-              setStep(3);
-              handleNext();
-            }}
-          >
-            Pokračovat <FontAwesomeIcon icon={faArrowRight} />
-          </button>
+        <div className="flex flex-col gap-5 items-center">
+          <div className="flex gap-3">
+            <button
+              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+              onClick={(e) => {
+                e.preventDefault();
+                const object = {
+                  ...formData,
+                  subName,
+                  subWebsite,
+                  subFrequency,
+                  subDay,
+                  subDeliveryMethod,
+                  subDeliveryAddress,
+                };
+
+                setFormData(object);
+                setError(null);
+                setStep(1);
+              }}
+            >
+              <FontAwesomeIcon icon={faArrowLeft} /> Zpět
+            </button>
+            <button
+              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+              onClick={(e) => {
+                handleNext(e);
+              }}
+            >
+              Pokračovat <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+          </div>
+
+          {error && (
+            <h2 className="font-bold text-center p-2 bg-red-200 rounded-lg border-2 border-red-300">
+              {error}
+            </h2>
+          )}
         </div>
       </form>
     );
@@ -447,18 +507,26 @@ export function SubscriptionForm() {
   //step three of form
   function StepThree() {
     const [items, setItems] = useState([...formData.items]);
-    const { createSubscription, error, isLoading } =
+    const { createSubscription, error, setError, isLoading } =
       createSubscriptionHandler();
     const { patchSubscription } = patchSubscriptionHandler();
 
     //handler update
-    async function handleSend(subscription, id) {
-      if (id) {
-        patchSubscription(subscription, id);
-      }
+    function handleSend(subscription, id) {
+      const missingArray = items.filter(
+        (item) => !item.url || !item.amount || !item.changable
+      );
+      if (missingArray.length > 0) {
+        setError("Nejsou vyplněná všechna pole");
+      } else {
+        setError(null);
+        if (id) {
+          patchSubscription(subscription, id);
+        }
 
-      if (!id) {
-        createSubscription(subscription);
+        if (!id) {
+          createSubscription(subscription);
+        }
       }
     }
 
@@ -480,6 +548,7 @@ export function SubscriptionForm() {
     };
 
     function handleBack() {
+      setError(null);
       const object = { ...formData };
       object.items = items;
       console.log(object);
@@ -528,8 +597,8 @@ export function SubscriptionForm() {
                   <label className="flex flex-col text-heading text-lg font-semibold col-span-3">
                     Nahraditelné?
                     <select
-                      name="exchange"
-                      id="exchange"
+                      name="changable"
+                      id="changable"
                       className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                       value={item.changable}
                       onChange={(e) => {
@@ -569,46 +638,49 @@ export function SubscriptionForm() {
           </div>
         </fieldset>
 
-        <div className="mx-auto flex gap-3">
-          <button
-            className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
-            onClick={() => {
-              setStep(2);
-              handleBack();
-            }}
-          >
-            Zpět <FontAwesomeIcon icon={faArrowLeft} />
-          </button>
-          <button
-            disabled={isLoading}
-            className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
-            onClick={(e) => {
-              e.preventDefault();
-              const subscription = {
-                userId: user.id,
-                firstName: formData.firstName,
-                secondName: formData.secondName,
-                phone: formData.phone,
-                email: formData.email,
-                address: formData.address,
-                addressNumber: formData.addressNumber,
-                city: formData.city,
-                cityNumber: formData.cityNumber,
-                subName: formData.subName,
-                subWebsite: formData.subWebsite,
-                subFrequency: formData.subFrequency,
-                subDay: formData.subDay,
-                subDeliveryMethod: formData.subDeliveryMethod,
-                subDeliveryAddress: formData.subDeliveryAddress,
-                items: items,
-              };
+        <div className="flex flex-col items-center gap-5">
+          <div className="flex gap-3">
+            <button
+              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+              onClick={() => {
+                setStep(2);
+                handleBack();
+              }}
+            >
+              <FontAwesomeIcon icon={faArrowLeft} /> Zpět
+            </button>
+            <button
+              disabled={isLoading}
+              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+              onClick={(e) => {
+                e.preventDefault();
+                const subscription = {
+                  userId: user.id,
+                  firstName: formData.firstName,
+                  secondName: formData.secondName,
+                  phone: formData.phone,
+                  email: formData.email,
+                  address: formData.address,
+                  addressNumber: formData.addressNumber,
+                  city: formData.city,
+                  cityNumber: formData.cityNumber,
+                  subName: formData.subName,
+                  subWebsite: formData.subWebsite,
+                  subFrequency: formData.subFrequency,
+                  subDay: formData.subDay,
+                  subDeliveryMethod: formData.subDeliveryMethod,
+                  subDeliveryAddress: formData.subDeliveryAddress,
+                  items: items,
+                };
 
-              handleSend(subscription, id);
-            }}
-          >
-            {id ? "Aktualizovat předplatné" : "Vytvořit předplatné"}{" "}
-            <FontAwesomeIcon icon={faCheck} />
-          </button>
+                handleSend(subscription, id);
+              }}
+            >
+              {id ? "Aktualizovat předplatné" : "Vytvořit předplatné"}{" "}
+              <FontAwesomeIcon icon={faCheck} />
+            </button>
+          </div>
+
           {error && (
             <h2 className="font-bold text-center p-2 bg-red-200 rounded-lg border-2 border-red-300">
               {error}

@@ -14,6 +14,8 @@ export function createSubscriptionHandler() {
     setIsLoading(true);
     setError(null);
 
+    console.log(data);
+
     if (!user) {
       setError("Musíte být přihlášení");
       return;
@@ -48,5 +50,5 @@ export function createSubscriptionHandler() {
     }
   }
 
-  return { createSubscription, isLoading, error };
+  return { createSubscription, isLoading, error, setError };
 }
