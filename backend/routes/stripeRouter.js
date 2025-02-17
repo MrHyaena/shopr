@@ -24,12 +24,6 @@ router.get(
     const { subId, subFrequency, userId, stripeCustomerId } = req.params;
     console.log(stripeCustomerId);
 
-    //CustomerId check
-    let customerId = "none";
-    if (stripeCustomerId !== "none") {
-      customerId = stripeCustomerId;
-    }
-
     if (!subId) {
       return res.status(404).json("Plan does not exist");
     }
@@ -58,7 +52,7 @@ router.get(
         break;
     }
 
-    if (customerId === "none") {
+    if (stripeCustomerId === "none") {
       try {
         const session = await stripe.checkout.sessions.create({
           mode: "subscription",
