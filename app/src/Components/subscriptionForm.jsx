@@ -7,6 +7,7 @@ import {
   faPlusSquare,
   faSquareXmark,
   faTriangleExclamation,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
@@ -95,8 +96,28 @@ export function SubscriptionForm() {
       setFormData(object);
     }
 
+    function inputUserInfo(e) {
+      e.preventDefault();
+      setFirstName(user.firstName);
+      setSecondName(user.secondName);
+      setPhone(user.phone);
+      setEmail(user.email);
+      setAddress(user.address);
+      setAddressNumber(user.addressNumber);
+      setCity(user.city);
+      setCityNumber(user.cityNumber);
+    }
+
     return (
       <form className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg">
+        <button
+          className="bg-quad self-start p-3 text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+          onClick={(e) => {
+            inputUserInfo(e);
+          }}
+        >
+          Vložit osobní údaje <FontAwesomeIcon icon={faUser} />
+        </button>
         <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
           <legend className="text-xl font-semibold text-heading mb-5">
             Kontaktní údaje
@@ -193,7 +214,7 @@ export function SubscriptionForm() {
                 onChange={(e) => {
                   setCityNumber(e.target.value);
                 }}
-                type="email"
+                type="text"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
             </label>
