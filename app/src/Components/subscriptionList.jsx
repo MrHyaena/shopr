@@ -44,13 +44,20 @@ export function Subscriptions() {
   //}, []);
 
   async function activateSubscription(subId, subFrequency) {
+    let stripeCustomerId = "none";
+    if (user.stripeCustomerId !== "none") {
+      stripeCustomerId = user.stripeCustomerId;
+    }
+
     const session = await fetch(
       "http://localhost:4000/api/stripe/activate/" +
         user.id +
         "/" +
         subId +
         "/" +
-        subFrequency,
+        subFrequency +
+        "/" +
+        stripeCustomerId,
       {
         mode: "cors",
         method: "GET",
@@ -66,8 +73,6 @@ export function Subscriptions() {
 
       window.location.href = json;
     }
-
-    //window.location.href = session;
   }
 
   // FUNCTION FOR GENERATING SUBSCRIPTION TABS
@@ -75,6 +80,7 @@ export function Subscriptions() {
   function SubscriptionTabs({
     subId,
     stripeSubId,
+    stripeCustomerId,
     active,
     firstName,
     secondName,
@@ -146,6 +152,14 @@ export function Subscriptions() {
                 Aktivovat
               </button>
             )}
+            <button
+              onClick={() => {
+                activateSubscription(subId, subFrequency);
+              }}
+              className="text-textDark cursor-pointer p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad border border-slate-100 hover:border-white"
+            >
+              Aktivovat
+            </button>
             {toggle ? (
               <button
                 onClick={() => {
@@ -339,14 +353,28 @@ export function Subscriptions() {
                       <h4 className="text-heading font-bold text-textDark">
                         Platební ID:
                       </h4>
-                      <p>
+                      <p className="break-all">
                         {stripeSubId ? (
-                          { stripeSubId }
+                          stripeSubId
                         ) : (
                           <p>Předplatné je neaktivní</p>
                         )}
                       </p>
                     </div>
+                    {stripeSubId && (
+                      <div className="grid grid-cols-2 py-2 px-4 bg-slate-100">
+                        <h4 className="text-heading font-bold text-textDark">
+                          Zákaznické ID:
+                        </h4>
+                        <p className="break-all">
+                          {stripeCustomerId ? (
+                            stripeCustomerId
+                          ) : (
+                            <p>Účet zatím nemá přiřazené ID</p>
+                          )}
+                        </p>
+                      </div>
+                    )}
                     {subDeliveryMethod !== "courier" && (
                       <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
                         <h4 className="text-heading font-bold text-textDark">
@@ -533,6 +561,7 @@ export function Subscriptions() {
                     index={index}
                     subId={item._id}
                     stripeSubId={item.stripeSubId}
+                    stripeCustomerId={item.stripeCustomerId}
                     active={item.active}
                     firstName={item.firstName}
                     secondName={item.secondName}

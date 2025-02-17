@@ -17,6 +17,9 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    stripeCustomerId: {
+      type: String,
+    },
     firstName: {
       type: String,
     },
@@ -78,6 +81,7 @@ userSchema.statics.signup = async function (data) {
   const user = await this.create({
     email,
     password: hash,
+    stripeCustomerId: "none",
     firstName,
     secondName,
     phone,

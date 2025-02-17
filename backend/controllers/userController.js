@@ -59,6 +59,7 @@ const loginUser = async (req, res) => {
     res.status(200).json({
       token,
       id: user._id,
+      stripeCustomerId: user.stripeCustomerId,
       email: user.email,
       phone: user.phone,
       firstName: user.firstName,
