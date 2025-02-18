@@ -722,6 +722,7 @@ export function SubscriptionForm() {
                 const subscription = {
                   userId: user.id,
                   stripeSubId: formData.stripeSubId,
+                  stripeCustomerId: user.stripeCustomerId,
                   active: formData.active,
                   firstName: formData.firstName,
                   secondName: formData.secondName,

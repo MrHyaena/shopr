@@ -34,6 +34,7 @@ const createSubscription = async (req, res) => {
   const {
     userId,
     stripeSubId,
+    stripeCustomerId,
     firstName,
     secondName,
     phone,
@@ -113,7 +114,7 @@ const createSubscription = async (req, res) => {
     const subscription = await Subscription.create({
       userId,
       stripeSubId,
-      stripeCustomerId: "",
+      stripeCustomerId,
       active: false,
       firstName,
       secondName,

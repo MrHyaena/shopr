@@ -23,7 +23,7 @@ app.use("/api/user", express.json(), userRouter);
 app.use("/api/subscriptions", express.json(), subscriptionRouter);
 
 //router for stripe handling
-app.use("/api/stripe", express.json(), stripeRouter);
+app.use("/api/stripe", stripeRouter);
 
 //starting server and connecting to database
 mongoose

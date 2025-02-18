@@ -15,45 +15,47 @@ import { handleDelete } from "../functions/deleteSubscriptionHandler";
 import { SubscriptionMissing } from "./subscriptionMissing";
 
 export function Subscriptions() {
-  const arraySub = [1, 2, 3, 4, 5, 6, 7];
   const { subscriptions, setSubscriptions } = useSubscriptionContext();
   const { user, setUser } = useAuthContext();
 
-  //useEffect(() => {
-  //  console.log(user.token);
-  //  const fetchSubscription = async () => {
-  //    const response = await fetch("http://localhost:4000/api/subscriptions", {
-  //      method: "GET",
-  //      mode: "cors",
-  //      headers: {
-  //        "Content-Type": "application/json",
-  //        Authorization: `Bearer ${user.token}`,
-  //      },
-  //    });
-  //    const json = await response.json();
-  //    if (response.ok) {
-  //      return setSubscriptions(json);
-  //    }
-  //
-  //    if (!response.ok) {
-  //      return console.log("error");
-  //    }
-  //  };
-  //
-  //  fetchSubscription();
-  //}, []);
+  //deactivate subscription - send user to stripe customer portal, where he can manage
+  async function customerPortal(stripeCustomerId) {
+    const session = await fetch(
+      "http://localhost:4000/api/stripe/portal/" + stripeCustomerId,
+      {
+        mode: "cors",
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
 
-  async function activateSubscription(subId, subFrequency) {
-    let stripeCustomerId = "none";
-    if (user.stripeCustomerId !== "none") {
-      stripeCustomerId = user.stripeCustomerId;
+    const json = await session.json();
+
+    if (session.ok) {
+      window.location.href = json;
     }
+  }
 
+  //activate subscription - sends user to stripe checkout session
+  async function activateSubscription(
+    subId,
+    subName,
+    subWebsite,
+    subFrequency,
+    stripeCustomerId
+  ) {
     const session = await fetch(
       "http://localhost:4000/api/stripe/activate/" +
         user.id +
         "/" +
         subId +
+        "/" +
+        subName +
+        "/" +
+        subWebsite +
         "/" +
         subFrequency +
         "/" +
@@ -145,7 +147,13 @@ export function Subscriptions() {
             ) : (
               <button
                 onClick={() => {
-                  activateSubscription(subId, subFrequency);
+                  activateSubscription(
+                    subId,
+                    subName,
+                    subWebsite,
+                    subFrequency,
+                    stripeCustomerId
+                  );
                 }}
                 className="text-textDark cursor-pointer p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad border border-slate-100 hover:border-white"
               >
@@ -154,7 +162,13 @@ export function Subscriptions() {
             )}
             <button
               onClick={() => {
-                activateSubscription(subId, subFrequency);
+                activateSubscription(
+                  subId,
+                  subName,
+                  subWebsite,
+                  subFrequency,
+                  stripeCustomerId
+                );
               }}
               className="text-textDark cursor-pointer p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad border border-slate-100 hover:border-white"
             >
@@ -349,7 +363,13 @@ export function Subscriptions() {
                         {subDeliveryMethod == "dropbox" && "Box/výdejní místé"}
                       </p>
                     </div>
-                    <div className="grid grid-cols-2 py-2 px-4 bg-white">
+                    <div className="grid grid-cols-2 py-2 px-4">
+                      <h4 className="text-heading font-bold text-textDark">
+                        Zákaznické ID:
+                      </h4>
+                      <p className="break-all">{stripeCustomerId}</p>
+                    </div>
+                    <div className="grid grid-cols-2 py-2 px-4 bg-slate-100">
                       <h4 className="text-heading font-bold text-textDark">
                         Platební ID:
                       </h4>
@@ -361,20 +381,6 @@ export function Subscriptions() {
                         )}
                       </p>
                     </div>
-                    {stripeSubId && (
-                      <div className="grid grid-cols-2 py-2 px-4 bg-slate-100">
-                        <h4 className="text-heading font-bold text-textDark">
-                          Zákaznické ID:
-                        </h4>
-                        <p className="break-all">
-                          {stripeCustomerId ? (
-                            stripeCustomerId
-                          ) : (
-                            <p>Účet zatím nemá přiřazené ID</p>
-                          )}
-                        </p>
-                      </div>
-                    )}
                     {subDeliveryMethod !== "courier" && (
                       <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
                         <h4 className="text-heading font-bold text-textDark">
@@ -389,20 +395,27 @@ export function Subscriptions() {
                       </div>
                     )}
                     <div className="p-5 flex xl:justify-center gap-5 justify-center ">
-                      <button
-                        className="font-semibold text-textDark  border border-slate-200 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
-                        onClick={() => {}}
-                      >
-                        Deaktivovat předplatné
-                      </button>
-                      <button
-                        className="font-semibold text-textDark  text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
-                        onClick={() => {
-                          setToggleDelete(true);
-                        }}
-                      >
-                        Zrušit předplatné
-                      </button>
+                      {active && (
+                        <button
+                          className="font-semibold text-textDark  border border-slate-200 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
+                          onClick={() => {
+                            customerPortal(stripeCustomerId);
+                          }}
+                        >
+                          Deaktivovat předplatné
+                        </button>
+                      )}
+
+                      {!active && (
+                        <button
+                          className="font-semibold text-textDark  text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
+                          onClick={() => {
+                            setToggleDelete(true);
+                          }}
+                        >
+                          Zrušit předplatné
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>

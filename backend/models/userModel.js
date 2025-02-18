@@ -1,7 +1,9 @@
 //requirements
+require("dotenv").config();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
+const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 //user schema for mongoDB
 const Schema = mongoose.Schema;
@@ -77,11 +79,24 @@ userSchema.statics.signup = async function (data) {
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
+  //creating stripe customer
+  const customer = await stripe.customers.create({
+    name: firstName + " " + secondName,
+    email: email,
+    phone: phone,
+  });
+
+  if (!customer) {
+    throw Error(
+      "Učet nešel vytvořit z důvodu údržby. Omlouváme se, přijďte prosím později."
+    );
+  }
+
   //creating new record of user into Users database
   const user = await this.create({
     email,
     password: hash,
-    stripeCustomerId: "none",
+    stripeCustomerId: customer.id,
     firstName,
     secondName,
     phone,

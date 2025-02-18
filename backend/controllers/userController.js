@@ -32,6 +32,7 @@ const signupUser = async (req, res) => {
     res.status(200).json({
       token,
       id: user._id,
+      stripeCustomerId: user.stripeCustomerId,
       email,
       phone,
       firstName,
