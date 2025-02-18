@@ -32,7 +32,7 @@ export function LoginPage() {
           >
             <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
               <legend className="text-xl font-semibold text-slate-900 mb-5">
-                Přihlaste se
+                Přihlašte se
               </legend>
               <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
                 Email:
@@ -47,7 +47,7 @@ export function LoginPage() {
                 ></input>
               </label>
               <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
-                Heslo
+                Heslo:
                 <input
                   name="password"
                   type="password"

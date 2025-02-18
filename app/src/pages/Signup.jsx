@@ -108,7 +108,7 @@ export function SignupPage() {
               </div>
               <div className="flex gap-3 xl:flex-row flex-col">
                 <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
-                  Heslo
+                  Heslo:
                   <input
                     name="password"
                     type="password"
@@ -120,7 +120,7 @@ export function SignupPage() {
                   ></input>
                 </label>
                 <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
-                  Heslo znovu
+                  Heslo znovu:
                   <input
                     name="passwordCheck"
                     type="password"
@@ -223,7 +223,7 @@ export function SignupPage() {
               <p className="text-lg font-semibold text-textDark">
                 Jakmile vyplníte formulář na levé straně, vytvoříme pro Vás v
                 našem systému uživatelský účet. V něm si následně můžete
-                vytvořit předplatné v jakémkoliv e-shopu budete chtít.
+                vytvořit předplatné u jakéhokoliv e-shopu jen chcete.
               </p>
             </div>
             <div className="flex flex-col items-center gap-3 p-4">
@@ -254,7 +254,7 @@ export function SignupPage() {
               {question == 1 && (
                 <div className="animate-scale-up">
                   <p className="text-md font-semibold text-textDark mb-2">
-                    Vedení i registrace účtu jsou zcela zdarma. Platíme malou
+                    Vedení i registrace účtu jsou zcela zdarma. Platíte malou
                     částku pouze v případě, že máte aktivní předplatné.
                   </p>
                 </div>
@@ -325,7 +325,7 @@ export function SignupPage() {
                 <div className="animate-scale-up">
                   <p className="text-md font-semibold text-textDark mb-2">
                     Každé předplatné vyžaduje kontaktní a dodací údaje. Abychom
-                    Vám usnadnili v budoucnu práci, přiřadíme je k vašemu
+                    Vám usnadnili v budoucnu práci, přidáme tyto údaje k
                     uživatelskému účtu. Budete je poté moci nastavit na jedno
                     kliknutí.
                   </p>
