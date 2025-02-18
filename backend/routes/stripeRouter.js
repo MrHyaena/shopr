@@ -133,7 +133,7 @@ router.post(
   "/webhook",
   express.raw({ type: "application/json" }),
   (req, res) => {
-    const sig = res.headers["stripe-signature"];
+    const sig = req.headers["stripe-signature"];
 
     let event;
 
