@@ -79,8 +79,10 @@ export function LoginPage() {
             )}
           </form>
           <div className="xl:w-[300px] xl:flex hidden flex-col items-center gap-3 justify-center bg-yellow-200 m-6 shadow-xl  rounded-xl text-textDark p-10 overflow-clip animate-fall-up-delay">
-            <h2 className="text-2xl font-semibold">Vítejte zpět!</h2>
-            <p className="text-center font-semibold"></p>
+            <h2 className="text-2xl font-semibold">Vítejte!</h2>
+            <p className="text-center font-semibold">
+              Pokud ještě nemáte účet, klepněte na tlačítko Zaregistrovat se.
+            </p>
           </div>
         </div>
       </div>

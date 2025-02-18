@@ -51,7 +51,7 @@ export function SignupPage() {
         <div className="bg-white flex xl:flex-row flex-col-reverse gap-8 p-5 border rounded-xl border-slate-200 shadow-xl animate-fall-down-faster">
           <form className="flex flex-col gap-5 p-2" onSubmit={handleSubmit}>
             <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
-              <legend className="text-xl font-semibold text-slate-900 mb-5">
+              <legend className="text-xl font-semibold text-slate-900">
                 Zaregistrovat se
               </legend>
               <div className="flex gap-3 xl:flex-row flex-col">
@@ -135,7 +135,7 @@ export function SignupPage() {
             </fieldset>
 
             <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
-              <legend className="text-xl font-semibold text-slate-900 mb-5">
+              <legend className="text-xl font-semibold text-slate-900">
                 Adresa dodání
               </legend>
               <div className="flex gap-3 xl:flex-row flex-col">
@@ -210,26 +210,23 @@ export function SignupPage() {
               </h2>
             )}
           </form>
-          <div className="xl:w-[500px] max-w-full flex flex-col justify-start items-center gap-4 text-center bg-quad rounded-xl p-5 shadow-xl animate-fall-down">
+          <div className="xl:w-[500px] max-w-full flex flex-col justify-start items-center gap-4 text-center bg-quad rounded-xl p-3 shadow-xl animate-fall-down">
             <img
               src={logoBlack}
               alt="logo"
-              className="max-h-20 animate-scale-up justify-self-center"
+              className="max-h-16 animate-scale-up justify-self-center"
             />
             <div className="flex flex-col gap-3 p-4">
               <h2 className="text-xl font-semibold">
                 Děkujeme, že to s námi chcete vyzkoušet!
               </h2>
-              <p className="text-md font-semibold text-textDark">
+              <p className="text-lg font-semibold text-textDark">
                 Jakmile vyplníte formulář na levé straně, vytvoříme pro Vás v
                 našem systému uživatelský účet. V něm si následně můžete
-                vytvořit předplatné k jakémkoliv e-shopu budete chtít.
+                vytvořit předplatné v jakémkoliv e-shopu budete chtít.
               </p>
             </div>
             <div className="flex flex-col items-center gap-3 p-4">
-              <h2 className="text-xl font-semibold">Nejčastější otázky</h2>
-              <div className=" bg-yellow-400 w-full h-0.5"></div>
-
               <button
                 className="text-lg font-semibold flex items-center gap-3 cursor-pointer"
                 onClick={() => {
@@ -241,18 +238,18 @@ export function SignupPage() {
                   }
                 }}
               >
+                Je registrace a vedení účtu zdarma?
                 {question == 1 ? (
                   <FontAwesomeIcon
                     icon={faChevronDown}
-                    className="text-yellow-500"
+                    className="text-tertiary bg-white w-5 h-5 p-3 rounded-md text-xl"
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faChevronRight}
-                    className="text-yellow-500"
+                    className="text-tertiary bg-white w-5 h-5 p-3 rounded-md text-xl"
                   />
                 )}
-                Je registrace a vedení účtu zdarma?
               </button>
               {question == 1 && (
                 <div className="animate-scale-up">
@@ -274,18 +271,18 @@ export function SignupPage() {
                   }
                 }}
               >
+                Můžu účet kdykoliv zrušit? Můžu změnit údaje?{" "}
                 {question == 2 ? (
                   <FontAwesomeIcon
                     icon={faChevronDown}
-                    className="text-yellow-500"
+                    className="text-tertiary bg-white w-5 h-5 p-3 rounded-md text-xl"
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faChevronRight}
-                    className="text-yellow-500"
+                    className="text-tertiary bg-white w-5 h-5 p-3 rounded-md text-xl"
                   />
                 )}
-                Můžu účet kdykoliv zrušit? Můžu změnit údaje?
               </button>
               {question == 2 && (
                 <div className="animate-scale-up">
@@ -311,18 +308,18 @@ export function SignupPage() {
                   }
                 }}
               >
+                K čemu potřebujeme tyto údaje?
                 {question == 3 ? (
                   <FontAwesomeIcon
                     icon={faChevronDown}
-                    className="text-yellow-500"
+                    className="text-tertiary bg-white w-5 h-5 p-3 rounded-md text-xl"
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faChevronRight}
-                    className="text-yellow-500"
+                    className="text-tertiary bg-white w-5 h-5 p-3 rounded-md text-xl"
                   />
                 )}
-                K čemu potřebujeme tyto údaje?
               </button>
               {question == 3 && (
                 <div className="animate-scale-up">
