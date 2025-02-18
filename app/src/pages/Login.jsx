@@ -18,7 +18,7 @@ export function LoginPage() {
 
   return (
     <>
-      <div className="bg-slate-50 flex flex-col xl:grid xl:grid-rows-[1fr_2fr_1fr] xl:justify-center pt-20 xl:pt-0 justify-start items-center min-h-screen">
+      <div className="bg-slate-50 flex flex-col xl:grid xl:grid-rows-[1fr_2fr_1fr] xl:justify-center xl:pt-0 justify-center items-center min-h-screen">
         <img
           src={logoBlack}
           alt="logo"
