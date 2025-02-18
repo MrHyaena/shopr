@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
+const apiURL = import.meta.env.VITE_API_URL;
 
 export const SubscriptionContext = createContext();
 
@@ -10,7 +11,7 @@ export const SubscriptionContextProvider = ({ children }) => {
   useEffect(() => {
     console.log(user);
     const fetchSubscription = async () => {
-      const response = await fetch("http://localhost:4000/api/subscriptions", {
+      const response = await fetch(apiURL + "/api/subscriptions", {
         method: "GET",
         mode: "cors",
         headers: {

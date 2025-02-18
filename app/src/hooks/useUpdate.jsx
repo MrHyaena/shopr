@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
+const apiURL = import.meta.env.VITE_API_URL;
 
 export function useUpdate() {
   const [error, setError] = useState(null);
@@ -12,7 +13,7 @@ export function useUpdate() {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("http://localhost:4000/api/user/update", {
+    const response = await fetch(apiURL + "/api/user/update", {
       mode: "cors",
       method: "POST",
       headers: {

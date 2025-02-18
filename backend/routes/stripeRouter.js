@@ -127,7 +127,7 @@ router.get("/portal/:stripeCustomerId", express.json(), async (req, res) => {
   }
 });
 
-const endpointSecret = process.env.STRIPE_HOOK_CANCEL_SUBSCRIPTION_SECRET;
+const endpointSecret = process.env.STRIPE_WEBHOOK;
 
 router.post(
   "/webhook",

@@ -9,6 +9,7 @@ export function createSubscriptionHandler() {
   const { user, setUser } = useAuthContext();
   const { subscriptions, setSubscriptions } = useSubscriptionContext();
   const navigate = useNavigate();
+  const apiURL = import.meta.env.VITE_API_URL;
 
   async function createSubscription(data) {
     setIsLoading(true);
@@ -21,7 +22,7 @@ export function createSubscriptionHandler() {
       return;
     }
 
-    const response = await fetch("http://localhost:4000/api/subscriptions", {
+    const response = await fetch(apiURL + "/api/subscriptions", {
       mode: "cors",
       method: "POST",
       headers: {

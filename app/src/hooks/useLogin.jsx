@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
+const apiURL = import.meta.env.VITE_API_URL;
 
 export function useLogin() {
   const [error, setError] = useState(null);
@@ -11,7 +12,7 @@ export function useLogin() {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("http://localhost:4000/api/user/login", {
+    const response = await fetch(apiURL + "/api/user/login", {
       mode: "cors",
       method: "POST",
       headers: { "Content-Type": "application/json" },

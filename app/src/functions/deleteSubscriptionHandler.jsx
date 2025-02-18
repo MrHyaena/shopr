@@ -1,5 +1,6 @@
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
+const apiURL = import.meta.env.VITE_API_URL;
 
 // FUNCTION FOR DELETING SUBSCRIPTIONS
 export async function handleDelete(
@@ -8,16 +9,13 @@ export async function handleDelete(
   subscriptions,
   setSubscriptions
 ) {
-  const response = await fetch(
-    "http://localhost:4000/api/subscriptions/" + subId,
-    {
-      method: "DELETE",
-      mode: "cors",
-      headers: {
-        authorization: `Bearer ${user.token}`,
-      },
-    }
-  );
+  const response = await fetch(apiURL + "/subscriptions/" + subId, {
+    method: "DELETE",
+    mode: "cors",
+    headers: {
+      authorization: `Bearer ${user.token}`,
+    },
+  });
 
   const json = await response.json();
 

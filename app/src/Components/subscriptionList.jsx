@@ -13,6 +13,7 @@ import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { handleDelete } from "../functions/deleteSubscriptionHandler";
 import { SubscriptionMissing } from "./subscriptionMissing";
+const apiURL = import.meta.env.VITE_API_URL;
 
 export function Subscriptions() {
   const { subscriptions, setSubscriptions } = useSubscriptionContext();
@@ -21,7 +22,7 @@ export function Subscriptions() {
   //deactivate subscription - send user to stripe customer portal, where he can manage
   async function customerPortal(stripeCustomerId) {
     const session = await fetch(
-      "http://localhost:4000/api/stripe/portal/" + stripeCustomerId,
+      apiURL + "/api/stripe/portal/" + stripeCustomerId,
       {
         mode: "cors",
         method: "GET",
@@ -48,7 +49,8 @@ export function Subscriptions() {
     stripeCustomerId
   ) {
     const session = await fetch(
-      "http://localhost:4000/api/stripe/activate/" +
+      apiURL +
+        "/api/stripe/activate/" +
         user.id +
         "/" +
         subId +
