@@ -3,6 +3,7 @@
 
 //requirements
 const express = require("express");
+require("dotenv").config();
 
 //controller functions
 const {
@@ -10,6 +11,8 @@ const {
   signupUser,
   deleteUser,
   updateUser,
+  resetUserEmail,
+  resetUserPassword,
 } = require("../controllers/userController");
 const requireAuth = require("../middleware/requireAuth");
 
@@ -29,5 +32,10 @@ router.post("/delete", deleteUser);
 
 //update user
 router.post("/update", requireAuth, updateUser);
+
+//reset password email
+router.get("/reset/email/:email", resetUserEmail);
+
+router.get("/reset/authorized/:hash", resetUserPassword);
 
 module.exports = router;

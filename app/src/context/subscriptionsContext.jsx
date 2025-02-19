@@ -11,7 +11,7 @@ export const SubscriptionContextProvider = ({ children }) => {
   useEffect(() => {
     console.log(user);
     const fetchSubscription = async () => {
-      const response = await fetch(apiURL + "/api/subscriptions", {
+      const response = await fetch(apiURL + "api/subscriptions", {
         method: "GET",
         mode: "cors",
         headers: {

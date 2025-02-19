@@ -2,21 +2,19 @@ import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 const apiURL = import.meta.env.VITE_API_URL;
 
-export function useSignup() {
+export function useReset() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
+  const [message, setMessage] = useState(null);
 
-  const { setUser } = useAuthContext();
-
-  async function signup(data) {
+  async function reset(email) {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch(apiURL + "api/user/signup", {
+    const response = await fetch(apiURL + "api/user/reset/email/" + email, {
       mode: "cors",
-      method: "POST",
+      method: "GET",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...data }),
     });
 
     const json = await response.json();
@@ -27,16 +25,10 @@ export function useSignup() {
     }
 
     if (response.ok) {
-      // save the user to local storage
-
-      localStorage.setItem("user", JSON.stringify(json));
-
-      // update the auth context
-      setUser(json);
-
+      setMessage(json);
       setIsLoading(false);
     }
   }
 
-  return { signup, isLoading, error };
+  return { reset, isLoading, error, setError, message };
 }

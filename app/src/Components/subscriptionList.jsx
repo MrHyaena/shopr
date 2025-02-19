@@ -22,7 +22,7 @@ export function Subscriptions() {
   //deactivate subscription - send user to stripe customer portal, where he can manage
   async function customerPortal(stripeCustomerId) {
     const session = await fetch(
-      apiURL + "/api/stripe/portal/" + stripeCustomerId,
+      apiURL + "api/stripe/portal/" + stripeCustomerId,
       {
         mode: "cors",
         method: "GET",

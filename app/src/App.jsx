@@ -16,6 +16,7 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import { Contact } from "./Components/contact";
 import { Personal } from "./Components/personal";
 import { Faq } from "./Components/faq";
+import { PasswordReset } from "./pages/PasswordReset";
 
 function App() {
   const { user } = useAuthContext();
@@ -56,6 +57,7 @@ function App() {
             path="signup"
             element={!user ? <SignupPage /> : <Navigate to="/app" />}
           />
+          <Route path="reset/authorized/:hash" element={<PasswordReset />} />
           <Route path="/" element={<Navigate to="/app" />} />
         </Routes>
       </BrowserRouter>

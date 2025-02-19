@@ -193,7 +193,7 @@ export function SignupPage() {
             </fieldset>
             <button
               disabled={isLoading}
-              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               type="submit"
             >
               Zaregistrovat se
