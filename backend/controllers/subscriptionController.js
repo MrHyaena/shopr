@@ -1,5 +1,7 @@
+require("dotenv").config();
 const Subscription = require("../models/subscriptionModel");
 const mongoose = require("mongoose");
+const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 //get all subscriptions
 const getSubscriptions = async (req, res) => {
@@ -164,10 +166,48 @@ const deleteSubscription = async (req, res) => {
 
 //update subscription
 const updateSubscription = async (req, res) => {
-  const { id } = req.params;
+  console.log("update subscription");
+  const { id, frequencyChange } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "Takové předplatné neexistuje" });
+  }
+
+  if (frequencyChange && req.body.active) {
+    console.log("frequency change active");
+    let priceId;
+
+    switch (req.body.subFrequency.toLowerCase()) {
+      case "weekly":
+        priceId = process.env.PLAN_WEEKLY;
+        break;
+      case "biweekly":
+        priceId = process.env.PLAN_BIWEEKLY;
+        break;
+      case "monthly":
+        priceId = process.env.PLAN_MONTHLY;
+        break;
+      case "bimonthly":
+        priceId = process.env.PLAN_BIMONTHLY;
+        break;
+      case "quarterly":
+        priceId = process.env.PLAN_QUARTERLY;
+        break;
+    }
+
+    const subscriptionObject = await stripe.subscriptions.retrieve(
+      req.body.stripeSubId
+    );
+
+    const response = await stripe.subscriptions.update(req.body.stripeSubId, {
+      items: [
+        {
+          id: subscriptionObject.items.data[0].id,
+          price: priceId,
+          quantity: 1,
+        },
+      ],
+    });
   }
 
   const subscription = await Subscription.findOneAndUpdate(

@@ -45,6 +45,7 @@ export function SubscriptionForm() {
     subDeliveryAddress: "",
     items: [{ url: "", amount: "", changable: "true" }],
   });
+  const [frequencyChange, setFrequencyChange] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -402,6 +403,7 @@ export function SubscriptionForm() {
                 value={subFrequency}
                 onChange={(e) => {
                   setSubFrequency(e.target.value);
+                  setFrequencyChange(true);
                 }}
                 name="frekvence"
                 id="frekvence"
@@ -552,7 +554,7 @@ export function SubscriptionForm() {
       } else {
         setError(null);
         if (id) {
-          patchSubscription(subscription, id);
+          patchSubscription(subscription, id, frequencyChange);
         }
 
         if (!id) {

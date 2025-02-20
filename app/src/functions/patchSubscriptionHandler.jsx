@@ -17,7 +17,7 @@ export function patchSubscriptionHandler() {
   const { subscriptions, setSubscriptions } = useSubscriptionContext();
   const navigate = useNavigate();
 
-  async function patchSubscription(data, id) {
+  async function patchSubscription(data, id, frequencyChange) {
     setIsLoading(true);
     setError(null);
 
@@ -26,15 +26,18 @@ export function patchSubscriptionHandler() {
       return;
     }
 
-    const response = await fetch(apiURL + "/api/subscriptions/" + id, {
-      mode: "cors",
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.token}`,
-      },
-      body: JSON.stringify({ ...data }),
-    });
+    const response = await fetch(
+      apiURL + "/api/subscriptions/" + id + "/" + frequencyChange,
+      {
+        mode: "cors",
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify({ ...data }),
+      }
+    );
 
     const json = await response.json();
 
