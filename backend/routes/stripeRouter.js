@@ -147,9 +147,13 @@ router.post(
     // Handle the event
     switch (event.type) {
       case "customer.subscription.deleted":
-        const customerSubscriptionDeleted = event.data.object;
+        const stripeSubscription = event.data.object;
         // Then define and call a function to handle the event customer.subscription.deleted
-        console.log(customerSubscriptionDeleted);
+        const subscription = Subscription.findOneAndUpdate(
+          { stripeSubId: stripeSubscription.id },
+          { active: false }
+        );
+        console.log(subscription);
         break;
       // ... handle other event types
       default:
