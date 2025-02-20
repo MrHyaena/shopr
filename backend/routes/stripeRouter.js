@@ -153,7 +153,7 @@ router.post(
     if (event.type == "customer.subscription.updated") {
       try {
         //Update subscription according to stripe status
-        const subActive = stripeObject.cancel_at_period_end;
+        const subActive = !stripeObject.cancel_at_period_end;
 
         const subscription = await Subscription.findOneAndUpdate(
           { stripeSubId: stripeSubscription.id },
