@@ -11,11 +11,14 @@ export function useReset() {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch(apiURL + "api/user/reset/email/" + email, {
-      mode: "cors",
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
+    const response = await fetch(
+      apiURL + "api/user/reset/password?email=" + email,
+      {
+        mode: "cors",
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
 
     const json = await response.json();
 

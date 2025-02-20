@@ -31,7 +31,7 @@ export function Sidebar() {
         <div className="bg-primary h-screen border-slate-200 shadow-xl shadow-slate-200 text-white sticky top-0">
           <div className=" flex flex-col justify-between items-center h-full py-10">
             <a href="https://www.shopr.cz">
-              <img src={logo} alt="logo" className="h-18" />
+              <img src={logo} alt="logo" className="h-12" />
             </a>
             <div className="flex flex-col items-center gap-2  p-4 row-span-5 self-center">
               {activeButton == 1 ? (

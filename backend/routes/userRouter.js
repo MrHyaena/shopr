@@ -34,8 +34,9 @@ router.post("/delete", deleteUser);
 router.post("/update", requireAuth, updateUser);
 
 //reset password email
-router.get("/reset/email/:email", resetUserEmail);
+router.get("/reset/password", resetUserEmail);
 
-router.get("/reset/authorized/:hash", resetUserPassword);
+//reset password authorized request
+router.post("/reset/authorized", resetUserPassword);
 
 module.exports = router;

@@ -57,7 +57,7 @@ function App() {
             path="signup"
             element={!user ? <SignupPage /> : <Navigate to="/app" />}
           />
-          <Route path="reset/authorized/:hash" element={<PasswordReset />} />
+          <Route path="reset/password" element={<PasswordReset />} />
           <Route path="/" element={<Navigate to="/app" />} />
         </Routes>
       </BrowserRouter>
