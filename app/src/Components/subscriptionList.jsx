@@ -1,10 +1,12 @@
 import {
   faCartShopping,
+  faCashRegister,
   faChevronDown,
   faChevronUp,
   faGears,
   faHouseUser,
   faPen,
+  faWallet,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useEffect, useState } from "react";
@@ -15,7 +17,7 @@ import { handleDelete } from "../functions/deleteSubscriptionHandler";
 import { SubscriptionMissing } from "./subscriptionMissing";
 const apiURL = import.meta.env.VITE_API_URL;
 
-export function Subscriptions() {
+export function Subscriptions({ setActiveButton }) {
   const { subscriptions, setSubscriptions } = useSubscriptionContext();
   const { user, setUser } = useAuthContext();
 
@@ -411,10 +413,16 @@ export function Subscriptions() {
               <h2 className="text-2xl text-textDark font-bold xl:mr-5 mt-[-8px]">
                 {subName}
               </h2>
+              {active && (
+                <div className="bg-emerald-500 h-8 rounded-md flex items-center justify-center gap-2 px-3 font-semibold text-white shadow-sm">
+                  <FontAwesomeIcon icon={faCashRegister} />
+                  Aktivní
+                </div>
+              )}
             </div>
           </div>
           <div className="flex xl:flex-row flex-col gap-6 xl:items-center items-center justify-end">
-            {!active ? (
+            {!active && (
               <button
                 onClick={() => {
                   activateSubscription(
@@ -429,10 +437,6 @@ export function Subscriptions() {
               >
                 Aktivovat
               </button>
-            ) : (
-              <h2 className="font-semibold text-lg text-emerald-700 p-2">
-                Aktivní
-              </h2>
             )}
             <Link
               to={editURL}
