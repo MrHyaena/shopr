@@ -12,7 +12,7 @@ export function useSignup() {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch(apiURL + "api/user/signup", {
+    const response = await fetch(apiURL + "/api/user/signup", {
       mode: "cors",
       method: "POST",
       headers: { "Content-Type": "application/json" },

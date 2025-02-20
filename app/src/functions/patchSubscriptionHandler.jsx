@@ -26,7 +26,7 @@ export function patchSubscriptionHandler() {
       return;
     }
 
-    const response = await fetch(apiURL + "api/subscriptions/" + id, {
+    const response = await fetch(apiURL + "/api/subscriptions/" + id, {
       mode: "cors",
       method: "PATCH",
       headers: {

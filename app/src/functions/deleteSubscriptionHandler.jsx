@@ -9,7 +9,7 @@ export async function handleDelete(
   subscriptions,
   setSubscriptions
 ) {
-  const response = await fetch(apiURL + "subscriptions/" + subId, {
+  const response = await fetch(apiURL + "/subscriptions/" + subId, {
     method: "DELETE",
     mode: "cors",
     headers: {

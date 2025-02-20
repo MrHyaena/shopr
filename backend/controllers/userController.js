@@ -131,7 +131,7 @@ const resetUserEmail = async (req, res) => {
     const passreset = await Passreset.create({ userId: user._id, token: hash });
 
     //Setting up and sending email
-    const url = process.env.PROXY_APP + "reset/password?hash=" + hash;
+    const url = process.env.PROXY_APP + "/reset/password?hash=" + hash;
     const emailBody = `<h3>Dobr&yacute; den,</h3> <p>tento email slouž&iacute; pro změnu hesla v aplikaci Shopr. Pro změnu hesla klepněte na odkaz n&iacute;že:</p> <p><a href="${url}">${url}</p> <p>Pokud jste si tuto změnu nevyž&aacute;dali, napi&scaron;te n&aacute;m pros&iacute;m na adresu <a href="mailto:info@shopr.cz">info@shopr.cz</a>.</p> <p>Přejeme V&aacute;m kr&aacute;sn&yacute; zbytek dne.</p> <p>----------------------------------</p> <p>S pozdravem,</p> <p>Martin Doležal</p> <p>Shopr</p>`;
     const fromEmail = process.env.SMTP_EMAIL_ADMIN;
     const toEmail = email;

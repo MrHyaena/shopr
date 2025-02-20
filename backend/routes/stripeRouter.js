@@ -78,8 +78,8 @@ router.get(
           metadata: { subId: subId, userId: userId },
         },
         customer: stripeCustomerId,
-        success_url: `${process.env.PROXY_SERVER}api/stripe/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${process.env.PROXY_APP}app`,
+        success_url: `${process.env.PROXY_SERVER}/api/stripe/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${process.env.PROXY_APP}/app`,
       });
       res.status(200).json(session.url);
     } catch (error) {

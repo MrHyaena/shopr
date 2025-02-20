@@ -22,7 +22,7 @@ export function createSubscriptionHandler() {
       return;
     }
 
-    const response = await fetch(apiURL + "api/subscriptions", {
+    const response = await fetch(apiURL + "/api/subscriptions", {
       mode: "cors",
       method: "POST",
       headers: {

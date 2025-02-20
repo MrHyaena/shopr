@@ -22,7 +22,7 @@ export function PasswordReset() {
       setError("Heslo musí mít délku alespoň 6 znaků");
     } else {
       const response = await fetch(
-        apiURL + "api/user/reset/authorized?hash=" + utm.get("hash"),
+        apiURL + "/api/user/reset/authorized?hash=" + utm.get("hash"),
         {
           method: "POST",
           mode: "cors",

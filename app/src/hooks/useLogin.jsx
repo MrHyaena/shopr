@@ -12,7 +12,7 @@ export function useLogin() {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch(apiURL + "api/user/login", {
+    const response = await fetch(apiURL + "/api/user/login", {
       mode: "cors",
       method: "POST",
       headers: { "Content-Type": "application/json" },

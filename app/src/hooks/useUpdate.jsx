@@ -13,7 +13,7 @@ export function useUpdate() {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch(apiURL + "api/user/update", {
+    const response = await fetch(apiURL + "/api/user/update", {
       mode: "cors",
       method: "POST",
       headers: {

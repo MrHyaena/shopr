@@ -12,7 +12,7 @@ export function useReset() {
     setError(null);
 
     const response = await fetch(
-      apiURL + "api/user/reset/password?email=" + email,
+      apiURL + "/api/user/reset/password?email=" + email,
       {
         mode: "cors",
         method: "GET",
