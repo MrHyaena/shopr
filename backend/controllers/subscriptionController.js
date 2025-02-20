@@ -4,12 +4,19 @@ const mongoose = require("mongoose");
 //get all subscriptions
 const getSubscriptions = async (req, res) => {
   const user_id = req.user._id;
+  try {
+    const subscriptions = await Subscription.find({ userId: user_id }).sort({
+      createdAt: 1,
+    });
 
-  const subscriptions = await Subscription.find({ userId: user_id }).sort({
-    createdAt: 1,
-  });
+    if (!subscriptions) {
+      throw Error("Nemáte žádné předplatné");
+    }
 
-  res.status(200).json(subscriptions);
+    res.status(200).json(subscriptions);
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
 };
 
 //get a single subscription

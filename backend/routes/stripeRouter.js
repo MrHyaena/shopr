@@ -120,7 +120,6 @@ router.get("/portal/:stripeCustomerId", express.json(), async (req, res) => {
       customer: stripeCustomerId,
       return_url: process.env.PROXY_APP,
     });
-    console.log(portalSession);
     res.status(200).json(portalSession.url);
   } catch (error) {
     res.status(400).json(error);
@@ -132,36 +131,37 @@ const endpointSecret = process.env.STRIPE_WEBHOOK;
 router.post(
   "/webhook",
   express.raw({ type: "application/json" }),
-  (req, res) => {
+  async (req, res) => {
     const sig = req.headers["stripe-signature"];
 
     let event;
 
     try {
-      event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+      event = await stripe.webhooks.constructEvent(
+        req.body,
+        sig,
+        endpointSecret
+      );
     } catch (err) {
       res.status(400).send(`Webhook Error: ${err.message}`);
       return;
     }
 
     // Handle the event
-    switch (event.type) {
-      case "customer.subscription.deleted":
+    if (event.type == "customer.subscription.updated") {
+      try {
         const stripeSubscription = event.data.object;
         // Then define and call a function to handle the event customer.subscription.deleted
-        const subscription = Subscription.findOneAndUpdate(
+        const subscription = await Subscription.findOneAndUpdate(
           { stripeSubId: stripeSubscription.id },
           { active: false }
         );
-        console.log(subscription);
-        break;
-      // ... handle other event types
-      default:
-        console.log(`Unhandled event type ${event.type}`);
+        console.log("Zrušeno");
+        res.status(200).json({ subscription });
+      } catch (error) {
+        res.status(400).json({ error: error.message });
+      }
     }
-
-    // Return a 200 response to acknowledge receipt of the event
-    res.send();
   }
 );
 
