@@ -79,7 +79,7 @@ router.get(
           metadata: { subId: subId, userId: userId },
         },
         customer: stripeCustomerId,
-        success_url: `${process.env.PROXY_APP}/app`,
+        success_url: `${process.env.PROXY_SERVER}/api/stripe/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${process.env.PROXY_APP}/app`,
       });
       res.status(200).json(session.url);
@@ -127,7 +127,6 @@ router.get("/portal/:stripeCustomerId", express.json(), async (req, res) => {
   }
 });
 
-//stripe webhook listener
 router.post(
   "/webhook",
   express.raw({ type: "application/json" }),
@@ -149,10 +148,10 @@ router.post(
 
     const stripeObject = event.data.object;
 
-    //start task based on event.type
+    // Handle the event
     if (event.type == "customer.subscription.updated") {
       try {
-        //update subscription according to stripe status
+        //Update subscription according to stripe status
         const subActive = !stripeObject.cancel_at_period_end;
 
         const subscription = await Subscription.findOneAndUpdate(
