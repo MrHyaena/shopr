@@ -151,7 +151,7 @@ export function Sidebar() {
     const [toggleMenu, setToggleMenu] = useState(false);
 
     return (
-      <div className="xl:hidden fixed top-0 w-full">
+      <div className="xl:hidden fixed top-0 w-full z-50">
         <div className="bg-primary border-slate-200 shadow-slate-200 text-white sticky top-0">
           <div className="flex justify-between p-5">
             <img src={logo} alt="logo" className="h-10" />

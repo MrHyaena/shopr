@@ -94,19 +94,6 @@ export function Personal() {
                   value={phone}
                 ></input>
               </label>
-              <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
-                Váš email - Nelze změnit
-                <input
-                  disabled={true}
-                  name="email"
-                  type="text"
-                  className=" rounded p-2 text-md font-semibold text-input underline"
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                  value={email}
-                ></input>
-              </label>
             </div>
           </fieldset>
 
@@ -178,7 +165,7 @@ export function Personal() {
           </div>
 
           {error && (
-            <h2 className="font-bold text-center p-2 bg-red-200 rounded-lg border-2 border-red-300">
+            <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
               {error}
             </h2>
           )}

@@ -205,7 +205,7 @@ export function SignupPage() {
               Přihlásit se
             </Link>
             {error && (
-              <h2 className="font-bold text-center p-2 bg-red-200 rounded-lg border-2 border-red-300">
+              <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
                 {error}
               </h2>
             )}

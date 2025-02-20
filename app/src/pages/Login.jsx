@@ -75,7 +75,7 @@ export function LoginPage() {
             Zaregistrovat se
           </Link>
           {error && (
-            <h2 className="font-bold text-center p-2 bg-red-200 rounded-lg border-2 border-red-300">
+            <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
               {error}
             </h2>
           )}
@@ -149,14 +149,14 @@ export function LoginPage() {
               </button>
 
               {error && (
-                <h2 className="font-bold text-center p-2 bg-red-200 rounded-lg border-2 border-red-300">
+                <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
                   {error}
                 </h2>
               )}
             </>
           ) : (
             <>
-              <h2 className="font-bold text-center p-2 bg-emerald-200 rounded-lg border-2 border-emerald-300 max-w-[250px]">
+              <h2 className="font-bold text-center p-2 bg-messageBg rounded-lg border-2 border-messageBorder max-w-[250px]">
                 {message}
               </h2>
               <button

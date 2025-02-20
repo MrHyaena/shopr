@@ -147,7 +147,9 @@ export function Subscriptions() {
                         </div>
                         <div className="flex gap-2">
                           <p className="text-textDark font-bold">Lze změnit:</p>
-                          <p className="">{item.changable}</p>
+                          <p className="">
+                            {item.changable == "true" ? "Ano" : "Ne"}
+                          </p>
                         </div>
                       </li>
                       <li className="bg-slate-100 py-2 px-4 xl:grid hidden items-center grid-cols-4">
@@ -162,7 +164,7 @@ export function Subscriptions() {
                           {item.amount}
                         </p>
                         <p className="col-span-1 justify-self-center">
-                          {item.changable}
+                          {item.changable == "true" ? "Ano" : "Ne"}
                         </p>
                       </li>
                     </Fragment>
@@ -187,7 +189,7 @@ export function Subscriptions() {
                         </div>
                         <div className="flex gap-2">
                           <p className="text-textDark font-bold">Lze změnit:</p>
-                          <p className="">{item.changable}</p>
+                          {item.changable == "true" ? "Ano" : "Ne"}
                         </div>
                       </li>
                       <li className="py-2 px-4 xl:grid grid-cols-4 items-center  hidden">
@@ -202,7 +204,7 @@ export function Subscriptions() {
                           {item.amount}
                         </p>
                         <p className="col-span-1 justify-self-center">
-                          {item.changable}
+                          {item.changable == "true" ? "Ano" : "Ne"}
                         </p>
                       </li>
                     </>
@@ -303,7 +305,7 @@ export function Subscriptions() {
                 <div className="py-5 flex xl:justify-center gap-5 justify-center ">
                   {active && (
                     <button
-                      className="font-semibold text-textDark w-full  border border-slate-200 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
+                      className="font-semibold text-textDark w-full hover:text-white hover:border-deleteButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton  cursor-pointer"
                       onClick={() => {
                         customerPortal(stripeCustomerId);
                       }}
@@ -314,7 +316,7 @@ export function Subscriptions() {
 
                   {!active && (
                     <button
-                      className="font-semibold text-textDark w-full  text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
+                      className="font-semibold text-textDark w-full hover:text-white hover:border-deleteButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton  cursor-pointer"
                       onClick={() => {
                         setToggleDelete(true);
                       }}
@@ -357,7 +359,7 @@ export function Subscriptions() {
                   <h4 className="text-heading font-bold text-textDark">
                     Email:
                   </h4>
-                  <p>{email}</p>
+                  <p className="break-all">{email}</p>
                 </div>
                 <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
                   <h4 className="text-heading font-bold text-textDark">
@@ -402,9 +404,9 @@ export function Subscriptions() {
 
             <div className="flex gap-5 items-center justify-center xl:justify-start">
               <img
-                src="https://google.cz/favicon.ico"
+                src={"https://" + subWebsite + "/favicon.ico"}
                 alt="icon"
-                className="xl:block hidden"
+                className="xl:block hidden max-h-8"
               />
               <h2 className="text-2xl text-textDark font-bold xl:mr-5 mt-[-8px]">
                 {subName}
@@ -412,18 +414,7 @@ export function Subscriptions() {
             </div>
           </div>
           <div className="flex xl:flex-row flex-col gap-6 xl:items-center items-center justify-end">
-            <Link
-              to={editURL}
-              className=" text-textDark p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad flex gap-2 items-center border border-slate-100 hover:border-white"
-            >
-              <FontAwesomeIcon icon={faPen} />
-              Upravit
-            </Link>
-            {active ? (
-              <h2 className="font-bold text-lg text-emerald-700 p-2">
-                Aktivní
-              </h2>
-            ) : (
+            {!active ? (
               <button
                 onClick={() => {
                   activateSubscription(
@@ -434,12 +425,22 @@ export function Subscriptions() {
                     stripeCustomerId
                   );
                 }}
-                className="text-textDark cursor-pointer p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad border border-slate-100 hover:border-white"
+                className="text-textDark hover:shadow-md cursor-pointer p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad border border-slate-100 hover:border-quad"
               >
                 Aktivovat
               </button>
+            ) : (
+              <h2 className="font-semibold text-lg text-emerald-700 p-2">
+                Aktivní
+              </h2>
             )}
-
+            <Link
+              to={editURL}
+              className=" text-textDark p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-2 items-center border border-slate-100 hover:border-quad"
+            >
+              <FontAwesomeIcon icon={faPen} />
+              Upravit
+            </Link>
             {toggle ? (
               <button
                 onClick={() => {
@@ -448,7 +449,7 @@ export function Subscriptions() {
               >
                 <FontAwesomeIcon
                   icon={faChevronUp}
-                  className="text-2xl border hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2  transition-all ease-in-out cursor-pointer"
+                  className="text-2xl border hover:shadow-md hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2  transition-all ease-in-out cursor-pointer"
                 />
               </button>
             ) : (
@@ -459,7 +460,7 @@ export function Subscriptions() {
               >
                 <FontAwesomeIcon
                   icon={faChevronDown}
-                  className="text-2xl border hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2 transition-all ease-in-out cursor-pointer"
+                  className="text-2xl border hover:shadow-md hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2 transition-all ease-in-out cursor-pointer"
                 />
               </button>
             )}
@@ -490,7 +491,7 @@ export function Subscriptions() {
                 />
               </label>
               {errorDelete && (
-                <p className="p-2 bg-red-200 border-2 border-red-300 rounded-md font-semibold text-medium">
+                <p className="p-2 bg-errorBg border-2 border-errorBorder rounded-md font-semibold text-medium">
                   Vložený text se neshoduje se jménem.
                 </p>
               )}
