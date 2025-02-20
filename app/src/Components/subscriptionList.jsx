@@ -500,6 +500,7 @@ export function Subscriptions() {
                   onClick={() => {
                     if (checkDelete == subName) {
                       setToggleDelete(false);
+                      setCheckDelete(null);
                       handleDelete(
                         subId,
                         user,

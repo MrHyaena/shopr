@@ -45,7 +45,7 @@ export function SubscriptionForm() {
     subDeliveryAddress: "",
     items: [{ url: "", amount: "", changable: "true" }],
   });
-  const [frequencyChange, setFrequencyChange] = useState(false);
+  const [originFrequency, setOriginFreqency] = useState("");
 
   useEffect(() => {
     if (id) {
@@ -70,6 +70,8 @@ export function SubscriptionForm() {
         items: sub.items,
       };
 
+      const newOriginFrequency = sub.subFrequency;
+      setOriginFreqency(newOriginFrequency);
       setFormData({ ...newData });
     }
   }, []);
@@ -134,7 +136,7 @@ export function SubscriptionForm() {
     return (
       <form className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg">
         <button
-          className="bg-quad self-start p-3 text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+          className="bg-quad self-start p-3 text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
           onClick={(e) => {
             inputUserInfo(e);
           }}
@@ -245,7 +247,7 @@ export function SubscriptionForm() {
         </fieldset>
         <div className="flex flex-col items-center gap-5">
           <button
-            className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+            className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
             onClick={(e) => {
               handleNext(e);
             }}
@@ -402,11 +404,9 @@ export function SubscriptionForm() {
               <select
                 value={subFrequency}
                 onChange={(e) => {
+                  console.log(e.target.value);
                   setSubFrequency(e.target.value);
-                  setFrequencyChange(true);
                 }}
-                name="frekvence"
-                id="frekvence"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               >
                 <option value="weekly">Jednou za týden</option>
@@ -423,8 +423,6 @@ export function SubscriptionForm() {
                 onChange={(e) => {
                   setSubDay(e.target.value);
                 }}
-                name="den"
-                id="den"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               >
                 <option value="monday">Pondělí</option>
@@ -479,7 +477,7 @@ export function SubscriptionForm() {
         <div className="flex flex-col gap-5 items-center">
           <div className="flex gap-3">
             <button
-              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
                 const object = {
@@ -500,7 +498,7 @@ export function SubscriptionForm() {
               <FontAwesomeIcon icon={faArrowLeft} /> Zpět
             </button>
             <button
-              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               onClick={(e) => {
                 handleNext(e);
               }}
@@ -554,6 +552,11 @@ export function SubscriptionForm() {
       } else {
         setError(null);
         if (id) {
+          let frequencyChange = 0;
+          if (subscription.subFrequency !== originFrequency) {
+            frequencyChange = 1;
+          }
+          console.log(frequencyChange);
           patchSubscription(subscription, id, frequencyChange);
         }
 
@@ -674,7 +677,7 @@ export function SubscriptionForm() {
         <div className="flex flex-col items-center gap-5">
           <div className="flex gap-3">
             <button
-              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               onClick={() => {
                 setStep(2);
                 handleBack();
@@ -684,7 +687,7 @@ export function SubscriptionForm() {
             </button>
             <button
               disabled={isLoading}
-              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
 

@@ -169,11 +169,13 @@ const updateSubscription = async (req, res) => {
   console.log("update subscription");
   const { id, frequencyChange } = req.params;
 
+  console.log(frequencyChange, req.body.active);
+
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "Takové předplatné neexistuje" });
   }
 
-  if (frequencyChange && req.body.active) {
+  if (frequencyChange == 1 && req.body.active) {
     console.log("frequency change active");
     let priceId;
 
@@ -223,9 +225,6 @@ const updateSubscription = async (req, res) => {
 
   res.status(200).json(subscription);
 };
-
-//activate subscription
-const activateSubscription = async (req, res) => {};
 
 module.exports = {
   getSubscriptions,
