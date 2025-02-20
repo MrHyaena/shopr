@@ -7,7 +7,7 @@ import {
   faPen,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -111,7 +111,10 @@ export function Subscriptions() {
 
     function SubDetails() {
       return (
-        <div className="col-span-2 grid xl:grid-cols-3 gap-y-5 gap-x-15 animate-scale-up-noBounce">
+        <div
+          className="col-span-2 grid xl:grid-cols-3 gap-y-5 gap-x-15"
+          key={"subDetails" + subId}
+        >
           <div className="xl:col-span-2">
             <h3 className="text-xl font-bold text-textLight py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
               <FontAwesomeIcon icon={faCartShopping} />
@@ -126,7 +129,7 @@ export function Subscriptions() {
               {items.map((item, index) => {
                 if (index % 2 == 0) {
                   return (
-                    <>
+                    <Fragment key={"subItemToBuy" + subId}>
                       <li className="bg-slate-100 py-2 px-4 xl:hidden">
                         <div className="flex gap-2">
                           <p className="text-textDark font-bold">URL:</p>
@@ -162,7 +165,7 @@ export function Subscriptions() {
                           {item.changable}
                         </p>
                       </li>
-                    </>
+                    </Fragment>
                   );
                 } else {
                   return (
@@ -297,10 +300,10 @@ export function Subscriptions() {
                     </a>
                   </div>
                 )}
-                <div className="p-5 flex xl:justify-center gap-5 justify-center ">
+                <div className="py-5 flex xl:justify-center gap-5 justify-center ">
                   {active && (
                     <button
-                      className="font-semibold text-textDark  border border-slate-200 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
+                      className="font-semibold text-textDark w-full  border border-slate-200 text-lg p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
                       onClick={() => {
                         customerPortal(stripeCustomerId);
                       }}
@@ -311,7 +314,7 @@ export function Subscriptions() {
 
                   {!active && (
                     <button
-                      className="font-semibold text-textDark  text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
+                      className="font-semibold text-textDark w-full  text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton hover:text-textDark hover:text--textDark cursor-pointer"
                       onClick={() => {
                         setToggleDelete(true);
                       }}
@@ -408,7 +411,7 @@ export function Subscriptions() {
               </h2>
             </div>
           </div>
-          <div className="flex xl:flex-row flex-col gap-5 xl:items-center items-center justify-end">
+          <div className="flex xl:flex-row flex-col gap-6 xl:items-center items-center justify-end">
             <Link
               to={editURL}
               className=" text-textDark p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad flex gap-2 items-center border border-slate-100 hover:border-white"
@@ -436,20 +439,7 @@ export function Subscriptions() {
                 Aktivovat
               </button>
             )}
-            <button
-              onClick={() => {
-                activateSubscription(
-                  subId,
-                  subName,
-                  subWebsite,
-                  subFrequency,
-                  stripeCustomerId
-                );
-              }}
-              className="text-textDark cursor-pointer p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad border border-slate-100 hover:border-white"
-            >
-              Aktivovat
-            </button>
+
             {toggle ? (
               <button
                 onClick={() => {
@@ -458,7 +448,7 @@ export function Subscriptions() {
               >
                 <FontAwesomeIcon
                   icon={faChevronUp}
-                  className="text-3xl border hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2  transition-all ease-in-out cursor-pointer"
+                  className="text-2xl border hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2  transition-all ease-in-out cursor-pointer"
                 />
               </button>
             ) : (
@@ -469,7 +459,7 @@ export function Subscriptions() {
               >
                 <FontAwesomeIcon
                   icon={faChevronDown}
-                  className="text-3xl border hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2 transition-all ease-in-out cursor-pointer"
+                  className="text-2xl border hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2 transition-all ease-in-out cursor-pointer"
                 />
               </button>
             )}
@@ -478,14 +468,15 @@ export function Subscriptions() {
           {toggle ? <SubDetails /> : <></>}
         </div>
         {toggleDelete && (
-          <div className="fixed top-0 right-0 w-full h-full bg-primary/15 m-auto flex justify-center items-center">
+          <div className="fixed top-0 right-0 w-full p-5 h-full bg-primary/15 m-auto flex justify-center items-center">
             <div className="m-auto gap-5 flex flex-col justify-center items-center bg-white p-10 rounded-xl">
               <p className="text-textDark font-semibold">
                 Opravdu chcete zrušit předplatné s názvem:{" "}
                 <span className="text-textHighlightYellow">{subName}</span>?
               </p>
               <label className="flex flex-col gap-2 font-semibold">
-                Pro potvrzení smazání napište jméno vašeho předplatného
+                Pro potvrzení smazání napište jméno předplatného, které vidíte
+                výše.
                 <input
                   type="text"
                   className="bg-zinc-50 p-3 rounded-lg border border-slate-200"
@@ -499,7 +490,7 @@ export function Subscriptions() {
                 />
               </label>
               {errorDelete && (
-                <p className="p-2 bg-red-100 rounded-md font-semibold text-medium">
+                <p className="p-2 bg-red-200 border-2 border-red-300 rounded-md font-semibold text-medium">
                   Vložený text se neshoduje se jménem.
                 </p>
               )}
@@ -561,7 +552,7 @@ export function Subscriptions() {
           {subscriptions !== 0 &&
             subscriptions.map((item, index) => {
               return (
-                <>
+                <Fragment key={"subItem" + item._id}>
                   <SubscriptionTabs
                     index={index}
                     subId={item._id}
@@ -583,9 +574,8 @@ export function Subscriptions() {
                     subDeliveryMethod={item.subDeliveryMethod}
                     subDeliveryAddress={item.subDeliveryAddress}
                     items={item.items}
-                    key={"subItem" + item._id}
                   />
-                </>
+                </Fragment>
               );
             })}
           {subscriptions == 0 && <SubscriptionMissing />}
