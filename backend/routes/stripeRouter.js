@@ -147,14 +147,17 @@ router.post(
       return;
     }
 
+    const stripeObject = event.data.object;
+
     // Handle the event
     if (event.type == "customer.subscription.updated") {
       try {
-        const stripeSubscription = event.data.object;
-        // Then define and call a function to handle the event customer.subscription.deleted
+        //Update subscription according to stripe status
+        const subActive = stripeObject.cancel_at_period_end;
+
         const subscription = await Subscription.findOneAndUpdate(
           { stripeSubId: stripeSubscription.id },
-          { active: false }
+          { active: subActive }
         );
         console.log("Zrušeno");
         res.status(200).json({ subscription });
