@@ -9,6 +9,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET);
 const Subscription = require("../models/subscriptionModel");
 const User = require("../models/userModel");
 const mongoose = require("mongoose");
+const endpointSecret = process.env.STRIPE_WEBHOOK;
 
 //controller functions
 
@@ -78,7 +79,7 @@ router.get(
           metadata: { subId: subId, userId: userId },
         },
         customer: stripeCustomerId,
-        success_url: `${process.env.PROXY_SERVER}/api/stripe/success?session_id={CHECKOUT_SESSION_ID}`,
+        success_url: `${process.env.PROXY_APP}/app`,
         cancel_url: `${process.env.PROXY_APP}/app`,
       });
       res.status(200).json(session.url);
@@ -126,8 +127,7 @@ router.get("/portal/:stripeCustomerId", express.json(), async (req, res) => {
   }
 });
 
-const endpointSecret = process.env.STRIPE_WEBHOOK;
-
+//stripe webhook listener
 router.post(
   "/webhook",
   express.raw({ type: "application/json" }),
@@ -149,18 +149,17 @@ router.post(
 
     const stripeObject = event.data.object;
 
-    // Handle the event
+    //start task based on event.type
     if (event.type == "customer.subscription.updated") {
       try {
-        //Update subscription according to stripe status
+        //update subscription according to stripe status
         const subActive = !stripeObject.cancel_at_period_end;
 
         const subscription = await Subscription.findOneAndUpdate(
-          { stripeSubId: stripeSubscription.id },
+          { stripeSubId: stripeObject.id },
           { active: subActive }
         );
-        console.log("Zrušeno");
-        res.status(200).json({ subscription });
+        res.status(200).json({ isActivated: subActive });
       } catch (error) {
         res.status(400).json({ error: error.message });
       }
