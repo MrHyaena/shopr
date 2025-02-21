@@ -1,17 +1,216 @@
 @import "tailwindcss";
 
+@layer components {
+  h1 {
+    font-size: var(--text-7xl);
+    line-height: normal;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  h2 {
+    font-size: var(--text-5xl);
+    line-height: normal;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  h3 {
+    font-size: var(--text-4xl);
+    line-height: normal;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  h5 {
+    font-size: var(--text-2xl);
+    line-height: normal;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  h4 {
+    font-size: var(--text-2xl);
+    line-height: normal;
+    font-weight: 700;
+    color: var(--color-yellow-400);
+  }
+
+  p {
+    font-size: var(--text-lg);
+    color: var(--color-textDarker);
+    font-weight: 600;
+  }
+}
+
 @theme {
   --color-primary: var(--color-zinc-950);
   --color-secondary: var(--color-zinc-900);
   --color-tertiary: var(--color-yellow-300);
   --color-quad: var(--color-yellow-200);
+
   --color-textDark: var(--color-zinc-900);
-  --color-textMedium: var(--color-zinc-700);
+  --color-textDarker: var(--color-zinc-700);
+  --color-textMedium: var(--color-zinc-500);
   --color-textLighter: var(--color-zinc-400);
   --color-textLight: var(--color-zinc-100);
+  --color-textA: var(--color-emerald-600);
+  --color-textHighlightYellow: var(--color-yellow-600);
 
-  --color-deleteButton: var(--color-red-200);
+  --color-deleteButton: var(--color-red-400);
+
+  --spacing-wrapper: 1400px;
+
+  --color-errorBg: var(--color-red-200);
+  --color-errorBorder: var(--color-red-300);
+  --color-messageBg: var(--color-emerald-200);
+  --color-messageBorder: var(--color-emerald-300);
+
+  --color-bgLight: var(--color-white);
+
   --color-input: var(--color-slate-700);
   --color-subIcon: var(--color-slate-500);
   --color-subItem: var(--color-slate-800);
+
+  --animate-fall-down: fall-down 0.8s ease-in-out forwards;
+  --animate-fall-down-faster: fall-down 0.7s ease-in-out forwards;
+
+  @keyframes fall-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(30px);
+    }
+    80% {
+      opacity: 1;
+      transform: translateY(-5px);
+    }
+    100% {
+      opacity: 1;
+
+      transform: translateY(0px);
+    }
+  }
+
+  --animate-fall-right: fall-right 0.8s ease-in-out forwards;
+  --animate-fall-right-delay: fall-right 0.8s ease-in-out both 0.5s;
+  --animate-fall-right-faster: fall-right 0.7s ease-in-out forwards;
+
+  @keyframes fall-right {
+    0% {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    50% {
+      opacity: 1;
+      transform: translateX(30px);
+    }
+    80% {
+      opacity: 1;
+      transform: translateX(-10px);
+    }
+    90% {
+      opacity: 1;
+      transform: translateX(5px);
+    }
+    100% {
+      opacity: 1;
+
+      transform: translateX(0px);
+    }
+  }
+
+  --animate-fall-left: fall-right 0.8s ease-in-out forwards;
+  --animate-fall-left-delay: fall-right 0.8s ease-in-out both 0.5s;
+  --animate-fall-left-faster: fall-right 0.7s ease-in-out forwards;
+
+  @keyframes fall-right {
+    0% {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    50% {
+      opacity: 1;
+      transform: translateX(-30px);
+    }
+    80% {
+      opacity: 1;
+      transform: translateX(10px);
+    }
+    90% {
+      opacity: 1;
+      transform: translateX(-5px);
+    }
+    100% {
+      opacity: 1;
+
+      transform: translateX(0px);
+    }
+  }
+
+  --animate-fall-up: fall-up 0.8s ease-in-out forwards;
+  --animate-fall-up-delay: fall-up 0.8s ease-in-out both 0.5s;
+
+  @keyframes fall-up {
+    0% {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(30px);
+    }
+    80% {
+      opacity: 1;
+      transform: translateY(-10px);
+    }
+    90% {
+      opacity: 1;
+      transform: translateY(5px);
+    }
+    100% {
+      opacity: 1;
+
+      transform: translateY(0px);
+    }
+  }
+
+  --animate-scale-up: scale-up ease-out 0.5s forwards;
+  --animate-scale-up-delay: scale-up ease-out 0.5s both 0.8s;
+
+  @keyframes scale-up {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    80% {
+      opacity: 1;
+      transform: scale(0.97);
+    }
+
+    100% {
+      opacity: 1;
+
+      transform: scale(0px);
+    }
+  }
+
+  --animate-scale-up-noBounce: scale-up-no-bounce 0.3s ease-in-out forwards;
+  @keyframes scale-up-no-bounce {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 }

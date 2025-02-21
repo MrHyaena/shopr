@@ -8,7 +8,149 @@
     <title>Vite App</title>
   </head>
   <body>
-    <div id="app"></div>
-    <h1 class="text-2xl text-red-500">Hello</h1>
+    <!-- NAVIGATION DESKTOP-->
+    <nav
+      class="fixed top-5 lg:flex justify-center w-full hidden animate-fall-down"
+    >
+      <div
+        class="bg-white border border-slate-50 rounded-xl py-3 px-5 mx-15 shadow-lg flex items-center gap-5 w-[100%] justify-between"
+      >
+        <div>
+          <ul class="flex gap-8 text-lg font-bold items-center text-zinc-800">
+            <li>
+              <a href="https://www.shopr.cz">
+                <img
+                  src="./public/shopr-logo.png"
+                  alt="logo"
+                  class="max-h-15"
+                />
+              </a>
+            </li>
+            <li>
+              <a>Domů</a>
+            </li>
+            <li>
+              <a>Jak to funguje</a>
+            </li>
+            <li>
+              <a>Cena</a>
+            </li>
+            <li>
+              <a>O nás</a>
+            </li>
+            <li>
+              <a>Otázky</a>
+            </li>
+          </ul>
+        </div>
+        <div class="flex gap-8 items-center text-lg font-bold text-zinc-800">
+          <a href="https://app.shopr.cz">Přihlásit se</a>
+
+          <button
+            class="bg-quad text-zinc-800 cursor-pointer font-semibold py-2 px-3 text-md rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 self-stretch"
+          >
+            Vytvořit účet
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- NAVIGATION DESKTOP-->
+    <nav class="fixed top-0 flex justify-center w-full px-15 lg:hidden">
+      <div
+        class="bg-white rounded-b-xl p-5 shadow-lg flex items-center gap-5 w-[100%] justify-between"
+      >
+        <a href="https://www.shopr.cz">
+          <img src="./public/shopr-logo.png" alt="logo" class="max-h-10" />
+        </a>
+
+        <div class="flex gap-4 items-center">
+          <ul class="flex gap-5">
+            <li>
+              <a class="text-md font-bold text-textDarker">Domů</a>
+            </li>
+            <li>
+              <a class="text-md font-bold text-textDarker">Jak to funguje</a>
+            </li>
+            <li>
+              <a class="text-md font-bold text-textDarker">Cena</a>
+            </li>
+            <li>
+              <a class="text-md font-bold text-textDarker">O nás</a>
+            </li>
+            <li>
+              <a class="text-md font-bold text-textDarker">Otázky</a>
+            </li>
+          </ul>
+          <button
+            class="bg-quad py-2 px-3 text-md font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 self-stretch"
+          >
+            Vytvořit účet
+          </button>
+          <button
+            class="bg-quad py-2 px-3 text-md font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 self-stretch"
+          >
+            Přihlásit se
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO sekce -->
+    <div
+      class="bg-linear-200 from-30% to-40% from-yellow-100 to-slate min-h-screen flex items-center justify-center"
+    >
+      <!-- Wrapper -  -->
+      <div class="grid grid-cols-2 items-center gap-10 max-w-wrapper">
+        <!-- Levá strana -->
+        <div class="flex flex-col items-center justify-start h-full gap-5">
+          <h1 class="">
+            Založte si<br />
+            <span class="">předplatné na jakémkoliv e-shopu</span>
+          </h1>
+          <p class="text-2xl font-semibold text-textDark">
+            Už nikdy se nebudete muset dívat na prázdné balení od fitness
+            suplementů, kosmetiky nebo čehokoliv jiného.
+          </p>
+          <div class="flex gap-5 justify-start w-full">
+            <button
+              class="bg-white text-textDark p-3 text-2xl font-semibold rounded-tl-xl rounded-br-xl rounded-sm transition-all ease-in-out hover:scale-105 shadow-sm cursor-pointer"
+            >
+              Jak to funguje
+            </button>
+            <button
+              class="bg-quad hover:bg-tertiary text-textDark p-3 text-2xl font-semibold transition-all ease-in-out rounded-tl-xl rounded-br-xl rounded-sm hover:scale-105 shadow-sm cursor-pointer"
+            >
+              Založit účet
+            </button>
+          </div>
+        </div>
+
+        <!-- Pravá strana -->
+        <div class=""></div>
+      </div>
+    </div>
+    <!-- WHY proof -->
+    <div class="min-h-screen flex justify-center items-start py-20">
+      <div class="max-w-wrapper flex flex-col items-center">
+        <div>
+          <h4 class="text-headingTwo">Co všechno umíme</h4>
+          <h2 class="text-headingTwo">Proč si u nás udělat předplatné?</h2>
+        </div>
+        <div class="flex flex-col gap-20">
+          <div>
+            <h5>Ušetříme vám čas</h5>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa
+              placeat fuga et unde fugit autem harum. Illum explicabo, magnam
+              dolorem id, architecto corporis soluta, enim cum voluptatum quod
+              assumenda delectus!
+            </p>
+          </div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
