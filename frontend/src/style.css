@@ -2,38 +2,38 @@
 
 @layer components {
   h1 {
-    font-size: var(--text-7xl);
+    font-size: var(--text-6xl);
     line-height: normal;
     font-weight: 700;
-    color: var(--color-primary);
+    color: var(--color-textDark);
   }
 
   h2 {
     font-size: var(--text-5xl);
     line-height: normal;
     font-weight: 700;
-    color: var(--color-primary);
+    color: var(--color-textDark);
   }
 
   h3 {
     font-size: var(--text-4xl);
     line-height: normal;
     font-weight: 700;
-    color: var(--color-primary);
-  }
-
-  h5 {
-    font-size: var(--text-2xl);
-    line-height: normal;
-    font-weight: 700;
-    color: var(--color-primary);
+    color: var(--color-textDark);
   }
 
   h4 {
     font-size: var(--text-2xl);
     line-height: normal;
     font-weight: 700;
-    color: var(--color-yellow-400);
+    color: var(--color-quad);
+  }
+
+  h5 {
+    font-size: var(--text-lg);
+    line-height: normal;
+    font-weight: 700;
+    color: var(--color-quad);
   }
 
   p {
@@ -41,25 +41,33 @@
     color: var(--color-textDarker);
     font-weight: 600;
   }
+
+  .h6 {
+    font-size: var(--text-xl);
+    line-height: normal;
+    font-weight: 700;
+    color: var(--color-quad);
+  }
 }
 
 @theme {
   --color-primary: var(--color-zinc-950);
-  --color-secondary: var(--color-zinc-900);
-  --color-tertiary: var(--color-yellow-300);
-  --color-quad: var(--color-yellow-200);
+  --color-secondary: var(--color-zinc-800);
+  --color-tertiary: var(--color-rose-700);
+  --color-quad: var(--color-rose-600);
 
-  --color-textDark: var(--color-zinc-900);
+  --color-textDark: var(--color-zinc-800);
   --color-textDarker: var(--color-zinc-700);
   --color-textMedium: var(--color-zinc-500);
   --color-textLighter: var(--color-zinc-400);
   --color-textLight: var(--color-zinc-100);
   --color-textA: var(--color-emerald-600);
   --color-textHighlightYellow: var(--color-yellow-600);
+  --color-textButton: var(--color-white);
 
   --color-deleteButton: var(--color-red-400);
 
-  --spacing-wrapper: 1400px;
+  --spacing-wrapper: 1280px;
 
   --color-errorBg: var(--color-red-200);
   --color-errorBorder: var(--color-red-300);
@@ -88,6 +96,33 @@
       opacity: 1;
       transform: translateY(-5px);
     }
+    100% {
+      opacity: 1;
+
+      transform: translateY(0px);
+    }
+  }
+
+  --animate-rotate: rotate 40s linear infinite;
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  --animate-fall-down-noBounce: fall-down-noBounce 0.8s ease-out forwards;
+
+  @keyframes fall-down-noBounce {
+    0% {
+      opacity: 0;
+      transform: translateY(-100px);
+    }
+
     100% {
       opacity: 1;
 
