@@ -157,7 +157,7 @@ export function Personal() {
           <div className="flex justify-center">
             <button
               disabled={isLoading}
-              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+              className="bg-quad  text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
               type="submit"
             >
               Aktualizovat
@@ -181,7 +181,7 @@ export function Personal() {
           <h1 className="text-3xl font-bold text-heading">Vaše osobní údaje</h1>
           <Link
             to="/"
-            className="bg-quad hidden xl:block text-center p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+            className="bg-quad text-textButton hidden xl:block text-center p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
           >
             Zpět
           </Link>

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 import { Link } from "react-router-dom";
-import logoBlack from "/public/shopr-logo-black.png";
+import logoBlack from "/public/shopr-logo.png";
 import { useReset } from "../hooks/useReset";
 
 export function LoginPage() {
@@ -63,7 +63,7 @@ export function LoginPage() {
           </fieldset>
           <button
             disabled={isLoading}
-            className="bg-quad xl:m-3 m-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+            className="bg-quad text-textButton xl:m-3 m-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
             type="submit"
           >
             Přihlásit se
@@ -81,7 +81,7 @@ export function LoginPage() {
           )}
         </form>
 
-        <div className="xl:w-[300px] xl:flex hidden flex-col items-center gap-3 justify-center bg-yellow-200 m-6 shadow-xl  rounded-xl text-textDark p-10 overflow-clip animate-fall-up-delay">
+        <div className="xl:w-[300px] xl:flex hidden flex-col items-center gap-3 justify-center bg-white text-textDark m-6 shadow-lg  rounded-lg border border-slate-100  p-10 overflow-clip animate-fall-up-delay">
           <h2 className="text-2xl font-semibold">Vítejte!</h2>
           <p className="text-center font-semibold">
             Pokud ještě nemáte účet, klepněte na tlačítko Zaregistrovat se.
@@ -133,7 +133,7 @@ export function LoginPage() {
               </fieldset>
               <button
                 disabled={isLoading}
-                className="bg-quad xl:m-3 m-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 self-stretch"
+                className="bg-quad text-textButton xl:m-3 m-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 self-stretch"
                 type="submit"
               >
                 Odeslat
@@ -164,7 +164,7 @@ export function LoginPage() {
                   setReset(!reset);
                 }}
                 to="/signup"
-                className="bg-quad xl:m-3 m-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 self-stretch"
+                className="bg-quad text-textButton xl:m-3 m-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 self-stretch"
               >
                 Vrátit se na přihlášení
               </button>
@@ -172,7 +172,7 @@ export function LoginPage() {
           )}
         </form>
 
-        <div className="w-[300px] flex flex-col items-center gap-3 justify-center bg-yellow-200 m-6 shadow-xl  rounded-xl text-textDark p-10 overflow-clip animate-fall-up-delay">
+        <div className="w-[300px] flex flex-col items-center gap-3 justify-center bg-white border border-slate-100 m-6 shadow-lg  rounded-xl text-textDark p-10 overflow-clip animate-fall-up-delay">
           <h2 className="text-2xl font-semibold"></h2>
           <p className="text-center font-semibold">
             Po klepnutí na tlačítko Odeslat Vám přijde email s odkazem pro změnu

@@ -6,16 +6,17 @@
 @theme {
   --color-primary: var(--color-zinc-950);
   --color-secondary: var(--color-zinc-900);
-  --color-tertiary: var(--color-yellow-300);
-  --color-quad: var(--color-yellow-200);
+  --color-tertiary: var(--color-rose-600);
+  --color-quad: var(--color-rose-500);
 
   --color-textDark: var(--color-zinc-900);
   --color-textDarker: var(--color-zinc-700);
   --color-textMedium: var(--color-zinc-500);
   --color-textLighter: var(--color-zinc-400);
   --color-textLight: var(--color-zinc-100);
-  --color-textA: var(--color-emerald-600);
+  --color-textA: var(--color-rose-600);
   --color-textHighlightYellow: var(--color-yellow-600);
+  --color-textButton: var(--color-white);
 
   --color-deleteButton: var(--color-red-400);
 

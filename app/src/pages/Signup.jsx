@@ -8,7 +8,7 @@ import {
   faExclamation,
   faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
-import logoBlack from "/public/shopr-logo-black.png";
+import logoBlack from "/public/shopr-logo.png";
 
 export function SignupPage() {
   const [email, setEmail] = useState("");
@@ -193,7 +193,7 @@ export function SignupPage() {
             </fieldset>
             <button
               disabled={isLoading}
-              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+              className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               type="submit"
             >
               Zaregistrovat se
@@ -210,14 +210,14 @@ export function SignupPage() {
               </h2>
             )}
           </form>
-          <div className="xl:w-[500px] max-w-full flex flex-col justify-start items-center gap-4 text-center bg-quad rounded-xl p-3 shadow-xl animate-fall-down">
+          <div className="xl:w-[500px] max-w-full flex flex-col justify-start items-center gap-4 text-center bg-white rounded-lg p-3 shadow-xl border border-slate-100 animate-fall-down">
             <img
               src={logoBlack}
               alt="logo"
               className="max-h-16 animate-scale-up justify-self-center"
             />
             <div className="flex flex-col gap-3 p-4">
-              <h2 className="text-xl font-semibold">
+              <h2 className="text-xl font-semibold text-textDark">
                 Děkujeme, že to s námi chcete vyzkoušet!
               </h2>
               <p className="text-lg font-semibold text-textDark">
@@ -242,12 +242,12 @@ export function SignupPage() {
                 {question == 1 ? (
                   <FontAwesomeIcon
                     icon={faChevronDown}
-                    className="text-tertiary bg-white w-5 h-5 p-3 rounded-md text-xl"
+                    className="text-textButton bg-quad w-5 h-5 p-3 rounded-md shadow-md text-xl"
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faChevronRight}
-                    className="text-tertiary bg-white w-5 h-5 p-3 rounded-md text-xl"
+                    className="text-textButton bg-quad w-5 h-5 p-3 rounded-md shadow-md text-xl"
                   />
                 )}
               </button>
@@ -275,12 +275,12 @@ export function SignupPage() {
                 {question == 2 ? (
                   <FontAwesomeIcon
                     icon={faChevronDown}
-                    className="text-tertiary bg-white w-5 h-5 p-3 rounded-md text-xl"
+                    className="text-textButton bg-quad w-5 h-5 p-3 rounded-md shadow-md text-xl"
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faChevronRight}
-                    className="text-tertiary bg-white w-5 h-5 p-3 rounded-md text-xl"
+                    className="text-textButton bg-quad w-5 h-5 p-3 rounded-md shadow-md text-xl"
                   />
                 )}
               </button>
@@ -312,12 +312,12 @@ export function SignupPage() {
                 {question == 3 ? (
                   <FontAwesomeIcon
                     icon={faChevronDown}
-                    className="text-tertiary bg-white w-5 h-5 p-3 rounded-md text-xl"
+                    className="text-textButton bg-quad w-5 h-5 p-3 rounded-md shadow-md text-xl"
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faChevronRight}
-                    className="text-tertiary bg-white w-5 h-5 p-3 rounded-md text-xl"
+                    className="text-textButton bg-quad w-5 h-5 p-3 rounded-md shadow-md text-xl"
                   />
                 )}
               </button>

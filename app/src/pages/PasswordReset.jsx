@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import logoBlack from "/public/shopr-logo-black.png";
+import logoBlack from "/public/shopr-logo.png";
 const apiURL = import.meta.env.VITE_API_URL;
 
 export function PasswordReset() {
@@ -83,7 +83,7 @@ export function PasswordReset() {
                 </label>
               </fieldset>
               <button
-                className="bg-quad xl:m-3 m-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 self-stretch"
+                className="bg-quad text-textButton xl:m-3 m-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 self-stretch"
                 onClick={(e) => {
                   handleSubmit(e);
                 }}
@@ -110,7 +110,7 @@ export function PasswordReset() {
                 </h2>
                 <Link
                   to="/login"
-                  className="bg-quad xl:m-3 m-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+                  className="bg-quad text-textButton xl:m-3 m-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
                 >
                   Zpět na přihlášení
                 </Link>

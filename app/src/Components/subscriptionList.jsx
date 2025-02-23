@@ -6,6 +6,7 @@ import {
   faGears,
   faHouseUser,
   faPen,
+  faShop,
   faWallet,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,6 +16,7 @@ import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { handleDelete } from "../functions/deleteSubscriptionHandler";
 import { SubscriptionMissing } from "./subscriptionMissing";
+import shopLogo from "/public/shop-solid.png";
 const apiURL = import.meta.env.VITE_API_URL;
 
 export function Subscriptions({ setActiveButton }) {
@@ -304,27 +306,47 @@ export function Subscriptions({ setActiveButton }) {
                     </a>
                   </div>
                 )}
-                <div className="py-5 flex xl:justify-center gap-5 justify-center ">
-                  {active && (
-                    <button
-                      className="font-semibold text-textDark w-full hover:text-white hover:border-deleteButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton  cursor-pointer"
-                      onClick={() => {
-                        customerPortal(stripeCustomerId);
-                      }}
-                    >
-                      Deaktivovat předplatné
-                    </button>
-                  )}
-
-                  {!active && (
-                    <button
-                      className="font-semibold text-textDark w-full hover:text-white hover:border-deleteButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton  cursor-pointer"
-                      onClick={() => {
-                        setToggleDelete(true);
-                      }}
-                    >
-                      Zrušit předplatné
-                    </button>
+                <div className="py-5 grid grid-cols-2 gap-5">
+                  {!active ? (
+                    <>
+                      <button
+                        className="font-semibold text-textDark w-full hover:border-quad hover:text-textButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-quad  cursor-pointer"
+                        onClick={() => {
+                          activateSubscription(
+                            subId,
+                            subName,
+                            subWebsite,
+                            subFrequency,
+                            stripeCustomerId
+                          );
+                        }}
+                      >
+                        Aktivovat předplatné
+                      </button>
+                      <button
+                        className="font-semibold text-textDark w-full hover:text-white hover:border-deleteButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton  cursor-pointer"
+                        onClick={() => {
+                          setToggleDelete(true);
+                        }}
+                      >
+                        Smazat předplatné
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        className="font-semibold text-textDark w-full hover:text-white hover:border-deleteButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-red-500  cursor-pointer"
+                        onClick={() => {
+                          customerPortal(stripeCustomerId);
+                        }}
+                      >
+                        Deaktivovat předplatné
+                      </button>
+                      <p>
+                        Pokud chcete předplatné smazat, musíte jej nejprve
+                        deaktivovat
+                      </p>
+                    </>
                   )}
                 </div>
               </div>
@@ -405,11 +427,21 @@ export function Subscriptions({ setActiveButton }) {
             </div>
 
             <div className="flex gap-5 items-center justify-center xl:justify-start">
-              <img
-                src={"https://" + subWebsite + "/favicon.ico"}
-                alt="icon"
-                className="xl:block hidden max-h-8"
-              />
+              <a
+                href={"https://" + subWebsite}
+                target="_blank"
+                className="xl:w-10 flex justify-center"
+              >
+                <img
+                  src={"https://" + subWebsite + "/favicon.ico"}
+                  alt="icon"
+                  className="xl:block hidden max-h-8 max-w-8"
+                  onError={(e) => {
+                    e.target.src = shopLogo;
+                  }}
+                />
+              </a>
+
               <h2 className="text-2xl text-textDark font-bold xl:mr-5 mt-[-8px]">
                 {subName}
               </h2>
@@ -433,14 +465,14 @@ export function Subscriptions({ setActiveButton }) {
                     stripeCustomerId
                   );
                 }}
-                className="text-textDark hover:shadow-md cursor-pointer p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad border border-slate-100 hover:border-quad"
+                className="text-textDark hover:text-textButton hover:shadow-md cursor-pointer p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad border border-slate-100 hover:border-quad"
               >
                 Aktivovat
               </button>
             )}
             <Link
               to={editURL}
-              className=" text-textDark p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-2 items-center border border-slate-100 hover:border-quad"
+              className=" text-textDark hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-2 items-center border border-slate-100 hover:border-quad"
             >
               <FontAwesomeIcon icon={faPen} />
               Upravit
@@ -453,7 +485,7 @@ export function Subscriptions({ setActiveButton }) {
               >
                 <FontAwesomeIcon
                   icon={faChevronUp}
-                  className="text-2xl border hover:shadow-md hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2  transition-all ease-in-out cursor-pointer"
+                  className="text-2xl border hover:text-textButton hover:shadow-md hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2  transition-all ease-in-out cursor-pointer"
                 />
               </button>
             ) : (
@@ -464,7 +496,7 @@ export function Subscriptions({ setActiveButton }) {
               >
                 <FontAwesomeIcon
                   icon={faChevronDown}
-                  className="text-2xl border hover:shadow-md hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2 transition-all ease-in-out cursor-pointer"
+                  className="text-2xl border hover:text-textButton hover:shadow-md hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2 transition-all ease-in-out cursor-pointer"
                 />
               </button>
             )}
@@ -549,7 +581,7 @@ export function Subscriptions({ setActiveButton }) {
           <h1 className="text-3xl font-bold text-textDark">Vaše předplatné</h1>
           <Link
             to="/app/form"
-            className="bg-quad text-center shadow-md shadow-slate-200 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary"
+            className="bg-quad text-center shadow-md text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary"
           >
             Nové předplatné
           </Link>

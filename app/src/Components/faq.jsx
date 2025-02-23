@@ -21,14 +21,11 @@ export function Faq() {
         >
           <div className="flex justify-between items-center gap-3">
             <p className="text-lg font-semibold ">{text}</p>
-            <button className="w-10 h-10 bg-quad rounded-md cursor-pointer">
+            <button className="w-10 h-10 bg-quad shadow-md text-textButton rounded-md cursor-pointer">
               {problemToggle == index ? (
-                <FontAwesomeIcon icon={faChevronUp} className="text-textDark" />
+                <FontAwesomeIcon icon={faChevronUp} className="" />
               ) : (
-                <FontAwesomeIcon
-                  icon={faChevronDown}
-                  className="text-textDark"
-                />
+                <FontAwesomeIcon icon={faChevronDown} className="" />
               )}
             </button>
           </div>
@@ -57,7 +54,7 @@ export function Faq() {
           </h1>
           <Link
             to="/"
-            className="bg-quad hidden xl:block text-center p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+            className="bg-quad text-textButton hidden xl:block text-center p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
           >
             Zpět
           </Link>

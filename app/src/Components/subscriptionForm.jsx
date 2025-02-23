@@ -136,7 +136,7 @@ export function SubscriptionForm() {
     return (
       <form className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg">
         <button
-          className="bg-quad self-start p-3 text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+          className="bg-quad text-textButton self-start p-3 text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
           onClick={(e) => {
             inputUserInfo(e);
           }}
@@ -246,14 +246,22 @@ export function SubscriptionForm() {
           </div>
         </fieldset>
         <div className="flex flex-col items-center gap-5">
-          <button
-            className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
-            onClick={(e) => {
-              handleNext(e);
-            }}
-          >
-            Pokračovat <FontAwesomeIcon icon={faArrowRight} />
-          </button>
+          <div className="flex gap-3">
+            <Link
+              to="/"
+              className="bg-quad text-textButton mb-5 xl:mb-0 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+            >
+              Zrušit
+            </Link>
+            <button
+              className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+              onClick={(e) => {
+                handleNext(e);
+              }}
+            >
+              Pokračovat <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+          </div>
 
           {error && (
             <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
@@ -373,7 +381,7 @@ export function SubscriptionForm() {
                 placeholder="Moje první předplatné"
               ></input>
             </label>
-            <div className="text-md font-semibold text-textDark flex items-center gap-3 bg-quad xl:p-2 p-4 rounded-lg">
+            <div className="text-md font-semibold text-textButton shadow-lg flex items-center gap-3 bg-quad xl:p-2 p-4 rounded-lg">
               <div className="hidden xl:block">
                 <FontAwesomeIcon
                   icon={faTriangleExclamation}
@@ -477,7 +485,7 @@ export function SubscriptionForm() {
         <div className="flex flex-col gap-5 items-center">
           <div className="flex gap-3">
             <button
-              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+              className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
                 const object = {
@@ -498,7 +506,7 @@ export function SubscriptionForm() {
               <FontAwesomeIcon icon={faArrowLeft} /> Zpět
             </button>
             <button
-              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+              className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               onClick={(e) => {
                 handleNext(e);
               }}
@@ -677,7 +685,7 @@ export function SubscriptionForm() {
         <div className="flex flex-col items-center gap-5">
           <div className="flex gap-3">
             <button
-              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+              className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               onClick={() => {
                 setStep(2);
                 handleBack();
@@ -687,7 +695,7 @@ export function SubscriptionForm() {
             </button>
             <button
               disabled={isLoading}
-              className="bg-quad p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+              className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               onClick={(e) => {
                 e.preventDefault();
 
@@ -791,7 +799,7 @@ export function SubscriptionForm() {
           </h1>
           <Link
             to="/"
-            className="bg-quad mb-5 xl:mb-0 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+            className="bg-quad text-textButton mb-5 xl:mb-0 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
           >
             Zpět
           </Link>
