@@ -11,7 +11,7 @@ export function SubscriptionMissing() {
       </h2>
       <Link
         to={"/app/form"}
-        className="bg-quad shadow-md shadow-slate-200 mt-3 mb-5 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary"
+        className="bg-quad text-textButton shadow-md shadow-slate-200 mt-3 mb-5 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary"
       >
         Založit předplatné
       </Link>
@@ -20,7 +20,7 @@ export function SubscriptionMissing() {
       </h2>
       <Link
         to={"/app/navody"}
-        className="bg-quad shadow-md shadow-slate-200 mt-5 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary"
+        className="bg-quad text-textButton shadow-md shadow-slate-200 mt-5 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary"
       >
         Jak to funguje?
       </Link>
