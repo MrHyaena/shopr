@@ -324,7 +324,7 @@ export function Subscriptions({ setActiveButton }) {
                         Aktivovat předplatné
                       </button>
                       <button
-                        className="font-semibold text-textDark w-full hover:text-white hover:border-deleteButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-deleteButton  cursor-pointer"
+                        className="font-semibold bg-white hover:bg-red-500 text-textDark w-full hover:text-white  text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out  cursor-pointer"
                         onClick={() => {
                           setToggleDelete(true);
                         }}
