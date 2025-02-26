@@ -28,6 +28,10 @@ export default function Faq() {
               <span className="text-quad">info@shopr.cz</span>.
             </p>
           </div>
+        </div>
+      </div>
+      <div className="bg-zinc-50 flex justify-center items-start py-30">
+        <div className="max-w-wrapper flex flex-col items-center justify-start gap-10">
           <div className="grid grid-cols-3 gap-20">
             <div className="col-span-1 min-w-[400px]">
               <div className="sticky top-40">
