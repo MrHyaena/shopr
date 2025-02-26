@@ -99,7 +99,7 @@ export default function Home() {
           <Image
             src={heroImgTwo}
             alt="hero"
-            className=" col-span-2 object-cover object-left animate-fall-left-noBounce"
+            className=" col-span-2 object-cover object-left animate-fall-left-noBounce [clip-path:polygon(10%_0%,100%_0%,100%_100%,0%_100%,20%_50%)]"
           />
         </div>
       </>
