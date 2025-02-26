@@ -16,6 +16,9 @@ import {
   faUmbrellaBeach,
 } from "@fortawesome/free-solid-svg-icons";
 import PriceDescription from "./components/Price";
+import ReviewOne from "./components/ReviewOne";
+import ReviewGrid from "./components/ReviewGrid";
+import heroImgTwo from "./_img/hero.jpg";
 
 //Metadata
 export const metadata = {
@@ -33,7 +36,7 @@ export default function Home() {
             <div className="grid grid-cols-2 items-center gap-5">
               <div className="flex flex-col items-start justify-center h-full gap-5">
                 <h1 className="z-2">
-                  Založte si předplatné
+                  Pravidelné objednávky
                   <span className="text-quad">
                     {" "}
                     <br />
@@ -48,19 +51,12 @@ export default function Home() {
                   se nebudete muset dívat na prázdné balení od fitness
                   suplementů, kosmetiky, drogerie nebo čehokoliv jiného.
                 </p>
-                <div className="flex z-2 bg-white gap-5 justify-start border border-slate-200 rounded-lg p-2">
-                  <input
-                    type="email"
-                    placeholder="Zadejte email"
-                    className="border-slate-300 p-3"
-                  />
-                  <button className="bg-quad shadow-md cursor-pointer rounded-md px-4 py-3 text-textButton font-bold text-xl hover:scale-102 transition-all ease-in-out">
-                    Založit uživatelský účet
-                  </button>
-                </div>
+                <button className="bg-quad shadow-md cursor-pointer rounded-md px-4 py-3 text-textButton font-bold text-xl hover:scale-102 transition-all ease-in-out">
+                  Založit uživatelský účet
+                </button>
               </div>
 
-              <div className="">
+              <div className="justify-self-center">
                 <Image
                   src={heroImg}
                   alt="hero-image"
@@ -75,10 +71,45 @@ export default function Home() {
     );
   }
 
+  function HeroSectionTwo() {
+    return (
+      <>
+        <div className="xl:min-h-[900px] grid grid-cols-5 min-h-screen items-stretch justify-center overflow-x-hidden">
+          <div className="flex flex-col items-start justify-center h-full gap-5 p-24 col-span-3 max-w-[900px] justify-self-center animate-scale-up-noBounce-delay">
+            <h1 className="z-2">
+              Pravidelné objednávky
+              <span className="text-quad">
+                {" "}
+                <br />
+                na jakémkoliv e-shopu <br />
+              </span>{" "}
+              jen chcete
+            </h1>
+
+            <p className="text-xl font-semibold text-textDark z-2">
+              Pravidelná objednávka ze všech e-shopů na internetu. Už nikdy se
+              nebudete muset dívat na prázdné balení od fitness suplementů,
+              kosmetiky, drogerie nebo čehokoliv jiného.
+            </p>
+            <button className="bg-quad shadow-md cursor-pointer rounded-md px-4 py-3 text-textButton font-bold text-xl hover:scale-102 transition-all ease-in-out">
+              Založit uživatelský účet
+            </button>
+          </div>
+
+          <Image
+            src={heroImgTwo}
+            alt="hero"
+            className=" col-span-2 object-cover object-left animate-fall-left-noBounce"
+          />
+        </div>
+      </>
+    );
+  }
+
   function Benefits() {
     return (
       <>
-        <div className="flex items-center justify-center py-40">
+        <div className="flex items-center justify-center py-40 pb-50">
           <div className="max-w-wrapper flex flex-col items-center justify-start gap-10">
             <div className="mx-auto text-center flex flex-col items-center">
               <h4 className="headingSmall">Co z toho budete mít Vy</h4>
@@ -92,7 +123,7 @@ export default function Home() {
               </p>
             </div>
             <div className="flex justify-center gap-10">
-              <div className="bg-primary shadow-lg p-10 rounded-lg flex flex-col items-center justify-center max-w-[300px] gap-5">
+              <div className="bg-primary shadow-[5px_5px_0px_0px] shadow-quad p-10 rounded-lg flex flex-col items-center justify-center max-w-[300px] gap-5">
                 <FontAwesomeIcon
                   icon={faClock}
                   className="text-white text-5xl"
@@ -106,7 +137,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div className="bg-primary shadow-lg relative top-10 p-10 rounded-lg flex flex-col items-center justify-center max-w-[300px] gap-5">
+              <div className="bg-primary shadow-[5px_5px_0px_0px] shadow-quad relative top-10 p-10 rounded-lg flex flex-col items-center justify-center max-w-[300px] gap-5">
                 <FontAwesomeIcon
                   icon={faMoneyBill1}
                   className="text-white text-5xl"
@@ -120,7 +151,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div className="bg-primary p-10 shadow-lg rounded-lg flex flex-col items-center justify-center max-w-[300px] gap-5">
+              <div className="bg-primary p-10 shadow-[5px_5px_0px_0px] shadow-quad rounded-lg flex flex-col items-center justify-center max-w-[300px] gap-5">
                 <FontAwesomeIcon
                   icon={faUmbrellaBeach}
                   className="text-white text-5xl"
@@ -134,7 +165,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div className="bg-primary shadow-lg relative top-10 p-10 rounded-lg flex flex-col items-center justify-center max-w-[300px] gap-5">
+              <div className="bg-primary shadow-[5px_5px_0px_0px] shadow-quad relative top-10 p-10 rounded-lg flex flex-col items-center justify-center max-w-[300px] gap-5">
                 <FontAwesomeIcon
                   icon={faBoxesStacked}
                   className="text-white text-5xl"
@@ -178,7 +209,7 @@ export default function Home() {
             </div>
             <div className="bg-white self-stretch flex justify-center py-10">
               <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
-                <div className="self-center">
+                <div className="self-center justify-self-center">
                   <Image
                     src={supplements}
                     alt="supplements"
@@ -187,7 +218,7 @@ export default function Home() {
                     className="rounded-lg shadow-lg"
                   />
                 </div>
-                <div className="flex flex-col gap-5 justify-center">
+                <div className="flex flex-col gap-5 justify-center items-start">
                   <div>
                     <h5>Doplňky stravy</h5>
                     <h3>Fitness suplementy</h3>
@@ -203,12 +234,15 @@ export default function Home() {
                     Každému z nás se již určitě stalo, že suplement došel. Co
                     potom?
                   </p>
+                  <button className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold py-2 px-3 text-textButton cursor-pointer">
+                    Založit účet
+                  </button>
                 </div>
               </div>
             </div>
             <div className="bg-slate-50 self-stretch flex justify-center py-10">
               <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
-                <div className="flex flex-col gap-5 justify-center">
+                <div className="flex flex-col gap-5 justify-center items-start">
                   <div>
                     <h5>Mazlíčci</h5>
                     <h3>Zvířecí žrádlo a pamlsky</h3>
@@ -222,8 +256,11 @@ export default function Home() {
                     My můžeme zajistit, že pro vašeho miláčka budete mít vždy
                     plnou skříň dobrot.
                   </p>
+                  <button className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold py-2 px-3 text-textButton cursor-pointer">
+                    Založit účet
+                  </button>
                 </div>
-                <div className="self-center">
+                <div className="self-center justify-self-center">
                   <Image
                     src={dogFood}
                     alt="pets"
@@ -236,7 +273,7 @@ export default function Home() {
             </div>
             <div className="bg-white self-stretch flex justify-center py-10">
               <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
-                <div className="self-center">
+                <div className="self-center justify-self-center">
                   <Image
                     src={supplements}
                     alt="supplements"
@@ -245,7 +282,7 @@ export default function Home() {
                     className="rounded-lg shadow-lg"
                   />
                 </div>
-                <div className="flex flex-col gap-5 justify-center">
+                <div className="flex flex-col gap-5 justify-center items-start">
                   <div>
                     <h5>Doplňky stravy</h5>
                     <h3>Fitness suplementy</h3>
@@ -261,12 +298,15 @@ export default function Home() {
                     Každému z nás se již určitě stalo, že suplement došel. Co
                     potom?
                   </p>
+                  <button className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold py-2 px-3 text-textButton cursor-pointer">
+                    Založit účet
+                  </button>
                 </div>
               </div>
             </div>
             <div className="bg-slate-50 self-stretch flex justify-center py-10">
               <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
-                <div className="flex flex-col gap-5 justify-center">
+                <div className="flex flex-col gap-5 justify-center items-start">
                   <div>
                     <h5>Domácnost</h5>
                     <h3>Čistící prostředky</h3>
@@ -277,8 +317,11 @@ export default function Home() {
                     regenerací, imunitou a dalšími věcmi. Vitamíny a jiné látky
                     se ale musí brát pravidelně.
                   </p>
+                  <button className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold py-2 px-3 text-textButton cursor-pointer">
+                    Založit účet
+                  </button>
                 </div>
-                <div className="self-center">
+                <div className="self-center justify-self-center">
                   <Image
                     src={drugs}
                     alt="drugs"
@@ -297,13 +340,12 @@ export default function Home() {
 
   return (
     <>
-      <HeroSection />
+      <HeroSectionTwo />
       <BlackDivider
         text={"Odstresujte hlavu a nechte pravidelné nákupy na nás"}
       />
-      <Benefits />
+      <Benefits /> <ReviewGrid />
       <WhyToTry />
-
       <PriceDescription
         subHeading={"Jedna cena, žádné komplikace"}
         description={

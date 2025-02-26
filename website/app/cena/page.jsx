@@ -1,7 +1,7 @@
 import React from "react";
 import Newsletter from "../components/Newsletter";
-import Question from "../components/Questions";
 import PriceDescription from "../components/Price";
+import QuestionShow from "../components/QuestionsShow";
 
 export const metadata = {
   title: "Shopr - Cena",
@@ -40,38 +40,38 @@ export default function Price() {
             <h3>Jak to s platbami funguje?</h3>
           </div>
 
-          <Question
-            heading={"Můžu platbu kdykoliv zrušit?"}
+          <QuestionShow
+            question={"Můžu platbu kdykoliv zrušit?"}
             answer={
               "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est facere magnam quam voluptatem nesciunt autem fugiat debitis aliquam soluta nobis asperiores commodi adipisci illum sint reiciendis, voluptates sequi dignissimos voluptatibus?"
             }
           />
-          <Question
-            heading={"Je omezený počet předplatných?"}
+          <QuestionShow
+            question={"Je omezený počet předplatných?"}
             answer={
               "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est facere magnam quam voluptatem nesciunt autem fugiat debitis aliquam soluta nobis asperiores commodi adipisci illum sint reiciendis, voluptates sequi dignissimos voluptatibus?"
             }
           />
-          <Question
-            heading={"Kdo spravuje mé platební údaje?"}
+          <QuestionShow
+            question={"Kdo spravuje mé platební údaje?"}
             answer={
               "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est facere magnam quam voluptatem nesciunt autem fugiat debitis aliquam soluta nobis asperiores commodi adipisci illum sint reiciendis, voluptates sequi dignissimos voluptatibus?"
             }
           />
-          <Question
-            heading={"Strhávají se platby automaticky?"}
+          <QuestionShow
+            question={"Strhávají se platby automaticky?"}
             answer={
               "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est facere magnam quam voluptatem nesciunt autem fugiat debitis aliquam soluta nobis asperiores commodi adipisci illum sint reiciendis, voluptates sequi dignissimos voluptatibus?"
             }
           />
-          <Question
-            heading={"Můžu kdykoliv požádat o smazání údajů?"}
+          <QuestionShow
+            question={"Můžu kdykoliv požádat o smazání údajů?"}
             answer={
               "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est facere magnam quam voluptatem nesciunt autem fugiat debitis aliquam soluta nobis asperiores commodi adipisci illum sint reiciendis, voluptates sequi dignissimos voluptatibus?"
             }
           />
-          <Question
-            heading={"Jak se počítá celková částka?"}
+          <QuestionShow
+            question={"Jak se počítá celková částka?"}
             answer={
               "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est facere magnam quam voluptatem nesciunt autem fugiat debitis aliquam soluta nobis asperiores commodi adipisci illum sint reiciendis, voluptates sequi dignissimos voluptatibus?"
             }
