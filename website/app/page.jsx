@@ -79,7 +79,7 @@ export default function Home() {
   function HeroSectionTwo() {
     return (
       <>
-        <div className="xl:min-h-[900px] mt-10 grid grid-cols-5 min-h-screen items-stretch justify-center overflow-x-hidden">
+        <div className="xl:min-h-[900px] pt-10 grid grid-cols-5 min-h-screen items-stretch justify-center overflow-x-hidden">
           <div className="flex flex-col items-start justify-center h-full gap-5 p-24 col-span-3 max-w-[900px] justify-self-center animate-scale-up-noBounce-delay">
             <h1 className="z-2">
               Předplatné
@@ -115,7 +115,7 @@ export default function Home() {
           <Image
             src={heroImgTwo}
             alt="hero"
-            className=" col-span-2 object-cover object-left animate-fall-left-noBounce [clip-path:polygon(10%_0%,100%_0%,100%_100%,0%_100%,20%_50%)]"
+            className=" col-span-2 object-cover object-left animate-fall-left-noBounce [clip-path:polygon(0%_0%,100%_0%,100%_100%,0%_100%,15%_50%)]"
           />
         </div>
       </>

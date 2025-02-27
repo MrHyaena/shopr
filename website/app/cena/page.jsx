@@ -2,6 +2,7 @@ import React from "react";
 import Newsletter from "../components/Newsletter";
 import PriceDescription from "../components/PriceDescription";
 import QuestionShow from "../components/QuestionsShow";
+import Link from "next/link";
 
 export const metadata = {
   title: "Shopr - Cena",
@@ -13,9 +14,9 @@ export default function Price() {
     <>
       <div className="pt-30 bg-linear-150 from-0% to-40% from-violet-100 to-white">
         <PriceDescription
-          subHeading={"Platba jen když používáte!"}
+          subHeading={"Platíte jen za aktivní předplatné!"}
           description={
-            "Platbu si z karty strháváme pouze za vyřízení objednávky v aktivním předplatném. Do té doby je vše plně zdarma."
+            "Platbu si z karty strháváme pouze za vyřízení objednávky v aktivním předplatném. Do té doby je vše plně zdarma. Klidně proto otestujte uživatelský účet a založte předplatné, které bude čekat na aktivaci."
           }
         />
       </div>
@@ -23,18 +24,15 @@ export default function Price() {
       <div className="flex flex-col justify-center items-center py-10 bg-primary">
         <div className="max-w-wrapper flex flex-col items-center justify-start">
           <p className="text-center text-textLight">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-            neque? Maxime ea totam voluptas amet fuga minima velit, saepe
-            architecto a nostrum nobis nemo sapiente hic harum odit molestias
-            blanditiis! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Soluta et numquam repellendus totam explicabo error quidem ipsa quo,
-            quaerat, accusantium, quae voluptates suscipit ex similique. Harum
-            eius tempora optio officiis.
+            Jediná platba, kterou u nás zažijte, je za aktivní předplatné. Za
+            každou vyřízenou objednávku, kterou v jakémkoliv předplatném
+            uděláme, se z karty strhne cena výše. Za týdenní předplatné to bude
+            čtyřikrát týdně, v čtvrtletním zase jednou za tři měsíce.
           </p>
         </div>
       </div>
       <div className="flex flex-col justify-center items-center py-30">
-        <div className="max-w-wrapper grid grid-cols-2 items-center justify-start gap-20">
+        <div className="max-w-wrapper grid grid-cols-2 items-start justify-start gap-20">
           <div className="flex flex-col justify-center items-center gap-2 text-center col-span-2">
             <h4>Otázky</h4>
             <h3>Jak to s platbami funguje?</h3>
@@ -43,39 +41,48 @@ export default function Price() {
           <QuestionShow
             question={"Můžu platbu kdykoliv zrušit?"}
             answer={
-              "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est facere magnam quam voluptatem nesciunt autem fugiat debitis aliquam soluta nobis asperiores commodi adipisci illum sint reiciendis, voluptates sequi dignissimos voluptatibus?"
+              "Samozřejmě! Předplatné lze kdykoliv deaktivovat, čímž se přeruší všechny následující pravidelné platby. Předplatné pak můžete kdykoliv znovu aktivovat a navázat na předchozí platby."
             }
           />
           <QuestionShow
             question={"Je omezený počet předplatných?"}
             answer={
-              "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est facere magnam quam voluptatem nesciunt autem fugiat debitis aliquam soluta nobis asperiores commodi adipisci illum sint reiciendis, voluptates sequi dignissimos voluptatibus?"
+              "Předplatných si můžete vytvořit kolik jenom potřebujete. To stejné pak platí i na ty aktivní, nicméně za ty si již z Vložené karty strháváme částku ve stanoveném intervalu."
             }
           />
           <QuestionShow
             question={"Kdo spravuje mé platební údaje?"}
             answer={
-              "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est facere magnam quam voluptatem nesciunt autem fugiat debitis aliquam soluta nobis asperiores commodi adipisci illum sint reiciendis, voluptates sequi dignissimos voluptatibus?"
+              "Abychom zajistili co největší bezpečí Vašich platebních údajů, řešíme jejich správu a platby skrze platformu Stripe. Služba Stripe běží po celém světě a jedná se o jednu z největších služeb tohoto typu na trhu."
             }
           />
           <QuestionShow
             question={"Strhávají se platby automaticky?"}
             answer={
-              "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est facere magnam quam voluptatem nesciunt autem fugiat debitis aliquam soluta nobis asperiores commodi adipisci illum sint reiciendis, voluptates sequi dignissimos voluptatibus?"
+              "Ano, platby se strhávají automaticky v pravidelných intervalech, které se shodují s intervaly objednávek. Pokud si tedy nastavíte objednávky jednou za měsíc, pak se platba strhne vždy jednou za měsíc."
             }
           />
           <QuestionShow
             question={"Můžu kdykoliv požádat o smazání údajů?"}
             answer={
-              "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est facere magnam quam voluptatem nesciunt autem fugiat debitis aliquam soluta nobis asperiores commodi adipisci illum sint reiciendis, voluptates sequi dignissimos voluptatibus?"
+              "Máte na to plné právo. Stačí nám napsat na emailovou adresu info@shopr.cz a my to obratem zařídíme. V tu chvíli se nicméně deaktivují všechna vaše předplatná."
             }
           />
           <QuestionShow
             question={"Jak se počítá celková částka?"}
             answer={
-              "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est facere magnam quam voluptatem nesciunt autem fugiat debitis aliquam soluta nobis asperiores commodi adipisci illum sint reiciendis, voluptates sequi dignissimos voluptatibus?"
+              "Částka je vždy stejná, nicméně se liší prodlevy mezi jednotlivými platbami. Ta je nastavená podle typu předplatného. Jestliže budete mít aktivované předplatné jednou za dva týdny, pak se platba z karty strhne jednou za dva týdny. Částky se nesčítají, jdou vždy samostatně. To Vám zajišťuje možnost kdykoliv předplatné zrušit a neřešit pak vrácení částky, která se nevyužila."
             }
           />
+          <div className="flex flex-col justify-center items-center gap-10 text-center col-span-2">
+            <h3>Pokud máte další otázky, můžete se podívat do našeho FAQ</h3>
+            <Link
+              href="/otazky"
+              className="bg-quad shadow-md cursor-pointer rounded-md px-4 py-3 text-textButton font-bold text-xl hover:scale-105 transition-all ease-in-out"
+            >
+              Založit účet ZDARMA
+            </Link>
+          </div>
         </div>
       </div>
       <Newsletter />

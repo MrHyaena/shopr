@@ -163,7 +163,7 @@ export default function Faq() {
                   <QuestionToggle
                     question={"Můžu platby kdykoliv zrušit?"}
                     answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                      "Samozřejmě! Předplatné lze kdykoliv deaktivovat, čímž se přeruší všechny následující pravidelné platby. Předplatné pak můžete kdykoliv znovu aktivovat a navázat na předchozí platby."
                     }
                   />
                   <QuestionToggle
@@ -209,7 +209,7 @@ export default function Faq() {
                   <QuestionToggle
                     question={"Je omezený počet předplatných?"}
                     answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                      "Předplatných si můžete vytvořit kolik jenom potřebujete. To stejné pak platí i na ty aktivní, nicméně za ty si již z Vložené karty strháváme částku ve stanoveném intervalu."
                     }
                   />{" "}
                   <QuestionToggle

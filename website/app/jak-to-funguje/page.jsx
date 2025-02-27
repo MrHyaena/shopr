@@ -11,14 +11,14 @@ import ReviewOne from "../components/ReviewOne";
 export default function Howto() {
   return (
     <>
-      <div className="flex items-center justify-center py-40">
+      <div className="flex items-center justify-center pt-30 pb-20">
         <div className="max-w-wrapper flex flex-col items-center justify-start gap-10">
           <div className="mx-auto text-center flex flex-col items-center">
             <h4 className="headingSmall">Jak to funguje</h4>
             <h2 className="mt-2 my-5">
               Vyznaváme jednoduchost, takže nehledejte nic komplikovaného
             </h2>
-            <p className="max-w-[600px] font-medium text-textDark text-lg mb-5">
+            <p className="max-w-[600px] font-medium text-textDark text-lg">
               Naše předplatné má především usnadňovat životy. Dává tedy smysl,
               abychom udělali naši službu co možná nejjednodušší. Nemáte se
               proto čeho obávat, a už vůbec ne nějakého složitého nastavování.
@@ -33,7 +33,7 @@ export default function Howto() {
         <div className="max-w-wrapper flex flex-col items-center justify-start gap-10">
           <div>
             <div className="grid grid-cols-[1fr_2px_1fr] max-w-[1000px] gap-10">
-              <div className=" bg-white border border-slate-200 my-10 rounded-lg shadow-lg">
+              <div className=" bg-white border border-slate-200 my-10 rounded-lg shadow-lg mb-20">
                 <h4 className="bg-primary text-white p-10 rounded-t-lg border border-slate-200">
                   Založíte účet
                 </h4>
@@ -56,7 +56,7 @@ export default function Howto() {
                 </button>
               </div>
               <div className="w-1 bg-quad"></div>
-              <div className=" flex flex-col py-10">
+              <div className=" flex flex-col py-10 mb-20">
                 <div className="sticky top-80 flex flex-col items-center">
                   <FontAwesomeIcon
                     icon={faFileInvoice}
@@ -70,7 +70,7 @@ export default function Howto() {
               </div>
             </div>
             <div className="grid grid-cols-[1fr_2px_1fr] max-w-[1000px] gap-10">
-              <div className=" flex flex-col p-10">
+              <div className=" flex flex-col p-10 mb-20">
                 <div className="sticky top-80 flex flex-col items-center">
                   <FontAwesomeIcon
                     icon={faSliders}
@@ -81,7 +81,7 @@ export default function Howto() {
                 </div>
               </div>
               <div className="w-1 bg-quad"></div>
-              <div className=" bg-white border border-slate-200 my-10 rounded-lg shadow-lg">
+              <div className=" bg-white border border-slate-200 my-10 rounded-lg shadow-lg mb-20">
                 <h4 className="bg-primary text-white p-10 rounded-t-lg border border-slate-200">
                   Vytvoříte předplatné
                 </h4>
@@ -100,7 +100,7 @@ export default function Howto() {
               </div>
             </div>
             <div className="grid grid-cols-[1fr_2px_1fr] max-w-[1000px] gap-10">
-              <div className=" bg-white border border-slate-200 my-10 rounded-lg shadow-lg">
+              <div className=" bg-white border border-slate-200 my-10 rounded-lg shadow-lg  mb-20">
                 <h4 className="bg-primary text-white p-10 rounded-t-lg border border-slate-200">
                   Aktivujete předplatné
                 </h4>
@@ -119,7 +119,7 @@ export default function Howto() {
                 </div>
               </div>
               <div className="w-1 bg-quad"></div>
-              <div className=" flex flex-col p-10">
+              <div className=" flex flex-col p-10 mb-20">
                 <div className="sticky top-80 flex flex-col items-center">
                   <FontAwesomeIcon
                     icon={faCheckToSlot}
@@ -155,7 +155,6 @@ export default function Howto() {
           </div>
         </div>
       </div>
-      <ReviewOne />
     </>
   );
 }
