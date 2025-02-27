@@ -136,49 +136,64 @@ export default function About() {
         <div className="max-w-wrapper flex flex-col items-center justify-start">
           <div className="flex flex-col items-center py-10">
             <h4>O nás</h4>
-            <h2 className="mt-2 my-5">Aplikace z našich vlastních potřeb</h2>
+            <h2 className="mt-2 my-5">
+              Aplikace vycházející z našich vlastních potřeb
+            </h2>
           </div>
 
           <div className="grid grid-cols-2 gap-10">
             <p className="font-medium text-textDark text-lg col-span-2">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur
-              dolores cumque maxime hic cum repellendus omnis esse nam
-              laudantium minima soluta ex tempora debitis, harum deleniti
-              dolorum incidunt delectus quos?Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Pariatur dolores cumque maxime hic
-              cum repellendus omnis esse nam laudantium minima soluta ex tempora
-              debitis, harum deleniti dolorum incidunt delectus quos?
+              Rádi bychom se Vám také trochu představili. Koneckonců není špatně
+              vědět o základech, na kterých služba stojí. Takže kde jsou naše
+              kořeny? Můžete je hledat přímo v posilovně. Zvedání těžkých věcí
+              stále dokola je jeden z našich koníčků, který nás udržuje v
+              provozu a kondici. Společně s tím se lae také zabýváme stravou a
+              jejími doplňky, které mohou podporovat celkovou vitalitu a výkon.
+              Když berete takový suplement, především ty z různých bylinek
+              apod., je potřeba vydržet poměrně dlouhou dobu, než začnou něco
+              dělat. A zde přichází problém.
             </p>
             <Image
               src={img}
               style={{ objectFit: "cover" }}
               alt="story"
-              className="rounded-lg shadow-lg max-h-[400px] w-auto self-center"
+              className="rounded-md shadow-lg max-h-[400px] w-auto self-center object-cover"
               width="auto"
               height="auto"
             />
             <div className="flex flex-col gap-5">
               <p className="max-w-[600px] font-medium text-textDark text-lg">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Pariatur dolores cumque maxime hic cum repellendus omnis esse
-                nam laudantium minima soluta ex tempora debitis, harum deleniti
-                dolorum incidunt delectus quos? Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Similique provident error facilis
-                odit consequatur aut dolorum explicabo maxime, ipsam ad
-                molestiae voluptatem excepturi quidem totam eaque, reiciendis
-                quia placeat vero?
+                Kromě nějakých svalů máme totiž také problém s pravidelnými
+                nákupy. Snažíme se být plně investovaní v naší práci a tak nějak
+                už nezbývala mentální kapacita a pamět na dokupování potřebných
+                věcí. Vždy jsme se k tomu dostali i týden a více poté, co nám
+                daná látka došla. A to je, jak si jistě umíte předtsavit, dost
+                pozdě.
               </p>
               <p className="max-w-[600px] font-medium text-textDark text-lg">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Pariatur dolores cumque maxime hic cum repellendus omnis esse
-                nam laudantium minima soluta ex tempora debitis, harum deleniti
-                dolorum incidunt delectus quos? Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Similique provident error facilis
-                odit consequatur aut dolorum explicabo maxime, ipsam ad
-                molestiae voluptatem excepturi quidem totam eaque, reiciendis
-                quia placeat vero?
+                Na trhu jsme nenašli žádnou službu, která by tohle řešila.
+                E-shopy zaměřené na suplementy standardně nákupy skrze
+                předplatné nenabízejí. Rozhodli jsme se, že to zkusíme změnit a
+                vytvoříme službu, která by s tím pomáhala nejen nám, ale i
+                ostatním lidem se stejnými problému. V průběhu jsme si pak už
+                domysleli, že by to šlo rozšířit na všechno možné - léky, krmení
+                pro zvířata, materiál pro různé výtvarné koníčky, kávu a mnoho
+                dalšího.
               </p>
             </div>
+            <p className="font-medium text-textDark text-lg col-span-2">
+              Doufáme, že se Vám s námi bude spolupracovat dobře. Snažíme se
+              službu neustále zlepšovat a posouvat kupředu, avšak ne vždy to jde
+              tak rychle, jak bychom si jen přáli. To už je ale život a určitě
+              to všichni známe. Už teď asi nezbývá nic jiného, než si navzájem
+              popřát hodně štěstí a dát Vám poděkování za to, že nám věříte.
+            </p>
+            <p className="font-medium text-textDark text-lg col-span-2">
+              Takže...
+            </p>
+            <h3 className="mt-2 my-5 col-span-2 text-center mb-20">
+              Děkujeme, budeme se na Vás těšit!
+            </h3>
           </div>
         </div>
       </div>
