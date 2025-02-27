@@ -2,6 +2,13 @@ import React from "react";
 import Image from "next/image";
 import img from "./image.jpg";
 
+//Metadata
+export const metadata = {
+  title: "Shopr: O nás",
+  description:
+    "Příběhy jsou vždy důležité. My jsme se rozhodli, že Vám odprezentujeme i ten náš.",
+};
+
 export default function About() {
   function WhyToTry() {
     return (

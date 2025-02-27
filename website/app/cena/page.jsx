@@ -5,8 +5,9 @@ import QuestionShow from "../components/QuestionsShow";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Shopr - Cena",
-  description: "Nice Description",
+  title: "Shopr: Cena",
+  description:
+    "Ceník naší aplikace Shopr. Platíte pouze za vyplněnou objednávku v aktivním předplatném. Vše ostatní je zdarma.",
 };
 
 export default function Price() {

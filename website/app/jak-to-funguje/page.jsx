@@ -8,6 +8,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //Images
 import ReviewOne from "../components/ReviewOne";
 
+//Metadata
+export const metadata = {
+  title: "Shopr: Jak to funguje",
+  description:
+    "Jsme jednoduchá a efektivní služba. Od založení účtu po vyplnění předplatného to může trvat i méně než 10 minut.",
+};
+
 export default function Howto() {
   return (
     <>
