@@ -101,25 +101,25 @@ export default function Faq() {
                   <QuestionToggle
                     question={"Kdo nese odpovědnost za převzetí objednávky?"}
                     answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                      "Naše služba je založená jako zrpostředkovatel objednávek na jiných e-shopech vaším jménem. Výsledný vztah je tedy mezi Vámi a e-shopem, respektive firmou provozující daný e-shop. Naše služba nese odpovědnost pouze za špatně vyplněnou objednávku."
                     }
                   />{" "}
                   <QuestionToggle
                     question={"Co když objednávku nepřevezmu?"}
                     answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                      "Vztah týkající se objednávky je mezi Vámi a e-shopem. Jakékoliv potenciální pokuty plynoucí z nepřevzetí objednávky jsou tím pádem Vaší odpovědností."
                     }
                   />{" "}
                   <QuestionToggle
                     question={"Na koho je objednávka objednávána?"}
                     answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                      "Objednávku můžete objednat na jakékoliv dodací údaje. Je to úplně stejné, jako když objednáváte z e-shopu přímo."
                     }
                   />{" "}
                   <QuestionToggle
                     question={"Kdo řeší případné problémy s objednávkou?"}
                     answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                      "naší prací je zprostředkování objednávky, tedy i její správné nastavení. Veškeré ostatní problémy plynoucí z dopravy, vadných kusů a podobně řešíte se samotným e-shopem."
                     }
                   />
                 </div>
@@ -133,31 +133,31 @@ export default function Faq() {
                   <QuestionToggle
                     question={"Za co se strhávají platby?"}
                     answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                      "Platba z karty se strhává v případě, že máte aktivní předplatné. Frekvence plateb je následně závislá na frekvenci předplatného. Pokud tedy budete mít předplatné nastavené na interval jednou měsíčně, platba se trhne jednou za měsíc. Princip je stejný i u všech ostatních intervalů."
                     }
                   />
                   <QuestionToggle
                     question={"Jsou zde nějaké skryté poplatky?"}
                     answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                      "Jediná platba, kterou budeme z karty strhávat, je ta za správně zprostředkovanou objednávku v aktivním předplatném. Pokud nemáte ani jedno aktivní předplatné, nic neplatíte."
                     }
                   />
                   <QuestionToggle
                     question={"Jsou platby automatické?"}
                     answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                      "Ano, pokud máte aktivované nějaké předplatné, platby se budou z karty strhávat automaticky."
                     }
                   />{" "}
                   <QuestionToggle
                     question={"Kde jsou uložené moje platební údaje?"}
                     answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                      "Pro zprostředkování plateb využíváme službu Stripe, která také zabezpečuje vaše platební údaje. Jde o dnes asi nejznámější službu tohoto typu, která takto pomáhá statisícům firmám po celém světě. Ze Stripu tedy strach mít nemusíte, své místo na trhu si již zasloužil."
                     }
                   />{" "}
                   <QuestionToggle
                     question={"Lze platební metodu změnit?"}
                     answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                      "Samozřejmě je to možné, avšak jen do určité míry. Můžete změnit kartu, kterou využíváte, stejně tak jako typ platebního nástroje, pokud je dostupná náhrada."
                     }
                   />{" "}
                   <QuestionToggle
@@ -169,7 +169,7 @@ export default function Faq() {
                   <QuestionToggle
                     question={"Můžu zažádat o vrácení peněz?"}
                     answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                      "Jelikož jsme služba, je to s vrácením plateb složitější. Pokud již platba proběhla a my jsme objednávku vyřídili, poté není možné peníze vrátit. Samozřejmě existují případy, ve kterých se společně dokážeme domluvit. Pokud nějaký takový problém máte, napište nám na adresu info@shopr.cz."
                     }
                   />
                   <QuestionToggle
@@ -177,13 +177,13 @@ export default function Faq() {
                       "Přišlo mi něco jiného, než mám v předplatném. Mám nárok na vrácení peněz?"
                     }
                     answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                      "Pokud jsme v objednávce něco pokazili, máte nárok na vrácení celé částky za danou objednávku."
                     }
                   />
                   <QuestionToggle
                     question={"Jak často se platby strhávají?"}
                     answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                      "Platby se strhávají podle intervalu nastaveném v předplatném. Nabízíme možnosti od jednoho týdne do tří měsíců."
                     }
                   />
                 </div>
@@ -245,23 +245,17 @@ export default function Faq() {
                 </h3>
                 <div className="flex flex-col gap-8">
                   <QuestionToggle
-                    question={"Můžu údaje kdykoliv změnit?"}
-                    answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
-                    }
-                  />{" "}
-                  <QuestionToggle
                     question={"Můžu svůj profil smazat?"}
                     answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                      "Profil můžete kdykoliv smazat. Smažou se tím a deaktivují také předplatná a odstraníme všechny vaše údaje do míry, v jaké nám to umožňuje zákon."
                     }
-                  />{" "}
+                  />
                   <QuestionToggle
                     question={"Kdo spravuje mé kontaktní a dodací informace?"}
                     answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                      "Kontaktní a dodací informace držíme v naší databázi. Správcem jsme proto my. Můžete kdykoliv zažádat o jejich smazání, nicméně poté budeme nuceni smazat i Váš profil a předplatná."
                     }
-                  />{" "}
+                  />
                 </div>
               </div>
               {/* ------------ Osobní údaje ------------------- */}
@@ -273,7 +267,7 @@ export default function Faq() {
                   <QuestionToggle
                     question={"K čemu ptořebujete mé osobní údaje?"}
                     answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                      "osobní slouží pro zjednodušení celého systému. Údaje můžete na jedno kliknutí nahrát do formuláře při nastavování předplatného, což šetří spoustu času."
                     }
                   />{" "}
                   <QuestionToggle
@@ -285,7 +279,7 @@ export default function Faq() {
                   <QuestionToggle
                     question={"Můžu požádat o smazání osobních údajů?"}
                     answer={
-                      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                      "Máte na to plné právo. Abychom ale dokázali fungovat a předplatné vyplňovat, údaje potřebujeme. Proto budeme nucení v případě žádosti o smazání údaje zrušit i uživatelský účet a předplatná."
                     }
                   />{" "}
                 </div>
