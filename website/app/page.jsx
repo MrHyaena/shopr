@@ -5,20 +5,25 @@ import BlackDivider from "./components/BlackDivider";
 
 //Images
 import Image from "next/image";
+
 import heroImg from "../public/hero-image.png";
-import dogFood from "../public/dog-food.webp";
-import supplements from "../public/image.jpg";
-import drugs from "../public/leky.jpg";
+
+import catFood from "./_img/examples/cat-food.png";
+import suplementy from "./_img/examples/suplementy.png";
+import leky from "./_img/examples/leky.png";
+import tea from "./_img/examples/tea.png";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faMoneyBill1 } from "@fortawesome/free-regular-svg-icons";
 import {
   faBoxesStacked,
   faUmbrellaBeach,
 } from "@fortawesome/free-solid-svg-icons";
-import PriceDescription from "./components/Price";
+import PriceDescription from "./components/PriceDescription";
 import ReviewOne from "./components/ReviewOne";
 import ReviewGrid from "./components/ReviewGrid";
 import heroImgTwo from "./_img/hero.jpg";
+import Link from "next/link";
 
 //Metadata
 export const metadata = {
@@ -87,13 +92,24 @@ export default function Home() {
             </h1>
 
             <p className="text-xl font-semibold text-textDark z-2">
-              Pravidelná objednávka ze všech e-shopů na internetu. Už nikdy se
-              nebudete muset dívat na prázdné balení od fitness suplementů,
-              kosmetiky, drogerie nebo čehokoliv jiného.
+              Vytvoříme pro vás pravidelnou objednávku na jakémkoliv e-shopu jen
+              chcete. Už nikdy se tak nebudete muset dívat na prázdné balení od
+              doplňků stravy, kosmetiky, drogerie nebo čehokoliv jiného.
             </p>
-            <button className="bg-quad shadow-md cursor-pointer rounded-md px-4 py-3 text-textButton font-bold text-xl hover:scale-102 transition-all ease-in-out">
-              Založit uživatelský účet
-            </button>
+            <div className="flex gap-5">
+              <a
+                href="https://app.shopr.cz/signup"
+                className="bg-quad shadow-md cursor-pointer rounded-md px-4 py-3 text-textButton font-bold text-xl hover:scale-102 transition-all ease-in-out"
+              >
+                Založit uživatelský účet ZDARMA
+              </a>
+              <Link
+                href="/jak-to-funguje"
+                className="bg-white cursor-pointer shadow-md shadow-slate-100 rounded-md px-4 py-3 text-textDark font-bold text-xl hover:scale-102 transition-all ease-in-out border border-slate-200"
+              >
+                Jak to funguje?
+              </Link>
+            </div>
           </div>
 
           <Image
@@ -112,17 +128,20 @@ export default function Home() {
         <div className="flex items-center justify-center py-40 pb-50">
           <div className="max-w-wrapper flex flex-col items-center justify-start gap-10">
             <div className="mx-auto text-center flex flex-col items-center">
-              <h4 className="headingSmall">Co z toho budete mít Vy</h4>
+              <h4 className="headingSmall">Proč do toho jít?</h4>
               <h2 className="mt-2 my-5">
                 Méně starostí, více času, žádný nedostatek
               </h2>
               <p className="max-w-[600px] font-medium text-textDark text-lg mb-5">
                 Známe to všichni. Víme, že potřebujeme něco nakoupit, ale
                 odložíme to na večer. Následně na to zapomeneme, jen aby se
-                tento cyklus opakoval dalších několik dní.
+                tento cyklus opakoval dalších několik dní. Například u některých
+                cvičebních suplementů to může znamenat ztrátů účinku, a to jen
+                kvůli tomu, že jsme prostě neměli kapacitu. Co kdybychom to
+                vyřešili za Vás?
               </p>
             </div>
-            <div className="flex justify-center gap-10">
+            <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-10">
               <div className="bg-primary shadow-[5px_5px_0px_0px] shadow-quad p-10 rounded-lg flex flex-col items-center justify-center max-w-[300px] gap-5">
                 <FontAwesomeIcon
                   icon={faClock}
@@ -130,10 +149,10 @@ export default function Home() {
                 />
 
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
-                  <h4 className="text-white">Ušetříe vám čas</h4>
+                  <h4 className="text-white">Ušetříe vám spoustu času</h4>
                   <p className="text-white">
-                    Ušetřete čas tím, že vaše pravidelné nákupy přehodíte na
-                    nás.
+                    Nemusíte trávit hodiny výběrem zboží po e-shopech, ani v
+                    panice běhat do fyzických prodejen
                   </p>
                 </div>
               </div>
@@ -144,10 +163,12 @@ export default function Home() {
                 />
 
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
-                  <h4 className="text-white">Ušetříme Vám peníze</h4>
+                  <h4 className="text-white">
+                    Zachráníme peníze, držíme budget
+                  </h4>
                   <p className="text-white">
-                    Ušetřete čas tím, že vaše pravidelné nákupy přehodíte na
-                    nás.
+                    Když nakupujeme, často do našich košíků přihazujeme i
+                    zbytečnosti. S námi budete mít budget pod kontrolou.
                   </p>
                 </div>
               </div>
@@ -158,10 +179,11 @@ export default function Home() {
                 />
 
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
-                  <h4 className="text-white">Přestaňte se stresovat</h4>
+                  <h4 className="text-white">Přestanete se stresovat</h4>
                   <p className="text-white">
-                    Ušetřete čas tím, že vaše pravidelné nákupy přehodíte na
-                    nás.
+                    Dnes nosíme v hlavě spoustu věcí. Nastavením pravidelných
+                    objednávek se části z nich zbavíte bez toho, abyste se
+                    museli omezovat.
                   </p>
                 </div>
               </div>
@@ -174,8 +196,8 @@ export default function Home() {
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
                   <h4 className="text-white">Už Vám nebude nic chybět</h4>
                   <p className="text-white">
-                    Ušetřete čas tím, že vaše pravidelné nákupy přehodíte na
-                    nás.
+                    Chybí suplementy, pes nemá co jíst a káva nám došla. Něco je
+                    kritické, ostatní ne zas tolik. Všemu ale dokážeme předejít.
                   </p>
                 </div>
               </div>
@@ -189,147 +211,133 @@ export default function Home() {
   function WhyToTry() {
     return (
       <>
-        <div className=" py-30">
-          <div className=" flex flex-col items-center justify-center">
-            <div className="max-w-wrapper mx-auto text-center flex flex-col items-center ">
-              <h4>Proč to zkusit</h4>
-              <h2 className="mt-2 my-5">
-                Vyřešíme Vaše starosti s pravidelnou objednávkou
-              </h2>
-              <p className="max-w-[600px] font-medium text-textDark text-lg">
-                Často máme v našich životech věci, které potřebujeme na
-                pravidelné bázi. To ale znamená, že musíme neustále přemýšlet
-                nád tím, zda máme dané věci dost, kdy nám dojde a že jí
-                potřebujeme objednat.
-              </p>
-              <p className="max-w-[600px] font-medium text-textDark text-lg mt-5">
-                I když se představivosti meze nekladou, pojďme si teď ukázat
-                příklady, u kterých můžete tyto starosti svěřit nám.
-              </p>
-            </div>
-            <div className="bg-white self-stretch flex justify-center py-10">
-              <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
-                <div className="self-center justify-self-center">
-                  <Image
-                    src={supplements}
-                    alt="supplements"
-                    width={500}
-                    height={500}
-                    className="rounded-lg shadow-lg"
-                  />
+        <div className=" flex flex-col items-center justify-center pt-30">
+          <div className="max-w-wrapper mx-auto text-center flex flex-col items-center ">
+            <h4>Příklady</h4>
+            <h2 className="mt-2 my-5">Nechte se inspirovat!</h2>
+            <p className="max-w-[600px] font-medium text-textDark text-lg">
+              Máme v našich životech spoustu věcí, u kterých si někdy ani
+              neuvědomujeme, že je potřebujeme na pravidelné bázi.
+            </p>
+            <p className="max-w-[600px] font-medium text-textDark text-lg mt-5">
+              Nevíte, s čím bychom Vám mohli pomoct? Nechte se inspirovat!
+            </p>
+          </div>
+        </div>
+        <div className=" flex flex-col items-center justify-center">
+          <div className="bg-white self-stretch flex justify-center py-10">
+            <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
+              <div className="self-center justify-self-center">
+                <Image
+                  src={suplementy}
+                  alt="Suplementy"
+                  width={500}
+                  height={500}
+                />
+              </div>
+              <div className="flex flex-col gap-5 justify-center items-start">
+                <div>
+                  <h5>Doplňky stravy</h5>
+                  <h3>Fitness suplementy</h3>
                 </div>
-                <div className="flex flex-col gap-5 justify-center items-start">
-                  <div>
-                    <h5>Doplňky stravy</h5>
-                    <h3>Fitness suplementy</h3>
-                  </div>
 
-                  <p>
-                    Pokud se člověk začne zabývat cvičením a stravou, standardně
-                    se dostane k suplementům, které pomáhají například s
-                    regenerací, imunitou a dalšími věcmi. Vitamíny a jiné látky
-                    se ale musí brát pravidelně.
-                  </p>
-                  <p>
-                    Každému z nás se již určitě stalo, že suplement došel. Co
-                    potom?
-                  </p>
-                  <button className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold py-2 px-3 text-textButton cursor-pointer">
-                    Založit účet
-                  </button>
-                </div>
+                <p>
+                  Pokud se člověk začne zabývat cvičením a stravou, standardně
+                  se dostane k suplementům, které pomáhají například s
+                  regenerací, imunitou a dalšími věcmi. Vitamíny a jiné látky se
+                  ale musí brát pravidelně.
+                </p>
+                <p>
+                  Každému z nás se již určitě stalo, že suplement došel. Co
+                  potom?
+                </p>
+                <a
+                  href="https://app.shopr.cz/signup"
+                  className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold p-3 text-textButton cursor-pointer"
+                >
+                  Založit uživatelský účet
+                </a>
               </div>
             </div>
-            <div className="bg-slate-50 self-stretch flex justify-center py-10">
-              <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
-                <div className="flex flex-col gap-5 justify-center items-start">
-                  <div>
-                    <h5>Mazlíčci</h5>
-                    <h3>Zvířecí žrádlo a pamlsky</h3>
-                  </div>
-                  <p>
-                    Zvířata jsou součastí našich domovů od nepaměti. Když si
-                    nějaké pořídíme, máme ale za nového člena domácnosti
-                    odpovědnost v podobě krmení, venčení, změny podestýlky apod.
-                  </p>
-                  <p>
-                    My můžeme zajistit, že pro vašeho miláčka budete mít vždy
-                    plnou skříň dobrot.
-                  </p>
-                  <button className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold py-2 px-3 text-textButton cursor-pointer">
-                    Založit účet
-                  </button>
+          </div>
+          <div className="bg-slate-50 self-stretch flex justify-center py-10">
+            <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
+              <div className="flex flex-col gap-5 justify-center items-start">
+                <div>
+                  <h5>Mazlíčci</h5>
+                  <h3>Zvířecí žrádlo a pamlsky</h3>
                 </div>
-                <div className="self-center justify-self-center">
-                  <Image
-                    src={dogFood}
-                    alt="pets"
-                    width={500}
-                    height={400}
-                    className="rounded-lg shadow-lg"
-                  />
-                </div>
+                <p>
+                  Zvířata jsou součastí našich domovů od nepaměti. Když si
+                  nějaké pořídíme, máme ale za nového člena domácnosti
+                  odpovědnost v podobě krmení, venčení, změny podestýlky apod.
+                </p>
+                <p>
+                  My můžeme zajistit, že pro vašeho miláčka budete mít vždy
+                  plnou skříň dobrot a potřeb.
+                </p>
+                <a
+                  href="https://app.shopr.cz/signup"
+                  className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold p-3 text-textButton cursor-pointer"
+                >
+                  Založit uživatelský účet
+                </a>
+              </div>
+              <div className="self-center justify-self-center">
+                <Image src={catFood} alt="Mazlíčci" width={500} height={400} />
               </div>
             </div>
-            <div className="bg-white self-stretch flex justify-center py-10">
-              <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
-                <div className="self-center justify-self-center">
-                  <Image
-                    src={supplements}
-                    alt="supplements"
-                    width={500}
-                    height={500}
-                    className="rounded-lg shadow-lg"
-                  />
+          </div>
+          <div className="bg-white self-stretch flex justify-center py-10">
+            <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
+              <div className="self-center justify-self-center">
+                <Image src={tea} alt="Káva a čaj" width={500} height={500} />
+              </div>
+              <div className="flex flex-col gap-5 justify-center items-start">
+                <div>
+                  <h5>Dobroty</h5>
+                  <h3>Káva, čaj a jiné pochutiny</h3>
                 </div>
-                <div className="flex flex-col gap-5 justify-center items-start">
-                  <div>
-                    <h5>Doplňky stravy</h5>
-                    <h3>Fitness suplementy</h3>
-                  </div>
 
-                  <p>
-                    Pokud se člověk začne zabývat cvičením a stravou, standardně
-                    se dostane k suplementům, které pomáhají například s
-                    regenerací, imunitou a dalšími věcmi. Vitamíny a jiné látky
-                    se ale musí brát pravidelně.
-                  </p>
-                  <p>
-                    Každému z nás se již určitě stalo, že suplement došel. Co
-                    potom?
-                  </p>
-                  <button className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold py-2 px-3 text-textButton cursor-pointer">
-                    Založit účet
-                  </button>
-                </div>
+                <p>
+                  Káva je životabudič před cestou do kanceláře, čaj nás zase
+                  naladá do klidu. Spousta lidí bez nich nevyleze z domu, takže
+                  stabilní zásoba oblíbeného typu je naprostý základ fungování.
+                </p>
+                <p>
+                  My pro vás zařídíme dávku tohoto potěšení na pravidelné bázi.
+                </p>
+                <a
+                  href="https://app.shopr.cz/signup"
+                  className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold p-3 text-textButton cursor-pointer"
+                >
+                  Založit uživatelský účet
+                </a>
               </div>
             </div>
-            <div className="bg-slate-50 self-stretch flex justify-center py-10">
-              <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
-                <div className="flex flex-col gap-5 justify-center items-start">
-                  <div>
-                    <h5>Domácnost</h5>
-                    <h3>Čistící prostředky</h3>
-                  </div>
-                  <p>
-                    Pokud se člověk začne zabývat cvičením a stravou, standardně
-                    se dostane k suplementům, které pomáhají například s
-                    regenerací, imunitou a dalšími věcmi. Vitamíny a jiné látky
-                    se ale musí brát pravidelně.
-                  </p>
-                  <button className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold py-2 px-3 text-textButton cursor-pointer">
-                    Založit účet
-                  </button>
+          </div>
+          <div className="bg-slate-50 self-stretch flex justify-center py-10">
+            <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
+              <div className="flex flex-col gap-5 justify-center items-start">
+                <div>
+                  <h5>Léky a zdraví</h5>
+                  <h3>Pravidelná objednávka léků</h3>
                 </div>
-                <div className="self-center justify-self-center">
-                  <Image
-                    src={drugs}
-                    alt="drugs"
-                    className="rounded-lg shadow-lg"
-                    width={500}
-                    height={500}
-                  />
-                </div>
+                <p>
+                  Stejně jako u suplementů, i u léků je často nutná
+                  pravidelnost. Velká část z nich je dostupná v online
+                  lékárnách, ze kterých je dokážeme pravidelně objednávat a
+                  posílat na vaši adresu.
+                </p>
+                <a
+                  href="https://app.shopr.cz/signup"
+                  className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold py-2 px-3 text-textButton cursor-pointer"
+                >
+                  Založit uživatelský účet
+                </a>
+              </div>
+              <div className="self-center justify-self-center">
+                <Image src={leky} alt="drugs" width={500} height={500} />
               </div>
             </div>
           </div>
@@ -342,14 +350,16 @@ export default function Home() {
     <>
       <HeroSectionTwo />
       <BlackDivider
-        text={"Odstresujte hlavu a nechte pravidelné nákupy na nás"}
+        text={
+          "Odstresujte hlavu a nechte starosti s pravidelnými nákupy na nás"
+        }
       />
       <Benefits /> <ReviewGrid />
       <WhyToTry />
       <PriceDescription
         subHeading={"Jedna cena, žádné komplikace"}
         description={
-          "Celý uživatelsý účet, jeho nastavení a tvorba předplatných je zdarma. Platba probíhá pouze ve chvíli, kdy máte u nějakého e-shopu předplatné aktivované a my pro Vás zajišťujeme pravidelné objednávky."
+          "Celý uživatelský účet, jeho nastavení a tvorba předplatných je zdarma. Platba probíhá pouze ve chvíli, kdy máte u nějakého e-shopu předplatné aktivované a my pro Vás zajišťujeme pravidelné objednávky."
         }
       />
       <Newsletter />

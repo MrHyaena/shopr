@@ -1,6 +1,6 @@
 import React from "react";
 import Newsletter from "../components/Newsletter";
-import PriceDescription from "../components/Price";
+import PriceDescription from "../components/PriceDescription";
 import QuestionShow from "../components/QuestionsShow";
 
 export const metadata = {
