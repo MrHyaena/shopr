@@ -16,12 +16,15 @@ export default function Howto() {
           <div className="mx-auto text-center flex flex-col items-center">
             <h4 className="headingSmall">Jak to funguje</h4>
             <h2 className="mt-2 my-5">
-              V jednoduchosti je síla, takže nehledejte nic komplikovaného
+              Vyznaváme jednoduchost, takže nehledejte nic komplikovaného
             </h2>
             <p className="max-w-[600px] font-medium text-textDark text-lg mb-5">
-              Známe to všichni. Víme, že potřebujeme něco nakoupit, ale odložíme
-              to na večer. Následně na to zapomeneme, jen aby se tento cyklus
-              opakoval dalších několik dní.
+              Naše předplatné má především usnadňovat životy. Dává tedy smysl,
+              abychom udělali naši službu co možná nejjednodušší. Nemáte se
+              proto čeho obávat, a už vůbec ne nějakého složitého nastavování.
+              Celkem je potřeba splnit tři kroky - registraci, tvorbu
+              předplatného a aktivaci. Potom už řešíte jen převzetí vašich
+              pravidelných objednávek.
             </p>
           </div>
         </div>
@@ -34,19 +37,20 @@ export default function Howto() {
                 <h4 className="bg-primary text-white p-10 rounded-t-lg border border-slate-200">
                   Založíte účet
                 </h4>
-                <p className="p-10">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Placeat labore vel obcaecati sunt voluptatibus? Molestias non
-                  ab veniam asperiores rem impedit a quia porro, ullam est eius
-                  quisquam cum quo? Lorem, ipsum dolor sit amet consectetur
-                  adipisicing elit. Tenetur alias totam rem dolorum, magni
-                  tempore et illo provident esse vel ut! In, nam? Porro
-                  similique quas dolorum dolores architecto quia. Lorem ipsum
-                  dolor sit amet consectetur adipisicing elit. Aperiam officia
-                  quod quos ullam enim cum quidem architecto maxime a facere
-                  tenetur, autem suscipit veniam vitae. Quasi nihil assumenda
-                  rerum aperiam?
-                </p>
+                <div className="flex flex-col gap-5 my-10">
+                  <p className="px-10">
+                    Vůbec prvním krokem v celé cestě je tvorba uživatelského
+                    účtu. Jde o jednoduchý registrační formulář, ve kterém Vás
+                    požádáme o vyplnění kontaktních údajů, hesla a emailu.
+                  </p>
+                  <p className="px-10">
+                    Údaje potřebujeme buď k tomu, abychom Vám vytvořili do
+                    systému přístup, nebo k usnadnění vaší budoucí práce s
+                    předplatnými. Kromě emailu je samozřejmě možné každý z nich
+                    změnit, takže si z toho nemusíte dělat nějak těžkou hlavu.
+                  </p>
+                </div>
+
                 <button className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold py-2 px-3 text-textButton cursor-pointer mx-10 mb-10">
                   Založit účet
                 </button>
@@ -81,19 +85,18 @@ export default function Howto() {
                 <h4 className="bg-primary text-white p-10 rounded-t-lg border border-slate-200">
                   Vytvoříte předplatné
                 </h4>
-                <p className="p-10">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Placeat labore vel obcaecati sunt voluptatibus? Molestias non
-                  ab veniam asperiores rem impedit a quia porro, ullam est eius
-                  quisquam cum quo? Lorem, ipsum dolor sit amet consectetur
-                  adipisicing elit. Tenetur alias totam rem dolorum, magni
-                  tempore et illo provident esse vel ut! In, nam? Porro
-                  similique quas dolorum dolores architecto quia. Lorem ipsum
-                  dolor sit amet consectetur adipisicing elit. Aperiam officia
-                  quod quos ullam enim cum quidem architecto maxime a facere
-                  tenetur, autem suscipit veniam vitae. Quasi nihil assumenda
-                  rerum aperiam?
-                </p>
+                <div className="flex flex-col gap-5 my-10">
+                  <p className="px-10">
+                    Když už máte vytvořený uživatelský účet, nic Vám nebrání v
+                    tvorbě předplatného. Možná máte představi o tom, jak složité
+                    to bude, ale ujišťujeme Vás, že to jde udělat do několika
+                    málo minut.
+                  </p>
+                  <p className="px-10">
+                    Prakticky je potřeba jen vědět, co chcete do předplatného
+                    zahrnout, nastavit doručení a vyplnit dodací údaje. Nic víc.
+                  </p>
+                </div>
               </div>
             </div>
             <div className="grid grid-cols-[1fr_2px_1fr] max-w-[1000px] gap-10">
@@ -101,19 +104,19 @@ export default function Howto() {
                 <h4 className="bg-primary text-white p-10 rounded-t-lg border border-slate-200">
                   Aktivujete předplatné
                 </h4>
-                <p className="p-10">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Placeat labore vel obcaecati sunt voluptatibus? Molestias non
-                  ab veniam asperiores rem impedit a quia porro, ullam est eius
-                  quisquam cum quo? Lorem, ipsum dolor sit amet consectetur
-                  adipisicing elit. Tenetur alias totam rem dolorum, magni
-                  tempore et illo provident esse vel ut! In, nam? Porro
-                  similique quas dolorum dolores architecto quia. Lorem ipsum
-                  dolor sit amet consectetur adipisicing elit. Aperiam officia
-                  quod quos ullam enim cum quidem architecto maxime a facere
-                  tenetur, autem suscipit veniam vitae. Quasi nihil assumenda
-                  rerum aperiam?
-                </p>
+                <div className="flex flex-col gap-5 my-10">
+                  <p className="px-10">
+                    Posledním a nejdůležitějším krokem je aktivace předplatného.
+                    Abychom Vám poskytli co nejbezpečnější službu a ochránili
+                    vaše platební údaje, navázali jsme spolupráci s firmou
+                    Stripe, která řeší platby pro miliony lidí po celém světě.
+                  </p>
+                  <p className="px-10">
+                    Pro Vás je to už jen standardní vyplnění údajů z karty. Když
+                    to splníte, máte hotovo a my jdeme zpracovat vaši
+                    objednávku.
+                  </p>
+                </div>
               </div>
               <div className="w-1 bg-quad"></div>
               <div className=" flex flex-col p-10">

@@ -79,7 +79,7 @@ export default function Home() {
   function HeroSectionTwo() {
     return (
       <>
-        <div className="xl:min-h-[900px] grid grid-cols-5 min-h-screen items-stretch justify-center overflow-x-hidden">
+        <div className="xl:min-h-[900px] mt-10 grid grid-cols-5 min-h-screen items-stretch justify-center overflow-x-hidden">
           <div className="flex flex-col items-start justify-center h-full gap-5 p-24 col-span-3 max-w-[900px] justify-self-center animate-scale-up-noBounce-delay">
             <h1 className="z-2">
               Předplatné
