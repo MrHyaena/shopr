@@ -6,8 +6,8 @@
 @theme {
   --color-primary: var(--color-zinc-950);
   --color-secondary: var(--color-zinc-900);
-  --color-tertiary: var(--color-rose-600);
-  --color-quad: var(--color-rose-500);
+  --color-tertiary: var(--color-rose-700);
+  --color-quad: var(--color-rose-600);
 
   --color-textDark: var(--color-zinc-900);
   --color-textDarker: var(--color-zinc-700);

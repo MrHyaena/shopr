@@ -8,7 +8,9 @@ export default function ReviewGrid() {
           <div className="grid grid-cols-2 max-w-[1300px] gap-20 items-start">
             <div className="flex flex-col gap-5 justify-center">
               <div>
-                <h5>Martin Doležal - Projektový manažer</h5>
+                <p className="text-xl font-bold text-quad">
+                  Martin Doležal - Projektový manažer
+                </p>
                 <h4 className="text-textDark">Čaj a kafe naskladněno</h4>
               </div>
               <p className="italic">
@@ -18,7 +20,9 @@ export default function ReviewGrid() {
             </div>
             <div className="flex flex-col gap-5 justify-center">
               <div>
-                <h5>Hana Doležalová - Doktorka</h5>
+                <p className="text-xl font-bold text-quad">
+                  Hana Doležalová - Doktorka
+                </p>
                 <h4 className="text-textDark">Léky pro příbuzné</h4>
               </div>
               <p className="italic">
@@ -30,7 +34,9 @@ export default function ReviewGrid() {
             </div>
             <div className="flex flex-col gap-5 justify-center">
               <div>
-                <h5>Kateřina Zbihlejová - Milovnice koček</h5>
+                <p className="text-xl font-bold text-quad">
+                  Kateřina Zbihlejová - Milovnice koček
+                </p>
                 <h4 className="text-textDark">Pamlsky pro mého mazlíčka</h4>
               </div>
               <p className="italic">
@@ -41,7 +47,9 @@ export default function ReviewGrid() {
             </div>
             <div className="flex flex-col gap-5 justify-center">
               <div>
-                <h5>Marek Sviradov - Fitness trenér</h5>
+                <p className="text-xl font-bold text-quad">
+                  Marek Sviradov - Fitness trenér
+                </p>
                 <h4 className="text-textDark">Suplementy pro klienty</h4>
               </div>
               <p className="italic">

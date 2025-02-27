@@ -5,7 +5,7 @@ export default function PriceDescription({ subHeading, description }) {
         <div className="max-w-wrapper flex flex-col items-center justify-start">
           <div className=" px-4">
             <div className="mx-auto text-center flex flex-col items-center">
-              <h4>Ceník</h4>
+              <p className="headingSmall">Ceník</p>
               <h2 className="mt-2 my-5">{subHeading}</h2>
               <p className="max-w-[600px] font-medium text-textDark text-lg">
                 {description}
@@ -13,9 +13,9 @@ export default function PriceDescription({ subHeading, description }) {
             </div>
 
             <div className="mt-5 max-w-[1200px] mx-auto flex flex-col items-center">
-              <h2 className="text-5xl font-bold text-textDark text-center">
+              <p className="text-5xl font-bold text-textDark text-center">
                 90 Kč
-              </h2>
+              </p>
               <p className="text-lg text-center font-bold text-textDark mb-6">
                 za splněnou objednávku
               </p>

@@ -41,6 +41,13 @@
     color: var(--color-textDarker);
     font-weight: 600;
   }
+
+  .headingSmall {
+    font-size: var(--text-2xl);
+    line-height: normal;
+    font-weight: 700;
+    color: var(--color-quad);
+  }
 }
 
 @theme {

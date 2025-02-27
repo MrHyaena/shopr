@@ -29,7 +29,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Shopr: Předplatné na každém e-shopu",
   description:
-    "Objednáváte doplňky stravy, pečujete o zvířata, nebo třeba milujete čaj? Založte si pravidelné objednávky na jakémkoliv e-shopu jen chcete. Objednávky vyřídíme za Vás, vy si zboží jen převezmete.",
+    "Objednáváte doplňky stravy, pečujete o zvířata, nebo třeba milujete čaj? Založte si pravidelné objednávky na jakémkoliv e-shopu jen chcete.",
 };
 
 export default function Home() {
@@ -82,7 +82,7 @@ export default function Home() {
         <div className="xl:min-h-[900px] grid grid-cols-5 min-h-screen items-stretch justify-center overflow-x-hidden">
           <div className="flex flex-col items-start justify-center h-full gap-5 p-24 col-span-3 max-w-[900px] justify-self-center animate-scale-up-noBounce-delay">
             <h1 className="z-2">
-              Pravidelné objednávky
+              Předplatné
               <span className="text-quad">
                 {" "}
                 <br />
@@ -92,9 +92,9 @@ export default function Home() {
             </h1>
 
             <p className="text-xl font-semibold text-textDark z-2">
-              Vytvoříme pro vás pravidelnou objednávku na jakémkoliv e-shopu jen
-              chcete. Už nikdy se tak nebudete muset dívat na prázdné balení od
-              doplňků stravy, kosmetiky, drogerie nebo čehokoliv jiného.
+              Vytvoříme pro Vás předplatné na jakémkoliv e-shopu jen chcete. Už
+              nikdy se tak nebudete muset dívat na prázdné balení od doplňků
+              stravy, kosmetiky, drogerie nebo čehokoliv jiného.
             </p>
             <div className="flex gap-5">
               <a
@@ -128,7 +128,7 @@ export default function Home() {
         <div className="flex items-center justify-center py-40 pb-50">
           <div className="max-w-wrapper flex flex-col items-center justify-start gap-10">
             <div className="mx-auto text-center flex flex-col items-center">
-              <h4 className="headingSmall">Proč do toho jít?</h4>
+              <p className="headingSmall">Proč si založit předplatné?</p>
               <h2 className="mt-2 my-5">
                 Méně starostí, více času, žádný nedostatek
               </h2>
@@ -213,7 +213,7 @@ export default function Home() {
       <>
         <div className=" flex flex-col items-center justify-center pt-30">
           <div className="max-w-wrapper mx-auto text-center flex flex-col items-center ">
-            <h4>Příklady</h4>
+            <p className="headingSmall">Příklady</p>
             <h2 className="mt-2 my-5">Nechte se inspirovat!</h2>
             <p className="max-w-[600px] font-medium text-textDark text-lg">
               Máme v našich životech spoustu věcí, u kterých si někdy ani
@@ -237,7 +237,7 @@ export default function Home() {
               </div>
               <div className="flex flex-col gap-5 justify-center items-start">
                 <div>
-                  <h5>Doplňky stravy</h5>
+                  <p className="text-lg font-bold text-quad">Doplňky stravy</p>
                   <h3>Fitness suplementy</h3>
                 </div>
 
@@ -249,7 +249,7 @@ export default function Home() {
                 </p>
                 <p>
                   Každému z nás se již určitě stalo, že suplement došel. Co
-                  potom?
+                  potom? Model předplatného je zde ideální řešení!
                 </p>
                 <a
                   href="https://app.shopr.cz/signup"
@@ -264,12 +264,12 @@ export default function Home() {
             <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
               <div className="flex flex-col gap-5 justify-center items-start">
                 <div>
-                  <h5>Mazlíčci</h5>
+                  <p className="text-lg font-bold text-quad">Mazlíčci</p>
                   <h3>Zvířecí žrádlo a pamlsky</h3>
                 </div>
                 <p>
                   Zvířata jsou součastí našich domovů od nepaměti. Když si
-                  nějaké pořídíme, máme ale za nového člena domácnosti
+                  nějaké pořídíme, máme také za nového člena domácnosti
                   odpovědnost v podobě krmení, venčení, změny podestýlky apod.
                 </p>
                 <p>
@@ -295,13 +295,13 @@ export default function Home() {
               </div>
               <div className="flex flex-col gap-5 justify-center items-start">
                 <div>
-                  <h5>Dobroty</h5>
+                  <p className="text-lg font-bold text-quad">Dobroty</p>
                   <h3>Káva, čaj a jiné pochutiny</h3>
                 </div>
 
                 <p>
                   Káva je životabudič před cestou do kanceláře, čaj nás zase
-                  naladá do klidu. Spousta lidí bez nich nevyleze z domu, takže
+                  naladí do klidu. Spousta lidí bez nich nevyleze z domu, takže
                   stabilní zásoba oblíbeného typu je naprostý základ fungování.
                 </p>
                 <p>
@@ -320,14 +320,14 @@ export default function Home() {
             <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
               <div className="flex flex-col gap-5 justify-center items-start">
                 <div>
-                  <h5>Léky a zdraví</h5>
+                  <p className="text-lg font-bold text-quad">Léky a zdraví</p>
                   <h3>Pravidelná objednávka léků</h3>
                 </div>
                 <p>
                   Stejně jako u suplementů, i u léků je často nutná
                   pravidelnost. Velká část z nich je dostupná v online
-                  lékárnách, ze kterých je dokážeme pravidelně objednávat a
-                  posílat na vaši adresu.
+                  lékárnách, na kterých Vám můžeme zařídit předplatné a
+                  zajistit, že je budete mít vždy po ruce.
                 </p>
                 <a
                   href="https://app.shopr.cz/signup"
