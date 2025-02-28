@@ -199,8 +199,8 @@ export function Personal() {
             </h1>
             <p className="text-lg font-semibold ">
               Tyto informace používáme pro urychlení procesu tvorby
-              předplatného. Vaše osobní informace můžete kdykoliv změnit a
-              aktualizované údaje budou okamžitě dostupné.
+              předplatného. Vaše osobní údaje můžete kdykoliv změnit.
+              Aktualizované údaje budou dostupné okamžitě.
             </p>
           </div>
         </div>

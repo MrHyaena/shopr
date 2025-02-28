@@ -277,15 +277,28 @@ export function SubscriptionForm() {
     return (
       <>
         <div className="p-10">
-          <h2 className="text-xl font-semibold mb-4 text-heading">
-            Proč potřebujeme tyto údaje?
-          </h2>
-          <p className="text-md font-semibold text-textMedium">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dolorum
-            quam quasi odio asperiores dicta, ut accusamus pariatur error itaque
-            vero, dignissimos, quidem atque consequuntur aspernatur nemo quae
-            placeat enim.
-          </p>
+          <div className="mb-10">
+            <h2 className="text-xl font-semibold mb-4 text-heading">
+              Proč tyto údaje potřebujeme?
+            </h2>
+            <p className="text-md font-semibold text-textMedium">
+              Jelikož pro Vás budeme pravidelně vytvářet objednávku na některém
+              z e-shopů, potřebujeme znát kontaktní údaje a cílovou adresu
+              člověka, který si zásilku převezme. Můžete to být Vy, nebo klidně
+              někdo jiný, s kým jste se takto dohodli.
+            </p>
+          </div>
+
+          <div className="mb-10">
+            <h2 className="text-xl font-semibold mb-4 text-heading">
+              Lze údaje v budoucnu změnit?
+            </h2>
+            <p className="text-md font-semibold text-textMedium">
+              Samozřejmě. Jakmile si předplatné vytvoříte, můžete to i hned
+              vyzkoušet. Stačí v hlavním menu kliknout na tlačítko Upravit u
+              daného předplatného a změnit vámi zvolené údaje.
+            </p>
+          </div>
         </div>
       </>
     );
@@ -381,22 +394,9 @@ export function SubscriptionForm() {
                 placeholder="Moje první předplatné"
               ></input>
             </label>
-            <div className="text-md font-semibold text-textButton shadow-lg flex items-center gap-3 bg-quad xl:p-2 p-4 rounded-lg">
-              <div className="hidden xl:block">
-                <FontAwesomeIcon
-                  icon={faTriangleExclamation}
-                  className="text-2xl"
-                />
-              </div>
-              <p>
-                Název předplatného musí být stejný jako ten, který budete
-                zadávat při platbě. Pouze tak můžeme poznat, zda je předplatné
-                platné či nikoliv.
-              </p>
-            </div>
 
             <label className="flex flex-col text-heading text-lg font-semibold">
-              Webová stránka eshopu
+              Webová stránka e-shopu
               <input
                 value={subWebsite}
                 onChange={(e) => {
@@ -407,6 +407,21 @@ export function SubscriptionForm() {
                 placeholder="www.eshop.cz"
               ></input>
             </label>
+            <div className="text-md font-semibold text-textButton shadow-lg flex items-center gap-3 bg-quad xl:p-2 p-4 rounded-lg">
+              <div className="hidden xl:block">
+                <FontAwesomeIcon
+                  icon={faTriangleExclamation}
+                  className="text-2xl"
+                />
+              </div>
+              <div>
+                <p>
+                  Je nutné, aby měl e-shop platbu dobírkou. Pokud e-shop tuto
+                  možnost nenabízí, pak nedokážeme vytvořit předplatné.
+                </p>
+              </div>
+            </div>
+
             <label className="flex flex-col text-heading text-lg font-semibold">
               Frekvence doručování
               <select
@@ -529,15 +544,46 @@ export function SubscriptionForm() {
     return (
       <>
         <div className="p-10">
-          <h2 className="text-xl font-semibold mb-4 text-heading">
-            Nastavte si parametry vašeho předplatného
-          </h2>
-          <p className="text-md font-semibold text-textMedium">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dolorum
-            quam quasi odio asperiores dicta, ut accusamus pariatur error itaque
-            vero, dignissimos, quidem atque consequuntur aspernatur nemo quae
-            placeat enim.
-          </p>
+          <div className="mb-10">
+            <h2 className="text-xl font-semibold mb-4 text-heading">
+              Nastavte si parametry vašeho předplatného
+            </h2>
+            <p className="text-md font-semibold text-textMedium">
+              Zde je potřeba nastavit fungování vašeho předplatného. Zadejte
+              název, podle kterého se budete oriantovat. Webová stránka e-shopu
+              je cílový obchod, na kterém pro Vás zařídíme pravidelné
+              objednávky.
+            </p>
+          </div>
+          <div className="mb-10">
+            <h2 className="text-xl font-semibold mb-4 text-heading">
+              Frekvence doručování
+            </h2>
+            <p className="text-md font-semibold text-textMedium">
+              Frekvence doručování je stejná jako frekvence plateb. které se Vám
+              budou strhávat z karty za naše služby.
+            </p>
+          </div>
+          <div className="mb-10">
+            <h2 className="text-xl font-semibold mb-4 text-heading">
+              Preferovaný den objednání
+            </h2>
+            <p className="text-md font-semibold text-textMedium">
+              Jde o den, ve kterém budeme vaši objednávka tvořit. Budeme se vždy
+              snažit, abychom tento den dodrželi, nicméně při velkém objemu
+              objednávek v jeden den se může stát, že vaše předplatné vyřídíme
+              až následující den.
+            </p>
+          </div>
+          <div className="mb-10">
+            <h2 className="text-xl font-semibold mb-4 text-heading">
+              Způsob doručení
+            </h2>
+            <p className="text-md font-semibold text-textMedium">
+              Na výběr máte buď kurýrní službu nebo nějaké odběrné místé. V
+              každém případě se však bude jednat o dobírku.
+            </p>
+          </div>
         </div>
       </>
     );
@@ -776,15 +822,26 @@ export function SubscriptionForm() {
     return (
       <>
         <div className="p-10">
-          <h2 className="text-xl font-semibold mb-4 text-heading">
-            Vyberte produkty, které chcete objednávat
-          </h2>
-          <p className="text-md font-semibold text-textMedium">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dolorum
-            quam quasi odio asperiores dicta, ut accusamus pariatur error itaque
-            vero, dignissimos, quidem atque consequuntur aspernatur nemo quae
-            placeat enim.
-          </p>
+          <div className="mb-10">
+            <h2 className="text-xl font-semibold mb-4 text-heading">
+              Vyberte produkty, které chcete objednávat
+            </h2>
+            <p className="text-md font-semibold text-textMedium">
+              Teď už je to jednoduché. Najděte si v e-shopu produkty, které
+              chcete pravidelně objednávat, překopírujte odkaz do formuláře a
+              zvolte množství.
+            </p>
+          </div>
+          <div className="mb-10">
+            <h2 className="text-xl font-semibold mb-4 text-heading">
+              Nahraditelné zboží
+            </h2>
+            <p className="text-md font-semibold text-textMedium">
+              Někdy se může stát, že zboží nebude naskladněné. Pokud v políčku
+              nahraditelné vyberete Ano, pak se zboží pokusíme nahradit stejným
+              typem od jiné značky.
+            </p>
+          </div>
         </div>
       </>
     );

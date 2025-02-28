@@ -3,25 +3,59 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { Link } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
+const apiURL = import.meta.env.VITE_API_URL;
 
 export function Contact() {
-  const { subscriptions } = useSubscriptionContext();
-  const [email, setEmail] = useState("");
-  const [problem, setProblem] = useState("");
-  const [message, setMessage] = useState("");
-  const [problemToggle, setProblemToggle] = useState(false);
+  function Formular() {
+    const { subscriptions } = useSubscriptionContext();
+    const [email, setEmail] = useState("");
+    const [problem, setProblem] = useState("");
+    const [message, setMessage] = useState("");
+    const [problemToggle, setProblemToggle] = useState(false);
+    const { user } = useAuthContext();
+    const [subject, setSubject] = useState("");
 
-  function handleSend() {
-    const messageObject = {
-      email: email,
-      problem: problem,
-      message: message,
-    };
+    const [error, setError] = useState(null);
+    const [responseOk, setResponseOk] = useState(null);
 
-    console.log(messageObject);
-  }
+    async function handleSend() {
+      const messageObject = {
+        email: email,
+        subject: subject,
+        isSub: problemToggle,
+        subscription: problem,
+        message: message,
+      };
 
-  function StepOne() {
+      if (!email || !message || !subject) {
+        setError("Prosím, vyplňte předmět, emailovou adresu a zprávu.");
+      }
+
+      if (email && message && subject) {
+        const response = await fetch(apiURL + "/api/email/usercontact", {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify(messageObject),
+        });
+
+        const json = await response.json();
+
+        if (response.ok) {
+          setError(null);
+          setResponseOk(json);
+        }
+
+        if (!response.ok) {
+          setError(json);
+        }
+      }
+    }
+
     return (
       <form
         className="flex flex-col gap-5 p-10 bg-white border border-slate-200 rounded-lg w-full"
@@ -36,9 +70,22 @@ export function Contact() {
             <input
               value={email}
               onChange={(e) => {
+                setError(null);
                 setEmail(e.target.value);
               }}
               type="email"
+              className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input "
+            ></input>
+          </label>
+          <label className="flex flex-col text-heading text-lg font-semibold">
+            Předmět emailu
+            <input
+              value={subject}
+              onChange={(e) => {
+                setError(null);
+                setSubject(e.target.value);
+              }}
+              type="text"
               className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input "
             ></input>
           </label>
@@ -48,6 +95,7 @@ export function Contact() {
               value={problemToggle}
               className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               onChange={(e) => {
+                setError(null);
                 setProblemToggle(!problemToggle);
               }}
             >
@@ -63,6 +111,7 @@ export function Contact() {
                 name="subProblem"
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                 onChange={(e) => {
+                  setError(null);
                   setProblem(e.target.value);
                 }}
               >
@@ -83,6 +132,7 @@ export function Contact() {
           <textarea
             value={message}
             onChange={(e) => {
+              setError(null);
               setMessage(e.target.value);
             }}
             className="bg-slate-50 min-h-[150px] border border-slate-300 rounded p-2 text-md font-semibold text-input resize-none"
@@ -90,9 +140,23 @@ export function Contact() {
         </label>
 
         <div className="mx-auto">
-          <button className="bg-quad  text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200">
-            Odeslat
-          </button>
+          {responseOk == null && (
+            <button className="bg-quad  text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200">
+              Odeslat
+            </button>
+          )}
+        </div>
+        <div className="flex justify-center">
+          {error && (
+            <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
+              {error}
+            </h2>
+          )}
+          {responseOk && (
+            <h2 className="font-bold text-center p-2 bg-messageBg rounded-lg border-2 border-messageBorder max-w-[250px]">
+              {responseOk}
+            </h2>
+          )}
         </div>
       </form>
     );
@@ -116,7 +180,7 @@ export function Contact() {
             <h1 className="text-xl font-bold text-heading">
               Kontaktní formulář
             </h1>
-            <StepOne />
+            <Formular />
           </div>
           <div className="flex flex-col items-start gap-5 max-w-[700px]">
             <h1 className="text-xl font-bold text-heading">Kontaktní údaje</h1>

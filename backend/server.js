@@ -6,6 +6,7 @@ const express = require("express");
 const userRouter = require("./routes/userRouter");
 const subscriptionRouter = require("./routes/subscriptionRouter");
 const stripeRouter = require("./routes/stripeRouter");
+const emailRouter = require("./routes/emailRouter");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
@@ -24,6 +25,9 @@ app.use("/api/subscriptions", express.json(), subscriptionRouter);
 
 //router for stripe handling
 app.use("/api/stripe", stripeRouter);
+
+//router for stripe handling
+app.use("/api/email", express.json(), emailRouter);
 
 //starting server and connecting to database
 mongoose

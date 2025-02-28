@@ -119,17 +119,15 @@ export function Sidebar() {
                 </Link>
               ) : (
                 <Link
-                  onClick={() => {
-                    setActiveButton(4);
-                  }}
-                  to="/app/otazky"
+                  to="https://shopr.cz/otazky"
+                  target="_blank"
                   className="text-sm cursor-pointer font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
                 >
                   <FontAwesomeIcon
                     icon={faClipboardQuestion}
                     className="text-2xl"
                   />
-                  Jak to funguje?
+                  Otázky
                 </Link>
               )}
             </div>
@@ -194,13 +192,11 @@ export function Sidebar() {
                 Kontakt
               </Link>
               <Link
-                onClick={() => {
-                  setToggleMenu(false);
-                }}
-                to="/app/otazky"
+                target="_blank"
+                to="https://shopr.cz/otazky"
                 className="text-xl font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
               >
-                Jak to funguje?
+                FAQ
               </Link>
               <button
                 className="text-xl font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 mt-20 w-full text-center"
