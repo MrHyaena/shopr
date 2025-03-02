@@ -29,7 +29,10 @@ router.use(requireAuth);
 router.post("/", createSubscription);
 
 //update subscription route
-router.patch("/:id/:frequencyChange", updateSubscription);
+router.patch(
+  "/:id/:frequencyChange/:nameChange/:websiteChange",
+  updateSubscription
+);
 
 //delete subscription route
 router.delete("/:id", deleteSubscription);

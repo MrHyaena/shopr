@@ -75,7 +75,7 @@ router.get(
         },
         subscription_data: {
           description:
-            "Předplatné s názvem: " + subName + " pro e-shop: " + subWebsite,
+            "Název předplatného: " + subName + " // E-shop: " + subWebsite,
           metadata: { subId: subId, userId: userId },
         },
         customer: stripeCustomerId,

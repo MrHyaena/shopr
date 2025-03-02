@@ -167,7 +167,7 @@ const deleteSubscription = async (req, res) => {
 //update subscription
 const updateSubscription = async (req, res) => {
   console.log("update subscription");
-  const { id, frequencyChange } = req.params;
+  const { id, frequencyChange, nameChange, websiteChange } = req.params;
 
   console.log(frequencyChange, req.body.active);
 
@@ -175,7 +175,11 @@ const updateSubscription = async (req, res) => {
     return res.status(404).json({ error: "Takové předplatné neexistuje" });
   }
 
-  if (frequencyChange == 1 && req.body.active) {
+  //Decide if it is also necessary to call stripe subscription update
+  if (
+    (frequencyChange == 1 || nameChange == 1 || websiteChange == 1) &&
+    req.body.active
+  ) {
     console.log("frequency change active");
     let priceId;
 
@@ -209,6 +213,11 @@ const updateSubscription = async (req, res) => {
           quantity: 1,
         },
       ],
+      description:
+        "Nazev předplatného: " +
+        req.body.subName +
+        " // E-shop: " +
+        req.body.subWebsite,
     });
   }
 

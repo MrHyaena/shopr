@@ -45,7 +45,7 @@ export function SubscriptionForm() {
     subDeliveryAddress: "",
     items: [{ url: "", amount: "", changable: "true" }],
   });
-  const [originFrequency, setOriginFreqency] = useState("");
+  const [originalSub, setOriginalSub] = useState("");
 
   useEffect(() => {
     if (id) {
@@ -70,8 +70,7 @@ export function SubscriptionForm() {
         items: sub.items,
       };
 
-      const newOriginFrequency = sub.subFrequency;
-      setOriginFreqency(newOriginFrequency);
+      setOriginalSub({ ...sub });
       setFormData({ ...newData });
     }
   }, []);
@@ -614,11 +613,25 @@ export function SubscriptionForm() {
         setError(null);
         if (id) {
           let frequencyChange = 0;
-          if (subscription.subFrequency !== originFrequency) {
+          if (subscription.subFrequency !== originalSub.subFrequency) {
             frequencyChange = 1;
           }
+          let nameChange = 0;
+          if (subscription.subName !== originalSub.subName) {
+            nameChange = 1;
+          }
+          let websiteChange = 0;
+          if (subscription.subFrequency !== originalSub.subWebsite) {
+            websiteChange = 1;
+          }
           console.log(frequencyChange);
-          patchSubscription(subscription, id, frequencyChange);
+          patchSubscription(
+            subscription,
+            id,
+            frequencyChange,
+            nameChange,
+            websiteChange
+          );
         }
 
         if (!id) {

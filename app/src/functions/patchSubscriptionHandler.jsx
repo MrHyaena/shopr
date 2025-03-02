@@ -17,7 +17,13 @@ export function patchSubscriptionHandler() {
   const { subscriptions, setSubscriptions } = useSubscriptionContext();
   const navigate = useNavigate();
 
-  async function patchSubscription(data, id, frequencyChange) {
+  async function patchSubscription(
+    data,
+    id,
+    frequencyChange,
+    nameChange,
+    websiteChange
+  ) {
     setIsLoading(true);
     setError(null);
 
@@ -27,7 +33,15 @@ export function patchSubscriptionHandler() {
     }
 
     const response = await fetch(
-      apiURL + "/api/subscriptions/" + id + "/" + frequencyChange,
+      apiURL +
+        "/api/subscriptions/" +
+        id +
+        "/" +
+        frequencyChange +
+        "/" +
+        nameChange +
+        "/" +
+        websiteChange,
       {
         mode: "cors",
         method: "PATCH",
