@@ -281,7 +281,7 @@ export function SubscriptionForm() {
             <h2 className="text-xl font-semibold mb-4 text-heading">
               Proč tyto údaje potřebujeme?
             </h2>
-            <p className="text-md font-semibold text-textMedium">
+            <p className="text-md font-semibold text-textDark">
               Jelikož pro Vás budeme pravidelně vytvářet objednávku na některém
               z e-shopů, potřebujeme znát kontaktní údaje a cílovou adresu
               člověka, který si zásilku převezme. Můžete to být Vy, nebo klidně
@@ -293,7 +293,7 @@ export function SubscriptionForm() {
             <h2 className="text-xl font-semibold mb-4 text-heading">
               Lze údaje v budoucnu změnit?
             </h2>
-            <p className="text-md font-semibold text-textMedium">
+            <p className="text-md font-semibold text-textDark">
               Samozřejmě. Jakmile si předplatné vytvoříte, můžete to i hned
               vyzkoušet. Stačí v hlavním menu kliknout na tlačítko Upravit u
               daného předplatného a změnit vámi zvolené údaje.
@@ -344,6 +344,13 @@ export function SubscriptionForm() {
         oldURL[6] == "/"
       ) {
         oldURL.splice(0, 7);
+        newURL = oldURL.join("");
+      }
+
+      console.log(oldURL);
+
+      if (oldURL[oldURL.length - 1] == "/") {
+        oldURL.splice(oldURL.length - 1, 1);
         newURL = oldURL.join("");
       }
 
@@ -548,7 +555,7 @@ export function SubscriptionForm() {
             <h2 className="text-xl font-semibold mb-4 text-heading">
               Nastavte si parametry vašeho předplatného
             </h2>
-            <p className="text-md font-semibold text-textMedium">
+            <p className="text-md font-semibold text-textDark">
               Zde je potřeba nastavit fungování vašeho předplatného. Zadejte
               název, podle kterého se budete oriantovat. Webová stránka e-shopu
               je cílový obchod, na kterém pro Vás zařídíme pravidelné
@@ -559,7 +566,7 @@ export function SubscriptionForm() {
             <h2 className="text-xl font-semibold mb-4 text-heading">
               Frekvence doručování
             </h2>
-            <p className="text-md font-semibold text-textMedium">
+            <p className="text-md font-semibold text-textDark">
               Frekvence doručování je stejná jako frekvence plateb. které se Vám
               budou strhávat z karty za naše služby.
             </p>
@@ -568,7 +575,7 @@ export function SubscriptionForm() {
             <h2 className="text-xl font-semibold mb-4 text-heading">
               Preferovaný den objednání
             </h2>
-            <p className="text-md font-semibold text-textMedium">
+            <p className="text-md font-semibold text-textDark">
               Jde o den, ve kterém budeme vaši objednávka tvořit. Budeme se vždy
               snažit, abychom tento den dodrželi, nicméně při velkém objemu
               objednávek v jeden den se může stát, že vaše předplatné vyřídíme
@@ -579,7 +586,7 @@ export function SubscriptionForm() {
             <h2 className="text-xl font-semibold mb-4 text-heading">
               Způsob doručení
             </h2>
-            <p className="text-md font-semibold text-textMedium">
+            <p className="text-md font-semibold text-textDark">
               Na výběr máte buď kurýrní službu nebo nějaké odběrné místé. V
               každém případě se však bude jednat o dobírku.
             </p>
@@ -648,7 +655,7 @@ export function SubscriptionForm() {
     return (
       <form className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg">
         <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
-          <legend className="text-xl font-semibold text-slate-900 mb-5">
+          <legend className="text-xl font-semibold text-slate-900">
             Zboží do objednávky
           </legend>
           <div className="flex flex-col gap-3">
@@ -774,6 +781,11 @@ export function SubscriptionForm() {
                     newURL = oldURL.join("");
                   }
 
+                  if (oldURL[oldURL.length - 1] == "/") {
+                    oldURL.splice(oldURL.length - 1, 1);
+                    newURL = oldURL.join("");
+                  }
+
                   item.url = newURL;
                   itemsArray.splice(itemsArray.length, 0, item);
                 });
@@ -826,7 +838,7 @@ export function SubscriptionForm() {
             <h2 className="text-xl font-semibold mb-4 text-heading">
               Vyberte produkty, které chcete objednávat
             </h2>
-            <p className="text-md font-semibold text-textMedium">
+            <p className="text-md font-semibold text-textDark">
               Teď už je to jednoduché. Najděte si v e-shopu produkty, které
               chcete pravidelně objednávat, překopírujte odkaz do formuláře a
               zvolte množství.
@@ -836,7 +848,7 @@ export function SubscriptionForm() {
             <h2 className="text-xl font-semibold mb-4 text-heading">
               Nahraditelné zboží
             </h2>
-            <p className="text-md font-semibold text-textMedium">
+            <p className="text-md font-semibold text-textDark">
               Někdy se může stát, že zboží nebude naskladněné. Pokud v políčku
               nahraditelné vyberete Ano, pak se zboží pokusíme nahradit stejným
               typem od jiné značky.

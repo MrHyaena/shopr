@@ -52,14 +52,14 @@ export function LoginPage() {
                 value={password}
               ></input>
             </label>
-            <button
+            <p
               className="font-semibold underline text-textDark text-sm cursor-pointer"
               onClick={() => {
                 setReset(!reset);
               }}
             >
               Zapomenuté heslo
-            </button>
+            </p>
           </fieldset>
           <button
             disabled={isLoading}

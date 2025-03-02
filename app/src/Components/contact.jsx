@@ -141,7 +141,7 @@ export function Contact() {
 
         <div className="mx-auto">
           {responseOk == null && (
-            <button className="bg-quad  text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200">
+            <button className="bg-quad cursor-pointer text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200">
               Odeslat
             </button>
           )}
@@ -188,8 +188,6 @@ export function Contact() {
               Pokud nás chcete kontaktovat přímo na emailovou adresu, můžete to
               udělat skrze <span className="text-textA">info@shopr.cz</span>.
             </p>
-            <h1 className="text-xl font-bold text-heading">Podnikové údaje</h1>
-            <p className="text-lg font-semibold ">IČO: 10796509</p>
           </div>
         </div>
       </div>

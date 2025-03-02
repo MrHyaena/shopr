@@ -446,7 +446,7 @@ export function Subscriptions({ setActiveButton }) {
                 {subName}
               </h2>
               {active && (
-                <div className="bg-emerald-500 h-8 rounded-md flex items-center justify-center gap-2 px-3 font-semibold text-white shadow-sm">
+                <div className="bg-emerald-500 rounded-md flex items-center justify-center gap-2 px-3 py-1 font-semibold text-white shadow-sm">
                   <FontAwesomeIcon icon={faCashRegister} />
                   Aktivní
                 </div>
@@ -455,49 +455,49 @@ export function Subscriptions({ setActiveButton }) {
           </div>
           <div className="flex xl:flex-row flex-col gap-6 xl:items-center items-center justify-end">
             {!active && (
-              <button
-                onClick={() => {
-                  activateSubscription(
-                    subId,
-                    subName,
-                    subWebsite,
-                    subFrequency,
-                    stripeCustomerId
-                  );
-                }}
-                className="text-textDark hover:text-textButton hover:shadow-md cursor-pointer p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad border border-slate-100 hover:border-quad"
-              >
-                Aktivovat
-              </button>
+              <>
+                <button
+                  onClick={() => {
+                    activateSubscription(
+                      subId,
+                      subName,
+                      subWebsite,
+                      subFrequency,
+                      stripeCustomerId
+                    );
+                  }}
+                  className=" text-textDark cursor-pointer hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-quad"
+                >
+                  Aktivovat předplatné
+                </button>
+              </>
             )}
             <Link
               to={editURL}
-              className=" text-textDark hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-2 items-center border border-slate-100 hover:border-quad"
+              className=" text-textDark hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-quad"
             >
-              <FontAwesomeIcon icon={faPen} />
               Upravit
+              <FontAwesomeIcon icon={faPen} />
             </Link>
             {toggle ? (
               <button
                 onClick={() => {
                   setToggle(!toggle);
                 }}
+                className="text-md font-semibold flex gap-3 items-center border hover:text-textButton hover:shadow-md hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2 transition-all ease-in-out cursor-pointer"
               >
-                <FontAwesomeIcon
-                  icon={faChevronUp}
-                  className="text-2xl border hover:text-textButton hover:shadow-md hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2  transition-all ease-in-out cursor-pointer"
-                />
+                Detail
+                <FontAwesomeIcon icon={faChevronUp} className="text-lg" />
               </button>
             ) : (
               <button
                 onClick={() => {
                   setToggle(!toggle);
                 }}
+                className="text-md font-semibold flex gap-3 items-center border hover:text-textButton hover:shadow-md hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2 transition-all ease-in-out cursor-pointer"
               >
-                <FontAwesomeIcon
-                  icon={faChevronDown}
-                  className="text-2xl border hover:text-textButton hover:shadow-md hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2 transition-all ease-in-out cursor-pointer"
-                />
+                Detail
+                <FontAwesomeIcon icon={faChevronDown} className="text-lg" />
               </button>
             )}
           </div>

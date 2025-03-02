@@ -157,7 +157,7 @@ export function Personal() {
           <div className="flex justify-center">
             <button
               disabled={isLoading}
-              className="bg-quad  text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+              className="bg-quad cursor-pointer text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
               type="submit"
             >
               Aktualizovat
