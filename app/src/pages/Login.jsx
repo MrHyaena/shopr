@@ -4,6 +4,7 @@ import { useLogin } from "../hooks/useLogin";
 import { Link } from "react-router-dom";
 import logoBlack from "/public/shopr-logo.png";
 import { useReset } from "../hooks/useReset";
+import { ErrorWindow } from "../Components/errorWindow";
 
 export function LoginPage() {
   const [reset, setReset] = useState(false);
@@ -74,11 +75,7 @@ export function LoginPage() {
           >
             Zaregistrovat se
           </Link>
-          {error && (
-            <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
-              {error}
-            </h2>
-          )}
+          {error && <ErrorWindow error={error} />}
         </form>
 
         <div className="xl:w-[300px] xl:flex hidden flex-col items-center gap-3 justify-center bg-white text-textDark m-6 shadow-lg  rounded-lg border border-slate-100  p-10 overflow-clip animate-fall-up-delay">

@@ -18,7 +18,7 @@ const router = express.Router();
 
 // ---------------------- SERVER ROUTES ----------------------
 
-//activate subscription route
+//activate subscription route - creating cheackout session
 router.get(
   "/activate/:userId/:subId/:subName/:subWebsite/:subFrequency/:stripeCustomerId",
   express.json(),

@@ -13,6 +13,7 @@ const {
   updateUser,
   resetUserEmail,
   resetUserPassword,
+  activateUser,
 } = require("../controllers/userController");
 const requireAuth = require("../middleware/requireAuth");
 
@@ -38,5 +39,8 @@ router.get("/reset/password", resetUserEmail);
 
 //reset password authorized request
 router.post("/reset/authorized", resetUserPassword);
+
+//activate account authorized request
+router.get("/activate/authorized", activateUser);
 
 module.exports = router;

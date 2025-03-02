@@ -1,10 +1,11 @@
 //requirements
 const User = require("../models/userModel");
-const Passreset = require("../models/passresetModel");
+const Hashcheck = require("../models/hashcheckModel");
 const jwt = require("jsonwebtoken");
 const { sendEmail } = require("../email/sendEmail");
 require("dotenv").config();
 const bcrypt = require("bcrypt");
+const express = require("express");
 
 //create token function
 function createToken(_id) {
@@ -61,6 +62,7 @@ const loginUser = async (req, res) => {
 
     res.status(200).json({
       token,
+      active: user.active,
       id: user._id,
       stripeCustomerId: user.stripeCustomerId,
       email: user.email,
@@ -127,8 +129,8 @@ const resetUserEmail = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(process.env.PASSWORD_CHANGE_SECRET, salt);
 
-    //Creating record in Passreset database
-    const passreset = await Passreset.create({ userId: user._id, token: hash });
+    //Creating record in Hashcheck database
+    const Hashcheck = await Hashcheck.create({ userId: user._id, token: hash });
 
     //Setting up and sending email
     const url = process.env.PROXY_APP + "/reset/password?hash=" + hash;
@@ -147,7 +149,7 @@ const resetUserEmail = async (req, res) => {
 const resetUserPassword = async (req, res) => {
   const hash = req.query.hash;
   const password = req.body.password;
-  const hashObject = await Passreset.findOne({ token: hash });
+  const hashObject = await Hashcheck.findOne({ token: hash });
   console.log(hashObject.userId);
   //Dates
   const hashObjectDate = await hashObject.createdAt.getTime();
@@ -184,6 +186,30 @@ const resetUserPassword = async (req, res) => {
   }
 };
 
+const activateUser = async (req, res) => {
+  const hash = req.query.hash;
+  const hashObject = await Hashcheck.findOne({ token: hash });
+
+  //checking dates
+
+  try {
+    const user = await User.findByIdAndUpdate(
+      { _id: hashObject.userId },
+      {
+        active: true,
+      }
+    );
+
+    if (!user) {
+      res.redirect(process.env.PROXY_APP + "/login/?problem=our");
+    } else if (user) {
+      res.redirect(process.env.PROXY_APP + "/login");
+    }
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+};
+
 module.exports = {
   signupUser,
   loginUser,
@@ -191,4 +217,5 @@ module.exports = {
   updateUser,
   resetUserEmail,
   resetUserPassword,
+  activateUser,
 };

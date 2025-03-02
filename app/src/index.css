@@ -52,6 +52,18 @@
     }
   }
 
+  --animate-rotate: rotate 2s linear infinite;
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
   --animate-fall-right: fall-right 0.8s ease-in-out forwards;
   --animate-fall-right-delay: fall-right 0.8s ease-in-out both 0.5s;
   --animate-fall-right-faster: fall-right 0.7s ease-in-out forwards;

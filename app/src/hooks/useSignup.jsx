@@ -1,13 +1,10 @@
 import { useState } from "react";
-import { useAuthContext } from "./useAuthContext";
 const apiURL = import.meta.env.VITE_API_URL;
 
 export function useSignup() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const [message, setMessage] = useState(null);
-
-  const { setUser } = useAuthContext();
 
   async function signup(data) {
     setIsLoading(true);
@@ -28,6 +25,7 @@ export function useSignup() {
     }
 
     if (response.ok) {
+      setIsLoading(false);
       setMessage(
         "Registrace proběhla úspěšně. Odeslali jsme Vám email s odkazem pro aktivaci účtu. Jakmile na odkaz kliknete, bude Váš účet aktivován a Vy se můžete přihlásit."
       );

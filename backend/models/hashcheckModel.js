@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 //user schema for mongoDB
 const Schema = mongoose.Schema;
 
-const passresetSchema = new Schema(
+const hashcheckSchema = new Schema(
   {
     userId: {
       type: String,
@@ -19,4 +19,4 @@ const passresetSchema = new Schema(
 );
 
 //module export
-module.exports = mongoose.model("Passreset", passresetSchema);
+module.exports = mongoose.model("Hashcheck", hashcheckSchema);
