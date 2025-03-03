@@ -263,11 +263,11 @@ export function Subscriptions({ setActiveButton }) {
                     Frekvence:
                   </h4>
                   <p>
-                    {subFrequency == "weekly" && "Jednou za měsíc"}
-                    {subFrequency == "biWeekly" && "Jednou za měsíc"}
+                    {subFrequency == "weekly" && "Jednou za týden"}
+                    {subFrequency == "biWeekly" && "Jednou za dva týdny"}
                     {subFrequency == "monthly" && "Jednou za měsíc"}
-                    {subFrequency == "biMonthly" && "Dvakrát za měsíc"}
-                    {subFrequency == "quarterly" && "Třikrát za měsíc"}
+                    {subFrequency == "biMonthly" && "Jednou za dva měsíce"}
+                    {subFrequency == "quarterly" && "Jednou za tři měsíce"}
                   </p>
                 </div>
                 <div className="grid grid-cols-2 py-2 px-4 bg-slate-100">
@@ -533,7 +533,8 @@ export function Subscriptions({ setActiveButton }) {
               )}
               <div className="flex gap-3 justify-center">
                 <button
-                  className="p-3 rounded-md bg-red-400 hover:bg-red-500 transition-all ease-in-out cursor-pointer font-semibold text-textLight"
+                  disabled={checkDelete !== subName}
+                  className="p-3 rounded-md bg-deleteButton hover:bg-red-500 transition-all ease-in-out cursor-pointer font-semibold text-textButton disabled:bg-slate-300 disabled:hover:bg-slate-300 disabled:cursor-default"
                   onClick={() => {
                     if (checkDelete == subName) {
                       setToggleDelete(false);
@@ -553,6 +554,7 @@ export function Subscriptions({ setActiveButton }) {
                 >
                   Zrušit předplatné
                 </button>
+
                 <button
                   className="p-3 rounded-md bg-zinc-200 font-semibold text-textDarker cursor-pointer transition-all ease-in-out hover:bg-zinc-300"
                   onClick={() => {

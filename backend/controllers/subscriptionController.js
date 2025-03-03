@@ -1,4 +1,9 @@
 require("dotenv").config();
+const {
+  pipedriveApiCallV1,
+  pipedriveApiCallV2,
+  pipedriveApiCallDeleteV2,
+} = require("../functions/pipedriveApiCall");
 const Subscription = require("../models/subscriptionModel");
 const mongoose = require("mongoose");
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
@@ -44,6 +49,8 @@ const createSubscription = async (req, res) => {
     userId,
     stripeSubId,
     stripeCustomerId,
+    pipedrivePersonId,
+    pipedriveDealId,
     firstName,
     secondName,
     phone,
@@ -120,10 +127,94 @@ const createSubscription = async (req, res) => {
 
   //Creating subscription
   try {
+    // ------------- PIPEDRIVE - creating new deal ----------------
+    let subPriceValue = 0;
+
+    switch (subFrequency.toLowerCase()) {
+      case "weekly":
+        subPriceValue = 400;
+        break;
+      case "biweekly":
+        subPriceValue = 200;
+        break;
+      case "monthly":
+        subPriceValue = 100;
+        break;
+      case "bimonthly":
+        subPriceValue = 50;
+        break;
+      case "quarterly":
+        subPriceValue = 33;
+        break;
+    }
+
+    let deliveryAddress = subDeliveryAddress;
+    if (subDeliveryAddress == "") {
+      deliveryAddress = "empty";
+    }
+
+    const payload = {
+      title: "Předplatné - " + subName,
+      value: Number(subPriceValue),
+      user_id: Number(process.env.PIPEDRIVE_ADMIN_ID),
+      person_id: Number(pipedrivePersonId),
+      pipeline_id: 1,
+
+      //Subscription website
+      "6fe93496fbed53b575f74a3f2c417c3a2835b8ec": subWebsite.toString(),
+      //Subscription frequency
+      "324eb38d42174b3aa9a863a9b17f113e8a0e7e49": subFrequency.toString(),
+      //Prefered day
+      "5eae91790af43786f5240c32e6e11d83ece79a89": subDay.toString(),
+      //Delivery method
+      "312b6dcc95b0ba9ed831633b403a4403a40b31dd": subDeliveryMethod.toString(),
+      //Delivery address
+      "7a1dbb2f437886b1406c46e6b321fcc1e1d6e109": deliveryAddress.toString(),
+      //Address
+      a510a3128419f358c03cc252266397c5f5da2d1c: address.toString(),
+      //Address number
+      a5607a0f617db28a2c7fd063678d356477fd8957: addressNumber.toString(),
+      //City
+      "5b5f7eede36fbbd0806074735ec0267c9d922cae": city.toString(),
+      //City number
+      "1366f1e1ffa9d80d7d8f62138a30b0f76442feef": cityNumber.toString(),
+      //Stripe subscription id
+      e4fb7e3a556ffa5f39a87863e13d9fba332c7c65: stripeSubId.toString(),
+      //Stripe customer id
+      "234eb23481651e82621f30edd7ff98afaa46b125": stripeCustomerId.toString(),
+      //User id
+      d928b5c7e8156ed85f55cb5457effb76e8b77667: userId.toString(),
+      //Mongoose id
+      "5146a1cc524232c94914cbb5068e4b724407b9ed": "empty",
+      //firstName
+      "16185306e53f189ae97c6ffa6e4650f77dac9419": firstName.toString(),
+      //secondName
+      "5373cbb402366fa93e8b650db79a1fc84a7f53e8": secondName.toString(),
+      //Email
+      "598febcf061c8207b5a96191701df4fe30b75456": email.toString(),
+      //Phone
+      "4bf6ca46c825f1b8e771f55d14fb46245ee171f1": phone.toString(),
+    };
+
+    const pipeResponse = await pipedriveApiCallV1("deals", "POST", payload);
+
+    console.log(pipeResponse);
+
+    const pipeDeal = await pipeResponse.json();
+
+    if (!pipeResponse.ok) {
+      throw Error(
+        "Omlouváme se, předplatné nelze vytvořit. Chyba je na naší straně. (Pipedrive)"
+      );
+    }
+
+    // ------------- MONGOOSE - creating new record of subscription ----------------
     const subscription = await Subscription.create({
       userId,
       stripeSubId,
       stripeCustomerId,
+      pipedrivePersonId,
+      pipedriveDealId: pipeDeal.data.id,
       active: false,
       firstName,
       secondName,
@@ -151,31 +242,164 @@ const createSubscription = async (req, res) => {
 //delete subscription
 const deleteSubscription = async (req, res) => {
   const { id } = req.params;
+  try {
+    // ------------- MONGOOSE - deleting record ----------------
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: "Takové předplatné neexistuje" });
+    }
+
+    const subscription = await Subscription.findOneAndDelete({ _id: id });
+
+    if (!subscription) {
+      throw Error("Takové předplatné neexistuje");
+    }
+
+    // ------------- PIPEDRIVE - deleting deal ----------------
+    const pipeResponse = await pipedriveApiCallDeleteV2(
+      "deals/" + subscription.pipedriveDealId,
+      "DELETE"
+    );
+
+    if (!pipeResponse.ok) {
+      throw Error(
+        "Chyba je na naší straně, omlouváme se. Zkuste to prosím později. (Pipedrive)"
+      );
+    }
+
+    res.status(200).json(subscription);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+//update subscription
+const updateSubscription = async (req, res) => {
+  const {
+    userId,
+    stripeSubId,
+    stripeCustomerId,
+    pipedrivePersonId,
+    pipedriveDealId,
+    firstName,
+    secondName,
+    phone,
+    email,
+    address,
+    addressNumber,
+    city,
+    cityNumber,
+    subName,
+    subWebsite,
+    subFrequency,
+    subDay,
+    subDeliveryMethod,
+    subDeliveryAddress,
+    items,
+  } = req.body;
+
+  console.log("update subscription");
+  const { id, frequencyChange, nameChange, websiteChange } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "Takové předplatné neexistuje" });
   }
 
-  const subscription = await Subscription.findOneAndDelete({ _id: id });
+  // ------------- MONGOOSE - updating mongoose record ----------------
+  const subscription = await Subscription.findOneAndUpdate(
+    { _id: id },
+    {
+      ...req.body,
+    }
+  );
 
   if (!subscription) {
     return res.status(400).json({ error: "Takové předplatné neexistuje" });
   }
 
-  res.status(200).json(subscription);
-};
+  // ------------- PIPEDRIVE - creating new deal ----------------
+  let subPriceValue = 0;
 
-//update subscription
-const updateSubscription = async (req, res) => {
-  console.log("update subscription");
-  const { id, frequencyChange, nameChange, websiteChange } = req.params;
-
-  console.log(frequencyChange, req.body.active);
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "Takové předplatné neexistuje" });
+  switch (subFrequency.toLowerCase()) {
+    case "weekly":
+      subPriceValue = 400;
+      break;
+    case "biweekly":
+      subPriceValue = 200;
+      break;
+    case "monthly":
+      subPriceValue = 100;
+      break;
+    case "bimonthly":
+      subPriceValue = 50;
+      break;
+    case "quarterly":
+      subPriceValue = 33;
+      break;
   }
 
+  let deliveryAddress = subDeliveryAddress;
+  if (subDeliveryAddress == "") {
+    deliveryAddress = "empty";
+  }
+
+  const payload = {
+    title: "Předplatné - " + subName,
+    value: subPriceValue,
+    person_id: Number(pipedrivePersonId),
+    //Subscription website
+    custom_fields: {
+      "6fe93496fbed53b575f74a3f2c417c3a2835b8ec": subWebsite.toString(),
+      //Subscription frequency
+      "324eb38d42174b3aa9a863a9b17f113e8a0e7e49": subFrequency.toString(),
+      //Prefered day
+      "5eae91790af43786f5240c32e6e11d83ece79a89": subDay.toString(),
+      //Delivery method
+      "312b6dcc95b0ba9ed831633b403a4403a40b31dd": subDeliveryMethod.toString(),
+      //Delivery address
+      "7a1dbb2f437886b1406c46e6b321fcc1e1d6e109": deliveryAddress.toString(),
+      //Address
+      a510a3128419f358c03cc252266397c5f5da2d1c: address.toString(),
+      //Address number
+      a5607a0f617db28a2c7fd063678d356477fd8957: addressNumber.toString(),
+      //City
+      "5b5f7eede36fbbd0806074735ec0267c9d922cae": city.toString(),
+      //City number
+      "1366f1e1ffa9d80d7d8f62138a30b0f76442feef": cityNumber.toString(),
+      //Stripe subscription id
+      e4fb7e3a556ffa5f39a87863e13d9fba332c7c65: stripeSubId.toString(),
+      //Stripe customer id
+      "234eb23481651e82621f30edd7ff98afaa46b125": stripeCustomerId.toString(),
+      //User id
+      d928b5c7e8156ed85f55cb5457effb76e8b77667: userId.toString(),
+      //Mongoose id
+      "5146a1cc524232c94914cbb5068e4b724407b9ed": id.toString(),
+      //firstName
+      "16185306e53f189ae97c6ffa6e4650f77dac9419": firstName.toString(),
+      //secondName
+      "5373cbb402366fa93e8b650db79a1fc84a7f53e8": secondName.toString(),
+      //Email
+      "598febcf061c8207b5a96191701df4fe30b75456": email.toString(),
+      //Phone
+      "4bf6ca46c825f1b8e771f55d14fb46245ee171f1": phone.toString(),
+    },
+  };
+
+  const pipeResponse = await pipedriveApiCallV2(
+    "deals/" + pipedriveDealId,
+    "PATCH",
+    payload
+  );
+
+  const pipeDeal = await pipeResponse.json();
+
+  if (!pipeResponse.ok) {
+    console.log(pipeResponse.error);
+    throw Error(
+      "Omlouváme se, předplatné nelze vytvořit. Chyba je na naší straně. (Pipedrive)"
+    );
+  }
+
+  // ------------- STRIPE - update ----------------
   //Decide if it is also necessary to call stripe subscription update
   if (
     (frequencyChange == 1 || nameChange == 1 || websiteChange == 1) &&
@@ -220,17 +444,6 @@ const updateSubscription = async (req, res) => {
         " // E-shop: " +
         req.body.subWebsite,
     });
-  }
-
-  const subscription = await Subscription.findOneAndUpdate(
-    { _id: id },
-    {
-      ...req.body,
-    }
-  );
-
-  if (!subscription) {
-    return res.status(400).json({ error: "Takové předplatné neexistuje" });
   }
 
   res.status(200).json(subscription);

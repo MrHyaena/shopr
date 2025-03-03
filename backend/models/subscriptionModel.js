@@ -16,6 +16,12 @@ const subscriptionSchema = new Schema(
     stripeCustomerId: {
       type: String,
     },
+    pipedrivePersonId: {
+      type: String,
+    },
+    pipedriveDealId: {
+      type: String,
+    },
     active: {
       type: Boolean,
       required: true,

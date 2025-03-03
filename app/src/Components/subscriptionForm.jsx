@@ -26,9 +26,12 @@ export function SubscriptionForm() {
 
   //data from form
   const [formData, setFormData] = useState({
-    userId: "",
-    stripeSubId: "",
-    active: "",
+    userId: "empty",
+    stripeSubId: "empty",
+    stripeCustomerId: "empty",
+    pipedrivePersonId: "empty",
+    pipedriveDealId: "empty",
+    active: false,
     firstName: "",
     secondName: "",
     phone: "",
@@ -52,6 +55,9 @@ export function SubscriptionForm() {
       const sub = subscriptions.find((element) => element._id == id);
       const newData = {
         stripeSubId: sub.stripeSubId,
+        stripeCustomerId: sub.stripeCustomerId,
+        pipedrivePersonId: sub.pipedrivePersonId,
+        pipedriveDealId: sub.pipedriveDealId,
         active: sub.active,
         firstName: sub.firstName,
         secondName: sub.secondName,
@@ -807,6 +813,8 @@ export function SubscriptionForm() {
                   userId: user.id,
                   stripeSubId: formData.stripeSubId,
                   stripeCustomerId: user.stripeCustomerId,
+                  pipedrivePersonId: user.pipedrivePersonId,
+                  pipedriveDealId: formData.pipedriveDealId,
                   active: formData.active,
                   firstName: formData.firstName,
                   secondName: formData.secondName,

@@ -9,6 +9,10 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET);
 const Subscription = require("../models/subscriptionModel");
 const User = require("../models/userModel");
 const mongoose = require("mongoose");
+const {
+  pipedriveApiCallV2,
+  pipedriveApiCallV1,
+} = require("../functions/pipedriveApiCall");
 const endpointSecret = process.env.STRIPE_WEBHOOK;
 
 //controller functions
@@ -39,6 +43,7 @@ router.get(
     if (!subFrequency) {
       return res.status(404).json("You need to set up subFrequency");
     }
+    // ---------------------- STRIPE - creating checkout session ----------------------
 
     let priceId;
 
@@ -93,8 +98,9 @@ router.get(
 router.get("/success", express.json(), async (req, res) => {
   const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
 
+  // ---------------------- MONGOOSE - updating subscription to active: true ----------------------
   try {
-    const response = await Subscription.findByIdAndUpdate(
+    const subscription = await Subscription.findByIdAndUpdate(
       { _id: session.metadata.subId },
       {
         active: true,
@@ -102,13 +108,52 @@ router.get("/success", express.json(), async (req, res) => {
         stripeCustomerId: session.customer,
       }
     );
-    const user = await User.findByIdAndUpdate(
-      { _id: session.metadata.userId },
-      { stripeCustomerId: session.customer }
+
+    // ---------------------- PIPEDRIVE - updating subscription and switching pipeline stages ----------------------
+    const payload = {
+      stage_id: 3,
+      custom_fields: {
+        //Stripe subscription id
+        e4fb7e3a556ffa5f39a87863e13d9fba332c7c65:
+          subscription.stripeSubId.toString(),
+      },
+    };
+    const pipeResponse = await pipedriveApiCallV2(
+      "deals/" + subscription.pipedriveDealId,
+      "PATCH",
+      payload
     );
 
-    res.status(200).redirect(process.env.PROXY_APP);
+    // ---------------------- PIPEDRIVE - creating task ----------------------
+    const linkArray = await subscription.items.map((item) => {
+      return `<p><a href='https://${item.url}' target='_blank'>${item.url}</a></p>`;
+    });
+
+    console.log(linkArray);
+
+    const note = linkArray.join(" ");
+    console.log(note);
+
+    const payloadTask = await {
+      subject: "Vyplnit objednávku - " + subscription.subWebsite,
+      type: "task",
+      user_id: Number(process.env.PIPEDRIVE_ADMIN_ID),
+      deal_id: Number(subscription.pipedriveDealId),
+      person_id: Number(subscription.pipedrivePersonId),
+      note: note,
+    };
+
+    const pipeResponseTask = await pipedriveApiCallV1(
+      "activities",
+      "POST",
+      payloadTask
+    );
+
+    console.log(pipeResponseTask);
+
+    res.redirect(process.env.PROXY_APP);
   } catch (error) {
+    console.log(error);
     res.send({ error: "Error in /success route", error: error });
   }
 });
@@ -127,6 +172,7 @@ router.get("/portal/:stripeCustomerId", express.json(), async (req, res) => {
   }
 });
 
+//Stripe webhook listener
 router.post(
   "/webhook",
   express.raw({ type: "application/json" }),
@@ -154,11 +200,51 @@ router.post(
         //Update subscription according to stripe status
         const subActive = !stripeObject.cancel_at_period_end;
 
+        // ---------------------- MONGOOSE - updating activ: false ----------------------
         const subscription = await Subscription.findOneAndUpdate(
           { stripeSubId: stripeObject.id },
           { active: subActive }
         );
-        res.status(200).json({ isActivated: subActive });
+
+        // ---------------------- PIPEDRIVE - updating stage ----------------------
+        const payload = {
+          stage_id: 2,
+        };
+        const pipeResponse = await pipedriveApiCallV2(
+          "deals/" + subscription.pipedriveDealId,
+          "PATCH",
+          payload
+        );
+
+        const pipeDeal = await pipeResponse.json();
+
+        // ---------------------- PIPEDRIVE - deleting tasks ----------------------
+
+        const pipeActivities = await pipedriveApiCallV2("activities", "GET");
+
+        const activitiesJson = await pipeActivities.json();
+
+        const activitiesForDeletion = await activitiesJson.data.filter(
+          (item) =>
+            item.done == false &&
+            item.deal_id == subscription.pipedriveDealId &&
+            item.is_deleted == false
+        );
+
+        const activitiesIds = activitiesForDeletion.map((item) => {
+          return item.id;
+        });
+
+        const idsJoin = activitiesIds.join(",");
+
+        const pipeDeleteActivitiesBulkcall = await pipedriveApiCallV1(
+          "activities?ids=" + idsJoin,
+          "DELETE"
+        );
+
+        console.log(pipeDeleteActivitiesBulkcall);
+
+        res.status(200).json({ isActivated: subActive, pipedrive: pipeDeal });
       } catch (error) {
         res.status(400).json({ error: error.message });
       }

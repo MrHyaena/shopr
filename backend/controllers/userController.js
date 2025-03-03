@@ -7,6 +7,7 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const validator = require("validator");
+const { pipedriveApiCallV1 } = require("../functions/pipedriveApiCall");
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 //create token function
@@ -59,22 +60,18 @@ const signupUser = async (req, res) => {
     }
 
     // ------------- PIPEDRIVE - creating new person ----------------
-    const pipePersonsResponse = await fetch(
-      process.env.PIPEDRIVE_URL + "/persons",
-      {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "x-api-token": process.env.PIPEDRIVE_SECRET,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: firstName + " " + secondName,
-          owner_id: process.env.PIPEDRIVE_ADMIN_ID,
-          email: [{ value: email, label: "osobni" }],
-          phone: [{ value: phone, label: "osobni" }],
-        }),
-      }
+
+    const payload = {
+      name: firstName + " " + secondName,
+      owner_id: process.env.PIPEDRIVE_ADMIN_ID,
+      email: [{ value: email, label: "osobni" }],
+      phone: [{ value: phone, label: "osobni" }],
+    };
+
+    const pipePersonsResponse = await pipedriveApiCallV1(
+      "persons",
+      "POST",
+      payload
     );
 
     const pipePerson = await pipePersonsResponse.json();
