@@ -2,6 +2,7 @@ require("dotenv").config();
 const Subscription = require("../models/subscriptionModel");
 const mongoose = require("mongoose");
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
+const pipedrive = require("pipedrive");
 
 //get all subscriptions
 const getSubscriptions = async (req, res) => {
@@ -141,6 +142,7 @@ const createSubscription = async (req, res) => {
       subDeliveryAddress,
       items,
     });
+
     res.status(200).json(subscription);
   } catch (error) {
     res.status(400).json({ error: error.message });

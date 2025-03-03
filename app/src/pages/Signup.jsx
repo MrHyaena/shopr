@@ -18,8 +18,8 @@ export function SignupPage() {
 
     return (
       <>
-        <div className=" bg-white w-full p-2">
-          <div className="flex justify-between items-center p-2 gap-5">
+        <div className=" bg-white w-full py-2">
+          <div className="flex justify-between items-center gap-5">
             <h5 className="text-lg font-semibold text-textDark text-start">
               {question}
             </h5>
@@ -32,7 +32,7 @@ export function SignupPage() {
             />
           </div>
           {toggle && (
-            <p className="font-medium text-textDark text-lg text-center  col-span-2">
+            <p className="font-medium text-textDark text-lg text-start  col-span-2">
               {answer}
             </p>
           )}
@@ -276,7 +276,7 @@ export function SignupPage() {
               e-shopu jen chcete.
             </p>
           </div>
-          <div className="flex flex-col items-center gap-3 p-4">
+          <div className="flex flex-col items-center p-4 w-full">
             <QuestionToggle
               question={"Je registrace a vedení účtu zdarma?"}
               answer="Vedení i registrace účtu jsou zcela zdarma. Platíte malou částku pouze v případě, že máte aktivní předplatné."

@@ -5,7 +5,9 @@ const jwt = require("jsonwebtoken");
 const { sendEmail } = require("../email/sendEmail");
 require("dotenv").config();
 const bcrypt = require("bcrypt");
-const express = require("express");
+const mongoose = require("mongoose");
+const validator = require("validator");
+const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 //create token function
 function createToken(_id) {
@@ -28,13 +30,122 @@ const signupUser = async (req, res) => {
     cityNumber,
   } = data;
   try {
-    const user = await User.signup(data);
+    // ------------ VALIDATION OF DATA FROM FORM --------------
+    if (!email || !password || !firstName || !secondName || !phone) {
+      throw Error("Musíte vyplnit všechna pole");
+    }
+
+    if (!validator.isEmail(email)) {
+      throw Error("Emailová adresa není platná");
+    }
+
+    const exists = await User.findOne({ email });
+
+    if (exists) {
+      throw Error("Email již existuje");
+    }
+
+    // ------------- STRIPE - creating customer ----------------
+    const customer = await stripe.customers.create({
+      name: firstName + " " + secondName,
+      email: email,
+      phone: phone,
+    });
+
+    if (!customer) {
+      throw Error(
+        "Omlouváme se, účet nelze vytvořit. Chyba je na naší straně. (Stripe)"
+      );
+    }
+
+    // ------------- PIPEDRIVE - creating new person ----------------
+    const pipePersonsResponse = await fetch(
+      process.env.PIPEDRIVE_URL + "/persons",
+      {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "x-api-token": process.env.PIPEDRIVE_SECRET,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: firstName + " " + secondName,
+          owner_id: process.env.PIPEDRIVE_ADMIN_ID,
+          email: [{ value: email, label: "osobni" }],
+          phone: [{ value: phone, label: "osobni" }],
+        }),
+      }
+    );
+
+    const pipePerson = await pipePersonsResponse.json();
+
+    if (!pipePersonsResponse.ok) {
+      throw Error(
+        "Omlouváme se, účet nelze vytvořit. Chyba je na naší straně. (Pipedrive)"
+      );
+    }
+
+    // ------------------- MONGOOSE - creating user record ----------------------------
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+
+    const user = await User.create({
+      active: false,
+      email,
+      password: hash,
+      pipedrivePersonId: pipePerson.data.id,
+      stripeCustomerId: customer.id,
+      firstName,
+      secondName,
+      phone,
+      address,
+      addressNumber,
+      city,
+      cityNumber,
+    });
+
+    // ------------------- EMAIL VERIFICATION - creating database hash record and sending email with URL request for checking ----------------------------
+    const emailSalt = await bcrypt.genSalt(10);
+    const emailHash = await bcrypt.hash(
+      process.env.EMAIL_ACTIVATION_SECRET,
+      emailSalt
+    );
+
+    const hashcheckRespone = Hashcheck.create({
+      userId: user._id,
+      token: emailHash,
+    });
+
+    const URL =
+      process.env.PROXY_SERVER +
+      "/api/user/activate/authorized/?hash=" +
+      emailHash;
+
+    const toEmail = email;
+    const fromEmail = process.env.SMTP_EMAIL_ADMIN;
+    const subject = "Shopr - Aktivace účtu";
+    const emailBody = `<h2>Dobr&yacute; den!</h2>
+      <p>V&iacute;t&aacute;me V&aacute;s v na&scaron;&iacute; aplikaci. Abyste měli do aplikace př&iacute;stup, je potřeba nejprve &uacute;čet aktivovat. To uděl&aacute;te jednodu&scaron;e kliknut&iacute;m na odkaz n&iacute;že, kter&yacute; V&aacute;s přenese na přihla&scaron;ovac&iacute; obrazovku.</p>
+      <p>${URL}</p>
+      <p>V&aacute;&scaron; &uacute;čet bude t&iacute;mto aktivovan&yacute; a můžete se ihned přihl&aacute;sit.</p>
+      <p>S pozdravem,</p>
+      <p>T&yacute;m Shopr</p>`;
+
+    const emailResponse = await sendEmail(
+      fromEmail,
+      toEmail,
+      subject,
+      emailBody
+    );
+
     //create token
     const token = createToken(user._id);
 
     res.status(200).json({
+      active: false,
       token,
       id: user._id,
+      pipedrivePersonId: pipePerson.data.id,
       stripeCustomerId: user.stripeCustomerId,
       email,
       phone,
@@ -55,7 +166,29 @@ const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.login(email, password);
+    // ------------ VALIDATION OF DATA FROM FORM --------------
+    if (!email || !password) {
+      throw Error("Musíte vyplnit všechna pole");
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      throw Error("Nesprávný email nebo heslo.");
+    }
+
+    // ------------ VERIFICATION - PASSWORD MATCHING --------------
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+      throw Error("Nesprávný email nebo heslo.");
+    }
+
+    if (!user.active) {
+      throw Error(
+        "Účet zatím nebyl aktivován. Na Váš email jsme odeslali zprávu s aktivačním odkazem. Kliknutím na odkaz v emailu účet aktivujete."
+      );
+    }
 
     //create token
     const token = createToken(user._id);
@@ -64,6 +197,7 @@ const loginUser = async (req, res) => {
       token,
       active: user.active,
       id: user._id,
+      pipedrivePersonId: user.pipedrivePersonId,
       stripeCustomerId: user.stripeCustomerId,
       email: user.email,
       phone: user.phone,
@@ -84,12 +218,29 @@ const deleteUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.delete(email, password);
+    // ------------ VALIDATION OF DATA FROM FORM --------------
+    if (!email || !password) {
+      throw Error("Musíte vyplnit všechna pole");
+    }
 
-    //delete user
-    const token = createToken(user._id);
+    // ------------ CHECKING DATABASE FOR USER --------------
+    const user = await User.findOne({ email });
 
-    res.status(200).json({ msg: "deleted", email, token });
+    if (!user) {
+      throw Error("Nesprávný email");
+    }
+
+    // ------------ CHECKING IF PASSWORDS ARE MATCHING --------------
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+      throw Error("Nesprávné heslo");
+    }
+
+    // ------------ DELETING USER FROM DATABASE --------------
+    const deletedUser = await User.findByIdAndDelete({ _id: user.id });
+
+    res.status(200).json({ deleted: true });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -109,7 +260,43 @@ const updateUser = async (req, res) => {
   } = data;
 
   try {
-    const user = await User.update(data);
+    const {
+      email,
+      firstName,
+      secondName,
+      phone,
+      address,
+      addressNumber,
+      city,
+      cityNumber,
+    } = data;
+
+    // ------------ VALIDATION OF DATA --------------
+    if (
+      !email ||
+      !firstName ||
+      !secondName ||
+      !phone ||
+      !address ||
+      !addressNumber ||
+      !city ||
+      !cityNumber
+    ) {
+      throw Error("Musíte vyplnit všechna pole");
+    }
+
+    // ------------ CHECKING IF USER EXISTS --------------
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      throw Error("Nesprávný email");
+    }
+
+    // ------------ UPDATING USER --------------
+    const updateUser = await User.findByIdAndUpdate(
+      { _id: user.id },
+      { firstName, secondName, phone, address, addressNumber, city, cityNumber }
+    );
 
     res.status(200).json({ ...data });
   } catch (error) {
