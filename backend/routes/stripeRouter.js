@@ -246,6 +246,7 @@ router.post(
 
         res.status(200).json({ isActivated: subActive, pipedrive: pipeDeal });
       } catch (error) {
+        console.log(error);
         res.status(400).json({ error: error.message });
       }
     }
