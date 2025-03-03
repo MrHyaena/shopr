@@ -2,7 +2,6 @@ require("dotenv").config();
 const Subscription = require("../models/subscriptionModel");
 const mongoose = require("mongoose");
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
-const pipedrive = require("pipedrive");
 
 //get all subscriptions
 const getSubscriptions = async (req, res) => {

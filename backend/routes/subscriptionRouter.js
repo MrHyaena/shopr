@@ -5,7 +5,6 @@
 require("dotenv").config();
 const express = require("express");
 const requireAuth = require("../middleware/requireAuth");
-const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 //controller functions
 const {
