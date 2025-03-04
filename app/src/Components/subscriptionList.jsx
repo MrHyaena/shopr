@@ -6,122 +6,74 @@ import {
   faGears,
   faHouseUser,
   faPen,
-  faShop,
-  faWallet,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { handleDelete } from "../functions/deleteSubscriptionHandler";
+import { deleteSubscriptionHandler } from "../functions/deleteSubscriptionHandler";
 import { SubscriptionMissing } from "./subscriptionMissing";
 import shopLogo from "/public/shop-solid.png";
+import { deactivateSubscriptionHandler } from "../functions/deactivateSubscriptionHandler";
+import { activateSubscriptionHandler } from "../functions/activateSubscriptionHandler";
 const apiURL = import.meta.env.VITE_API_URL;
 
-export function Subscriptions({ setActiveButton }) {
+export function Subscriptions() {
   const { subscriptions, setSubscriptions } = useSubscriptionContext();
   const { user, setUser } = useAuthContext();
 
-  //deactivate subscription - send user to stripe customer portal, where he can manage
-  async function customerPortal(stripeCustomerId) {
-    const session = await fetch(
-      apiURL + "/api/stripe/portal/" + stripeCustomerId,
-      {
-        mode: "cors",
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-      }
-    );
-
-    const json = await session.json();
-
-    if (session.ok) {
-      window.location.href = json;
-    }
-  }
-
-  //activate subscription - sends user to stripe checkout session
-  async function activateSubscription(
-    subId,
-    subName,
-    subWebsite,
-    subFrequency,
-    stripeCustomerId
-  ) {
-    const session = await fetch(
-      apiURL +
-        "/api/stripe/activate/" +
-        user.id +
-        "/" +
-        subId +
-        "/" +
-        subName +
-        "/" +
-        subWebsite +
-        "/" +
-        subFrequency +
-        "/" +
-        stripeCustomerId,
-      {
-        mode: "cors",
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-      }
-    );
-
-    if (session.ok) {
-      const json = await session.json();
-
-      window.location.href = json;
-    }
-  }
-
   // FUNCTION FOR GENERATING SUBSCRIPTION TABS
 
-  function SubscriptionTabs({
-    subId,
-    stripeSubId,
-    stripeCustomerId,
-    active,
-    firstName,
-    secondName,
-    phone,
-    email,
-    address,
-    addressNumber,
-    city,
-    cityNumber,
-    subName,
-    subWebsite,
-    subFrequency,
-    subDay,
-    subDeliveryMethod,
-    subDeliveryAddress,
-    items,
-  }) {
+  function SubscriptionTabs({ subscriptionData }) {
+    const {
+      _id,
+      stripeSubId,
+      stripeCustomerId,
+      pipedrivePersonId,
+      pipedriveDealId,
+      active,
+      firstName,
+      secondName,
+      phone,
+      email,
+      address,
+      addressNumber,
+      city,
+      cityNumber,
+      subName,
+      subWebsite,
+      subFrequency,
+      subDay,
+      subDeliveryMethod,
+      subDeliveryAddress,
+      items,
+    } = subscriptionData;
+
     const [toggle, setToggle] = useState(false);
+
     const [toggleDelete, setToggleDelete] = useState(false);
     const [checkDelete, setCheckDelete] = useState("");
     const [errorDelete, setErrorDelete] = useState(false);
 
-    const editURL = "/app/form/" + subId;
+    const [toggleDeactivate, setToggleDeactivate] = useState(false);
+    const [checkDeactivate, setCheckDeactivate] = useState("");
+    const [errorDeactivate, setErrorDeactivate] = useState(false);
+
+    const editURL = "/app/form/" + _id;
 
     function SubDetails() {
       return (
         <div
           className="col-span-2 grid xl:grid-cols-3 gap-y-5 gap-x-15"
-          key={"subDetails" + subId}
+          key={"subDetails" + _id}
         >
           <div className="xl:col-span-2">
             <h3 className="text-xl font-bold text-textLight py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
-              <FontAwesomeIcon icon={faCartShopping} />
+              <FontAwesomeIcon
+                icon={faCartShopping}
+                key={"faCartShopping" + _id}
+              />
               Produkty
             </h3>
             <div className="xl:grid hidden grid-cols-4 py-2 px-4 text-md font-semibold text-textLight bg-zinc-800">
@@ -133,7 +85,7 @@ export function Subscriptions({ setActiveButton }) {
               {items.map((item, index) => {
                 if (index % 2 == 0) {
                   return (
-                    <Fragment key={"subItemToBuy" + subId}>
+                    <Fragment key={"subItemToBuy" + item.amount + item.url}>
                       <li className="bg-slate-100 py-2 px-4 xl:hidden">
                         <div className="flex gap-2">
                           <p className="text-textDark font-bold">URL:</p>
@@ -176,41 +128,45 @@ export function Subscriptions({ setActiveButton }) {
                 } else {
                   return (
                     <>
-                      <li className="py-2 px-4 xl:hidden">
-                        <div className="flex gap-2">
-                          <p className="text-textDark font-bold">URL:</p>
+                      <Fragment key={"subItemToBuy" + item.amount + item.url}>
+                        <li className="py-2 px-4 xl:hidden">
+                          <div className="flex gap-2">
+                            <p className="text-textDark font-bold">URL:</p>
+                            <a
+                              href={"https://" + item.url}
+                              className="text-textA"
+                              target="_blank"
+                            >
+                              {item.url}
+                            </a>
+                          </div>
+                          <div className="flex gap-2">
+                            <p className="text-textDark font-bold">Počet:</p>
+                            <p className="">{item.amount}</p>
+                          </div>
+                          <div className="flex gap-2">
+                            <p className="text-textDark font-bold">
+                              Lze změnit:
+                            </p>
+                            {item.changable == "true" ? "Ano" : "Ne"}
+                          </div>
+                        </li>
+                        <li className="py-2 px-4 xl:grid grid-cols-4 items-center  hidden">
                           <a
                             href={"https://" + item.url}
-                            className="text-textA"
+                            className="col-span-2 text-textA"
                             target="_blank"
                           >
                             {item.url}
                           </a>
-                        </div>
-                        <div className="flex gap-2">
-                          <p className="text-textDark font-bold">Počet:</p>
-                          <p className="">{item.amount}</p>
-                        </div>
-                        <div className="flex gap-2">
-                          <p className="text-textDark font-bold">Lze změnit:</p>
-                          {item.changable == "true" ? "Ano" : "Ne"}
-                        </div>
-                      </li>
-                      <li className="py-2 px-4 xl:grid grid-cols-4 items-center  hidden">
-                        <a
-                          href={"https://" + item.url}
-                          className="col-span-2 text-textA"
-                          target="_blank"
-                        >
-                          {item.url}
-                        </a>
-                        <p className="col-span-1 justify-self-center">
-                          {item.amount}
-                        </p>
-                        <p className="col-span-1 justify-self-center">
-                          {item.changable == "true" ? "Ano" : "Ne"}
-                        </p>
-                      </li>
+                          <p className="col-span-1 justify-self-center">
+                            {item.amount}
+                          </p>
+                          <p className="col-span-1 justify-self-center">
+                            {item.changable == "true" ? "Ano" : "Ne"}
+                          </p>
+                        </li>
+                      </Fragment>
                     </>
                   );
                 }
@@ -220,7 +176,7 @@ export function Subscriptions({ setActiveButton }) {
           <div className="col-span-1 flex flex-col">
             <div>
               <h3 className="text-xl font-bold text-textLight py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
-                <FontAwesomeIcon icon={faGears} />
+                <FontAwesomeIcon icon={faGears} key={"fagears" + _id} />
                 Nastavení předplatného
               </h3>
               <div className="flex flex-col font-semibold text-textDark">
@@ -290,7 +246,11 @@ export function Subscriptions({ setActiveButton }) {
                     Platební ID:
                   </h4>
                   <p className="break-all">
-                    {stripeSubId ? stripeSubId : <p>Předplatné je neaktivní</p>}
+                    {stripeSubId !== "empty" ? (
+                      stripeSubId
+                    ) : (
+                      <p>Předplatné je neaktivní</p>
+                    )}
                   </p>
                 </div>
                 {subDeliveryMethod !== "courier" && (
@@ -312,12 +272,13 @@ export function Subscriptions({ setActiveButton }) {
                       <button
                         className="font-semibold text-textDark w-full hover:border-quad hover:text-textButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-quad  cursor-pointer"
                         onClick={() => {
-                          activateSubscription(
-                            subId,
+                          activateSubscriptionHandler(
+                            _id,
                             subName,
                             subWebsite,
                             subFrequency,
-                            stripeCustomerId
+                            stripeCustomerId,
+                            user
                           );
                         }}
                       >
@@ -337,7 +298,7 @@ export function Subscriptions({ setActiveButton }) {
                       <button
                         className="font-semibold text-textDark w-full hover:text-white hover:border-deleteButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-red-500  cursor-pointer"
                         onClick={() => {
-                          customerPortal(stripeCustomerId);
+                          setToggleDeactivate(true);
                         }}
                       >
                         Deaktivovat předplatné
@@ -353,7 +314,7 @@ export function Subscriptions({ setActiveButton }) {
             </div>
             <div>
               <h3 className="text-xl font-bold text-textLight py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
-                <FontAwesomeIcon icon={faHouseUser} />
+                <FontAwesomeIcon icon={faHouseUser} key={"faHouseUser" + _id} />
                 Cílový zákazník
               </h3>
               <div className="grid-cols-2 py-2 px-4 text-md font-semibold text-textLight bg-zinc-700 hidden">
@@ -418,7 +379,7 @@ export function Subscriptions({ setActiveButton }) {
           <div className="mb-5 xl:mb-0">
             <div className="xl:flex gap-10 mb-5 xl:mb-2">
               <p className="text-textDarker text-[12px] mb-2 font-medium">
-                ID: <span className="text-textLighter">{subId}</span>
+                ID: <span className="text-textLighter">{_id}</span>
               </p>
               <p className="text-textDarker text-[12px] mb-2 font-medium">
                 Webová stránka:{" "}
@@ -458,12 +419,13 @@ export function Subscriptions({ setActiveButton }) {
               <>
                 <button
                   onClick={() => {
-                    activateSubscription(
-                      subId,
+                    activateSubscriptionHandler(
+                      _id,
                       subName,
                       subWebsite,
                       subFrequency,
-                      stripeCustomerId
+                      stripeCustomerId,
+                      user
                     );
                   }}
                   className=" text-textDark cursor-pointer hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-quad"
@@ -505,42 +467,47 @@ export function Subscriptions({ setActiveButton }) {
           {toggle ? <SubDetails /> : <></>}
         </div>
         {toggleDelete && (
-          <div className="fixed top-0 right-0 w-full p-5 h-full bg-primary/15 m-auto flex justify-center items-center">
-            <div className="m-auto gap-5 flex flex-col justify-center items-center bg-white p-10 rounded-xl">
+          <div className="fixed top-0 right-0 w-full p-5 h-full bg-primary/50 m-auto flex justify-center items-center">
+            <div className="gap-5 flex flex-col justify-center items-stretch bg-white p-10 rounded-md max-w-[700px]">
+              <h3 className="text-2xl font-bold text-textDark">
+                Smazání předplatného
+              </h3>
               <p className="text-textDark font-semibold">
-                Opravdu chcete zrušit předplatné s názvem:{" "}
-                <span className="text-textHighlightYellow">{subName}</span>?
+                Jakmile předplatné smažete, automaticky vymažeme data o
+                předplatném z našich systémů. Předplatné již nelze obnovit a je
+                potřeba založit úplně nové.
               </p>
-              <label className="flex flex-col gap-2 font-semibold">
-                Pro potvrzení smazání napište jméno předplatného, které vidíte
-                výše.
-                <input
-                  type="text"
-                  className="bg-zinc-50 p-3 rounded-lg border border-slate-200"
-                  value={checkDelete}
-                  onChange={(e) => {
-                    if (errorDelete) {
-                      setErrorDelete(false);
-                    }
-                    setCheckDelete(e.target.value);
-                  }}
-                />
-              </label>
+              <p className="text-textDark font-semibold">
+                Pro potvrzení smazání napište jméno předplatného:{" "}
+                <span className="text-quad">{subName}</span>
+              </p>
+              <input
+                type="text"
+                className="bg-zinc-50 p-3 rounded-lg border border-slate-200 font-semibold"
+                value={checkDelete}
+                onChange={(e) => {
+                  if (errorDelete) {
+                    setErrorDelete(false);
+                  }
+                  setCheckDelete(e.target.value);
+                }}
+              />
               {errorDelete && (
                 <p className="p-2 bg-errorBg border-2 border-errorBorder rounded-md font-semibold text-medium">
                   Vložený text se neshoduje se jménem.
                 </p>
               )}
-              <div className="flex gap-3 justify-center">
+              <div className="grid grid-cols-2 w-full gap-5">
                 <button
                   disabled={checkDelete !== subName}
-                  className="p-3 rounded-md bg-deleteButton hover:bg-red-500 transition-all ease-in-out cursor-pointer font-semibold text-textButton disabled:bg-slate-300 disabled:hover:bg-slate-300 disabled:cursor-default"
+                  className="p-3 rounded-md bg-deleteButton hover:scale-105  hover:bg-red-500 transition-all ease-in-out cursor-pointer font-semibold text-textButton disabled:hover:scale-100 disabled:border disabled:bg-white disabled:border-slate-200 disabled:cursor-default disabled:text-textLighter"
                   onClick={() => {
                     if (checkDelete == subName) {
+                      console.log(_id, user, subscriptions, setSubscriptions);
                       setToggleDelete(false);
                       setCheckDelete(null);
-                      handleDelete(
-                        subId,
+                      deleteSubscriptionHandler(
+                        _id,
                         user,
                         subscriptions,
                         setSubscriptions
@@ -552,13 +519,83 @@ export function Subscriptions({ setActiveButton }) {
                     }
                   }}
                 >
-                  Zrušit předplatné
+                  Smazat předplatné
                 </button>
 
                 <button
-                  className="p-3 rounded-md bg-zinc-200 font-semibold text-textDarker cursor-pointer transition-all ease-in-out hover:bg-zinc-300"
+                  className="p-3 rounded-md bg-white border border-slate-200 font-semibold text-textDark cursor-pointer transition-all ease-in-out hover:scale-105"
                   onClick={() => {
                     setToggleDelete(false);
+                  }}
+                >
+                  Zpět
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+        {toggleDeactivate && (
+          <div className="fixed top-0 right-0 w-full p-5 h-full bg-primary/50 m-auto flex justify-center items-center">
+            <div className="gap-5 flex flex-col justify-center items-stretch bg-white p-10 rounded-md max-w-[700px]">
+              <h3 className="text-2xl font-bold text-textDark">
+                Deaktivace předplatného
+              </h3>
+              <p className="text-textDark font-semibold">
+                Jakmile předplatné deaktivujete, okamžitě se přeruší všechny
+                následující platby a objednávky. Pokud budete chtít předplatné v
+                budoucnu znovu aktivovat, bude potřeba znovu zadat platební
+                údaje z důvodu bezpečnosti v interních systémech neukládáme.
+              </p>
+              <p className="text-textDark font-semibold">
+                Pro potvrzení deaktivace napište jméno předplatného:{" "}
+                <span className="text-quad">{subName}</span>
+              </p>
+              <input
+                type="text"
+                className="bg-zinc-50 p-3 rounded-lg border border-slate-200 font-semibold"
+                value={checkDeactivate}
+                onChange={(e) => {
+                  if (errorDeactivate) {
+                    setErrorDeactivate(false);
+                  }
+                  setCheckDeactivate(e.target.value);
+                }}
+              />
+              {errorDeactivate && (
+                <p className="p-2 bg-errorBg border-2 border-errorBorder rounded-md font-semibold text-medium">
+                  Vložený text se neshoduje se jménem.
+                </p>
+              )}
+              <div className="grid grid-cols-2 w-full gap-5">
+                <button
+                  disabled={checkDeactivate !== subName}
+                  className="p-3 rounded-md bg-deleteButton hover:scale-105  hover:bg-red-500 transition-all ease-in-out cursor-pointer font-semibold text-textButton disabled:hover:scale-100 disabled:border disabled:bg-white disabled:border-slate-200 disabled:cursor-default disabled:text-textLighter"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (checkDeactivate == subName) {
+                      setToggleDeactivate(false);
+                      setCheckDeactivate(null);
+                      deactivateSubscriptionHandler(
+                        _id,
+                        stripeSubId,
+                        user,
+                        setSubscriptions
+                      );
+                    }
+
+                    if (checkDeactivate !== subName) {
+                      setErrorDeactivate(true);
+                    }
+                  }}
+                >
+                  Deaktivovat předplatné
+                </button>
+
+                <button
+                  className="p-3 rounded-md bg-white border border-slate-200 font-semibold text-textDark cursor-pointer transition-all ease-in-out hover:scale-105"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setToggleDeactivate(false);
                   }}
                 >
                   Zpět
@@ -593,28 +630,7 @@ export function Subscriptions({ setActiveButton }) {
             subscriptions.map((item, index) => {
               return (
                 <Fragment key={"subItem" + item._id}>
-                  <SubscriptionTabs
-                    index={index}
-                    subId={item._id}
-                    stripeSubId={item.stripeSubId}
-                    stripeCustomerId={item.stripeCustomerId}
-                    active={item.active}
-                    firstName={item.firstName}
-                    secondName={item.secondName}
-                    phone={item.phone}
-                    email={item.email}
-                    address={item.address}
-                    addressNumber={item.addressNumber}
-                    city={item.city}
-                    cityNumber={item.cityNumber}
-                    subName={item.subName}
-                    subWebsite={item.subWebsite}
-                    subFrequency={item.subFrequency}
-                    subDay={item.subDay}
-                    subDeliveryMethod={item.subDeliveryMethod}
-                    subDeliveryAddress={item.subDeliveryAddress}
-                    items={item.items}
-                  />
+                  <SubscriptionTabs subscriptionData={item} />
                 </Fragment>
               );
             })}

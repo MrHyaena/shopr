@@ -3,7 +3,7 @@ import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 const apiURL = import.meta.env.VITE_API_URL;
 
 // FUNCTION FOR DELETING SUBSCRIPTIONS
-export async function handleDelete(
+export async function deleteSubscriptionHandler(
   subId,
   user,
   subscriptions,

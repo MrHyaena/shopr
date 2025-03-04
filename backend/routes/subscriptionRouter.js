@@ -13,6 +13,7 @@ const {
   getSubscription,
   deleteSubscription,
   updateSubscription,
+  deactivateSubscription,
 } = require("../controllers/subscriptionController");
 
 //creating router
@@ -41,5 +42,8 @@ router.get("/", getSubscriptions);
 
 //get one subscription route
 router.get("/:id", getSubscription);
+
+//deactivate subscription route
+router.get("/deactivate/:subId/:stripeSubId", deactivateSubscription);
 
 module.exports = router;

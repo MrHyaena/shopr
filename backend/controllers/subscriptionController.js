@@ -198,8 +198,6 @@ const createSubscription = async (req, res) => {
 
     const pipeResponse = await pipedriveApiCallV1("deals", "POST", payload);
 
-    console.log(pipeResponse);
-
     const pipeDeal = await pipeResponse.json();
 
     if (!pipeResponse.ok) {
@@ -280,6 +278,7 @@ const updateSubscription = async (req, res) => {
     stripeCustomerId,
     pipedrivePersonId,
     pipedriveDealId,
+    active,
     firstName,
     secondName,
     phone,
@@ -297,7 +296,6 @@ const updateSubscription = async (req, res) => {
     items,
   } = req.body;
 
-  console.log("update subscription");
   const { id, frequencyChange, nameChange, websiteChange } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -316,7 +314,7 @@ const updateSubscription = async (req, res) => {
     return res.status(400).json({ error: "Takové předplatné neexistuje" });
   }
 
-  // ------------- PIPEDRIVE - creating new deal ----------------
+  // ------------- PIPEDRIVE - updating ----------------
   let subPriceValue = 0;
 
   switch (subFrequency.toLowerCase()) {
@@ -342,9 +340,15 @@ const updateSubscription = async (req, res) => {
     deliveryAddress = "empty";
   }
 
+  let stage = 2;
+  if (active) {
+    stage = 3;
+  }
+
   const payload = {
-    title: "Předplatné - " + subName,
-    value: subPriceValue,
+    title: ("Předplatné - " + subName).toString(),
+    value: Number(subPriceValue),
+    stage_id: Number(stage),
     person_id: Number(pipedrivePersonId),
     //Subscription website
     custom_fields: {
@@ -392,8 +396,9 @@ const updateSubscription = async (req, res) => {
 
   const pipeDeal = await pipeResponse.json();
 
+  console.log(pipeResponse);
+
   if (!pipeResponse.ok) {
-    console.log(pipeResponse.error);
     throw Error(
       "Omlouváme se, předplatné nelze vytvořit. Chyba je na naší straně. (Pipedrive)"
     );
@@ -405,7 +410,6 @@ const updateSubscription = async (req, res) => {
     (frequencyChange == 1 || nameChange == 1 || websiteChange == 1) &&
     req.body.active
   ) {
-    console.log("frequency change active");
     let priceId;
 
     switch (req.body.subFrequency.toLowerCase()) {
@@ -449,10 +453,70 @@ const updateSubscription = async (req, res) => {
   res.status(200).json(subscription);
 };
 
+const deactivateSubscription = async (req, res) => {
+  const { subId, stripeSubId } = req.params;
+
+  try {
+    // ---------------------- STRIPE - canceling cubscription ----------------------
+    const stripeSubscription = await stripe.subscriptions.cancel(stripeSubId);
+
+    // ---------------------- MONGOOSE - updating active to false ----------------------
+    const subscription = await Subscription.findOneAndUpdate(
+      { _id: subId },
+      { active: false }
+    );
+
+    // ---------------------- PIPEDRIVE - updating stage ----------------------
+    const payload = {
+      stage_id: 2,
+    };
+
+    const pipeResponse = await pipedriveApiCallV2(
+      "deals/" + subscription.pipedriveDealId,
+      "PATCH",
+      payload
+    );
+
+    // ---------------------- PIPEDRIVE - deleting tasks ----------------------
+    const pipeActivities = await pipedriveApiCallV2("activities", "GET");
+
+    const activitiesJson = await pipeActivities.json();
+
+    const activitiesForDeletion = await activitiesJson.data.filter(
+      (item) =>
+        item.done == false &&
+        item.deal_id == subscription.pipedriveDealId &&
+        item.is_deleted == false
+    );
+
+    const activitiesIds = activitiesForDeletion.map((item) => {
+      return item.id;
+    });
+
+    const idsJoin = activitiesIds.join(",");
+
+    const pipeDeleteActivitiesBulkcall = await pipedriveApiCallV1(
+      "activities?ids=" + idsJoin,
+      "DELETE"
+    );
+
+    const subscriptions = await Subscription.find();
+
+    const subscriptionArray = Object.values(subscriptions);
+
+    console.log(subscriptionArray);
+
+    res.status(200).json({ subscriptions: subscriptionArray });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: error.message });
+  }
+};
 module.exports = {
   getSubscriptions,
   getSubscription,
   createSubscription,
   deleteSubscription,
   updateSubscription,
+  deactivateSubscription,
 };
