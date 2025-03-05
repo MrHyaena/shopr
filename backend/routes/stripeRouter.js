@@ -124,33 +124,7 @@ router.get("/success", express.json(), async (req, res) => {
       payload
     );
 
-    // ---------------------- PIPEDRIVE - creating task ----------------------
-    const linkArray = await subscription.items.map((item) => {
-      return `<p><a href='https://${item.url}' target='_blank'>${item.url}</a></p>`;
-    });
-
-    const note = linkArray.join(" ");
-
-    const payloadTask = await {
-      subject:
-        "Vyplnit objednávku - " +
-        subscription.firstName +
-        " " +
-        subscription.secondName,
-      type: "task",
-      user_id: Number(process.env.PIPEDRIVE_ADMIN_ID),
-      deal_id: Number(subscription.pipedriveDealId),
-      person_id: Number(subscription.pipedrivePersonId),
-      note: note,
-    };
-
-    const pipeResponseTask = await pipedriveApiCallV1(
-      "activities",
-      "POST",
-      payloadTask
-    );
-
-    console.log(pipeResponseTask);
+    // ---------------------- EMAIL - sending confirmation email ----------------------
 
     res.redirect(process.env.PROXY_APP);
   } catch (error) {
@@ -174,85 +148,71 @@ router.get("/portal/:stripeCustomerId", express.json(), async (req, res) => {
 });
 
 //Stripe webhook listener
-//router.post(
-//  "/webhook",
-//  express.raw({ type: "application/json" }),
-//  async (req, res) => {
-//    const sig = req.headers["stripe-signature"];
-//
-//    let event;
-//
-//    try {
-//      event = await stripe.webhooks.constructEvent(
-//        req.body,
-//        sig,
-//        endpointSecret
-//      );
-//    } catch (err) {
-//      res.status(400).send(`Webhook Error: ${err.message}`);
-//      return;
-//    }
-//
-//    const stripeObject = event.data.object;
-//
-//    // Handle the event
-//    if (event.type == "customer.subscription.updated") {
-//      try {
-//        //Update subscription according to stripe status
-//        const subActive = !stripeObject.cancel_at_period_end;
-//
-//        // ---------------------- MONGOOSE - updating activ: false ----------------------
-//        const subscription = await Subscription.findOneAndUpdate(
-//          { stripeSubId: stripeObject.id },
-//          { active: subActive }
-//        );
-//
-//        if (!subActive) {
-//          // ---------------------- PIPEDRIVE - updating stage ----------------------
-//          const payload = {
-//            stage_id: 2,
-//          };
-//          const pipeResponse = await pipedriveApiCallV2(
-//            "deals/" + subscription.pipedriveDealId,
-//            "PATCH",
-//            payload
-//          );
-//
-//          const pipeDeal = await pipeResponse.json();
-//
-//          // ---------------------- PIPEDRIVE - deleting tasks ----------------------
-//
-//          const pipeActivities = await pipedriveApiCallV2("activities", "GET");
-//
-//          const activitiesJson = await pipeActivities.json();
-//
-//          const activitiesForDeletion = await activitiesJson.data.filter(
-//            (item) =>
-//              item.done == false &&
-//              item.deal_id == subscription.pipedriveDealId &&
-//              item.is_deleted == false
-//          );
-//
-//          const activitiesIds = activitiesForDeletion.map((item) => {
-//            return item.id;
-//          });
-//
-//          const idsJoin = activitiesIds.join(",");
-//
-//          const pipeDeleteActivitiesBulkcall = await pipedriveApiCallV1(
-//            "activities?ids=" + idsJoin,
-//            "DELETE"
-//          );
-//        }
-//
-//        res.status(200).json({ isActivated: subActive });
-//      } catch (error) {
-//        console.log(error);
-//        res.status(400).json({ error: error.message });
-//      }
-//    }
-//  }
-//);
+router.post(
+  "/webhook",
+  express.raw({ type: "application/json" }),
+  async (req, res) => {
+    const sig = req.headers["stripe-signature"];
+
+    let event;
+
+    try {
+      event = await stripe.webhooks.constructEvent(
+        req.body,
+        sig,
+        endpointSecret
+      );
+    } catch (err) {
+      res.status(400).send(`Webhook Error: ${err.message}`);
+      return;
+    }
+
+    // Handle the event
+    if (event.type == "invoice.payment_succeeded") {
+      try {
+        const stripeObject = event.data.object;
+
+        const subId = stripeObject.subscription_details.metadata.subId;
+        console.log(subId);
+
+        const subscription = await Subscription.findById(subId);
+
+        // ---------------------- PIPEDRIVE - creating task when invoice is payed----------------------
+        const linkArray = await subscription.items.map((item) => {
+          return `<p><a href='https://${item.url}' target='_blank'>${item.url}</a></p>`;
+        });
+
+        const note = linkArray.join(" ");
+
+        const payloadTask = await {
+          subject:
+            "Vyplnit objednávku - " +
+            subscription.firstName +
+            " " +
+            subscription.secondName,
+          type: "task",
+          user_id: Number(process.env.PIPEDRIVE_ADMIN_ID),
+          deal_id: Number(subscription.pipedriveDealId),
+          person_id: Number(subscription.pipedrivePersonId),
+          note: note,
+        };
+
+        const pipeResponseTask = await pipedriveApiCallV1(
+          "activities",
+          "POST",
+          payloadTask
+        );
+
+        console.log("task created successfully");
+
+        res.status(200).json({ message: "task created successfully" });
+      } catch (error) {
+        console.log(error);
+        res.status(400).json({ error: error.message });
+      }
+    }
+  }
+);
 
 //update subscription
 

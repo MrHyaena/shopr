@@ -504,8 +504,6 @@ const deactivateSubscription = async (req, res) => {
 
     const subscriptionArray = Object.values(subscriptions);
 
-    console.log(subscriptionArray);
-
     res.status(200).json({ subscriptions: subscriptionArray });
   } catch (error) {
     console.log(error);
