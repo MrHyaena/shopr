@@ -32,3 +32,8 @@ export function emailTemplatePasswordChange(changeUrl) {
 
   return body;
 }
+
+export function emailTemplateUserMessage(message, email) {
+  let body = `<h2>uživatelská zpráva</h2><p>${message}</p><p>${email}</p>`;
+  return body;
+}

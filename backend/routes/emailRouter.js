@@ -6,6 +6,7 @@ require("dotenv").config();
 const express = require("express");
 const requireAuth = require("../middleware/requireAuth");
 const { sendEmail } = require("../email/sendEmail");
+const { emailTemplateUserMessage } = require("../email/emailTemplates");
 
 //creating router
 const router = express.Router();
@@ -18,8 +19,8 @@ router.post("/usercontact", requireAuth, async (req, res) => {
 
   let fromEmail = "zakaznik@shopr.cz";
   let toEmail = "info@shopr.cz";
-  let subject = "Shopr - Zákazník " + data.subject;
-  let emailBody = `<h2>uživatelská zpráva</h2><p>${data.message}</p><p>${data.email}</p>`;
+  let subject = "Shopr - Zákazník - " + data.subject;
+  let emailBody = emailTemplateUserMessage(data.message, data.email);
 
   try {
     const response = await sendEmail(fromEmail, toEmail, subject, emailBody);
