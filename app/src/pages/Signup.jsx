@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronDown,
@@ -42,7 +42,9 @@ export function SignupPage() {
   }
 
   function SignupForm() {
-    const [email, setEmail] = useState("");
+    let [searchParams] = useSearchParams();
+
+    const [email, setEmail] = useState(searchParams.get("email"));
     const [password, setPassword] = useState("");
     const [passwordCheck, setPasswordCheck] = useState("");
 

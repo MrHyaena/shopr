@@ -72,15 +72,15 @@ export function Navbar() {
                   <>
                     <div
                       id="priklady"
-                      className="absolute border border-slate-200 p-5 shadow-lg mt-5 z-10 bg-white rounded-lg"
+                      className="absolute border border-slate-200 p-5 shadow-md mt-5 z-10 bg-white rounded-md"
                     >
                       <ul className="flex flex-col gap-5">
                         <li>
                           <Link
-                            href="/priklady/suplementy"
+                            href="/priklady/doplnky-stravy"
                             className=" text-base hover:text-quad transition-all ease-in-out"
                           >
-                            Výživové doplňky
+                            Doplňky stravy
                           </Link>
                         </li>
                         <li>
@@ -93,7 +93,7 @@ export function Navbar() {
                         </li>
                         <li>
                           <Link
-                            href="/priklady/jidlo"
+                            href="/priklady/kava-caj-vino"
                             className=" text-base hover:text-quad transition-all ease-in-out"
                           >
                             Káva, čaj a víno
@@ -101,10 +101,10 @@ export function Navbar() {
                         </li>
                         <li>
                           <Link
-                            href="/priklady/drogerie"
+                            href="/priklady/kosmetika"
                             className=" text-base hover:text-quad transition-all ease-in-out"
                           >
-                            Drogerie
+                            Kosmetika
                           </Link>
                         </li>
                       </ul>

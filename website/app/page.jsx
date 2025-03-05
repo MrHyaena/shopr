@@ -24,6 +24,7 @@ import ReviewOne from "./components/ReviewOne";
 import ReviewGrid from "./components/ReviewGrid";
 import heroImgTwo from "./_img/hero.jpg";
 import Link from "next/link";
+import { CTA } from "./components/CTA";
 
 //Metadata
 export const metadata = {
@@ -34,49 +35,6 @@ export const metadata = {
 
 export default function Home() {
   function HeroSection() {
-    return (
-      <>
-        <div className="pt-40 py-50 bg-linear-150 from-0% to-40% from-violet-100 to-white xl:min-h-[700px] min-h-screen flex items-center justify-center">
-          <div className="max-w-wrapper">
-            <div className="grid grid-cols-2 items-center gap-5">
-              <div className="flex flex-col items-start justify-center h-full gap-5">
-                <h1 className="z-2">
-                  Pravidelné objednávky
-                  <span className="text-quad">
-                    {" "}
-                    <br />
-                    na jakémkoliv <br />
-                    e-shopu
-                  </span>{" "}
-                  jen chcete
-                </h1>
-
-                <p className="text-xl font-semibold text-textDark z-2">
-                  Pravidelná objednávka ze všech e-shopů na internetu. Už nikdy
-                  se nebudete muset dívat na prázdné balení od fitness
-                  suplementů, kosmetiky, drogerie nebo čehokoliv jiného.
-                </p>
-                <button className="bg-quad shadow-md cursor-pointer rounded-md px-4 py-3 text-textButton font-bold text-xl hover:scale-102 transition-all ease-in-out">
-                  Založit uživatelský účet
-                </button>
-              </div>
-
-              <div className="justify-self-center">
-                <Image
-                  src={heroImg}
-                  alt="hero-image"
-                  width={500}
-                  height={500}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  function HeroSectionTwo() {
     return (
       <>
         <div className="xl:min-h-[900px] pt-10 grid grid-cols-5 min-h-screen items-stretch justify-center overflow-x-hidden">
@@ -348,7 +306,7 @@ export default function Home() {
 
   return (
     <>
-      <HeroSectionTwo />
+      <HeroSection />
       <BlackDivider
         text={
           "Odstresujte hlavu a nechte starosti s pravidelnými nákupy na nás"
@@ -362,7 +320,11 @@ export default function Home() {
           "Celý uživatelský účet, jeho nastavení a tvorba předplatných je zdarma. Platba probíhá pouze ve chvíli, kdy máte u nějakého e-shopu předplatné aktivované a my pro Vás zajišťujeme pravidelné objednávky."
         }
       />
-      <Newsletter />
+      <CTA
+        subHeading={"Využijte svůj čas smysluplně"}
+        heading={"Nechte pravidelné objednávky na nás!"}
+        text={`Věříme, že máte v živote lepší věci na práci než se neustále zabývat tím, že jste na něco zapomněli nebo že Vám někde něco chybí. Od toho jsme tu my. Devadesát korun je rozdíl mezi stresem a klidem.`}
+      />
     </>
   );
 }

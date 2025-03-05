@@ -154,8 +154,9 @@ export default function Howto() {
             <p className=" font-medium text-textDark text-lg">
               Známe to všichni. Víme, že potřebujeme něco nakoupit, ale odložíme
               to na večer. Následně na to zapomeneme, jen aby se tento cyklus
-              opakoval dalších několik dní.
+              opakoval dalších několik dní. Pojďme to jednou a provždy vyřešit!
             </p>
+
             <button className="bg-quad w-full rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-2xl font-semibold p-3 text-textButton cursor-pointer my-10">
               Založit účet
             </button>

@@ -38,7 +38,7 @@
 
   p {
     font-size: var(--text-lg);
-    color: var(--color-textDarker);
+    color: var(--color-textDark);
     font-weight: 600;
   }
 

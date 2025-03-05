@@ -3,6 +3,7 @@ import Newsletter from "../components/Newsletter";
 import PriceDescription from "../components/PriceDescription";
 import QuestionShow from "../components/QuestionsShow";
 import Link from "next/link";
+import { CTA } from "../components/CTA";
 
 export const metadata = {
   title: "Shopr: Cena",
@@ -32,7 +33,7 @@ export default function Price() {
           </p>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center py-30">
+      <div className="flex flex-col justify-center items-center py-40">
         <div className="max-w-wrapper grid grid-cols-2 items-start justify-start gap-20">
           <div className="flex flex-col justify-center items-center gap-2 text-center col-span-2">
             <h4>Otázky</h4>
@@ -81,12 +82,17 @@ export default function Price() {
               href="/otazky"
               className="bg-quad shadow-md cursor-pointer rounded-md px-4 py-3 text-textButton font-bold text-xl hover:scale-105 transition-all ease-in-out"
             >
-              Založit účet ZDARMA
+              Sekce otázek
             </Link>
           </div>
         </div>
       </div>
-      <Newsletter />
+      <CTA
+        subHeading={"Ušetřete čas a starosti"}
+        heading={"Nechte pravidelné objednávky na nás!"}
+        text={`Už žádné zapomenuté objednávky nebo zbytečné starosti. S naší pravidelnou objednávkou dostanete své oblíbené 
+                  doplňky stravy z jakéhokoliv e-shopu vždy včas a bez jakéhokoliv stresu.`}
+      />
     </>
   );
 }
