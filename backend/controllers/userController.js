@@ -8,6 +8,10 @@ const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const validator = require("validator");
 const { pipedriveApiCallV1 } = require("../functions/pipedriveApiCall");
+const {
+  emailTemplateActivateAccount,
+  emailTemplatePasswordChange,
+} = require("../email/emailTemplates");
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 //create token function
@@ -119,14 +123,9 @@ const signupUser = async (req, res) => {
       emailHash;
 
     const toEmail = email;
-    const fromEmail = process.env.SMTP_EMAIL_ADMIN;
+    const fromEmail = process.env.SMTP_EMAIL_INFO;
     const subject = "Shopr - Aktivace účtu";
-    const emailBody = `<h2>Dobr&yacute; den!</h2>
-      <p>V&iacute;t&aacute;me V&aacute;s v na&scaron;&iacute; aplikaci. Abyste měli do aplikace př&iacute;stup, je potřeba nejprve &uacute;čet aktivovat. To uděl&aacute;te jednodu&scaron;e kliknut&iacute;m na odkaz n&iacute;že, kter&yacute; V&aacute;s přenese na přihla&scaron;ovac&iacute; obrazovku.</p>
-      <p>${URL}</p>
-      <p>V&aacute;&scaron; &uacute;čet bude t&iacute;mto aktivovan&yacute; a můžete se ihned přihl&aacute;sit.</p>
-      <p>S pozdravem,</p>
-      <p>T&yacute;m Shopr</p>`;
+    const emailBody = emailTemplateActivateAccount(URL);
 
     const emailResponse = await sendEmail(
       fromEmail,
@@ -318,10 +317,10 @@ const resetUserEmail = async (req, res) => {
 
     //Setting up and sending email
     const url = process.env.PROXY_APP + "/reset/password?hash=" + hash;
-    const emailBody = `<h3>Dobr&yacute; den,</h3> <p>tento email slouž&iacute; pro změnu hesla v aplikaci Shopr. Pro změnu hesla klepněte na odkaz n&iacute;že:</p> <p><a href="${url}">${url}</p> <p>Pokud jste si tuto změnu nevyž&aacute;dali, napi&scaron;te n&aacute;m pros&iacute;m na adresu <a href="mailto:info@shopr.cz">info@shopr.cz</a>.</p> <p>Přejeme V&aacute;m kr&aacute;sn&yacute; zbytek dne.</p> <p>----------------------------------</p> <p>S pozdravem,</p> <p>Martin Doležal</p> <p>Shopr</p>`;
-    const fromEmail = process.env.SMTP_EMAIL_ADMIN;
+    const emailBody = emailTemplatePasswordChange(url);
+    const fromEmail = process.env.SMTP_EMAIL_INFO;
     const toEmail = email;
-    const subject = "Shopr: Změna hesla k uživatelskému účtu";
+    const subject = "Shopr - Žádost o změnu hesla";
     const response = await sendEmail(fromEmail, toEmail, subject, emailBody);
   }
 

@@ -13,6 +13,10 @@ const {
   pipedriveApiCallV2,
   pipedriveApiCallV1,
 } = require("../functions/pipedriveApiCall");
+const { sendEmail } = require("../email/sendEmail");
+const {
+  emailTemplateActivateSubscription,
+} = require("../email/emailTemplates");
 const endpointSecret = process.env.STRIPE_WEBHOOK;
 
 //controller functions
@@ -125,6 +129,12 @@ router.get("/success", express.json(), async (req, res) => {
     );
 
     // ---------------------- EMAIL - sending confirmation email ----------------------
+    const fromEmail = process.env.SMTP_EMAIL_INFO;
+    const toEmail = subscription.email;
+    const subject = "Shopr - Předplatné aktivováno";
+    const emailBody = emailTemplateActivateSubscription(subscription.subName);
+
+    sendEmail(fromEmail, toEmail, subject, emailBody);
 
     res.redirect(process.env.PROXY_APP);
   } catch (error) {
