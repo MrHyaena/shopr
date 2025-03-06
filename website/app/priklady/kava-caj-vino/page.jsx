@@ -7,6 +7,8 @@ import { ExamplesGrid } from "@/app/components/Grids/ExamplesGrid";
 import { TextSection } from "@/app/components/TextSection";
 import { ImageTextCheckmarks } from "@/app/components/ImageTextSection/ImageTextCheckmarks";
 import { BlockHeroSection } from "@/app/components/HeroSections/BlockHeroSection";
+import { HeadingCenter } from "@/app/components/Heading/HeadingCenter";
+import { HowDoesItWork } from "@/app/components/HowDoesItWork";
 
 export default function Supplements() {
   function BlackDivider({ text }) {
@@ -42,43 +44,27 @@ export default function Supplements() {
         />
       </BlockHeroSection>
       <BlackDivider />
+      <TextSection
+        subHeading={"Pravidelnost je základ"}
+        heading={"Aneb konec prázdným balením!"}
+        text={`Dodržování zdravého životního stylu a správné výživy není jen o volbě kvalitních produktů, ale hlavně o jejich pravidelném užívání. Vitamíny a minerály prospívají tělu jen tehdy, když je doplňujeme soustavně, proteiny jsou nejúčinnější při dlouhodobé podpoře svalového růstu a regenerace, a i zdravé pochoutky mají smysl, pokud jsou součástí vyváženého jídelníčku. Kolikrát už se vám ale stalo, že jste sáhli do skříně pro oblíbený doplněk a zjistili, že je balení prázdné? S pravidelnou zásobou už se nemusíte starat, jestli vám došly vitamíny, chybí minerály nebo zda si můžete dopřát svůj oblíbený proteinový shake. Doplňování výživy by nemělo být náhodné – udělejte z něj automatickou součást svého zdravého režimu a dopřejte tělu přesně to, co potřebuje, bez zbytečných výpadků!`}
+      />
+
       <ExamplesGrid
         headingOne={"Vitamíny"}
-        textOne={`Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aliquam facilis sequi recusandae laborum quidem. Sequi earum
-                  reiciendis provident quaerat soluta veritatis.`}
+        textOne={`Vitamíny jsou základním pilířem zdraví – podporují imunitu, dodávají energii a pomáhají proti únavě. Ať už jde o vitamín C pro obranyschopnost, D pro silné kosti nebo B-komplex pro správné fungování metabolismu, jejich pravidelný přísun udržuje tělo i mysl v kondici.`}
         imageOne={heroImg}
-        headingTwo={"Vitamíny"}
-        textTwo={`Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aliquam facilis sequi recusandae laborum quidem. Sequi earum
-                  reiciendis provident quaerat soluta veritatis.`}
+        headingTwo={"Minerály"}
+        textTwo={`Minerály hrají klíčovou roli v mnoha tělesných funkcích – hořčík pomáhá proti únavě a svalovým křečím, železo podporuje tvorbu červených krvinek a vápník je nezbytný pro pevné kosti. Jejich rovnováha je důležitá pro celkové zdraví a vitalitu, proto by neměly ve stravě chybět.`}
         imageTwo={heroImg}
-        headingThree={"Vitamíny"}
-        textThree={`Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aliquam facilis sequi recusandae laborum quidem. Sequi earum
-                  reiciendis provident quaerat soluta veritatis.`}
+        headingThree={"Proteiny"}
+        textThree={`Proteiny jsou stavebním kamenem svalů a zásadní součástí zdravého jídelníčku. Podporují regeneraci po fyzické námaze, pomáhají budovat svalovou hmotu a zasytí na dlouhou dobu. Jsou ideální jak pro sportovce, tak pro ty, kteří chtějí mít vyváženou a plnohodnotnou stravu.`}
         imageThree={heroImg}
-        headingFour={"Vitamíny"}
-        textFour={`Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aliquam facilis sequi recusandae laborum quidem. Sequi earum
-                  reiciendis provident quaerat soluta veritatis.`}
+        headingFour={"Ostatní dobroty"}
+        textFour={`I při zdravém životním stylu si můžete dopřát něco chutného! Proteinové sušenky, smoothie nebo nadýchané palačinky dodají tělu potřebné živiny a zároveň uspokojí chuť na sladké. Skvělá volba pro všechny, kteří chtějí spojit potěšení s vyváženou výživou.`}
         imageFour={heroImg}
       />
-      <TextSection
-        subHeading={"Příklady"}
-        heading={"Nechte se inspirovat!"}
-        text={`Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae
-              ipsum, similique, suscipit, at perspiciatis deleniti id impedit
-              placeat magni dicta eaque alias quibusdam facilis non? Quia quam
-              laudantium adipisci minima.Lorem ipsum dolor, sit amet consectetur
-              adipisicing elit. Vitae ipsum, similique, suscipit, at
-              perspiciatis deleniti id impedit placeat magni dicta eaque alias
-              quibusdam facilis non? Quia quam laudantium adipisci minima.Lorem
-              ipsum dolor, sit amet consectetur adipisicing elit. Vitae ipsum,
-              similique, suscipit, at perspiciatis deleniti id impedit placeat
-              magni dicta eaque alias quibusdam facilis non? Quia quam
-              laudantium adipisci minima.`}
-      />
+
       <ImageTextCheckmarks
         subHeading={"Proč si to zjendodušit?"}
         heading={"Jsou důležitější věci než pravidelné nákupy"}
@@ -93,6 +79,14 @@ export default function Supplements() {
         image={heroImg}
       />
       <ReviewGrid />
+      <HeadingCenter
+        subheading={"Jak to funguje"}
+        heading={"Tři kroky za 8 minut a máte hotovo"}
+        textHeading={`Pravidelné objednávky mají v první řadě usnadňovat život. S naší
+                  službou si tak zvládnete vytvořit toto předplatné na jakémkoliv
+                  e-shopu jen chcete. Stačí splnit tři snadně kroky, které Vám nezaberou více než pár minut.`}
+      />
+      <HowDoesItWork />
       <CTA
         subHeading={"Užíváte doplňky stravy pravidelně?"}
         heading={"Nechte pravidelné objednávky na nás!"}
