@@ -1,123 +1,96 @@
 import Image from "next/image";
 import React from "react";
 import heroImg from "./suplements-lp.jpg";
+import fruit from "./fruit.jpg";
+import minerals from "./minerals.jpg";
+import meat from "./meat.jpg";
+import peanut from "./peanut.jpg";
+
 import ReviewGrid from "@/app/components/ReviewGrid";
-import { CTA } from "@/app/components/CTA";
 import { ExamplesGrid } from "@/app/components/ExamplesGrid";
 import { TextSection } from "@/app/components/TextSection";
-import { ImageTextLeftWhite } from "@/app/components/ImageTextSection/ImageTextLeftWhite";
+import { BlockHeroSection } from "@/app/components/HeroSections/BlockHeroSection";
+import { BlackDivider } from "@/app/components/BlackDivider";
+import { HowDoesItWork } from "@/app/components/HowDoesItWork";
+import { HeadingCenter } from "@/app/components/Heading/HeadingCenter";
+import { CTA } from "@/app/components/CTA/CTA";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckSquare } from "@fortawesome/free-regular-svg-icons";
+import { faSquareCheck } from "@fortawesome/free-solid-svg-icons";
+import { ImageTextCheckmarks } from "@/app/components/ImageTextSection/ImageTextCheckmarks";
+
+//Metadata
+export const metadata = {
+  title: "Shopr: Doplňky stravy a suplementy",
+  description:
+    "Doplňky stravy a fitness suplementy se musí brát s určitou pravidelností. Zařiďte si skrze nás pravidelné objednávky a mějte je vždy při ruce!",
+};
 
 export default function Supplements() {
-  function HeroSection() {
-    return (
-      <>
-        <div className="xl:min-h-[800px] pt-10 grid grid-cols-5 min-h-screen items-stretch justify-center overflow-x-hidden">
-          <div className="flex flex-col items-start justify-center h-full gap-5 p-24 col-span-3 max-w-[900px] justify-self-center animate-scale-up-noBounce-delay">
-            <h1 className="z-2">
-              Mějte vaše
-              <span className="text-quad">
-                {" "}
-                <br />
-                doplňky stravy <br />
-              </span>{" "}
-              vždy po ruce
-            </h1>
-
-            <p className="text-xl font-semibold text-textDark z-2">
-              Doplňky stravy a fitness suplementy se musí brát s určitou
-              pravidelností. To Vám potvrdí každý, kdo se touto problematikou
-              zabýval.
-            </p>
-            <div className="flex gap-5">
-              <a
-                href="https://app.shopr.cz/signup"
-                className="bg-quad shadow-md cursor-pointer rounded-md px-4 py-3 text-textButton font-bold text-xl hover:scale-102 transition-all ease-in-out"
-              >
-                Založit uživatelský účet ZDARMA
-              </a>
-            </div>
-          </div>
-
-          <Image
-            src={heroImg}
-            alt="hero"
-            className=" col-span-2 object-cover object-left animate-fall-left-noBounce"
-          />
-        </div>
-      </>
-    );
-  }
-
-  function BlackDivider({ text }) {
-    return (
-      <>
-        <div className="flex flex-col items-center justify-center py-15 mb-15 bg-primary gap-10">
-          <div className="max-w-wrapper w-full flex items-center justify-evenly gap-10">
-            <p className="text-white text-2xl">Protein</p>
-            <p className="text-white text-2xl">Vitamíny</p>
-            <p className="text-white text-2xl">Minerály</p>
-            <p className="text-white text-2xl">Tyčinky</p>
-            <p className="text-white text-2xl">Přírodní doplňky stravy</p>
-            <p className="text-white text-2xl">Nakopávače</p>
-          </div>
-        </div>
-      </>
-    );
-  }
-
   return (
     <>
-      <HeroSection />
-      <BlackDivider />
+      <BlockHeroSection
+        headingOne={"Mějte vaše"}
+        headingRed={"doplňky stravy"}
+        headingThree={"vždy po ruce"}
+        text={`Doplňky stravy a fitness suplementy se musí brát s určitou pravidelností. To Vám potvrdí každý, kdo se touto problematikou zabýval. My můžeme zařídit to, že je budete mít vždy při ruce!`}
+        buttonText={"Vytvořit uživatelský účet ZDARMA"}
+      >
+        <Image
+          src={heroImg}
+          alt="doplnky-stravy-hero"
+          className=" col-span-2 object-cover object-left animate-fall-left-noBounce"
+        />
+      </BlockHeroSection>
+      <BlackDivider>
+        <div className="flex items-center justify-evenly gap-10">
+          <p className="text-white text-2xl mt-5">Protein</p>
+          <p className="text-white text-2xl mb-5">Vitamíny</p>
+          <p className="text-white text-2xl mt-5">Minerály</p>
+          <p className="text-white text-2xl mb-5">Tyčinky</p>
+          <p className="text-white text-2xl mt-5">Přírodní doplňky stravy</p>
+          <p className="text-white text-2xl mb-5">Nakopávače</p>
+        </div>
+      </BlackDivider>
+      <TextSection
+        subHeading={"Pravidelnost je základ"}
+        heading={"Aneb konec prázdným balením!"}
+        text={`Dodržování zdravého životního stylu a správné výživy není jen o volbě kvalitních produktů, ale hlavně o jejich pravidelném užívání. Vitamíny a minerály prospívají tělu jen tehdy, když je doplňujeme soustavně, proteiny jsou nejúčinnější při dlouhodobé podpoře svalového růstu a regenerace, a i zdravé pochoutky mají smysl, pokud jsou součástí vyváženého jídelníčku. Kolikrát už se vám ale stalo, že jste sáhli do skříně pro oblíbený doplněk a zjistili, že je balení prázdné? S pravidelnou zásobou už se nemusíte starat, jestli vám došly vitamíny, chybí minerály nebo zda si můžete dopřát svůj oblíbený proteinový shake. Doplňování výživy by nemělo být náhodné – udělejte z něj automatickou součást svého zdravého režimu a dopřejte tělu přesně to, co potřebuje, bez zbytečných výpadků!`}
+      />
+
       <ExamplesGrid
         headingOne={"Vitamíny"}
-        textOne={`Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aliquam facilis sequi recusandae laborum quidem. Sequi earum
-                  reiciendis provident quaerat soluta veritatis.`}
-        imageOne={heroImg}
-        headingTwo={"Vitamíny"}
-        textTwo={`Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aliquam facilis sequi recusandae laborum quidem. Sequi earum
-                  reiciendis provident quaerat soluta veritatis.`}
-        imageTwo={heroImg}
-        headingThree={"Vitamíny"}
-        textThree={`Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aliquam facilis sequi recusandae laborum quidem. Sequi earum
-                  reiciendis provident quaerat soluta veritatis.`}
-        imageThree={heroImg}
-        headingFour={"Vitamíny"}
-        textFour={`Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aliquam facilis sequi recusandae laborum quidem. Sequi earum
-                  reiciendis provident quaerat soluta veritatis.`}
-        imageFour={heroImg}
+        textOne={`Vitamíny jsou základním pilířem zdraví – podporují imunitu, dodávají energii a pomáhají proti únavě. Ať už jde o vitamín C pro obranyschopnost, D pro silné kosti nebo B-komplex pro správné fungování metabolismu, jejich pravidelný přísun udržuje tělo i mysl v kondici.`}
+        imageOne={fruit}
+        headingTwo={"Minerály"}
+        textTwo={`Minerály hrají klíčovou roli v mnoha tělesných funkcích – hořčík pomáhá proti únavě a svalovým křečím, železo podporuje tvorbu červených krvinek a vápník je nezbytný pro pevné kosti. Jejich rovnováha je důležitá pro celkové zdraví a vitalitu, proto by neměly ve stravě chybět.`}
+        imageTwo={minerals}
+        headingThree={"Proteiny"}
+        textThree={`Proteiny jsou stavebním kamenem svalů a zásadní součástí zdravého jídelníčku. Podporují regeneraci po fyzické námaze, pomáhají budovat svalovou hmotu a zasytí na dlouhou dobu. Jsou ideální jak pro sportovce, tak pro ty, kteří chtějí mít vyváženou a plnohodnotnou stravu.`}
+        imageThree={meat}
+        headingFour={"Ostatní dobroty"}
+        textFour={`I při zdravém životním stylu si můžete dopřát něco chutného! Proteinové sušenky, smoothie nebo nadýchané palačinky dodají tělu potřebné živiny a zároveň uspokojí chuť na sladké. Skvělá volba pro všechny, kteří chtějí spojit potěšení s vyváženou výživou.`}
+        imageFour={peanut}
       />
-      <TextSection
-        subHeading={"Příklady"}
-        heading={"Nechte se inspirovat!"}
-        text={`Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae
-              ipsum, similique, suscipit, at perspiciatis deleniti id impedit
-              placeat magni dicta eaque alias quibusdam facilis non? Quia quam
-              laudantium adipisci minima.Lorem ipsum dolor, sit amet consectetur
-              adipisicing elit. Vitae ipsum, similique, suscipit, at
-              perspiciatis deleniti id impedit placeat magni dicta eaque alias
-              quibusdam facilis non? Quia quam laudantium adipisci minima.Lorem
-              ipsum dolor, sit amet consectetur adipisicing elit. Vitae ipsum,
-              similique, suscipit, at perspiciatis deleniti id impedit placeat
-              magni dicta eaque alias quibusdam facilis non? Quia quam
-              laudantium adipisci minima.`}
+      <HeadingCenter
+        subheading={"Jak to funguje"}
+        heading={"Tři kroky za 8 minut a máte hotovo"}
+        textHeading={`Pravidelné objednávky mají v první řadě usnadňovat život. S naší
+            službou si tak zvládnete vytvořit toto předplatné na jakémkoliv
+            e-shopu jen chcete. Stačí splnit tři snadně kroky, které Vám nezaberou více než pár minut.`}
       />
-      <ImageTextLeftWhite
-        subHeading={"Doplňky stravy"}
-        heading={"Fitness suplementy"}
-        textOne={`Pokud se člověk začne zabývat cvičením a stravou, standardně
-                  se dostane k suplementům, které pomáhají například s
-                  regenerací, imunitou a dalšími věcmi. Vitamíny a jiné látky se
-                  ale musí brát pravidelně.`}
-        textTwo={`Každému z nás se již určitě stalo, že suplement došel. Co
-                  potom? Model předplatného je zde ideální řešení!`}
-        textButton={"Založit uživatelský účet"}
+      <HowDoesItWork />
+      <ImageTextCheckmarks
+        subHeading={"Proč si to zjednodušit?"}
+        heading={"Vychutnejte si den bez starostí"}
+        text={`V našich životech se pravidelné nákupy řadí spíše mezi starosti. Společně se zbytkem úkolů to dělá pěknou řádku povinností, se kterými si musíme zatěžkávat hlavu. Pro nás je ale důležité, aby lidé trávili čas smysluplně. S rodinou, koníčky, zálibami a relaxací. Proto tato služba také vznikla.`}
+        checkOne={"Už nikdy nezapomenete objednat"}
+        checkTwo={"Budete mít vaše doplňky stravy vždy po ruce"}
+        checkThree={"Zbavíme Vás starostí a stresu"}
+        buttonText={"Vytvořte si u nás uživatelský účet a všechno vyzkoušejte"}
         image={heroImg}
       />
+
       <ReviewGrid />
       <CTA
         subHeading={"Užíváte doplňky stravy pravidelně?"}

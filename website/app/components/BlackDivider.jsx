@@ -1,12 +1,10 @@
 import React from "react";
 
-export default function BlackDivider({ text }) {
+export function BlackDivider({ children }) {
   return (
     <>
-      <div className="flex items-center justify-center py-20 bg-primary ">
-        <div className="max-w-wrapper flex flex-col items-center justify-start gap-10">
-          <p className="font-semibold text-4xl text-white">"{text}!"</p>
-        </div>
+      <div className="flex flex-col items-center justify-center py-15 mb-15 bg-primary gap-10">
+        <div className="max-w-wrapper w-full">{children}</div>
       </div>
     </>
   );

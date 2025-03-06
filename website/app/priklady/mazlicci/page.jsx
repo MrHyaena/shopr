@@ -2,52 +2,13 @@ import Image from "next/image";
 import React from "react";
 import heroImg from "./cat-dog.jpg";
 import ReviewGrid from "@/app/components/ReviewGrid";
-import { CTA } from "@/app/components/CTA";
+import { CTA } from "@/app/components/CTA/CTA";
 import { ExamplesGrid } from "@/app/components/ExamplesGrid";
 import { TextSection } from "@/app/components/TextSection";
-import { ImageTextLeftWhite } from "@/app/components/ImageTextSection/ImageTextLeftWhite";
+import { ImageTextCheckmarks } from "@/app/components/ImageTextSection/ImageTextCheckmarks";
+import { BlockHeroSection } from "@/app/components/HeroSections/BlockHeroSection";
 
 export default function Supplements() {
-  function HeroSection() {
-    return (
-      <>
-        <div className="xl:min-h-[800px] pt-10 grid grid-cols-5 min-h-screen items-stretch justify-center overflow-x-hidden">
-          <div className="flex flex-col items-start justify-center h-full gap-5 p-24 col-span-3 max-w-[900px] justify-self-center animate-scale-up-noBounce-delay">
-            <h1 className="z-2">
-              Mějte vaše
-              <span className="text-quad">
-                {" "}
-                <br />
-                doplňky stravy <br />
-              </span>{" "}
-              vždy po ruce
-            </h1>
-
-            <p className="text-xl font-semibold text-textDark z-2">
-              Doplňky stravy a fitness suplementy se musí brát s určitou
-              pravidelností. To Vám potvrdí každý, kdo se touto problematikou
-              zabýval.
-            </p>
-            <div className="flex gap-5">
-              <a
-                href="https://app.shopr.cz/signup"
-                className="bg-quad shadow-md cursor-pointer rounded-md px-4 py-3 text-textButton font-bold text-xl hover:scale-102 transition-all ease-in-out"
-              >
-                Založit uživatelský účet ZDARMA
-              </a>
-            </div>
-          </div>
-
-          <Image
-            src={heroImg}
-            alt="hero"
-            className=" col-span-2 object-cover object-center animate-fall-left-noBounce [clip-path:polygon(10%_0%,100%_0%,100%_100%,10%_100%,5%_85%,0%_50%,5%_15%)]"
-          />
-        </div>
-      </>
-    );
-  }
-
   function BlackDivider({ text }) {
     return (
       <>
@@ -67,7 +28,19 @@ export default function Supplements() {
 
   return (
     <>
-      <HeroSection />
+      <BlockHeroSection
+        headingOne={"Mějte vaše"}
+        headingRed={"doplňky stravy"}
+        headingThree={"vždy po ruce"}
+        text={`Doplňky stravy a fitness suplementy se musí brát s určitou pravidelností. To Vám potvrdí každý, kdo se touto problematikou zabýval.`}
+        buttonText={"Vytvořit uživatelský účet ZDARMA"}
+      >
+        <Image
+          src={heroImg}
+          alt="hero"
+          className=" col-span-2 object-cover object-center animate-fall-left-noBounce [clip-path:polygon(10%_0%,100%_0%,100%_100%,10%_100%,5%_85%,0%_50%,5%_15%)]"
+        />
+      </BlockHeroSection>
       <BlackDivider />
       <ExamplesGrid
         headingOne={"Vitamíny"}
@@ -106,16 +79,17 @@ export default function Supplements() {
               magni dicta eaque alias quibusdam facilis non? Quia quam
               laudantium adipisci minima.`}
       />
-      <ImageTextLeftWhite
-        subHeading={"Doplňky stravy"}
-        heading={"Fitness suplementy"}
-        textOne={`Pokud se člověk začne zabývat cvičením a stravou, standardně
-                  se dostane k suplementům, které pomáhají například s
-                  regenerací, imunitou a dalšími věcmi. Vitamíny a jiné látky se
-                  ale musí brát pravidelně.`}
-        textTwo={`Každému z nás se již určitě stalo, že suplement došel. Co
-                  potom? Model předplatného je zde ideální řešení!`}
-        textButton={"Založit uživatelský účet"}
+      <ImageTextCheckmarks
+        subHeading={"Proč si to zjendodušit?"}
+        heading={"Jsou důležitější věci než pravidelné nákupy"}
+        text={`Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Inventore necessitatibus repellat quos labore hic soluta vero
+                      blanditiis, tempore earum quis atque perspiciatis deleniti eos
+                      corrupti reiciendis id suscipit dicta adipisci?`}
+        checkOne={"Už nikdy nezapomenete objednat"}
+        checkTwo={"Budete mít vaše doplňky stravy vždy po ruce"}
+        checkThree={"Zbavíme Vás starostí a stresu"}
+        buttonText={"Zaregistrovat se"}
         image={heroImg}
       />
       <ReviewGrid />

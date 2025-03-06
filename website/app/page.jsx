@@ -1,7 +1,6 @@
 import "./globals.css";
 
 import Newsletter from "./components/Newsletter";
-import BlackDivider from "./components/BlackDivider";
 
 //Images
 import Image from "next/image";
@@ -24,7 +23,8 @@ import ReviewOne from "./components/ReviewOne";
 import ReviewGrid from "./components/ReviewGrid";
 import heroImgTwo from "./_img/hero.jpg";
 import Link from "next/link";
-import { CTA } from "./components/CTA";
+import { BlackDivider } from "./components/BlackDivider";
+import { CTA } from "./components/CTA/CTA";
 
 //Metadata
 export const metadata = {
@@ -307,11 +307,11 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <BlackDivider
-        text={
-          "Odstresujte hlavu a nechte starosti s pravidelnými nákupy na nás"
-        }
-      />
+      <BlackDivider>
+        <p className="text-textLight text-4xl text-center">
+          Odstresujte hlavu a nechte starosti s pravidelnými nákupy na nás!
+        </p>
+      </BlackDivider>
       <Benefits /> <ReviewGrid />
       <WhyToTry />
       <PriceDescription
