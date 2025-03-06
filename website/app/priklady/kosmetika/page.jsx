@@ -54,7 +54,7 @@ export default function Supplements() {
         textHeading={`Že nevíte, s čím vším bychom Vám mohli pomoci? Pojďme se tedy společně podívat na několik příkladů, ve kterých určitě uvidíte nějaký potenciál.`}
       />
       <ImageTextCheckmarks
-        subHeading={"Proč si to zjendodušit?"}
+        subHeading={"Proč si to nezjednodušit?"}
         heading={"Jsou důležitější věci než pravidelné nákupy"}
         text={`Lorem ipsum dolor sit amet consectetur adipisicing elit.
                             Inventore necessitatibus repellat quos labore hic soluta vero
