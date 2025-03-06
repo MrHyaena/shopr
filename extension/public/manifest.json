@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "version": "1.0.0",
+  "name": "Shopr - Pravidelné objednávky",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": ["scripting", "storage"],
+  "host_permissions": ["https://*/*", "https://*/*"],
+  "icons": {
+    "16": "shopr-favicon.png",
+    "48": "shopr-favicon.png",
+    "128": "shopr-favicon.png"
+  }
+}
