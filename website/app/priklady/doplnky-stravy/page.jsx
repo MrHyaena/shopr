@@ -7,8 +7,8 @@ import meat from "./meat.jpg";
 import peanut from "./peanut.jpg";
 import relax from "./relax.jpg";
 
-import ReviewGrid from "@/app/components/ReviewGrid";
-import { ExamplesGrid } from "@/app/components/ExamplesGrid";
+import ReviewGrid from "@/app/components/Grids/ReviewGrid";
+import { ExamplesGrid } from "@/app/components/Grids/ExamplesGrid";
 import { TextSection } from "@/app/components/TextSection";
 import { BlockHeroSection } from "@/app/components/HeroSections/BlockHeroSection";
 import { BlackDivider } from "@/app/components/BlackDivider";
@@ -82,7 +82,7 @@ export default function Supplements() {
       />
       <HowDoesItWork />
       <ImageTextCheckmarks
-        subHeading={"Proč si to zjednodušit?"}
+        subHeading={"Proč si to nezjednodušit?"}
         heading={"Vychutnejte si den bez starostí"}
         text={`V našich životech se pravidelné nákupy řadí spíše mezi starosti. Společně se zbytkem úkolů to dělá pěknou řádku povinností, se kterými si musíme zatěžkávat hlavu. Pro nás je ale důležité, aby lidé trávili čas smysluplně. S rodinou, koníčky, zálibami a relaxací. Proto tato služba také vznikla.`}
         checkOne={"Už nikdy nezapomenete objednat"}

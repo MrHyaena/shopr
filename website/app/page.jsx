@@ -20,7 +20,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import PriceDescription from "./components/PriceDescription";
 import ReviewOne from "./components/ReviewOne";
-import ReviewGrid from "./components/ReviewGrid";
+import ReviewGrid from "./components/Grids/ReviewGrid";
 import heroImgTwo from "./_img/hero.jpg";
 import Link from "next/link";
 import { BlackDivider } from "./components/BlackDivider";

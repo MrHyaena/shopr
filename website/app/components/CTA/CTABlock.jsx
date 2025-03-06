@@ -1,7 +1,7 @@
 export function CTABlock() {
   return (
     <>
-      <div className="flex items-center justify-center py-10 pb-30">
+      <div className="flex items-center justify-center py-30 pb-30">
         <div className="max-w-wrapper flex flex-col items-center justify-start gap-10">
           <div className="bg-white border border-slate-200 rounded-lg shadow-lg p-10 max-w-[1000px]">
             <h4 className="headingSmall ">Správa předplatného</h4>

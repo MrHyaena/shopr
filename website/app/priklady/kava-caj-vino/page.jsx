@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React from "react";
 import heroImg from "./kava-caj.jpg";
-import ReviewGrid from "@/app/components/ReviewGrid";
+import ReviewGrid from "@/app/components/Grids/ReviewGrid";
 import { CTA } from "@/app/components/CTA/CTA";
-import { ExamplesGrid } from "@/app/components/ExamplesGrid";
+import { ExamplesGrid } from "@/app/components/Grids/ExamplesGrid";
 import { TextSection } from "@/app/components/TextSection";
 import { ImageTextCheckmarks } from "@/app/components/ImageTextSection/ImageTextCheckmarks";
 import { BlockHeroSection } from "@/app/components/HeroSections/BlockHeroSection";
