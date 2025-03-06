@@ -21,10 +21,10 @@ export function ImageTextCheckmarks({
             <div className="self-center justify-self-center">
               <Image
                 src={image}
-                alt="Suplementy"
+                alt="section-image"
                 width={500}
                 height={500}
-                className="rounded-lg"
+                className="rounded-lg shadow-md"
               />
             </div>
             <div className="flex flex-col gap-5 justify-center items-start">

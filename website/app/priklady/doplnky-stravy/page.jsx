@@ -5,6 +5,7 @@ import fruit from "./fruit.jpg";
 import minerals from "./minerals.jpg";
 import meat from "./meat.jpg";
 import peanut from "./peanut.jpg";
+import relax from "./relax.jpg";
 
 import ReviewGrid from "@/app/components/ReviewGrid";
 import { ExamplesGrid } from "@/app/components/ExamplesGrid";
@@ -88,7 +89,7 @@ export default function Supplements() {
         checkTwo={"Budete mít vaše doplňky stravy vždy po ruce"}
         checkThree={"Zbavíme Vás starostí a stresu"}
         buttonText={"Vytvořte si u nás uživatelský účet a všechno vyzkoušejte"}
-        image={heroImg}
+        image={relax}
       />
 
       <ReviewGrid />
