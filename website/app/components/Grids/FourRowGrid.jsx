@@ -26,14 +26,14 @@ export function FourRowGrid({
             <Image
               src={imageOne}
               alt="firstImage"
-              className="object-cover object-center rounded-md w-120 h-80 justify-self-end shadow-md"
+              className="object-cover object-center rounded-md w-100 h-100 justify-self-end shadow-md"
             />
           </div>
           <div className="grid grid-cols-2 gap-10 items-center">
             <Image
               src={imageTwo}
               alt="secondImage"
-              className="object-cover object-center rounded-md w-120 h-80 justify-self-start shadow-md"
+              className="object-cover object-center rounded-md w-100 h-100 justify-self-start shadow-md"
             />
             <div className="flex flex-col text-start gap-3">
               <h3 className="text-2xl">{headingTwo}</h3>
@@ -48,14 +48,14 @@ export function FourRowGrid({
             <Image
               src={imageThree}
               alt="thirdImage"
-              className="object-cover object-center rounded-md w-120 h-80 justify-self-end shadow-md"
+              className="object-cover object-center rounded-md w-100 h-100 justify-self-end shadow-md"
             />
           </div>
           <div className="grid grid-cols-2 gap-10 items-center">
             <Image
               src={imageFour}
               alt="fourthImage"
-              className="object-cover object-center rounded-md w-120 h-80 justify-self-start shadow-md"
+              className="object-cover object-center rounded-md w-100 h-100 justify-self-start shadow-md"
             />
             <div className="flex flex-col text-start gap-3">
               <h3 className="text-2xl">{headingFour}</h3>

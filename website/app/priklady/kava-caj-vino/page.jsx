@@ -1,6 +1,12 @@
 import Image from "next/image";
 import React from "react";
 import heroImg from "./kava-caj.jpg";
+import tea from "./tea.jpg";
+import coffee from "./coffee.jpg";
+import wine from "./wine.jpg";
+import chocolate from "./coco.jpg";
+import teaDrink from "./tea-drink.jpg";
+
 import ReviewGrid from "@/app/components/Grids/ReviewGrid";
 import { CTA } from "@/app/components/CTA/CTA";
 import { ExamplesGrid } from "@/app/components/Grids/ExamplesGrid";
@@ -9,33 +15,24 @@ import { ImageTextCheckmarks } from "@/app/components/ImageTextSection/ImageText
 import { BlockHeroSection } from "@/app/components/HeroSections/BlockHeroSection";
 import { HeadingCenter } from "@/app/components/Heading/HeadingCenter";
 import { HowDoesItWork } from "@/app/components/HowDoesItWork";
+import { BlackDivider } from "@/app/components/BlackDivider";
+
+//Metadata
+export const metadata = {
+  title: "Shopr: Doplňky stravy a suplementy",
+  description:
+    "Doplňky stravy a fitness suplementy se musí brát s určitou pravidelností. Zařiďte si skrze nás pravidelné objednávky a mějte je vždy při ruce!",
+};
 
 export default function Supplements() {
-  function BlackDivider({ text }) {
-    return (
-      <>
-        <div className="flex flex-col items-center justify-center py-15 mb-15 bg-primary gap-10">
-          <div className="max-w-wrapper w-full flex items-center justify-evenly gap-10">
-            <p className="text-white text-2xl">Protein</p>
-            <p className="text-white text-2xl">Vitamíny</p>
-            <p className="text-white text-2xl">Minerály</p>
-            <p className="text-white text-2xl">Tyčinky</p>
-            <p className="text-white text-2xl">Přírodní doplňky stravy</p>
-            <p className="text-white text-2xl">Nakopávače</p>
-          </div>
-        </div>
-      </>
-    );
-  }
-
   return (
     <>
       <BlockHeroSection
-        headingOne={"Mějte vaše"}
-        headingRed={"doplňky stravy"}
-        headingThree={"vždy po ruce"}
-        text={`Doplňky stravy a fitness suplementy se musí brát s určitou pravidelností. To Vám potvrdí každý, kdo se touto problematikou zabýval.`}
-        buttonText={"Vytvořit uživatelský účet ZDARMA"}
+        headingOne={"Zařiďte si"}
+        headingRed={"pravidelné objednávky"}
+        headingThree={"čaje, kávy a jiných potěšení"}
+        text={`Už nikdy nezapomeňte na svou oblíbenou kávu, čaj nebo pochoutky! S naším chytrým systémem pravidelných objednávek si zajistíte, že vám zásoby nikdy nedojdou. Objednávejte pohodlně a bez starostí na vybraných e-shopech a my se postaráme o vše ostatní. `}
+        buttonText={"Vytvořit bezplatný uživatelský účet"}
       >
         <Image
           src={heroImg}
@@ -43,40 +40,48 @@ export default function Supplements() {
           className=" col-span-2 object-cover object-center animate-fall-left-noBounce"
         />
       </BlockHeroSection>
-      <BlackDivider />
+      <BlackDivider>
+        <>
+          <div className="max-w-wrapper w-full flex items-center justify-evenly">
+            <p className="text-white text-2xl">Čaj</p>
+            <p className="text-white text-2xl">Káva</p>
+            <p className="text-white text-2xl">Víno</p>
+            <p className="text-white text-2xl">Koření</p>
+            <p className="text-white text-2xl">Čokoláda</p>
+            <p className="text-white text-2xl">Sladkosti</p>
+          </div>
+        </>
+      </BlackDivider>
       <TextSection
-        subHeading={"Pravidelnost je základ"}
-        heading={"Aneb konec prázdným balením!"}
-        text={`Dodržování zdravého životního stylu a správné výživy není jen o volbě kvalitních produktů, ale hlavně o jejich pravidelném užívání. Vitamíny a minerály prospívají tělu jen tehdy, když je doplňujeme soustavně, proteiny jsou nejúčinnější při dlouhodobé podpoře svalového růstu a regenerace, a i zdravé pochoutky mají smysl, pokud jsou součástí vyváženého jídelníčku. Kolikrát už se vám ale stalo, že jste sáhli do skříně pro oblíbený doplněk a zjistili, že je balení prázdné? S pravidelnou zásobou už se nemusíte starat, jestli vám došly vitamíny, chybí minerály nebo zda si můžete dopřát svůj oblíbený proteinový shake. Doplňování výživy by nemělo být náhodné – udělejte z něj automatickou součást svého zdravého režimu a dopřejte tělu přesně to, co potřebuje, bez zbytečných výpadků!`}
+        subHeading={"Pravidelné objednávky"}
+        heading={"Zásoba kvalitních surovin bez starost"}
+        text={`Užijte si pohodlí pravidelných objednávek a mějte vždy po ruce svou oblíbenou kávu, čaj nebo zdravé pochoutky. S automatickou zásobou se nemusíte obávat, že vám dojde ranní dávka kofeinu nebo oblíbený bylinný čaj na večerní relaxaci. Pravidelný přísun kvalitních surovin vám pomůže udržet vyvážený životní styl a zajistí, že si kdykoli dopřejete to, co máte rádi. Vyhněte se zbytečnému stresu z prázdných zásob a nechte si své oblíbené produkty doručovat pohodlně až k vám domů – bez starostí, vždy včas a přesně podle vašich potřeb.`}
       />
 
       <ExamplesGrid
-        headingOne={"Vitamíny"}
-        textOne={`Vitamíny jsou základním pilířem zdraví – podporují imunitu, dodávají energii a pomáhají proti únavě. Ať už jde o vitamín C pro obranyschopnost, D pro silné kosti nebo B-komplex pro správné fungování metabolismu, jejich pravidelný přísun udržuje tělo i mysl v kondici.`}
-        imageOne={heroImg}
-        headingTwo={"Minerály"}
-        textTwo={`Minerály hrají klíčovou roli v mnoha tělesných funkcích – hořčík pomáhá proti únavě a svalovým křečím, železo podporuje tvorbu červených krvinek a vápník je nezbytný pro pevné kosti. Jejich rovnováha je důležitá pro celkové zdraví a vitalitu, proto by neměly ve stravě chybět.`}
-        imageTwo={heroImg}
-        headingThree={"Proteiny"}
-        textThree={`Proteiny jsou stavebním kamenem svalů a zásadní součástí zdravého jídelníčku. Podporují regeneraci po fyzické námaze, pomáhají budovat svalovou hmotu a zasytí na dlouhou dobu. Jsou ideální jak pro sportovce, tak pro ty, kteří chtějí mít vyváženou a plnohodnotnou stravu.`}
-        imageThree={heroImg}
-        headingFour={"Ostatní dobroty"}
-        textFour={`I při zdravém životním stylu si můžete dopřát něco chutného! Proteinové sušenky, smoothie nebo nadýchané palačinky dodají tělu potřebné živiny a zároveň uspokojí chuť na sladké. Skvělá volba pro všechny, kteří chtějí spojit potěšení s vyváženou výživou.`}
-        imageFour={heroImg}
+        headingOne={"Čaj"}
+        textOne={`Objevte svět prémiových čajů s pravidelnou dodávkou přímo k vám domů. Ať už preferujete zelený čaj pro jeho antioxidační účinky, bylinkové směsi pro relaxaci, nebo černý čaj pro povzbuzení, zajistěte si vždy čerstvou zásobu. S pravidelným doručováním už nikdy nezůstanete bez svého oblíbeného šálku.`}
+        imageOne={tea}
+        headingTwo={"Káva"}
+        textTwo={`Nechte si doručovat čerstvě praženou kávu bez starostí. Od aromatické zrnkové kávy po kvalitní mletou směs – zajistěte si pravidelný přísun energie a chuti. Díky automatickým objednávkám už nikdy nezůstanete bez dokonalého espressa nebo krémového cappuccina.`}
+        imageTwo={coffee}
+        headingThree={"Víno"}
+        textThree={`Dopřejte si sklenku kvalitního vína, kdykoli budete chtít. Ať už preferujete červené, bílé nebo šumivé, pravidelná objednávka vám zajistí vždy zásobu pro každou příležitost. Užijte si pohodlí automatického doručování a objevujte nové chutě bez starostí.`}
+        imageThree={wine}
+        headingFour={"Sladkosti"}
+        textFour={`Potěšte své chuťové pohárky pravidelnou dávkou sladkého potěšení. Proteinové tyčinky, zdravé sušenky či lahodné čokolády – doplňte svou zásobu a užijte si sladké momenty bez přerušení. S naší službou si zajistíte oblíbené dobroty vždy po ruce.`}
+        imageFour={chocolate}
       />
 
       <ImageTextCheckmarks
-        subHeading={"Proč si to zjendodušit?"}
-        heading={"Jsou důležitější věci než pravidelné nákupy"}
-        text={`Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Inventore necessitatibus repellat quos labore hic soluta vero
-                      blanditiis, tempore earum quis atque perspiciatis deleniti eos
-                      corrupti reiciendis id suscipit dicta adipisci?`}
+        subHeading={"Proč si to nezjednodušit?"}
+        heading={"Nákupy nechte na nás"}
+        text={`Zapomeňte na starosti s pravidelnými objednávkami – my se o ně postaráme za vás. Díky automatickému zásobování už nikdy nebudete muset řešit, zda vám dochází oblíbená káva, čaj nebo doplňky stravy. Užijte si pohodlí a věnujte svůj čas tomu, co je pro vás opravdu důležité.`}
         checkOne={"Už nikdy nezapomenete objednat"}
-        checkTwo={"Budete mít vaše doplňky stravy vždy po ruce"}
-        checkThree={"Zbavíme Vás starostí a stresu"}
+        checkTwo={"Vždy po ruce to, co potřebujete"}
+        checkThree={"Méně starostí, více pohody "}
         buttonText={"Zaregistrovat se"}
-        image={heroImg}
+        image={teaDrink}
       />
       <ReviewGrid />
       <HeadingCenter

@@ -46,7 +46,9 @@ export function SubscriptionForm() {
     subDay: "monday",
     subDeliveryMethod: "courier",
     subDeliveryAddress: "",
+    itemsType: "",
     items: [{ url: "", amount: "", changable: "true" }],
+    mysteryItem: { categories: [], message: "", amount: 0 },
   });
   const [originalSub, setOriginalSub] = useState("");
 
@@ -73,7 +75,9 @@ export function SubscriptionForm() {
         subDay: sub.subDay,
         subDeliveryMethod: sub.subDeliveryMethod,
         subDeliveryAddress: sub.subDeliveryAddress,
+        itemsType: sub.itemsType,
         items: sub.items,
+        mysteryItem: sub.mysteryItem,
       };
 
       setOriginalSub({ ...sub });
@@ -603,10 +607,14 @@ export function SubscriptionForm() {
 
   //step three of form
   function StepThree() {
+    const [itemsType, setItemsType] = useState(formData.itemsType);
     const [items, setItems] = useState([...formData.items]);
+    const [mysteryItem, setMysteryItem] = useState(...formData.mysteryItem);
+
     const { createSubscription, error, setError, isLoading } =
       createSubscriptionHandler();
     const { patchSubscription } = patchSubscriptionHandler();
+    const [settingsToggle, setSettingsToggle] = useState(0);
 
     //handler update
     function handleSend(subscription, id) {
@@ -672,182 +680,424 @@ export function SubscriptionForm() {
     }
 
     return (
-      <form className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg">
-        <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
-          <legend className="text-xl font-semibold text-slate-900">
-            Zboží do objednávky
-          </legend>
-          <div className="flex flex-col gap-3">
-            {items.map((item, index) => {
-              return (
-                <div
-                  className="xl:grid grid-cols-12 flex flex-col gap-2 maw-w-full"
-                  key={"item" + index}
-                >
-                  <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
-                    Odkaz na položku
-                    <input
-                      name="url"
-                      type="text"
-                      className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
-                      placeholder="www.eshop.cz/hodinky/rolex300"
-                      value={item.url}
-                      onChange={(e) => {
-                        handleChange(e, index);
-                      }}
-                    ></input>
-                  </label>
-                  <label className="flex flex-col text--textDark text-lg font-semibold col-span-2">
-                    Množství
-                    <input
-                      name="amount"
-                      type="number"
-                      className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
-                      placeholder="5"
-                      value={item.amount}
-                      onChange={(e) => {
-                        handleChange(e, index);
-                      }}
-                    ></input>
-                  </label>
-                  <label className="flex flex-col text-heading text-lg font-semibold col-span-3">
-                    Nahraditelné?
-                    <select
-                      name="changable"
-                      id="changable"
-                      className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
-                      value={item.changable}
-                      onChange={(e) => {
-                        handleChange(e, index);
-                      }}
-                    >
-                      <option value="true">Ano</option>
-                      <option value="false">Ne</option>
-                    </select>
-                  </label>
-                  <FontAwesomeIcon
-                    icon={faSquareXmark}
-                    className="xl:text-xl text-3xl text-red-400 self-end mb-[14px] cursor-textMediumointer cursor-pointer"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleDeleteInput(index);
-                    }}
-                  />
-                </div>
-              );
-            })}
-          </div>
-          <div>
-            <button
-              className="flex justify-center items-center rounded-sm my-4 text-lg font-bold gap-3 hover:scale-105 ease-in-out transition-all cursor-pointer"
-              onClick={(e) => {
-                e.preventDefault();
-                handleAddInput();
-              }}
-            >
-              <FontAwesomeIcon
-                icon={faPlusSquare}
-                className=" text-textDark text-3xl"
-              />
-              <p className="xl:hidden">Přidejte položku</p>
-            </button>
-          </div>
-        </fieldset>
+      <>
+        {settingsToggle == 0 && (
+          <div className="bg-white p-5 rounded-md border border-slate-200 gap-x-10 gap-y-5 grid grid-cols-2 grid-rows-[1fr_80px] min-h-[500px]">
+            <div className="flex flex-col justify-between">
+              <div>
+                <h2 className="text-xl font-semibold mb-4 text-heading">
+                  Přesný soupis produktů, které chcete do pravidelné objednávky
+                </h2>
+                <p className="text-md font-semibold text-textDark">
+                  Vytvoříte si objednávku úplně stejně, jako to děláte právě na
+                  e-shopu. V objednávce dostanete jenom a pouze produkty, které
+                  si sami navolíte.
+                </p>
+              </div>
 
-        <div className="flex flex-col items-center gap-5">
-          <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  setItemsType("standard");
+                  setMysteryItem();
+                  setSettingsToggle(1);
+                }}
+                className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+              >
+                Chci standardní objednávku
+              </button>
+            </div>
+            <div className="flex flex-col justify-between">
+              <div>
+                <h2 className="text-xl font-semibold mb-4 text-heading">
+                  Mystery balíček plný překvapení
+                </h2>
+                <p className="text-md font-semibold text-textDark">
+                  Mystery balíček pro vás vytvoříme my. Vy si pouze zvolíte
+                  kategorie, přidáte komentář a zvolíte maximální částku
+                  objednávky. Zboží pro Vás budeme náhodně vybírat my.
+                </p>
+              </div>
+              <button
+                onClick={() => {
+                  setItemsType("mystery");
+                  setMysteryItem(null);
+                  setSettingsToggle(2);
+                }}
+                className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+              >
+                Chci mystery balíček
+              </button>
+            </div>
             <button
-              className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               onClick={() => {
                 setStep(2);
                 handleBack();
               }}
+              className="bg-quad col-span-2 justify-self-center self-center text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
             >
               <FontAwesomeIcon icon={faArrowLeft} /> Zpět
             </button>
-            <button
-              disabled={isLoading}
-              className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
-              onClick={(e) => {
-                e.preventDefault();
-
-                const itemsArray = [];
-                items.map((item) => {
-                  let newURL = item.url;
-                  let oldURL = item.url.split("");
-                  if (
-                    oldURL[0] == "h" &&
-                    oldURL[1] == "t" &&
-                    oldURL[2] == "t" &&
-                    oldURL[3] == "p" &&
-                    oldURL[4] == "s" &&
-                    oldURL[5] == ":" &&
-                    oldURL[6] == "/" &&
-                    oldURL[7] == "/"
-                  ) {
-                    oldURL.splice(0, 8);
-                    newURL = oldURL.join("");
-                  } else if (
-                    oldURL[0] == "h" &&
-                    oldURL[1] == "t" &&
-                    oldURL[2] == "t" &&
-                    oldURL[3] == "p" &&
-                    oldURL[4] == ":" &&
-                    oldURL[5] == "/" &&
-                    oldURL[6] == "/"
-                  ) {
-                    oldURL.splice(0, 7);
-                    newURL = oldURL.join("");
-                  }
-
-                  if (oldURL[oldURL.length - 1] == "/") {
-                    oldURL.splice(oldURL.length - 1, 1);
-                    newURL = oldURL.join("");
-                  }
-
-                  item.url = newURL;
-                  itemsArray.splice(itemsArray.length, 0, item);
-                });
-
-                const subscription = {
-                  userId: user.id,
-                  stripeSubId: formData.stripeSubId,
-                  stripeCustomerId: user.stripeCustomerId,
-                  pipedrivePersonId: user.pipedrivePersonId,
-                  pipedriveDealId: formData.pipedriveDealId,
-                  active: formData.active,
-                  firstName: formData.firstName,
-                  secondName: formData.secondName,
-                  phone: formData.phone,
-                  email: formData.email,
-                  address: formData.address,
-                  addressNumber: formData.addressNumber,
-                  city: formData.city,
-                  cityNumber: formData.cityNumber,
-                  subName: formData.subName,
-                  subWebsite: formData.subWebsite,
-                  subFrequency: formData.subFrequency,
-                  subDay: formData.subDay,
-                  subDeliveryMethod: formData.subDeliveryMethod,
-                  subDeliveryAddress: formData.subDeliveryAddress,
-                  items: itemsArray,
-                };
-
-                handleSend(subscription, id);
-              }}
-            >
-              {id ? "Aktualizovat předplatné" : "Vytvořit předplatné"}{" "}
-              <FontAwesomeIcon icon={faCheck} />
-            </button>
           </div>
+        )}
+        {settingsToggle == 1 && (
+          <>
+            <form className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg">
+              <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
+                <legend className="text-xl font-semibold text-slate-900">
+                  Nastavení standardní objednávky
+                </legend>
+                <div className="flex flex-col gap-3">
+                  {items.map((item, index) => {
+                    return (
+                      <div
+                        className="xl:grid grid-cols-12 flex flex-col gap-2 maw-w-full"
+                        key={"item" + index}
+                      >
+                        <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+                          Odkaz na položku
+                          <input
+                            name="url"
+                            type="text"
+                            className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                            placeholder="www.eshop.cz/hodinky/rolex300"
+                            value={item.url}
+                            onChange={(e) => {
+                              handleChange(e, index);
+                            }}
+                          ></input>
+                        </label>
+                        <label className="flex flex-col text--textDark text-lg font-semibold col-span-2">
+                          Množství
+                          <input
+                            name="amount"
+                            type="number"
+                            className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                            placeholder="5"
+                            value={item.amount}
+                            onChange={(e) => {
+                              handleChange(e, index);
+                            }}
+                          ></input>
+                        </label>
+                        <label className="flex flex-col text-heading text-lg font-semibold col-span-3">
+                          Nahraditelné?
+                          <select
+                            name="changable"
+                            id="changable"
+                            className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                            value={item.changable}
+                            onChange={(e) => {
+                              handleChange(e, index);
+                            }}
+                          >
+                            <option value="true">Ano</option>
+                            <option value="false">Ne</option>
+                          </select>
+                        </label>
+                        <FontAwesomeIcon
+                          icon={faSquareXmark}
+                          className="xl:text-xl text-3xl text-red-400 self-end mb-[14px] cursor-textMediumointer cursor-pointer"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleDeleteInput(index);
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+                <div>
+                  <button
+                    className="flex justify-center items-center rounded-sm my-4 text-lg font-bold gap-3 hover:scale-105 ease-in-out transition-all cursor-pointer"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleAddInput();
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      icon={faPlusSquare}
+                      className=" text-textDark text-3xl"
+                    />
+                    <p className="xl:hidden">Přidejte položku</p>
+                  </button>
+                </div>
+              </fieldset>
 
-          {error && (
-            <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
-              {error}
-            </h2>
-          )}
-        </div>
-      </form>
+              <div className="flex flex-col items-center gap-5">
+                <div className="flex gap-3">
+                  <button
+                    className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+                    onClick={() => {
+                      setSettingsToggle(0);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faArrowLeft} /> Zpět na výběr
+                  </button>
+                  <button
+                    disabled={isLoading}
+                    className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+                    onClick={(e) => {
+                      e.preventDefault();
+
+                      const itemsArray = [];
+                      items.map((item) => {
+                        let newURL = item.url;
+                        let oldURL = item.url.split("");
+                        if (
+                          oldURL[0] == "h" &&
+                          oldURL[1] == "t" &&
+                          oldURL[2] == "t" &&
+                          oldURL[3] == "p" &&
+                          oldURL[4] == "s" &&
+                          oldURL[5] == ":" &&
+                          oldURL[6] == "/" &&
+                          oldURL[7] == "/"
+                        ) {
+                          oldURL.splice(0, 8);
+                          newURL = oldURL.join("");
+                        } else if (
+                          oldURL[0] == "h" &&
+                          oldURL[1] == "t" &&
+                          oldURL[2] == "t" &&
+                          oldURL[3] == "p" &&
+                          oldURL[4] == ":" &&
+                          oldURL[5] == "/" &&
+                          oldURL[6] == "/"
+                        ) {
+                          oldURL.splice(0, 7);
+                          newURL = oldURL.join("");
+                        }
+
+                        if (oldURL[oldURL.length - 1] == "/") {
+                          oldURL.splice(oldURL.length - 1, 1);
+                          newURL = oldURL.join("");
+                        }
+
+                        item.url = newURL;
+                        itemsArray.splice(itemsArray.length, 0, item);
+                      });
+
+                      const subscription = {
+                        userId: user.id,
+                        stripeSubId: formData.stripeSubId,
+                        stripeCustomerId: user.stripeCustomerId,
+                        pipedrivePersonId: user.pipedrivePersonId,
+                        pipedriveDealId: formData.pipedriveDealId,
+                        active: formData.active,
+                        firstName: formData.firstName,
+                        secondName: formData.secondName,
+                        phone: formData.phone,
+                        email: formData.email,
+                        address: formData.address,
+                        addressNumber: formData.addressNumber,
+                        city: formData.city,
+                        cityNumber: formData.cityNumber,
+                        subName: formData.subName,
+                        subWebsite: formData.subWebsite,
+                        subFrequency: formData.subFrequency,
+                        subDay: formData.subDay,
+                        subDeliveryMethod: formData.subDeliveryMethod,
+                        subDeliveryAddress: formData.subDeliveryAddress,
+                        items: itemsArray,
+                      };
+
+                      handleSend(subscription, id);
+                    }}
+                  >
+                    {id ? "Aktualizovat předplatné" : "Vytvořit předplatné"}{" "}
+                    <FontAwesomeIcon icon={faCheck} />
+                  </button>
+                </div>
+
+                {error && (
+                  <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
+                    {error}
+                  </h2>
+                )}
+              </div>
+            </form>
+          </>
+        )}
+        {settingsToggle == 2 && (
+          <>
+            <form className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg">
+              <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
+                <legend className="text-xl font-semibold text-slate-900">
+                  nastavení mystery balíčku
+                </legend>
+                <div className="flex flex-col gap-3">
+                  {items.map((item, index) => {
+                    return (
+                      <div
+                        className="xl:grid grid-cols-12 flex flex-col gap-2 maw-w-full"
+                        key={"item" + index}
+                      >
+                        <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+                          Odkaz na položku
+                          <input
+                            name="url"
+                            type="text"
+                            className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                            placeholder="www.eshop.cz/hodinky/rolex300"
+                            value={item.url}
+                            onChange={(e) => {
+                              handleChange(e, index);
+                            }}
+                          ></input>
+                        </label>
+                        <label className="flex flex-col text--textDark text-lg font-semibold col-span-2">
+                          Množství
+                          <input
+                            name="amount"
+                            type="number"
+                            className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                            placeholder="5"
+                            value={item.amount}
+                            onChange={(e) => {
+                              handleChange(e, index);
+                            }}
+                          ></input>
+                        </label>
+                        <label className="flex flex-col text-heading text-lg font-semibold col-span-3">
+                          Nahraditelné?
+                          <select
+                            name="changable"
+                            id="changable"
+                            className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                            value={item.changable}
+                            onChange={(e) => {
+                              handleChange(e, index);
+                            }}
+                          >
+                            <option value="true">Ano</option>
+                            <option value="false">Ne</option>
+                          </select>
+                        </label>
+                        <FontAwesomeIcon
+                          icon={faSquareXmark}
+                          className="xl:text-xl text-3xl text-red-400 self-end mb-[14px] cursor-textMediumointer cursor-pointer"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleDeleteInput(index);
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+                <div>
+                  <button
+                    className="flex justify-center items-center rounded-sm my-4 text-lg font-bold gap-3 hover:scale-105 ease-in-out transition-all cursor-pointer"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleAddInput();
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      icon={faPlusSquare}
+                      className=" text-textDark text-3xl"
+                    />
+                    <p className="xl:hidden">Přidejte položku</p>
+                  </button>
+                </div>
+              </fieldset>
+
+              <div className="flex flex-col items-center gap-5">
+                <div className="flex gap-3">
+                  <button
+                    className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+                    onClick={() => {
+                      setSettingsToggle(0);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faArrowLeft} /> Zpět na výběr
+                  </button>
+                  <button
+                    disabled={isLoading}
+                    className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+                    onClick={(e) => {
+                      e.preventDefault();
+
+                      const itemsArray = [];
+                      items.map((item) => {
+                        let newURL = item.url;
+                        let oldURL = item.url.split("");
+                        if (
+                          oldURL[0] == "h" &&
+                          oldURL[1] == "t" &&
+                          oldURL[2] == "t" &&
+                          oldURL[3] == "p" &&
+                          oldURL[4] == "s" &&
+                          oldURL[5] == ":" &&
+                          oldURL[6] == "/" &&
+                          oldURL[7] == "/"
+                        ) {
+                          oldURL.splice(0, 8);
+                          newURL = oldURL.join("");
+                        } else if (
+                          oldURL[0] == "h" &&
+                          oldURL[1] == "t" &&
+                          oldURL[2] == "t" &&
+                          oldURL[3] == "p" &&
+                          oldURL[4] == ":" &&
+                          oldURL[5] == "/" &&
+                          oldURL[6] == "/"
+                        ) {
+                          oldURL.splice(0, 7);
+                          newURL = oldURL.join("");
+                        }
+
+                        if (oldURL[oldURL.length - 1] == "/") {
+                          oldURL.splice(oldURL.length - 1, 1);
+                          newURL = oldURL.join("");
+                        }
+
+                        item.url = newURL;
+                        itemsArray.splice(itemsArray.length, 0, item);
+                      });
+
+                      const subscription = {
+                        userId: user.id,
+                        stripeSubId: formData.stripeSubId,
+                        stripeCustomerId: user.stripeCustomerId,
+                        pipedrivePersonId: user.pipedrivePersonId,
+                        pipedriveDealId: formData.pipedriveDealId,
+                        active: formData.active,
+                        firstName: formData.firstName,
+                        secondName: formData.secondName,
+                        phone: formData.phone,
+                        email: formData.email,
+                        address: formData.address,
+                        addressNumber: formData.addressNumber,
+                        city: formData.city,
+                        cityNumber: formData.cityNumber,
+                        subName: formData.subName,
+                        subWebsite: formData.subWebsite,
+                        subFrequency: formData.subFrequency,
+                        subDay: formData.subDay,
+                        subDeliveryMethod: formData.subDeliveryMethod,
+                        subDeliveryAddress: formData.subDeliveryAddress,
+                        items: itemsArray,
+                      };
+
+                      handleSend(subscription, id);
+                    }}
+                  >
+                    {id ? "Aktualizovat předplatné" : "Vytvořit předplatné"}{" "}
+                    <FontAwesomeIcon icon={faCheck} />
+                  </button>
+                </div>
+
+                {error && (
+                  <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
+                    {error}
+                  </h2>
+                )}
+              </div>
+            </form>
+          </>
+        )}
+      </>
     );
   }
 

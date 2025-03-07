@@ -26,14 +26,14 @@ export function ExamplesGrid({
             <Image
               src={imageOne}
               alt="firstImage"
-              className="object-cover object-center rounded-md w-60 h-60 justify-self-center"
+              className="object-cover object-center rounded-md w-60 h-60 justify-self-center shadow-lg"
             />
           </div>
           <div className="grid grid-cols-2 gap-10 items-center">
             <Image
               src={imageTwo}
               alt="secondImage"
-              className="object-cover object-center rounded-md w-60 h-60 justify-self-center"
+              className="object-cover object-center rounded-md w-60 h-60 justify-self-center shadow-lg"
             />
             <div className="flex flex-col text-center gap-3">
               <h3 className="text-2xl">{headingTwo}</h3>
@@ -48,14 +48,14 @@ export function ExamplesGrid({
             <Image
               src={imageThree}
               alt="thirdImage"
-              className="object-cover object-left rounded-md w-60 h-60 justify-self-center"
+              className="object-cover object-left rounded-md w-60 h-60 justify-self-center shadow-lg"
             />
           </div>
           <div className="grid grid-cols-2 gap-10 items-center">
             <Image
               src={imageFour}
               alt="fourthImage"
-              className="object-cover object-left rounded-md w-60 h-60 justify-self-center"
+              className="object-cover object-left rounded-md w-60 h-60 justify-self-center shadow-lg"
             />
             <div className="flex flex-col text-center gap-3">
               <h3 className="text-2xl">{headingFour}</h3>

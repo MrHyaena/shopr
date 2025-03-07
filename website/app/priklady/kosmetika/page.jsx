@@ -1,6 +1,12 @@
 import Image from "next/image";
 import React from "react";
 import heroImg from "./cosmetics.jpg";
+import cosmeticsSet from "./cosmetics-set.jpg";
+import clean from "./clean.jpg";
+import hydro from "./hydro.jpg";
+import refeed from "./refeed.jpg";
+import protect from "./protect.jpg";
+
 import ReviewGrid from "@/app/components/Grids/ReviewGrid";
 import { CTA } from "@/app/components/CTA/CTA";
 import { ExamplesGrid } from "@/app/components/Grids/ExamplesGrid";
@@ -11,35 +17,17 @@ import { FourRowGrid } from "@/app/components/Grids/FourRowGrid";
 import { HeadingCenter } from "@/app/components/Heading/HeadingCenter";
 import ReviewOne from "@/app/components/ReviewOne";
 import PriceDescription from "@/app/components/PriceDescription";
+import { BlackDivider } from "@/app/components/BlackDivider";
 
 export default function Supplements() {
-  function BlackDivider({ text }) {
-    return (
-      <>
-        <div className="flex flex-col items-center justify-center py-15 mb-15 bg-primary gap-10">
-          <div className="max-w-wrapper w-full">
-            <div className="flex items-center justify-evenly gap-10">
-              <p className="text-white text-2xl">Protein</p>
-              <p className="text-white text-2xl">Vitamíny</p>
-              <p className="text-white text-2xl">Minerály</p>
-              <p className="text-white text-2xl">Tyčinky</p>
-              <p className="text-white text-2xl">Přírodní doplňky stravy</p>
-              <p className="text-white text-2xl">Nakopávače</p>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
-
   return (
     <>
       <BlockHeroSection
-        headingOne={"Mějte vaše"}
-        headingRed={"doplňky stravy"}
-        headingThree={"vždy po ruce"}
-        text={`Doplňky stravy a fitness suplementy se musí brát s určitou pravidelností. To Vám potvrdí každý, kdo se touto problematikou zabýval.`}
-        buttonText={"Vytvořit uživatelský účet ZDARMA"}
+        headingOne={"Zdravá pleť"}
+        headingRed={"začíná"}
+        headingThree={"pravidelnou péčí"}
+        text={`Skvělá pleť si žádá nejen kvalitní produkty, ale také pravidelnou péči. Správná rutina pomáhá udržet pleť hydratovanou, svěží a chráněnou před vnějšími vlivy. Dopřejte své pokožce péči, kterou si zaslouží – bez zbytečných výpadků!`}
+        buttonText={"Zaregistrujte si u nás uživatelský účet"}
       >
         <Image
           src={heroImg}
@@ -47,7 +35,18 @@ export default function Supplements() {
           className=" col-span-2 object-cover object-left animate-fall-left-noBounce"
         />
       </BlockHeroSection>
-      <BlackDivider />
+      <BlackDivider>
+        <>
+          <div className="flex items-center justify-evenly gap-10">
+            <p className="text-white text-2xl">Hydratace</p>
+            <p className="text-white text-2xl">Regenerace</p>
+            <p className="text-white text-2xl">Péče</p>
+            <p className="text-white text-2xl">Krása</p>
+            <p className="text-white text-2xl">Výživa</p>
+            <p className="text-white text-2xl">Zdraví</p>
+          </div>
+        </>
+      </BlackDivider>
       <HeadingCenter
         subheading={"Co pro Vás můžeme udělat?"}
         heading={"Pomůžeme Vám dát vašim miláčkům to nejlepší"}
@@ -55,40 +54,37 @@ export default function Supplements() {
       />
       <ImageTextCheckmarks
         subHeading={"Proč si to nezjednodušit?"}
-        heading={"Jsou důležitější věci než pravidelné nákupy"}
-        text={`Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Inventore necessitatibus repellat quos labore hic soluta vero
-                            blanditiis, tempore earum quis atque perspiciatis deleniti eos
-                            corrupti reiciendis id suscipit dicta adipisci?`}
-        checkOne={"Už nikdy nezapomenete objednat"}
-        checkTwo={"Budete mít vaše doplňky stravy vždy po ruce"}
-        checkThree={"Zbavíme Vás starostí a stresu"}
-        buttonText={"Zaregistrovat se"}
-        image={heroImg}
+        heading={"Nechte pravidelný nákup kosmetiky na nás!"}
+        text={`Už se nikdy nemusíte starat o to, zda máte dostatek své oblíbené kosmetiky. Naše pravidelná objednávka Vám zajistí, že vaše pleť bude vždy dostávat tu nejlepší péči, kterou potřebuje.`}
+        checkOne={"Konec prázdným krabičkám a překvapenému výrazu"}
+        checkTwo={"Vaše pleť vždy dostane to nejlepší"}
+        checkThree={"Bez starostí a zbytečného stresu"}
+        buttonText={"Vytvořte si u nás účet"}
+        image={cosmeticsSet}
       />
       <HeadingCenter
-        subheading={"Co pro Vás můžeme udělat?"}
-        heading={"Pomůžeme Vám dát vašim miláčkům to nejlepší"}
-        textHeading={`Že nevíte, s čím vším bychom Vám mohli pomoci? Pojďme se tedy společně podívat na několik příkladů, ve kterých určitě uvidíte nějaký potenciál.`}
+        subheading={"Kompletní péče o pleť s jedním předplatným"}
+        heading={"Pravidelný přísun kosmetiky pro zdravou a krásnou pleť"}
+        textHeading={`Od důkladného čištění až po ochranu před škodlivými vlivy. S našimi pravidelnými dodávkami můžete mít jistotu, že vaše pleť dostává pravidelnou péči, kterou si zaslouží, ať už jde o hydrataci, výživu nebo ochranu před slunečním zářením. Zjednodušte si každodenní rutinu a užívejte si krásnou pleť každý den.`}
       />
       <FourRowGrid
-        headingOne={"Krmení"}
-        textOne={`Správná výživa je klíčem k dlouhému a zdravému životu vašeho mazlíčka. Ať už máte psa, kočku nebo jiné zvířátko, kvalitní granule, kapsičky nebo konzervy by měly být součástí jejich každodenní stravy. Naše pravidelné objednávky vám zajistí, že nikdy nezůstanete bez zásob oblíbeného krmiva. S našimi službami můžete mít jistotu, že vaše zvířátko dostává vše potřebné pro správný růst a zdraví.`}
-        imageOne={heroImg}
-        headingTwo={"Pravidelná péče"}
-        textTwo={`Péče o zvířata zahrnuje nejen krmení a hračky, ale i pravidelnou údržbu jejich hygieny a pohodlí. Ať už jde o podestýlku pro hlodavce, kartáčování koček nebo hygienické potřeby pro psy, vše je součástí komplexní péče. Pravidelné objednávky vám umožní mít tyto produkty vždy po ruce, abyste mohli svému mazlíčkovi zajistit nejen pohodlí, ale i zdraví a pohodu.`}
-        imageTwo={heroImg}
-        headingThree={"Vitamíny"}
-        textThree={`Stejně jako lidé, i naši mazlíčci potřebují doplňky stravy, které podporují jejich imunitní systém a zdraví. Vitamíny a minerály jsou důležité pro jejich vitalitu, krásnou srst a celkové zdraví. S pravidelnou objednávkou vitamínů a dalších doplňků můžete svému zvířeti poskytnout vše potřebné pro lepší pohodu a energii. Nezapomeňte na pravidelnou kontrolu, zda váš mazlíček dostává to správné množství.`}
-        imageThree={heroImg}
-        headingFour={"Hračky"}
-        textFour={`Hračky nejsou jen pro zábavu, ale také pro rozvoj a stimulaci vašich mazlíčků. Pomáhají jim udržovat fyzickou i psychickou kondici, ať už jde o interaktivní hračky pro psy nebo škrabadla pro kočky. Pravidelná obměna hraček je důležitá pro udržení jejich zájmu a zdravého pohybu. Naše služba vám pomůže zajistit, že vždy budete mít po ruce nové a kvalitní hračky pro vašeho mazlíčka.`}
-        imageFour={heroImg}
+        headingOne={"Čištění "}
+        textOne={`Základ zdravé a krásné pleti spočívá v důkladném čištění. Každý den je pokožka vystavena nečistotám, prachu a zbytkům make-upu, které mohou ucpávat póry a způsobovat nedokonalosti. Správné čištění pomáhá odstranit tyto nečistoty, osvěžit pleť a připravit ji na další kroky péče. Jemné čisticí gely, pěny nebo micelární vody jsou klíčem k čisté a zářivé pleti.`}
+        imageOne={clean}
+        headingTwo={"Hydratace "}
+        textTwo={`Dostatečná hydratace je nezbytná pro udržení pružnosti a zdravého vzhledu pleti. Ať už máte suchou, mastnou nebo smíšenou pleť, hydratační krémy a séra pomáhají udržet správnou rovnováhu vlhkosti a chrání pleť před vysoušením. Pravidelná hydratace pomáhá zpomalit známky stárnutí, zklidnit podráždění a dodat pleti přirozený jas.`}
+        imageTwo={hydro}
+        headingThree={"Výživa "}
+        textThree={`Pleť potřebuje nejen hydrataci, ale i hloubkovou výživu. Pleťová séra, oleje a masky dodávají pokožce cenné vitamíny, antioxidanty a aktivní látky, které podporují regeneraci a pevnost. Výživné složky, jako jsou kyselina hyaluronová, kolagen nebo rostlinné extrakty, pomáhají bojovat proti stárnutí a udržovat pleť zdravou a zářivou.`}
+        imageThree={refeed}
+        headingFour={"Ochrana"}
+        textFour={`Každodenní ochrana pleti je klíčová pro její dlouhodobé zdraví. Sluneční záření, znečištění a modré světlo mohou způsobovat předčasné stárnutí a poškození pokožky. Používání krémů s SPF a antioxidanty pomáhá chránit pleť před škodlivými vlivy a udržovat ji svěží a mladistvou. Ochrana je posledním, ale neméně důležitým krokem v rutině péče o pleť.`}
+        imageFour={protect}
       />
 
       <ReviewGrid />
       <PriceDescription
-        subHeading={"Pohodlí vašich mazlíčku za pár korun"}
+        subHeading={"Vaše pohodlí je naše starost"}
         description={`Každý den nosíme v hlavě rodinu, práci, nákupy jídla, tankování do auta a mnoho dalšího. 
                   Dovolte nám, abychom jeden z těchto úkolů převzali za Vás a ulehčili Vám tak každodenní fungování.`}
       />
