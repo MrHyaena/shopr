@@ -675,6 +675,8 @@ export function SubscriptionForm() {
       setError(null);
       const object = { ...formData };
       object.items = items;
+      object.mysteryItem = mysteryItem;
+      object.itemsType = itemsType;
       console.log(object);
       setFormData(object);
     }
