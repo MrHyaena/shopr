@@ -65,7 +65,9 @@ const createSubscription = async (req, res) => {
     subDay,
     subDeliveryMethod,
     subDeliveryAddress,
+    itemsType,
     items,
+    mysteryItem,
   } = req.body;
 
   //validation
@@ -115,7 +117,7 @@ const createSubscription = async (req, res) => {
       emptyFields.push("Adresu zásilkovny");
     }
   }
-  if (!items) {
+  if (!items || !mysteryItem) {
     emptyFields.push("Položky");
   }
 
@@ -228,7 +230,9 @@ const createSubscription = async (req, res) => {
       subDay,
       subDeliveryMethod,
       subDeliveryAddress,
+      itemsType,
       items,
+      mysteryItem,
     });
 
     res.status(200).json(subscription);

@@ -81,9 +81,14 @@ const subscriptionSchema = new Schema(
     subDeliveryAddress: {
       type: String,
     },
+    itemsType: {
+      type: String,
+    },
     items: {
       type: Array,
-      required: true,
+    },
+    mysteryItem: {
+      type: Object,
     },
   },
   { timestamps: true }

@@ -8,6 +8,7 @@ import {
   faSquareXmark,
   faTriangleExclamation,
   faUser,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
@@ -48,9 +49,11 @@ export function SubscriptionForm() {
     subDeliveryAddress: "",
     itemsType: "",
     items: [{ url: "", amount: "", changable: "true" }],
-    mysteryItem: { categories: [], message: "", amount: 0 },
+    mysteryItem: { categories: [], message: "", amount: 100 },
   });
   const [originalSub, setOriginalSub] = useState("");
+
+  //third step toggle
 
   useEffect(() => {
     if (id) {
@@ -82,6 +85,12 @@ export function SubscriptionForm() {
 
       setOriginalSub({ ...sub });
       setFormData({ ...newData });
+
+      if (sub.itemsType == "standard") {
+        setSettingsToggle(1);
+      } else if (sub.itemsType == "mystery") {
+        setSettingsToggle(2);
+      }
     }
   }, []);
 
@@ -607,22 +616,185 @@ export function SubscriptionForm() {
 
   //step three of form
   function StepThree() {
+    //type of item - standard or mystery
     const [itemsType, setItemsType] = useState(formData.itemsType);
-    const [items, setItems] = useState([...formData.items]);
-    const [mysteryItem, setMysteryItem] = useState(...formData.mysteryItem);
 
+    //items
+    const [items, setItems] = useState([...formData.items]);
+
+    //mystery input states
+    const [mysteryItem, setMysteryItem] = useState(formData.mysteryItem);
+
+    const [mysteryCategories, setMysteryCategories] = useState([
+      ...formData.mysteryItem.categories,
+    ]);
+    const [mysteryCategoriesInput, setMysteryCategoriesInput] = useState("");
+
+    const [settingsToggle, setSettingsToggle] = useState(0);
+
+    //create or patch subscription hooks
     const { createSubscription, error, setError, isLoading } =
       createSubscriptionHandler();
     const { patchSubscription } = patchSubscriptionHandler();
-    const [settingsToggle, setSettingsToggle] = useState(0);
 
-    //handler update
-    function handleSend(subscription, id) {
+    //useEffect for updating settingsToggle
+    useEffect(() => {
+      if (itemsType == "standard") {
+        setSettingsToggle(1);
+      } else if (itemsType == "mystery") {
+        setSettingsToggle(2);
+      }
+    }, []);
+
+    //useEffect for updating mysteryItem
+    useEffect(() => {
+      setMysteryItem({ ...mysteryItem, categories: mysteryCategories });
+    }, [mysteryCategories]);
+
+    //items handlers
+    const handleAddInput = () => {
+      setItems([...items, { url: "", amount: "", changable: "true" }]);
+    };
+
+    const handleChange = (event, index) => {
+      let { name, value } = event.target;
+      let onChangeValue = [...items];
+      onChangeValue[index][name] = value;
+      setItems(onChangeValue);
+    };
+
+    const handleDeleteInput = (index) => {
+      const newArray = [...items];
+      newArray.splice(index, 1);
+      setItems(newArray);
+    };
+
+    //mystery item handlers
+
+    function mysteryCategoryAdd(value) {
+      const checkArray = mysteryCategories.filter(
+        (item) => item.toLowerCase() == value.toLowerCase()
+      );
+
+      if (checkArray.length == 0) {
+        setMysteryCategories([...mysteryCategories, value]);
+      }
+      setMysteryCategoriesInput("");
+    }
+    function mysteryCategoryDelete(index) {
+      const newArray = [...mysteryCategories];
+      newArray.splice(index, 1);
+      setMysteryCategories(newArray);
+    }
+
+    //function for going back to step two - saves the states so that user wont lose data
+    function handleBack() {
+      setError(null);
+      const object = { ...formData };
+      object.items = items;
+      object.mysteryItem = { ...mysteryItem };
+      object.itemsType = itemsType;
+      console.log(object);
+      setFormData(object);
+    }
+
+    //function for sending the form data to server
+    function handleSend() {
+      const itemsArray = [];
+      if (itemsType == "standard") {
+        items.map((item) => {
+          let newURL = item.url;
+          let oldURL = item.url.split("");
+          if (
+            oldURL[0] == "h" &&
+            oldURL[1] == "t" &&
+            oldURL[2] == "t" &&
+            oldURL[3] == "p" &&
+            oldURL[4] == "s" &&
+            oldURL[5] == ":" &&
+            oldURL[6] == "/" &&
+            oldURL[7] == "/"
+          ) {
+            oldURL.splice(0, 8);
+            newURL = oldURL.join("");
+          } else if (
+            oldURL[0] == "h" &&
+            oldURL[1] == "t" &&
+            oldURL[2] == "t" &&
+            oldURL[3] == "p" &&
+            oldURL[4] == ":" &&
+            oldURL[5] == "/" &&
+            oldURL[6] == "/"
+          ) {
+            oldURL.splice(0, 7);
+            newURL = oldURL.join("");
+          }
+
+          if (oldURL[oldURL.length - 1] == "/") {
+            oldURL.splice(oldURL.length - 1, 1);
+            newURL = oldURL.join("");
+          }
+
+          item.url = newURL;
+          itemsArray.splice(itemsArray.length, 0, item);
+        });
+      }
+
+      const mysteryItem = {};
+      if (itemsType == "mystery") {
+        mysteryItem = {
+          categories: mysteryCategories,
+          message: mysteryMessage,
+          amount: mysteryAmount,
+        };
+      }
+      console.log(mysteryItem);
+
+      if (mysteryCategories.length == 0) {
+        mysteryItem.categories.push("Všechny kategorie");
+      }
+
+      const subscription = {
+        userId: user.id,
+        stripeSubId: formData.stripeSubId,
+        stripeCustomerId: user.stripeCustomerId,
+        pipedrivePersonId: user.pipedrivePersonId,
+        pipedriveDealId: formData.pipedriveDealId,
+        active: formData.active,
+        firstName: formData.firstName,
+        secondName: formData.secondName,
+        phone: formData.phone,
+        email: formData.email,
+        address: formData.address,
+        addressNumber: formData.addressNumber,
+        city: formData.city,
+        cityNumber: formData.cityNumber,
+        subName: formData.subName,
+        subWebsite: formData.subWebsite,
+        subFrequency: formData.subFrequency,
+        subDay: formData.subDay,
+        subDeliveryMethod: formData.subDeliveryMethod,
+        subDeliveryAddress: formData.subDeliveryAddress,
+        itemsType: itemsType,
+        items: itemsArray,
+        mysteryItem: mysteryItem,
+      };
+
       const missingArray = items.filter(
         (item) => !item.url || !item.amount || !item.changable
       );
-      if (missingArray.length > 0) {
+
+      const missingMystery = [];
+      if (mysteryAmount < 100) {
+        missingMystery.push("Zvolte maximální cenu objednávky");
+      }
+
+      if (missingArray.length > 0 && itemsType == "standard") {
         setError("Nejsou vyplněná všechna pole");
+      } else if (missingMystery.length > 0 && itemsType == "mystery") {
+        setError(missingMystery[0]);
+      } else if (!itemsType) {
+        setError("Chyba je na naší straně, omlouváme se.");
       } else {
         setError(null);
         if (id) {
@@ -654,33 +826,6 @@ export function SubscriptionForm() {
       }
     }
 
-    const handleAddInput = () => {
-      setItems([...items, { url: "", amount: "", changable: "true" }]);
-    };
-
-    const handleChange = (event, index) => {
-      let { name, value } = event.target;
-      let onChangeValue = [...items];
-      onChangeValue[index][name] = value;
-      setItems(onChangeValue);
-    };
-
-    const handleDeleteInput = (index) => {
-      const newArray = [...items];
-      newArray.splice(index, 1);
-      setItems(newArray);
-    };
-
-    function handleBack() {
-      setError(null);
-      const object = { ...formData };
-      object.items = items;
-      object.mysteryItem = mysteryItem;
-      object.itemsType = itemsType;
-      console.log(object);
-      setFormData(object);
-    }
-
     return (
       <>
         {settingsToggle == 0 && (
@@ -700,7 +845,6 @@ export function SubscriptionForm() {
               <button
                 onClick={() => {
                   setItemsType("standard");
-                  setMysteryItem();
                   setSettingsToggle(1);
                 }}
                 className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
@@ -722,7 +866,6 @@ export function SubscriptionForm() {
               <button
                 onClick={() => {
                   setItemsType("mystery");
-                  setMysteryItem(null);
                   setSettingsToggle(2);
                 }}
                 className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
@@ -831,6 +974,7 @@ export function SubscriptionForm() {
                     className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
                     onClick={() => {
                       setSettingsToggle(0);
+                      setItemsType("");
                     }}
                   >
                     <FontAwesomeIcon icon={faArrowLeft} /> Zpět na výběr
@@ -840,70 +984,7 @@ export function SubscriptionForm() {
                     className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
                     onClick={(e) => {
                       e.preventDefault();
-
-                      const itemsArray = [];
-                      items.map((item) => {
-                        let newURL = item.url;
-                        let oldURL = item.url.split("");
-                        if (
-                          oldURL[0] == "h" &&
-                          oldURL[1] == "t" &&
-                          oldURL[2] == "t" &&
-                          oldURL[3] == "p" &&
-                          oldURL[4] == "s" &&
-                          oldURL[5] == ":" &&
-                          oldURL[6] == "/" &&
-                          oldURL[7] == "/"
-                        ) {
-                          oldURL.splice(0, 8);
-                          newURL = oldURL.join("");
-                        } else if (
-                          oldURL[0] == "h" &&
-                          oldURL[1] == "t" &&
-                          oldURL[2] == "t" &&
-                          oldURL[3] == "p" &&
-                          oldURL[4] == ":" &&
-                          oldURL[5] == "/" &&
-                          oldURL[6] == "/"
-                        ) {
-                          oldURL.splice(0, 7);
-                          newURL = oldURL.join("");
-                        }
-
-                        if (oldURL[oldURL.length - 1] == "/") {
-                          oldURL.splice(oldURL.length - 1, 1);
-                          newURL = oldURL.join("");
-                        }
-
-                        item.url = newURL;
-                        itemsArray.splice(itemsArray.length, 0, item);
-                      });
-
-                      const subscription = {
-                        userId: user.id,
-                        stripeSubId: formData.stripeSubId,
-                        stripeCustomerId: user.stripeCustomerId,
-                        pipedrivePersonId: user.pipedrivePersonId,
-                        pipedriveDealId: formData.pipedriveDealId,
-                        active: formData.active,
-                        firstName: formData.firstName,
-                        secondName: formData.secondName,
-                        phone: formData.phone,
-                        email: formData.email,
-                        address: formData.address,
-                        addressNumber: formData.addressNumber,
-                        city: formData.city,
-                        cityNumber: formData.cityNumber,
-                        subName: formData.subName,
-                        subWebsite: formData.subWebsite,
-                        subFrequency: formData.subFrequency,
-                        subDay: formData.subDay,
-                        subDeliveryMethod: formData.subDeliveryMethod,
-                        subDeliveryAddress: formData.subDeliveryAddress,
-                        items: itemsArray,
-                      };
-
-                      handleSend(subscription, id);
+                      handleSend(e);
                     }}
                   >
                     {id ? "Aktualizovat předplatné" : "Vytvořit předplatné"}{" "}
@@ -922,85 +1003,100 @@ export function SubscriptionForm() {
         )}
         {settingsToggle == 2 && (
           <>
-            <form className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg">
+            <div className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg">
               <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
                 <legend className="text-xl font-semibold text-slate-900">
-                  nastavení mystery balíčku
+                  Nastavení mystery balíčku
                 </legend>
                 <div className="flex flex-col gap-3">
-                  {items.map((item, index) => {
-                    return (
-                      <div
-                        className="xl:grid grid-cols-12 flex flex-col gap-2 maw-w-full"
-                        key={"item" + index}
-                      >
-                        <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
-                          Odkaz na položku
-                          <input
-                            name="url"
-                            type="text"
-                            className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
-                            placeholder="www.eshop.cz/hodinky/rolex300"
-                            value={item.url}
-                            onChange={(e) => {
-                              handleChange(e, index);
-                            }}
-                          ></input>
-                        </label>
-                        <label className="flex flex-col text--textDark text-lg font-semibold col-span-2">
-                          Množství
-                          <input
-                            name="amount"
-                            type="number"
-                            className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
-                            placeholder="5"
-                            value={item.amount}
-                            onChange={(e) => {
-                              handleChange(e, index);
-                            }}
-                          ></input>
-                        </label>
-                        <label className="flex flex-col text-heading text-lg font-semibold col-span-3">
-                          Nahraditelné?
-                          <select
-                            name="changable"
-                            id="changable"
-                            className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
-                            value={item.changable}
-                            onChange={(e) => {
-                              handleChange(e, index);
-                            }}
-                          >
-                            <option value="true">Ano</option>
-                            <option value="false">Ne</option>
-                          </select>
-                        </label>
-                        <FontAwesomeIcon
-                          icon={faSquareXmark}
-                          className="xl:text-xl text-3xl text-red-400 self-end mb-[14px] cursor-textMediumointer cursor-pointer"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleDeleteInput(index);
-                          }}
-                        />
+                  <div className="xl:grid grid-cols-2 flex flex-col gap-2 maw-w-full">
+                    <label className="flex flex-col text-textDark text-lg font-semibold w-full col-span-2">
+                      Kategorie
+                      <div className="grid grid-cols-2 w-full gap-5">
+                        <div>
+                          <div className="flex justify-between items-center gap-4 w-full bg-slate-50 border border-slate-300 rounded p-2">
+                            <input
+                              value={mysteryCategoriesInput}
+                              name="url"
+                              type="text"
+                              className=" text-md font-semibold text-input w-full focus:border-slate-100"
+                              placeholder="Sušenky"
+                              onChange={(e) => {
+                                setMysteryCategoriesInput(e.target.value);
+                              }}
+                              onKeyDown={(e) => {
+                                if (e.code == "Enter") {
+                                  mysteryCategoryAdd(mysteryCategoriesInput);
+                                }
+                              }}
+                            ></input>
+                            <FontAwesomeIcon
+                              onClick={() => {
+                                mysteryCategoryAdd(mysteryCategoriesInput);
+                              }}
+                              icon={faPlusSquare}
+                              className=" text-textDark text-3xl cursor-pointer"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="p-4 rounded-md border border-slate-300 bg-slate-50 flex gap-3 flex-wrap min-h-[100px]">
+                          {mysteryCategories.length == 0 ? (
+                            <p className="text-textLighter">
+                              Pokud žádnou kategorii nevyberete, budeme vybírat
+                              zboží ze všech kategorií v eshopu náhodně
+                            </p>
+                          ) : (
+                            mysteryCategories.map((item, index) => {
+                              return (
+                                <button
+                                  className=" px-2 py-0 h-8 font-semibold text-textButton bg-rose-800 rounded-md flex items-center gap-1 cursor-pointer shadow-md"
+                                  key={item}
+                                  onClick={() => {
+                                    mysteryCategoryDelete(index);
+                                  }}
+                                >
+                                  {item} <FontAwesomeIcon icon={faXmark} />
+                                </button>
+                              );
+                            })
+                          )}
+                        </div>
                       </div>
-                    );
-                  })}
-                </div>
-                <div>
-                  <button
-                    className="flex justify-center items-center rounded-sm my-4 text-lg font-bold gap-3 hover:scale-105 ease-in-out transition-all cursor-pointer"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleAddInput();
-                    }}
-                  >
-                    <FontAwesomeIcon
-                      icon={faPlusSquare}
-                      className=" text-textDark text-3xl"
-                    />
-                    <p className="xl:hidden">Přidejte položku</p>
-                  </button>
+                    </label>
+
+                    <label className="flex flex-col text--textDark text-lg font-semibold col-span-2">
+                      Zpráva
+                      <textarea
+                        value={mysteryItem.message}
+                        name="amount"
+                        className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                        placeholder="Přál bych si kombinaci proteinových tyčinek a ořechů"
+                        onChange={(e) => {
+                          setMysteryItem({
+                            ...mysteryItem,
+                            message: e.target.value,
+                          });
+                        }}
+                      ></textarea>
+                    </label>
+                    <label className="flex flex-col text-heading text-lg font-semibold col-span-2">
+                      Maximální cena celé objednávky
+                      <input
+                        name="changable"
+                        id="changable"
+                        type="number"
+                        className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                        value={mysteryItem.amount}
+                        onChange={(e) => {
+                          setMysteryAmount({
+                            ...mysteryItem,
+                            amount: e.target.value,
+                          });
+                        }}
+                      />
+                    </label>
+                  </div>
                 </div>
               </fieldset>
 
@@ -1010,6 +1106,7 @@ export function SubscriptionForm() {
                     className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
                     onClick={() => {
                       setSettingsToggle(0);
+                      setItemsType("");
                     }}
                   >
                     <FontAwesomeIcon icon={faArrowLeft} /> Zpět na výběr
@@ -1019,70 +1116,7 @@ export function SubscriptionForm() {
                     className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
                     onClick={(e) => {
                       e.preventDefault();
-
-                      const itemsArray = [];
-                      items.map((item) => {
-                        let newURL = item.url;
-                        let oldURL = item.url.split("");
-                        if (
-                          oldURL[0] == "h" &&
-                          oldURL[1] == "t" &&
-                          oldURL[2] == "t" &&
-                          oldURL[3] == "p" &&
-                          oldURL[4] == "s" &&
-                          oldURL[5] == ":" &&
-                          oldURL[6] == "/" &&
-                          oldURL[7] == "/"
-                        ) {
-                          oldURL.splice(0, 8);
-                          newURL = oldURL.join("");
-                        } else if (
-                          oldURL[0] == "h" &&
-                          oldURL[1] == "t" &&
-                          oldURL[2] == "t" &&
-                          oldURL[3] == "p" &&
-                          oldURL[4] == ":" &&
-                          oldURL[5] == "/" &&
-                          oldURL[6] == "/"
-                        ) {
-                          oldURL.splice(0, 7);
-                          newURL = oldURL.join("");
-                        }
-
-                        if (oldURL[oldURL.length - 1] == "/") {
-                          oldURL.splice(oldURL.length - 1, 1);
-                          newURL = oldURL.join("");
-                        }
-
-                        item.url = newURL;
-                        itemsArray.splice(itemsArray.length, 0, item);
-                      });
-
-                      const subscription = {
-                        userId: user.id,
-                        stripeSubId: formData.stripeSubId,
-                        stripeCustomerId: user.stripeCustomerId,
-                        pipedrivePersonId: user.pipedrivePersonId,
-                        pipedriveDealId: formData.pipedriveDealId,
-                        active: formData.active,
-                        firstName: formData.firstName,
-                        secondName: formData.secondName,
-                        phone: formData.phone,
-                        email: formData.email,
-                        address: formData.address,
-                        addressNumber: formData.addressNumber,
-                        city: formData.city,
-                        cityNumber: formData.cityNumber,
-                        subName: formData.subName,
-                        subWebsite: formData.subWebsite,
-                        subFrequency: formData.subFrequency,
-                        subDay: formData.subDay,
-                        subDeliveryMethod: formData.subDeliveryMethod,
-                        subDeliveryAddress: formData.subDeliveryAddress,
-                        items: itemsArray,
-                      };
-
-                      handleSend(subscription, id);
+                      handleSend();
                     }}
                   >
                     {id ? "Aktualizovat předplatné" : "Vytvořit předplatné"}{" "}
@@ -1096,7 +1130,7 @@ export function SubscriptionForm() {
                   </h2>
                 )}
               </div>
-            </form>
+            </div>
           </>
         )}
       </>
