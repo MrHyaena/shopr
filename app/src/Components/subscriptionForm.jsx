@@ -1009,42 +1009,40 @@ export function SubscriptionForm() {
                   Nastavení mystery balíčku
                 </legend>
                 <div className="flex flex-col gap-3">
-                  <div className="xl:grid grid-cols-2 flex flex-col gap-2 maw-w-full">
-                    <label className="flex flex-col text-textDark text-lg font-semibold w-full col-span-2">
+                  <div className="flex flex-col gap-2 maw-w-full">
+                    <label className="flex flex-col text-textDark text-lg font-semibold w-full">
                       Kategorie
-                      <div className="grid grid-cols-2 w-full gap-5">
-                        <div>
-                          <div className="flex justify-between items-center gap-4 w-full bg-slate-50 border border-slate-300 rounded p-2">
-                            <input
-                              value={mysteryCategoriesInput}
-                              name="url"
-                              type="text"
-                              className=" text-md font-semibold text-input w-full focus:border-slate-100"
-                              placeholder="Sušenky"
-                              onChange={(e) => {
-                                setMysteryCategoriesInput(e.target.value);
-                              }}
-                              onKeyDown={(e) => {
-                                if (e.code == "Enter") {
-                                  mysteryCategoryAdd(mysteryCategoriesInput);
-                                }
-                              }}
-                            ></input>
-                            <FontAwesomeIcon
-                              onClick={() => {
+                      <div className="flex flex-col gap-2">
+                        <div className="flex justify-between items-center gap-4 w-full bg-slate-50 border border-slate-300 rounded p-2">
+                          <input
+                            value={mysteryCategoriesInput}
+                            name="url"
+                            type="text"
+                            className=" text-md font-semibold text-input w-full focus:border-slate-100"
+                            placeholder="Sušenky"
+                            onChange={(e) => {
+                              setMysteryCategoriesInput(e.target.value);
+                            }}
+                            onKeyDown={(e) => {
+                              if (e.code == "Enter") {
                                 mysteryCategoryAdd(mysteryCategoriesInput);
-                              }}
-                              icon={faPlusSquare}
-                              className=" text-textDark text-3xl cursor-pointer"
-                            />
-                          </div>
+                              }
+                            }}
+                          ></input>
+                          <FontAwesomeIcon
+                            onClick={() => {
+                              mysteryCategoryAdd(mysteryCategoriesInput);
+                            }}
+                            icon={faPlusSquare}
+                            className=" text-textDark text-3xl cursor-pointer"
+                          />
                         </div>
-
-                        <div className="p-4 rounded-md border border-slate-300 bg-slate-50 flex gap-3 flex-wrap min-h-[100px]">
+                        <div className="p-2 rounded-md border border-slate-300 bg-slate-50 flex gap-3 flex-wrap min-h-[100px]">
                           {mysteryCategories.length == 0 ? (
                             <p className="text-textLighter">
-                              Pokud žádnou kategorii nevyberete, budeme vybírat
-                              zboží ze všech kategorií v eshopu náhodně
+                              Zde se zobrazí zvolené kategorie. Pokud žádnou
+                              kategorii nevyberete, budeme vybírat zboží ze
+                              všech kategorií v e-shopu náhodně.
                             </p>
                           ) : (
                             mysteryCategories.map((item, index) => {
@@ -1065,7 +1063,7 @@ export function SubscriptionForm() {
                       </div>
                     </label>
 
-                    <label className="flex flex-col text--textDark text-lg font-semibold col-span-2">
+                    <label className="flex flex-col text--textDark text-lg font-semibold">
                       Zpráva
                       <textarea
                         value={mysteryItem.message}
@@ -1082,19 +1080,45 @@ export function SubscriptionForm() {
                     </label>
                     <label className="flex flex-col text-heading text-lg font-semibold col-span-2">
                       Maximální cena celé objednávky
-                      <input
-                        name="changable"
-                        id="changable"
-                        type="number"
-                        className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
-                        value={mysteryItem.amount}
-                        onChange={(e) => {
-                          setMysteryAmount({
-                            ...mysteryItem,
-                            amount: e.target.value,
-                          });
-                        }}
-                      />
+                      <div className="grid grid-cols-[100px_1fr] gap-x-5">
+                        <input
+                          name="changable"
+                          id="changable"
+                          type="number"
+                          className="bg-slate-50 border border-slate-300 p-2 text-lg font-semibold text-input "
+                          value={mysteryItem.amount}
+                          onChange={(e) => {
+                            setMysteryItem({
+                              ...mysteryItem,
+                              amount: e.target.value,
+                            });
+                          }}
+                          onBlur={(e) => {
+                            if (e.target.value < 100) {
+                              e.target.value = 100;
+                            } else if (e.target.value > 9999) {
+                              e.target.value = 9999;
+                            }
+                          }}
+                        />
+                        <input
+                          min={0}
+                          max={9999}
+                          type="range"
+                          className="accent-quad"
+                          value={mysteryItem.amount}
+                          onChange={(e) => {
+                            setMysteryItem({
+                              ...mysteryItem,
+                              amount: e.target.value,
+                            });
+                          }}
+                        />
+                        <div className="col-start-2 flex items-center justify-between">
+                          <p>100</p>
+                          <p>9999</p>
+                        </div>
+                      </div>
                     </label>
                   </div>
                 </div>
