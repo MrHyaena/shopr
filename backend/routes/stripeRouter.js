@@ -198,11 +198,6 @@ router.post(
             linkArray.join(" ");
           //Mystery note
         } else if (subscription.itemsType == "mystery") {
-          const categoriesArray = await subscription.mysteryItem.categories.map(
-            (item) => {
-              return cate;
-            }
-          );
           note = `<h2>Typ předplatného</h2><p>${
             subscription.itemsType
           }</p><h3>Specifikace mystery balíčku</h3><h4>Maximální částka</h4><p>${
