@@ -47,7 +47,9 @@ export function Subscriptions() {
       subDay,
       subDeliveryMethod,
       subDeliveryAddress,
+      itemsType,
       items,
+      mysteryItem,
     } = subscriptionData;
 
     const [toggle, setToggle] = useState(false);
@@ -278,7 +280,8 @@ export function Subscriptions() {
                             subWebsite,
                             subFrequency,
                             stripeCustomerId,
-                            user
+                            user,
+                            itemsType
                           );
                         }}
                       >
@@ -425,7 +428,8 @@ export function Subscriptions() {
                       subWebsite,
                       subFrequency,
                       stripeCustomerId,
-                      user
+                      user,
+                      itemsType
                     );
                   }}
                   className=" text-textDark cursor-pointer hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-quad"

@@ -47,9 +47,9 @@ export function SubscriptionForm() {
     subDay: "monday",
     subDeliveryMethod: "courier",
     subDeliveryAddress: "",
-    itemsType: "",
+    itemsType: "empty",
     items: [{ url: "", amount: "", changable: "true" }],
-    mysteryItem: { categories: [], message: "", amount: 100 },
+    mysteryItem: { categories: [], message: "", amount: 300 },
   });
   const [originalSub, setOriginalSub] = useState("");
 
@@ -740,17 +740,7 @@ export function SubscriptionForm() {
         });
       }
 
-      const mysteryItem = {};
-      if (itemsType == "mystery") {
-        mysteryItem = {
-          categories: mysteryCategories,
-          message: mysteryMessage,
-          amount: mysteryAmount,
-        };
-      }
-      console.log(mysteryItem);
-
-      if (mysteryCategories.length == 0) {
+      if (mysteryItem.categories.length == 0) {
         mysteryItem.categories.push("Všechny kategorie");
       }
 
@@ -784,17 +774,8 @@ export function SubscriptionForm() {
         (item) => !item.url || !item.amount || !item.changable
       );
 
-      const missingMystery = [];
-      if (mysteryAmount < 100) {
-        missingMystery.push("Zvolte maximální cenu objednávky");
-      }
-
       if (missingArray.length > 0 && itemsType == "standard") {
         setError("Nejsou vyplněná všechna pole");
-      } else if (missingMystery.length > 0 && itemsType == "mystery") {
-        setError(missingMystery[0]);
-      } else if (!itemsType) {
-        setError("Chyba je na naší straně, omlouváme se.");
       } else {
         setError(null);
         if (id) {
@@ -829,60 +810,64 @@ export function SubscriptionForm() {
     return (
       <>
         {settingsToggle == 0 && (
-          <div className="bg-white p-5 rounded-md border border-slate-200 gap-x-10 gap-y-5 grid grid-cols-2 grid-rows-[1fr_80px] min-h-[500px]">
-            <div className="flex flex-col justify-between">
-              <div>
-                <h2 className="text-xl font-semibold mb-4 text-heading">
-                  Přesný soupis produktů, které chcete do pravidelné objednávky
-                </h2>
-                <p className="text-md font-semibold text-textDark">
-                  Vytvoříte si objednávku úplně stejně, jako to děláte právě na
-                  e-shopu. V objednávce dostanete jenom a pouze produkty, které
-                  si sami navolíte.
-                </p>
-              </div>
+          <>
+            <div className="bg-white p-5 rounded-md border border-slate-200 gap-x-10 gap-y-5 grid grid-cols-2 grid-rows-[1fr_80px] min-h-[500px]">
+              <div className="flex flex-col justify-between">
+                <div>
+                  <h2 className="text-xl font-semibold mb-4 text-heading">
+                    Přesný soupis produktů, které chcete do pravidelné
+                    objednávky
+                  </h2>
+                  <p className="text-md font-semibold text-textDark">
+                    Vytvoříte si objednávku úplně stejně, jako to děláte právě
+                    na e-shopu. V objednávce dostanete jenom a pouze produkty,
+                    které si sami navolíte.
+                  </p>
+                </div>
 
-              <button
-                onClick={() => {
-                  setItemsType("standard");
-                  setSettingsToggle(1);
-                }}
-                className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
-              >
-                Chci standardní objednávku
-              </button>
-            </div>
-            <div className="flex flex-col justify-between">
-              <div>
-                <h2 className="text-xl font-semibold mb-4 text-heading">
-                  Mystery balíček plný překvapení
-                </h2>
-                <p className="text-md font-semibold text-textDark">
-                  Mystery balíček pro vás vytvoříme my. Vy si pouze zvolíte
-                  kategorie, přidáte komentář a zvolíte maximální částku
-                  objednávky. Zboží pro Vás budeme náhodně vybírat my.
-                </p>
+                <button
+                  onClick={() => {
+                    setItemsType("standard");
+                    setSettingsToggle(1);
+                  }}
+                  className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+                >
+                  Chci standardní objednávku
+                </button>
+              </div>
+              <div className="flex flex-col justify-between">
+                <div>
+                  <h2 className="text-xl font-semibold mb-4 text-heading">
+                    Mystery balíček plný překvapení
+                  </h2>
+                  <p className="text-md font-semibold text-textDark">
+                    Mystery balíček pro vás vytvoříme my. Vy si pouze zvolíte
+                    kategorie, přidáte komentář a zvolíte maximální částku
+                    objednávky. Zboží pro Vás budeme náhodně vybírat my.
+                  </p>
+                </div>
+                <button
+                  onClick={() => {
+                    setItemsType("mystery");
+                    setSettingsToggle(2);
+                  }}
+                  className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+                >
+                  Chci mystery balíček
+                </button>
               </div>
               <button
                 onClick={() => {
-                  setItemsType("mystery");
-                  setSettingsToggle(2);
+                  setStep(2);
+                  handleBack();
                 }}
-                className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+                className="bg-quad col-span-2 justify-self-center self-center text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               >
-                Chci mystery balíček
+                <FontAwesomeIcon icon={faArrowLeft} /> Zpět
               </button>
             </div>
-            <button
-              onClick={() => {
-                setStep(2);
-                handleBack();
-              }}
-              className="bg-quad col-span-2 justify-self-center self-center text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
-            >
-              <FontAwesomeIcon icon={faArrowLeft} /> Zpět
-            </button>
-          </div>
+            <StepThreeCommentSettings />
+          </>
         )}
         {settingsToggle == 1 && (
           <>
@@ -974,7 +959,7 @@ export function SubscriptionForm() {
                     className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
                     onClick={() => {
                       setSettingsToggle(0);
-                      setItemsType("");
+                      setItemsType("empty");
                     }}
                   >
                     <FontAwesomeIcon icon={faArrowLeft} /> Zpět na výběr
@@ -999,6 +984,7 @@ export function SubscriptionForm() {
                 )}
               </div>
             </form>
+            <StepThreeCommentStandard />
           </>
         )}
         {settingsToggle == 2 && (
@@ -1048,7 +1034,7 @@ export function SubscriptionForm() {
                             mysteryCategories.map((item, index) => {
                               return (
                                 <button
-                                  className=" px-2 py-0 h-8 font-semibold text-textButton bg-rose-800 rounded-md flex items-center gap-1 cursor-pointer shadow-md"
+                                  className=" px-2 py-0 h-8 font-semibold text-textButton bg-rose-800 rounded-md flex items-center gap-1 cursor-pointer shadow-md animate-scale-up-noBounce"
                                   key={item}
                                   onClick={() => {
                                     mysteryCategoryDelete(index);
@@ -1094,15 +1080,15 @@ export function SubscriptionForm() {
                             });
                           }}
                           onBlur={(e) => {
-                            if (e.target.value < 100) {
-                              e.target.value = 100;
+                            if (e.target.value < 300) {
+                              e.target.value = 300;
                             } else if (e.target.value > 9999) {
                               e.target.value = 9999;
                             }
                           }}
                         />
                         <input
-                          min={0}
+                          min={300}
                           max={9999}
                           type="range"
                           className="accent-quad"
@@ -1115,7 +1101,7 @@ export function SubscriptionForm() {
                           }}
                         />
                         <div className="col-start-2 flex items-center justify-between">
-                          <p>100</p>
+                          <p>300</p>
                           <p>9999</p>
                         </div>
                       </div>
@@ -1130,7 +1116,7 @@ export function SubscriptionForm() {
                     className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
                     onClick={() => {
                       setSettingsToggle(0);
-                      setItemsType("");
+                      setItemsType("empty");
                     }}
                   >
                     <FontAwesomeIcon icon={faArrowLeft} /> Zpět na výběr
@@ -1155,13 +1141,45 @@ export function SubscriptionForm() {
                 )}
               </div>
             </div>
+            <StepThreeCommentMystery />
           </>
         )}
       </>
     );
   }
 
-  function StepThreeComment() {
+  function StepThreeCommentSettings() {
+    return (
+      <>
+        <div className="p-10">
+          <div className="mb-10">
+            <h2 className="text-xl font-semibold mb-4 text-heading">
+              Standardní objednávka
+            </h2>
+            <p className="text-md font-semibold text-textDark">
+              Standardní objednávku si můžete představit jako typickou
+              objednávku z e-shopu, ve které si zvolíte přesně dané produkty.
+              Nijak je nebudeme měnit ani upravovat, vše bude ve vašich rukách.
+            </p>
+          </div>
+          <div className="mb-10">
+            <h2 className="text-xl font-semibold mb-4 text-heading">
+              Mystery balíček
+            </h2>
+            <p className="text-md font-semibold text-textDark">
+              Mystery balíček je objednávka, do které Vám zvolíme náhodně
+              vybrané zboží my. V nastavení zvolíte maximální hodnotu
+              objednávky, upřesníte kategorie a necháte případně nějakou zprávu.
+              Hodí se třeba na předplatné různých čajů, sladkostí, a obecně
+              věcí, které chcete zkoušet a testovat.
+            </p>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  function StepThreeCommentStandard() {
     return (
       <>
         <div className="p-10">
@@ -1182,13 +1200,54 @@ export function SubscriptionForm() {
             <p className="text-md font-semibold text-textDark">
               Někdy se může stát, že zboží nebude naskladněné. Pokud v políčku
               nahraditelné vyberete Ano, pak se zboží pokusíme nahradit stejným
-              typem od jiné značky.
+              typem od jiné značky. Jestliže se nám nepovede ani to, předplatné
+              pozastavíme a budeme Vás kontaktovat.
             </p>
           </div>
         </div>
       </>
     );
   }
+
+  function StepThreeCommentMystery() {
+    return (
+      <>
+        <div className="p-10">
+          <div className="mb-10">
+            <h2 className="text-xl font-semibold mb-4 text-heading">
+              Zvolte kategorie
+            </h2>
+            <p className="text-md font-semibold text-textDark">
+              Zvolením kategorie máte možnost upřesnit typ zboží, který chcete v
+              Mystery balíčku mít. Čím více kategorií zvolíte, tím více typů
+              produktů do balíčku poskládáme. Pokud nezvolíte ani jednu
+              kategorii, budeme vybírat z celého e-shopu.
+            </p>
+          </div>
+          <div className="mb-10">
+            <h2 className="text-xl font-semibold mb-4 text-heading">
+              Přidejte zpráv
+            </h2>
+            <p className="text-md font-semibold text-textDark">
+              Jde o další upřesnění objednávky. Napište nám sem například pokud
+              jste na něco alergičtí, nenávidíte chuť skořice apod.
+            </p>
+          </div>
+          <div className="mb-10">
+            <h2 className="text-xl font-semibold mb-4 text-heading">
+              Zvolte maximální hodnotu
+            </h2>
+            <p className="text-md font-semibold text-textDark">
+              Počítá se včetně včetně doprovodných plateb za dopravu a platbu.
+              Nezapočítáváme sem cenu za vyřizování předplatného.
+            </p>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  //step four - final summary
 
   return (
     <>
@@ -1210,7 +1269,6 @@ export function SubscriptionForm() {
           {step == 2 && <StepTwo />}
           {step == 2 && <StepTwoComment />}
           {step == 3 && <StepThree />}
-          {step == 3 && <StepThreeComment />}
         </div>
       </div>
     </>

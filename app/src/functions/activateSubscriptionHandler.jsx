@@ -4,7 +4,8 @@ export async function activateSubscriptionHandler(
   subWebsite,
   subFrequency,
   stripeCustomerId,
-  user
+  user,
+  itemsType
 ) {
   const apiURL = import.meta.env.VITE_API_URL;
 
@@ -21,7 +22,9 @@ export async function activateSubscriptionHandler(
       "/" +
       subFrequency +
       "/" +
-      stripeCustomerId,
+      stripeCustomerId +
+      "/" +
+      itemsType,
     {
       mode: "cors",
       method: "GET",

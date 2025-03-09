@@ -117,9 +117,6 @@ const createSubscription = async (req, res) => {
       emptyFields.push("Adresu zásilkovny");
     }
   }
-  if (!items || !mysteryItem) {
-    emptyFields.push("Položky");
-  }
 
   if (emptyFields.length > 0) {
     return res
@@ -196,6 +193,8 @@ const createSubscription = async (req, res) => {
       "598febcf061c8207b5a96191701df4fe30b75456": email.toString(),
       //Phone
       "4bf6ca46c825f1b8e771f55d14fb46245ee171f1": phone.toString(),
+      //ItemsType
+      c2ec04237b8817bfcc272cb085cb2f321cfeab4f: itemsType.toString(),
     };
 
     const pipeResponse = await pipedriveApiCallV1("deals", "POST", payload);
@@ -297,7 +296,9 @@ const updateSubscription = async (req, res) => {
     subDay,
     subDeliveryMethod,
     subDeliveryAddress,
+    itemsType,
     items,
+    mysteryItem,
   } = req.body;
 
   const { id, frequencyChange, nameChange, websiteChange } = req.params;
@@ -389,6 +390,8 @@ const updateSubscription = async (req, res) => {
       "598febcf061c8207b5a96191701df4fe30b75456": email.toString(),
       //Phone
       "4bf6ca46c825f1b8e771f55d14fb46245ee171f1": phone.toString(),
+      //ItemsType
+      c2ec04237b8817bfcc272cb085cb2f321cfeab4f: itemsType.toString(),
     },
   };
 
@@ -412,11 +415,11 @@ const updateSubscription = async (req, res) => {
   //Decide if it is also necessary to call stripe subscription update
   if (
     (frequencyChange == 1 || nameChange == 1 || websiteChange == 1) &&
-    req.body.active
+    active
   ) {
     let priceId;
 
-    switch (req.body.subFrequency.toLowerCase()) {
+    switch (subFrequency.toLowerCase()) {
       case "weekly":
         priceId = process.env.PLAN_WEEKLY;
         break;
@@ -434,11 +437,22 @@ const updateSubscription = async (req, res) => {
         break;
     }
 
-    const subscriptionObject = await stripe.subscriptions.retrieve(
-      req.body.stripeSubId
-    );
+    const subscriptionObject = await stripe.subscriptions.retrieve(stripeSubId);
 
-    const response = await stripe.subscriptions.update(req.body.stripeSubId, {
+    let description =
+      "Typ předplatného: Standard // Nazev předplatného: " +
+      req.body.subName +
+      " // E-shop: " +
+      req.body.subWebsite;
+    if (itemsType == "mystery") {
+      description =
+        "Typ předplatného: Mystery // Nazev předplatného: " +
+        req.body.subName +
+        " // E-shop: " +
+        req.body.subWebsite;
+    }
+
+    const response = await stripe.subscriptions.update(stripeSubId, {
       items: [
         {
           id: subscriptionObject.items.data[0].id,
@@ -446,11 +460,7 @@ const updateSubscription = async (req, res) => {
           quantity: 1,
         },
       ],
-      description:
-        "Nazev předplatného: " +
-        req.body.subName +
-        " // E-shop: " +
-        req.body.subWebsite,
+      description: description,
     });
   }
 

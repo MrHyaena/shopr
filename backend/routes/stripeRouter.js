@@ -28,7 +28,7 @@ const router = express.Router();
 
 //activate subscription route - creating cheackout session
 router.get(
-  "/activate/:userId/:subId/:subName/:subWebsite/:subFrequency/:stripeCustomerId",
+  "/activate/:userId/:subId/:subName/:subWebsite/:subFrequency/:stripeCustomerId/:itemsType",
   express.json(),
   async (req, res) => {
     const {
@@ -38,6 +38,7 @@ router.get(
       subWebsite,
       userId,
       stripeCustomerId,
+      itemsType,
     } = req.params;
 
     if (!subId) {
@@ -69,6 +70,19 @@ router.get(
         break;
     }
 
+    let description =
+      "Typ předplatného: Standard // Nazev předplatného: " +
+      req.body.subName +
+      " // E-shop: " +
+      req.body.subWebsite;
+    if (itemsType == "mystery") {
+      description =
+        "Typ předplatného: Mystery // Nazev předplatného: " +
+        subName +
+        " // E-shop: " +
+        subWebsite;
+    }
+
     try {
       const session = await stripe.checkout.sessions.create({
         mode: "subscription",
@@ -83,8 +97,7 @@ router.get(
           userId: userId,
         },
         subscription_data: {
-          description:
-            "Název předplatného: " + subName + " // E-shop: " + subWebsite,
+          description: description,
           metadata: { subId: subId, userId: userId },
         },
         customer: stripeCustomerId,
@@ -143,20 +156,6 @@ router.get("/success", express.json(), async (req, res) => {
   }
 });
 
-//stripe customer portal
-router.get("/portal/:stripeCustomerId", express.json(), async (req, res) => {
-  const { stripeCustomerId } = req.params;
-  try {
-    const portalSession = await stripe.billingPortal.sessions.create({
-      customer: stripeCustomerId,
-      return_url: process.env.PROXY_APP,
-    });
-    res.status(200).json(portalSession.url);
-  } catch (error) {
-    res.status(400).json(error);
-  }
-});
-
 //Stripe webhook listener
 router.post(
   "/webhook",
@@ -188,11 +187,30 @@ router.post(
         const subscription = await Subscription.findById(subId);
 
         // ---------------------- PIPEDRIVE - creating task when invoice is payed----------------------
-        const linkArray = await subscription.items.map((item) => {
-          return `<p><a href='https://${item.url}' target='_blank'>${item.url}</a></p>`;
-        });
-
-        const note = linkArray.join(" ");
+        let note;
+        //standard note
+        if (subscription.itemsType == "standard") {
+          const linkArray = await subscription.items.map((item) => {
+            return `<p><a href='https://${item.url}' target='_blank'>${item.url}</a></p>`;
+          });
+          note =
+            `<h2>Typ předplatného</h2><p>${subscription.itemsType}</p><h3>Produkty v předplatném</h3>` +
+            linkArray.join(" ");
+          //Mystery note
+        } else if (subscription.itemsType == "mystery") {
+          const categoriesArray = await subscription.mysteryItem.categories.map(
+            (item) => {
+              return cate;
+            }
+          );
+          note = `<h2>Typ předplatného</h2><p>${
+            subscription.itemsType
+          }</p><h3>Specifikace mystery balíčku</h3><h4>Maximální částka</h4><p>${
+            subscription.mysteryItem.amount
+          }</p><h4>Kategorie</h4><p>${subscription.mysteryItem.categories.join(
+            " - "
+          )}</p><h4>Zpráva</h4><p>${subscription.mysteryItem.message}</p>`;
+        }
 
         const payloadTask = await {
           subject:
@@ -223,7 +241,5 @@ router.post(
     }
   }
 );
-
-//update subscription
 
 module.exports = router;
