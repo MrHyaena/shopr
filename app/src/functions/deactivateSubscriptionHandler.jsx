@@ -1,5 +1,3 @@
-import { useAuthContext } from "../hooks/useAuthContext";
-import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 const apiURL = import.meta.env.VITE_API_URL;
 
 // FUNCTION FOR DELETING SUBSCRIPTIONS
@@ -7,8 +5,10 @@ export async function deactivateSubscriptionHandler(
   subId,
   stripeSubId,
   user,
-  setSubscriptions
+  setSubscriptions,
+  setLoader
 ) {
+  setLoader(true);
   const response = await fetch(
     apiURL + "/api/subscriptions/deactivate/" + subId + "/" + stripeSubId,
     {
@@ -25,10 +25,14 @@ export async function deactivateSubscriptionHandler(
   console.log(json);
 
   if (response.ok) {
+    setLoader(false);
+
     setSubscriptions(json.subscriptions);
   }
 
   if (!response.ok) {
+    setLoader(false);
+
     console.log(response);
   }
 }

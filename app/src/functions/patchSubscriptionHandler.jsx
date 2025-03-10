@@ -22,8 +22,10 @@ export function patchSubscriptionHandler() {
     id,
     frequencyChange,
     nameChange,
-    websiteChange
+    websiteChange,
+    setLoader
   ) {
+    setLoader(true);
     setIsLoading(true);
     setError(null);
 
@@ -58,12 +60,14 @@ export function patchSubscriptionHandler() {
     console.log(json);
 
     if (!response.ok) {
+      setLoader(false);
       setIsLoading(false);
       setError(json.error);
       return;
     }
 
     if (response.ok) {
+      setLoader(false);
       const newItem = { ...json, ...data };
 
       setIsLoading(false);

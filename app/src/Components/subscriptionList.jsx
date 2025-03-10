@@ -4,7 +4,9 @@ import {
   faChevronDown,
   faChevronUp,
   faGears,
+  faGift,
   faHouseUser,
+  faMagnifyingGlass,
   faPen,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,7 +21,7 @@ import { deactivateSubscriptionHandler } from "../functions/deactivateSubscripti
 import { activateSubscriptionHandler } from "../functions/activateSubscriptionHandler";
 const apiURL = import.meta.env.VITE_API_URL;
 
-export function Subscriptions() {
+export function SubscriptionList({ setLoader }) {
   const { subscriptions, setSubscriptions } = useSubscriptionContext();
   const { user, setUser } = useAuthContext();
 
@@ -64,13 +66,13 @@ export function Subscriptions() {
 
     const editURL = "/app/form/" + _id;
 
-    function SubDetails() {
+    function SubDetailsStandard() {
       return (
         <div
-          className="col-span-2 grid xl:grid-cols-3 gap-y-5 gap-x-15"
-          key={"subDetails" + _id}
+          className="col-span-2 grid xl:grid-cols-3 gap-y-5 gap-x-10"
+          key={"SubDetailsStandard" + _id}
         >
-          <div className="xl:col-span-2">
+          <div className="">
             <h3 className="text-xl font-bold text-textLight py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
               <FontAwesomeIcon
                 icon={faCartShopping}
@@ -100,7 +102,7 @@ export function Subscriptions() {
                           </a>
                         </div>
                         <div className="flex gap-2">
-                          <p className="text-textDark font-bold">Počet:</p>
+                          <p className="text-textDark font-bold">Množství:</p>
                           <p className="">{item.amount}</p>
                         </div>
                         <div className="flex gap-2">
@@ -175,200 +177,416 @@ export function Subscriptions() {
               })}
             </ul>
           </div>
-          <div className="col-span-1 flex flex-col">
-            <div>
-              <h3 className="text-xl font-bold text-textLight py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
-                <FontAwesomeIcon icon={faGears} key={"fagears" + _id} />
-                Nastavení předplatného
-              </h3>
-              <div className="flex flex-col font-semibold text-textDark">
-                <div className="grid-cols-2 py-2 px-4 text-md font-semibold text-textLight bg-zinc-700 hidden">
-                  <p className="col-span-1">Údaj</p>
-                  <p className="col-span-1">Hodnota</p>
-                </div>
-                <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
-                  <h4 className="text-heading font-bold text-textDark">
-                    Název předplatného:
-                  </h4>
-                  <p>{subName}</p>
-                </div>
-                <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
-                  <h4 className="text-heading font-bold text-textDark">
-                    E-shop:
-                  </h4>
-                  <a
-                    href={"https://" + subWebsite}
-                    target="_blank"
-                    className="text-textA"
-                  >
-                    {subWebsite}
-                  </a>
-                </div>
-                <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
-                  <h4 className="text-heading font-bold text-textDark">
-                    Den objednání:
-                  </h4>
-                  <p>
-                    {subDay == "monday" && "Pondělí"}
-                    {subDay == "tuesday" && "Úterý"}
-                    {subDay == "wednesday" && "Středa"}
-                    {subDay == "thursday" && "Čtvrtek"}
-                    {subDay == "friday" && "Pátek"}
-                  </p>
-                </div>
-                <div className="grid grid-cols-2 py-2 px-4 ">
-                  <h4 className="text-heading font-bold text-textDark">
-                    Frekvence:
-                  </h4>
-                  <p>
-                    {subFrequency == "weekly" && "Jednou za týden"}
-                    {subFrequency == "biWeekly" && "Jednou za dva týdny"}
-                    {subFrequency == "monthly" && "Jednou za měsíc"}
-                    {subFrequency == "biMonthly" && "Jednou za dva měsíce"}
-                    {subFrequency == "quarterly" && "Jednou za tři měsíce"}
-                  </p>
-                </div>
-                <div className="grid grid-cols-2 py-2 px-4 bg-slate-100">
-                  <h4 className="text-heading font-bold text-textDark">
-                    Způsob doručení:
-                  </h4>
-                  <p>
-                    {subDeliveryMethod == "courier" && "Nejlevnější kurýr"}
-                    {subDeliveryMethod == "dropbox" && "Box/výdejní místé"}
-                  </p>
-                </div>
-                <div className="grid grid-cols-2 py-2 px-4">
-                  <h4 className="text-heading font-bold text-textDark">
-                    Zákaznické ID:
-                  </h4>
-                  <p className="break-all">{stripeCustomerId}</p>
-                </div>
-                <div className="grid grid-cols-2 py-2 px-4 bg-slate-100">
-                  <h4 className="text-heading font-bold text-textDark">
-                    Platební ID:
-                  </h4>
-                  <p className="break-all">
-                    {stripeSubId !== "empty" ? (
-                      stripeSubId
-                    ) : (
-                      <p>Předplatné je neaktivní</p>
-                    )}
-                  </p>
-                </div>
-                {subDeliveryMethod !== "courier" && (
-                  <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
-                    <h4 className="text-heading font-bold text-textDark">
-                      Výdejní místo:
-                    </h4>
-                    <a
-                      href={subDeliveryAddress}
-                      className="text-textA hover:text-yellow-700"
-                    >
-                      {subDeliveryAddress}
-                    </a>
-                  </div>
-                )}
-                <div className="py-5 grid grid-cols-2 gap-5">
-                  {!active ? (
-                    <>
-                      <button
-                        className="font-semibold text-textDark w-full hover:border-quad hover:text-textButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-quad  cursor-pointer"
-                        onClick={() => {
-                          activateSubscriptionHandler(
-                            _id,
-                            subName,
-                            subWebsite,
-                            subFrequency,
-                            stripeCustomerId,
-                            user,
-                            itemsType
-                          );
-                        }}
-                      >
-                        Aktivovat předplatné
-                      </button>
-                      <button
-                        className="font-semibold bg-white hover:bg-red-500 text-textDark w-full hover:text-white  text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out  cursor-pointer"
-                        onClick={() => {
-                          setToggleDelete(true);
-                        }}
-                      >
-                        Smazat předplatné
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <button
-                        className="font-semibold text-textDark w-full hover:text-white hover:border-deleteButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-red-500  cursor-pointer"
-                        onClick={() => {
-                          setToggleDeactivate(true);
-                        }}
-                      >
-                        Deaktivovat předplatné
-                      </button>
-                      <p>
-                        Pokud chcete předplatné smazat, musíte jej nejprve
-                        deaktivovat
-                      </p>
-                    </>
-                  )}
-                </div>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-textLight py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
-                <FontAwesomeIcon icon={faHouseUser} key={"faHouseUser" + _id} />
-                Cílový zákazník
-              </h3>
-              <div className="grid-cols-2 py-2 px-4 text-md font-semibold text-textLight bg-zinc-700 hidden">
+          <div>
+            <h3 className="text-xl font-bold text-textLight py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
+              <FontAwesomeIcon icon={faGears} key={"fagears" + _id} />
+              Nastavení předplatného
+            </h3>
+            <div className="flex flex-col font-semibold text-textDark">
+              <div className="grid-cols-2 gap-3 py-2 px-4 text-md font-semibold text-textLight bg-zinc-700 hidden">
                 <p className="col-span-1">Údaj</p>
                 <p className="col-span-1">Hodnota</p>
               </div>
-              <div className="text-textDark font-semibold ">
-                <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
-                  <h4 className="text-heading font-bold text-textDark">
-                    Jméno:
-                  </h4>
-                  <p>{firstName}</p>
-                </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 bg-slate-100">
+                <h4 className="text-heading font-bold text-textDark">
+                  Název předplatného:
+                </h4>
+                <p>{subName}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 ">
+                <h4 className="text-heading font-bold text-textDark">
+                  E-shop:
+                </h4>
+                <a
+                  href={"https://" + subWebsite}
+                  target="_blank"
+                  className="text-textA"
+                >
+                  {subWebsite}
+                </a>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 bg-slate-100">
+                <h4 className="text-heading font-bold text-textDark">
+                  Den objednání:
+                </h4>
+                <p>
+                  {subDay == "monday" && "Pondělí"}
+                  {subDay == "tuesday" && "Úterý"}
+                  {subDay == "wednesday" && "Středa"}
+                  {subDay == "thursday" && "Čtvrtek"}
+                  {subDay == "friday" && "Pátek"}
+                </p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 py-2 px-4 ">
+                <h4 className="text-heading font-bold text-textDark">
+                  Frekvence:
+                </h4>
+                <p>
+                  {subFrequency == "weekly" && "Jednou za týden"}
+                  {subFrequency == "biWeekly" && "Jednou za dva týdny"}
+                  {subFrequency == "monthly" && "Jednou za měsíc"}
+                  {subFrequency == "biMonthly" && "Jednou za dva měsíce"}
+                  {subFrequency == "quarterly" && "Jednou za tři měsíce"}
+                </p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 py-2 px-4 bg-slate-100">
+                <h4 className="text-heading font-bold text-textDark">
+                  Způsob doručení:
+                </h4>
+                <p>
+                  {subDeliveryMethod == "courier" && "Nejlevnější kurýr"}
+                  {subDeliveryMethod == "dropbox" && "Box/výdejní místé"}
+                </p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 py-2 px-4">
+                <h4 className="text-heading font-bold text-textDark">
+                  Zákaznické ID:
+                </h4>
+                <p className="break-all">{stripeCustomerId}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 py-2 px-4 bg-slate-100">
+                <h4 className="text-heading font-bold text-textDark">
+                  Platební ID:
+                </h4>
+                <p className="break-all">
+                  {stripeSubId !== "empty" ? (
+                    stripeSubId
+                  ) : (
+                    <p>Předplatné je neaktivní</p>
+                  )}
+                </p>
+              </div>
+              {subDeliveryMethod !== "courier" && (
                 <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
                   <h4 className="text-heading font-bold text-textDark">
-                    Příjmení:
+                    Výdejní místo:
                   </h4>
-                  <p>{secondName}</p>
+                  <a
+                    href={subDeliveryAddress}
+                    className="text-textA hover:text-yellow-700"
+                  >
+                    {subDeliveryAddress}
+                  </a>
                 </div>
-                <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
+              )}
+              <div className="py-5 grid grid-cols-2 gap-5">
+                {!active ? (
+                  <>
+                    <button
+                      className="font-semibold text-textDark w-full hover:border-quad hover:text-textButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-quad  cursor-pointer"
+                      onClick={() => {
+                        activateSubscriptionHandler(
+                          _id,
+                          subName,
+                          subWebsite,
+                          subFrequency,
+                          stripeCustomerId,
+                          user,
+                          itemsType
+                        );
+                      }}
+                    >
+                      Aktivovat předplatné
+                    </button>
+                    <button
+                      className="font-semibold bg-white hover:bg-red-500 text-textDark w-full hover:text-white  text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out  cursor-pointer"
+                      onClick={() => {
+                        setToggleDelete(true);
+                      }}
+                    >
+                      Smazat předplatné
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className="font-semibold text-textDark w-full hover:text-white hover:border-deleteButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-red-500  cursor-pointer"
+                      onClick={() => {
+                        setToggleDeactivate(true);
+                      }}
+                    >
+                      Deaktivovat předplatné
+                    </button>
+                    <p>
+                      Pokud chcete předplatné smazat, musíte jej nejprve
+                      deaktivovat
+                    </p>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-xl font-bold text-textLight py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
+              <FontAwesomeIcon icon={faHouseUser} key={"faHouseUser" + _id} />
+              Cílový zákazník
+            </h3>
+
+            <div className="text-textDark font-semibold ">
+              <div className="grid grid-cols-2  gap-3 border-slate-300 py-2 px-4 bg-slate-100">
+                <h4 className="text-heading font-bold text-textDark">Jméno:</h4>
+                <p>{firstName}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 ">
+                <h4 className="text-heading font-bold text-textDark">
+                  Příjmení:
+                </h4>
+                <p>{secondName}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 bg-slate-100">
+                <h4 className="text-heading font-bold text-textDark">
+                  Telefon:
+                </h4>
+                <p>{phone}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 ">
+                <h4 className="text-heading font-bold text-textDark">Email:</h4>
+                <p className="break-all">{email}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 bg-slate-100">
+                <h4 className="text-heading font-bold text-textDark">
+                  Adresa:
+                </h4>
+                <p>{address}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 ">
+                <h4 className="text-heading font-bold text-textDark">ČP:</h4>
+                <p>{addressNumber}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 bg-slate-100">
+                <h4 className="text-heading font-bold  text-textDark">
+                  Město:
+                </h4>
+                <p>{city}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 ">
+                <h4 className="text-heading font-bold text-textDark">PSČ:</h4>
+                <p>{cityNumber}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    function SubDetailsMystery() {
+      return (
+        <div
+          className="col-span-2 grid xl:grid-cols-3 gap-y-5 gap-x-10"
+          key={"SubDetailsStandard" + _id}
+        >
+          <div className="">
+            <h3 className="text-xl font-bold text-textLight py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
+              <FontAwesomeIcon icon={faGift} key={"faCartShopping" + _id} />
+              Mystery balíček
+            </h3>
+
+            <div className="flex flex-col font-semibold text-textDark">
+              <div className="grid grid-cols-2 gap-3 py-2 px-4 bg-slate-100">
+                <h4 className="text-heading font-bold text-textDark">
+                  Kategorie předplatného:
+                </h4>
+                <p>{mysteryItem.categories.join(" ")}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-5 py-2 px-4 ">
+                <h4 className="text-heading font-bold text-textDark">
+                  Maximální hodnota objednávky:
+                </h4>
+                <p>{mysteryItem.amount} Kč</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 py-2 px-4 bg-slate-100">
+                <h4 className="text-heading font-bold text-textDark">
+                  Zpráva k objednávce:
+                </h4>
+                <p>{mysteryItem.message}</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-xl font-bold text-textLight py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
+              <FontAwesomeIcon icon={faGears} key={"fagears" + _id} />
+              Nastavení předplatného
+            </h3>
+            <div className="flex flex-col font-semibold text-textDark">
+              <div className="grid-cols-2 py-2 px-4 gap-3 text-md font-semibold text-textLight bg-zinc-700 hidden">
+                <p className="col-span-1">Údaj</p>
+                <p className="col-span-1">Hodnota</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 bg-slate-100">
+                <h4 className="text-heading font-bold text-textDark">
+                  Název předplatného:
+                </h4>
+                <p>{subName}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 ">
+                <h4 className="text-heading font-bold text-textDark">
+                  E-shop:
+                </h4>
+                <a
+                  href={"https://" + subWebsite}
+                  target="_blank"
+                  className="text-textA"
+                >
+                  {subWebsite}
+                </a>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 bg-slate-100">
+                <h4 className="text-heading font-bold text-textDark">
+                  Den objednání:
+                </h4>
+                <p>
+                  {subDay == "monday" && "Pondělí"}
+                  {subDay == "tuesday" && "Úterý"}
+                  {subDay == "wednesday" && "Středa"}
+                  {subDay == "thursday" && "Čtvrtek"}
+                  {subDay == "friday" && "Pátek"}
+                </p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 py-2 px-4 ">
+                <h4 className="text-heading font-bold text-textDark">
+                  Frekvence:
+                </h4>
+                <p>
+                  {subFrequency == "weekly" && "Jednou za týden"}
+                  {subFrequency == "biWeekly" && "Jednou za dva týdny"}
+                  {subFrequency == "monthly" && "Jednou za měsíc"}
+                  {subFrequency == "biMonthly" && "Jednou za dva měsíce"}
+                  {subFrequency == "quarterly" && "Jednou za tři měsíce"}
+                </p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 py-2 px-4 bg-slate-100">
+                <h4 className="text-heading font-bold text-textDark">
+                  Způsob doručení:
+                </h4>
+                <p>
+                  {subDeliveryMethod == "courier" && "Nejlevnější kurýr"}
+                  {subDeliveryMethod == "dropbox" && "Box/výdejní místé"}
+                </p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 py-2 px-4">
+                <h4 className="text-heading font-bold text-textDark">
+                  Zákaznické ID:
+                </h4>
+                <p className="break-all">{stripeCustomerId}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 py-2 px-4 bg-slate-100">
+                <h4 className="text-heading font-bold text-textDark">
+                  Platební ID:
+                </h4>
+                <p className="break-all">
+                  {stripeSubId !== "empty" ? (
+                    stripeSubId
+                  ) : (
+                    <p>Předplatné je neaktivní</p>
+                  )}
+                </p>
+              </div>
+              {subDeliveryMethod !== "courier" && (
+                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 ">
                   <h4 className="text-heading font-bold text-textDark">
-                    Telefon:
+                    Výdejní místo:
                   </h4>
-                  <p>{phone}</p>
+                  <a
+                    href={subDeliveryAddress}
+                    className="text-textA hover:text-yellow-700"
+                  >
+                    {subDeliveryAddress}
+                  </a>
                 </div>
-                <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
-                  <h4 className="text-heading font-bold text-textDark">
-                    Email:
-                  </h4>
-                  <p className="break-all">{email}</p>
-                </div>
-                <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
-                  <h4 className="text-heading font-bold text-textDark">
-                    Adresa:
-                  </h4>
-                  <p>{address}</p>
-                </div>
-                <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
-                  <h4 className="text-heading font-bold text-textDark">ČP:</h4>
-                  <p>{addressNumber}</p>
-                </div>
-                <div className="grid grid-cols-2 border-slate-300 py-2 px-4 bg-slate-100">
-                  <h4 className="text-heading font-bold  text-textDark">
-                    Město:
-                  </h4>
-                  <p>{city}</p>
-                </div>
-                <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
-                  <h4 className="text-heading font-bold text-textDark">PSČ:</h4>
-                  <p>{cityNumber}</p>
-                </div>
+              )}
+              <div className="py-5 grid grid-cols-2 gap-5">
+                {!active ? (
+                  <>
+                    <button
+                      className="font-semibold text-textDark w-full hover:border-quad hover:text-textButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-quad  cursor-pointer"
+                      onClick={() => {
+                        activateSubscriptionHandler(
+                          _id,
+                          subName,
+                          subWebsite,
+                          subFrequency,
+                          stripeCustomerId,
+                          user,
+                          itemsType
+                        );
+                      }}
+                    >
+                      Aktivovat předplatné
+                    </button>
+                    <button
+                      className="font-semibold bg-white hover:bg-red-500 text-textDark w-full hover:text-white  text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out  cursor-pointer"
+                      onClick={() => {
+                        setToggleDelete(true);
+                      }}
+                    >
+                      Smazat předplatné
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className="font-semibold text-textDark w-full hover:text-white hover:border-deleteButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-red-500  cursor-pointer"
+                      onClick={() => {
+                        setToggleDeactivate(true);
+                      }}
+                    >
+                      Deaktivovat předplatné
+                    </button>
+                    <p>
+                      Pokud chcete předplatné smazat, musíte jej nejprve
+                      deaktivovat
+                    </p>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 className="text-xl font-bold text-textLight py-5 mt-10 bg-secondary rounded-t-md px-5 flex gap-3 items-center">
+              <FontAwesomeIcon icon={faHouseUser} key={"faHouseUser" + _id} />
+              Cílový zákazník
+            </h3>
+
+            <div className="text-textDark font-semibold ">
+              <div className="grid grid-cols-2  gap-3 border-slate-300 py-2 px-4 bg-slate-100">
+                <h4 className="text-heading font-bold text-textDark">Jméno:</h4>
+                <p>{firstName}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 ">
+                <h4 className="text-heading font-bold text-textDark">
+                  Příjmení:
+                </h4>
+                <p>{secondName}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 bg-slate-100">
+                <h4 className="text-heading font-bold text-textDark">
+                  Telefon:
+                </h4>
+                <p>{phone}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 ">
+                <h4 className="text-heading font-bold text-textDark">Email:</h4>
+                <p className="break-all">{email}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 bg-slate-100">
+                <h4 className="text-heading font-bold text-textDark">
+                  Adresa:
+                </h4>
+                <p>{address}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 ">
+                <h4 className="text-heading font-bold text-textDark">ČP:</h4>
+                <p>{addressNumber}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 bg-slate-100">
+                <h4 className="text-heading font-bold  text-textDark">
+                  Město:
+                </h4>
+                <p>{city}</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 ">
+                <h4 className="text-heading font-bold text-textDark">PSČ:</h4>
+                <p>{cityNumber}</p>
               </div>
             </div>
           </div>
@@ -379,8 +597,8 @@ export function Subscriptions() {
     return (
       <>
         <div className="bg-white xl:p-7 p-2 rounded-lg border border-slate-200 shadow-md shadow-slate-200 xl:grid grid-cols-2 gap-4 animate-fall-left">
-          <div className="mb-5 xl:mb-0">
-            <div className="xl:flex gap-10 mb-5 xl:mb-2">
+          <div className="mb-3 xl:mb-0">
+            <div className="xl:flex gap-10 mb-2 xl:mb-2">
               <p className="text-textDarker text-[12px] mb-2 font-medium">
                 ID: <span className="text-textLighter">{_id}</span>
               </p>
@@ -388,36 +606,42 @@ export function Subscriptions() {
                 Webová stránka:{" "}
                 <span className="text-textLighter">{subWebsite}</span>
               </p>
+              <p className="text-textDarker text-[12px] mb-2 font-medium">
+                Typ:{" "}
+                <span className="text-textLighter">
+                  {itemsType == "standard" ? "Standardní" : "Mystery balíček"}
+                </span>
+              </p>
             </div>
 
-            <div className="flex gap-5 items-center justify-center xl:justify-start">
+            <div className="flex xl:flex-row flex-col xl:gap-5 gap-2 items-center justify-center xl:justify-start">
               <a
                 href={"https://" + subWebsite}
                 target="_blank"
-                className="xl:w-10 flex justify-center"
+                className="xl:w-10 flex justify-center xl:block hidden"
               >
                 <img
                   src={"https://" + subWebsite + "/favicon.ico"}
                   alt="icon"
-                  className="xl:block hidden max-h-8 max-w-8"
+                  className=" max-h-8 max-w-8"
                   onError={(e) => {
                     e.target.src = shopLogo;
                   }}
                 />
               </a>
 
-              <h2 className="text-2xl text-textDark font-bold xl:mr-5 mt-[-8px]">
+              <h2 className="xl:text-2xl text-xl text-textDark font-bold xl:mr-5">
                 {subName}
               </h2>
               {active && (
-                <div className="bg-emerald-500 rounded-md flex items-center justify-center gap-2 px-3 py-1 font-semibold text-white shadow-sm">
+                <div className="bg-emerald-500 rounded-md flex text-base lg:text-ml items-center justify-center gap-2 px-3 py-1 font-semibold text-white shadow-sm">
                   <FontAwesomeIcon icon={faCashRegister} />
                   Aktivní
                 </div>
               )}
             </div>
           </div>
-          <div className="flex xl:flex-row flex-col gap-6 xl:items-center items-center justify-end">
+          <div className="flex xl:flex-row gap-2 xl:gap-6 xl:items-center xl:justify-end justify-center">
             {!active && (
               <>
                 <button
@@ -435,6 +659,7 @@ export function Subscriptions() {
                   className=" text-textDark cursor-pointer hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-quad"
                 >
                   Aktivovat předplatné
+                  <FontAwesomeIcon icon={faCashRegister} className="hidden" />
                 </button>
               </>
             )}
@@ -443,32 +668,21 @@ export function Subscriptions() {
               className=" text-textDark hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-quad"
             >
               Upravit
-              <FontAwesomeIcon icon={faPen} />
+              <FontAwesomeIcon icon={faPen} className="hidden" />
             </Link>
-            {toggle ? (
-              <button
-                onClick={() => {
-                  setToggle(!toggle);
-                }}
-                className="text-md font-semibold flex gap-3 items-center border hover:text-textButton hover:shadow-md hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2 transition-all ease-in-out cursor-pointer"
-              >
-                Detail
-                <FontAwesomeIcon icon={faChevronUp} className="text-lg" />
-              </button>
-            ) : (
-              <button
-                onClick={() => {
-                  setToggle(!toggle);
-                }}
-                className="text-md font-semibold flex gap-3 items-center border hover:text-textButton hover:shadow-md hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2 transition-all ease-in-out cursor-pointer"
-              >
-                Detail
-                <FontAwesomeIcon icon={faChevronDown} className="text-lg" />
-              </button>
-            )}
+            <button
+              onClick={() => {
+                setToggle(!toggle);
+              }}
+              className="text-md font-semibold flex gap-3 items-center border hover:text-textButton hover:shadow-md hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2 transition-all ease-in-out cursor-pointer"
+            >
+              {toggle ? "Zavřít" : "Detail"}
+              <FontAwesomeIcon icon={faMagnifyingGlass} className="text-lg" />
+            </button>
           </div>
 
-          {toggle ? <SubDetails /> : <></>}
+          {toggle && itemsType == "standard" ? <SubDetailsStandard /> : <></>}
+          {toggle && itemsType == "mystery" ? <SubDetailsMystery /> : <></>}
         </div>
         {toggleDelete && (
           <div className="fixed top-0 right-0 w-full p-5 h-full bg-primary/50 m-auto flex justify-center items-center">
@@ -514,7 +728,8 @@ export function Subscriptions() {
                         _id,
                         user,
                         subscriptions,
-                        setSubscriptions
+                        setSubscriptions,
+                        setLoader
                       );
                     }
 
@@ -583,7 +798,8 @@ export function Subscriptions() {
                         _id,
                         stripeSubId,
                         user,
-                        setSubscriptions
+                        setSubscriptions,
+                        setLoader
                       );
                     }
 
@@ -617,7 +833,7 @@ export function Subscriptions() {
   return (
     <>
       <div
-        className="bg-slate-50 p-10 flex flex-col xl:gap-10 gap-5 rounded-2xl min-h-screen xl:pt-10 pt-30 overflow-hidden"
+        className="bg-slate-50 xl:p-10 p-3 flex flex-col xl:gap-10 gap-5 rounded-2xl min-h-screen xl:pt-10 pt-30 overflow-hidden"
         key="subList"
       >
         <div className="xl:flex xl:flex-row flex-col-reverse items-center justify-between xl:gap-0 gap-5 hidden">

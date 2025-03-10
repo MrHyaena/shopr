@@ -7,8 +7,10 @@ export async function deleteSubscriptionHandler(
   subId,
   user,
   subscriptions,
-  setSubscriptions
+  setSubscriptions,
+  setLoader
 ) {
+  setLoader(true);
   const response = await fetch(apiURL + "/api/subscriptions/" + subId, {
     method: "DELETE",
     mode: "cors",
@@ -20,6 +22,7 @@ export async function deleteSubscriptionHandler(
   const json = await response.json();
 
   if (response.ok) {
+    setLoader(false);
     console.log("deleted");
     const subArray = subscriptions;
     const newSubscriptions = subArray.filter((element) => element._id != subId);
@@ -27,6 +30,7 @@ export async function deleteSubscriptionHandler(
   }
 
   if (!response.ok) {
+    setLoader(false);
     console.log(response);
   }
 }

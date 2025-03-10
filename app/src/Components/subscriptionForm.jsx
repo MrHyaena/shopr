@@ -18,7 +18,7 @@ import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { patchSubscriptionHandler } from "../functions/patchSubscriptionHandler";
 
-export function SubscriptionForm() {
+export function SubscriptionForm({ setLoader }) {
   //step state is for changing steps in form
   const [step, setStep] = useState(1);
   const { id } = useParams();
@@ -85,12 +85,6 @@ export function SubscriptionForm() {
 
       setOriginalSub({ ...sub });
       setFormData({ ...newData });
-
-      if (sub.itemsType == "standard") {
-        setSettingsToggle(1);
-      } else if (sub.itemsType == "mystery") {
-        setSettingsToggle(2);
-      }
     }
   }, []);
 
@@ -739,10 +733,16 @@ export function SubscriptionForm() {
           itemsArray.splice(itemsArray.length, 0, item);
         });
       }
-
-      if (mysteryItem.categories.length == 0) {
-        mysteryItem.categories.push("Všechny kategorie");
+      const newMysteryItem = mysteryItem;
+      if (newMysteryItem.categories.length == 0) {
+        newMysteryItem.categories.push("Všechny kategorie");
       }
+
+      if (newMysteryItem.message == "") {
+        newMysteryItem.message = "empty";
+      }
+      console.log(mysteryItem);
+      console.log(newMysteryItem);
 
       const subscription = {
         userId: user.id,
@@ -767,7 +767,7 @@ export function SubscriptionForm() {
         subDeliveryAddress: formData.subDeliveryAddress,
         itemsType: itemsType,
         items: itemsArray,
-        mysteryItem: mysteryItem,
+        mysteryItem: newMysteryItem,
       };
 
       const missingArray = items.filter(
@@ -797,12 +797,13 @@ export function SubscriptionForm() {
             id,
             frequencyChange,
             nameChange,
-            websiteChange
+            websiteChange,
+            setLoader
           );
         }
 
         if (!id) {
-          createSubscription(subscription);
+          createSubscription(subscription, setLoader);
         }
       }
     }

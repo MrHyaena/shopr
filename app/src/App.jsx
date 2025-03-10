@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Sidebar } from "./Components/sidebar";
-import { Subscriptions } from "./Components/subscriptionList";
+import { SubscriptionList } from "./Components/subscriptionList";
 import {
   Route,
   Navigate,
@@ -17,27 +17,53 @@ import { Contact } from "./Components/contact";
 import { Personal } from "./Components/personal";
 import { Faq } from "./Components/faq";
 import { PasswordReset } from "./pages/PasswordReset";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpider, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const { user } = useAuthContext();
 
   function ProtectedRoute() {
+    const [loader, setLoader] = useState(false);
+
     return (
-      <div className="grid xl:grid-cols-[150px_1fr] gap-5 min-h-screen bg-slate-50">
-        <Sidebar />
-        <div>
-          <main>
-            <Routes>
-              <Route path="*" element={<Subscriptions />} />
-              <Route path="/form" element={<SubscriptionForm />} />
-              <Route path="/form/:id" element={<SubscriptionForm />} />
-              <Route path="/kontakt" element={<Contact />} />
-              <Route path="/osobni-udaje" element={<Personal />} />
-              <Route path="/otazky" element={<Faq />} />
-            </Routes>
-          </main>
+      <>
+        {loader && (
+          <div className="w-screen h-screen bg-black/80 flex flex-col gap-4 items-center justify-center absolute top-0 left-0 z-40">
+            <FontAwesomeIcon
+              icon={faSpinner}
+              className="text-6xl text-white animate-rotate"
+            />
+            <p className="text-textLight text-2xl font-semibold">
+              Pracujeme na tom...
+            </p>
+          </div>
+        )}
+        <div className="grid xl:grid-cols-[150px_1fr] gap-5 min-h-screen bg-slate-50">
+          <Sidebar />
+          <div>
+            <main>
+              <Routes>
+                <Route
+                  path="*"
+                  element={<SubscriptionList setLoader={setLoader} />}
+                />
+                <Route
+                  path="/form"
+                  element={<SubscriptionForm setLoader={setLoader} />}
+                />
+                <Route
+                  path="/form/:id"
+                  element={<SubscriptionForm setLoader={setLoader} />}
+                />
+                <Route path="/kontakt" element={<Contact />} />
+                <Route path="/osobni-udaje" element={<Personal />} />
+                <Route path="/otazky" element={<Faq />} />
+              </Routes>
+            </main>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 

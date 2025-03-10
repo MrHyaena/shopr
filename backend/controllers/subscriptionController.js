@@ -195,6 +195,14 @@ const createSubscription = async (req, res) => {
       "4bf6ca46c825f1b8e771f55d14fb46245ee171f1": phone.toString(),
       //ItemsType
       c2ec04237b8817bfcc272cb085cb2f321cfeab4f: itemsType.toString(),
+      //Mystery message
+      "932e8f086a595364fe31c2b63d9e7952c5c2c201":
+        mysteryItem.message.toString(),
+      //Mystery amount
+      "0c0ede36a57daf67eaeb95a275b8c220cada4510": mysteryItem.amount.toString(),
+      //Mystery categories
+      "16f2e1cee90c1bc62ea81d80528fdc0d6070839f":
+        mysteryItem.categories.join(" / "),
     };
 
     const pipeResponse = await pipedriveApiCallV1("deals", "POST", payload);
@@ -319,7 +327,7 @@ const updateSubscription = async (req, res) => {
     return res.status(400).json({ error: "Takové předplatné neexistuje" });
   }
 
-  // ------------- PIPEDRIVE - updating ----------------
+  // ------------- PIPEDRIVE - updating deal ----------------
   let subPriceValue = 0;
 
   switch (subFrequency.toLowerCase()) {
@@ -345,15 +353,14 @@ const updateSubscription = async (req, res) => {
     deliveryAddress = "empty";
   }
 
-  let stage = 2;
-  if (active) {
-    stage = 3;
+  let mysteryMessage = mysteryItem.message;
+  if (mysteryMessage == "") {
+    mysteryMessage = "empty";
   }
 
   const payload = {
     title: ("Předplatné - " + subName).toString(),
     value: Number(subPriceValue),
-    stage_id: Number(stage),
     person_id: Number(pipedrivePersonId),
     //Subscription website
     custom_fields: {
@@ -392,6 +399,14 @@ const updateSubscription = async (req, res) => {
       "4bf6ca46c825f1b8e771f55d14fb46245ee171f1": phone.toString(),
       //ItemsType
       c2ec04237b8817bfcc272cb085cb2f321cfeab4f: itemsType.toString(),
+      //Mystery message
+      "932e8f086a595364fe31c2b63d9e7952c5c2c201":
+        mysteryItem.message.toString(),
+      //Mystery amount
+      "0c0ede36a57daf67eaeb95a275b8c220cada4510": mysteryItem.amount.toString(),
+      //Mystery categories
+      "16f2e1cee90c1bc62ea81d80528fdc0d6070839f":
+        mysteryItem.categories.join(" / "),
     },
   };
 
@@ -403,12 +418,46 @@ const updateSubscription = async (req, res) => {
 
   const pipeDeal = await pipeResponse.json();
 
-  console.log(pipeResponse);
-
   if (!pipeResponse.ok) {
     throw Error(
       "Omlouváme se, předplatné nelze vytvořit. Chyba je na naší straně. (Pipedrive)"
     );
+  }
+
+  // ------------- PIPEDRIVE - updating task ----------------
+
+  if (subscription.itemsType == "standard") {
+    //searching for updatable activities
+    const pipeActivities = await pipedriveApiCallV2("activities", "GET");
+    const activitiesJson = await pipeActivities.json();
+    const activitiesForUpdate = await activitiesJson.data.filter(
+      (item) =>
+        item.done == false &&
+        item.deal_id == subscription.pipedriveDealId &&
+        item.is_deleted == false &&
+        item.public_description == "Objednávka"
+    );
+
+    if (activitiesForUpdate.length > 0) {
+      let note;
+      //standard note
+      const linkArray = await subscription.items.map((item, index) => {
+        return `<p><a href='https://${item.url}' target='_blank'>Položka: ${
+          index + 1
+        } - Množství: ${item.amount}</a></p>`;
+      });
+      note = await linkArray.join(" ");
+
+      const payload = {
+        note: note,
+      };
+
+      const pipeDeleteActivitiesBulkcall = await pipedriveApiCallV2(
+        "activities/" + activitiesForUpdate[0].id,
+        "PATCH",
+        payload
+      );
+    }
   }
 
   // ------------- STRIPE - update ----------------

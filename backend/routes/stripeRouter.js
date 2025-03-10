@@ -190,34 +190,22 @@ router.post(
         let note;
         //standard note
         if (subscription.itemsType == "standard") {
-          const linkArray = await subscription.items.map((item) => {
-            return `<p><a href='https://${item.url}' target='_blank'>${item.url}</a></p>`;
+          const linkArray = await subscription.items.map((item, index) => {
+            return `<p><a href='https://${item.url}' target='_blank'>Položka: ${
+              index + 1
+            } - Množství: ${item.amount}</a></p>`;
           });
-          note =
-            `<h2>Typ předplatného</h2><p>${subscription.itemsType}</p><h3>Produkty v předplatném</h3>` +
-            linkArray.join(" ");
-          //Mystery note
-        } else if (subscription.itemsType == "mystery") {
-          note = `<h2>Typ předplatného</h2><p>${
-            subscription.itemsType
-          }</p><h3>Specifikace mystery balíčku</h3><h4>Maximální částka</h4><p>${
-            subscription.mysteryItem.amount
-          }</p><h4>Kategorie</h4><p>${subscription.mysteryItem.categories.join(
-            " - "
-          )}</p><h4>Zpráva</h4><p>${subscription.mysteryItem.message}</p>`;
+          note = linkArray.join(" ");
         }
 
         const payloadTask = await {
-          subject:
-            "Vyplnit objednávku - " +
-            subscription.firstName +
-            " " +
-            subscription.secondName,
+          subject: "Vyplnit objednávku",
           type: "task",
           user_id: Number(process.env.PIPEDRIVE_ADMIN_ID),
           deal_id: Number(subscription.pipedriveDealId),
           person_id: Number(subscription.pipedrivePersonId),
           note: note,
+          public_description: "Objednávka",
         };
 
         const pipeResponseTask = await pipedriveApiCallV1(

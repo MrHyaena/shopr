@@ -11,7 +11,8 @@ export function createSubscriptionHandler() {
   const navigate = useNavigate();
   const apiURL = import.meta.env.VITE_API_URL;
 
-  async function createSubscription(data) {
+  async function createSubscription(data, setLoader) {
+    setLoader(true);
     setIsLoading(true);
     setError(null);
 
@@ -35,13 +36,14 @@ export function createSubscriptionHandler() {
     const json = await response.json();
 
     if (!response.ok) {
+      setLoader(false);
       setIsLoading(false);
       setError(json.error);
       return;
     }
 
     if (response.ok) {
-      console.log(json);
+      setLoader(false);
       setIsLoading(false);
       const newObject = subscriptions;
       newObject.splice(newObject.length, 0, { ...json });
