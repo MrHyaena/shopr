@@ -58,7 +58,7 @@ export function Contact() {
 
     return (
       <form
-        className="flex flex-col gap-5 p-10 bg-white border border-slate-200 rounded-lg w-full"
+        className="flex flex-col gap-5 xl:p-10 px-5 pt-5 bg-white border border-slate-200 rounded-lg w-full"
         onSubmit={(e) => {
           e.preventDefault();
           handleSend();
@@ -163,8 +163,8 @@ export function Contact() {
   }
   return (
     <>
-      <div className="bg-slate-50 p-10 flex flex-col xl:gap-10 gap-10 xl:pt-10 pt-30 text-textDark">
-        <div className="flex xl:flex-row justify-between items-center flex-col-reverse gap-5">
+      <div className="bg-slate-50 xl:p-10 p-3 flex flex-col xl:gap-10 gap-10 xl:pt-10 pt-30 text-textDark">
+        <div className="flex xl:flex-row justify-between items-center flex-col-reverse gap-5 xl:text-start text-center">
           <h1 className="text-3xl font-bold text-heading0">
             Trápí Vás nějaký problém? Napište nám!
           </h1>
@@ -176,13 +176,13 @@ export function Contact() {
           </Link>
         </div>
         <div className="flex xl:flex-row flex-col gap-10 xl:pb-0 pb-20">
-          <div className="flex flex-col items-start gap-5 xl:w-[40%]">
-            <h1 className="text-xl font-bold text-heading">
+          <div className="flex flex-col xl:items-start items-center gap-5 xl:w-[40%]">
+            <h1 className="text-xl font-bold text-heading xl:text-start text-center">
               Kontaktní formulář
             </h1>
             <Formular />
           </div>
-          <div className="flex flex-col items-start gap-5 max-w-[700px]">
+          <div className="flex flex-col items-start gap-5 max-w-[700px] p-5">
             <h1 className="text-xl font-bold text-heading">Kontaktní údaje</h1>
             <p className="text-lg font-semibold ">
               Pokud nás chcete kontaktovat přímo na emailovou adresu, můžete to

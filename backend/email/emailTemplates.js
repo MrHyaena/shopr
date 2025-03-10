@@ -25,7 +25,7 @@ export function emailTemplatePasswordChange(changeUrl) {
   let body = `<h3>Dobr&yacute; den!</h3>
 <h2>Tento email slouž&iacute; pro změnu hesla v aplikaci Shopr</h2>
 <p>Pro změnu hesla klepněte na odkaz n&iacute;že:</p>
-<p><a href="${url}">${url}</a></p>
+<p><a href="${changeUrl}">${changeUrl}</a></p>
 <p>Pokud jste si tuto změnu nevyž&aacute;dali, napi&scaron;te n&aacute;m pros&iacute;m na adresu <a href="mailto:info@shopr.cz">info@shopr.cz</a>.</p>
 <p>S pozdravem,</p>
 <p>T&yacute;m Shopr</p>`;

@@ -313,7 +313,10 @@ const resetUserEmail = async (req, res) => {
     const hash = await bcrypt.hash(process.env.PASSWORD_CHANGE_SECRET, salt);
 
     //Creating record in Hashcheck database
-    const Hashcheck = await Hashcheck.create({ userId: user._id, token: hash });
+    const hashcheckResponse = await Hashcheck.create({
+      userId: user._id,
+      token: hash,
+    });
 
     //Setting up and sending email
     const url = process.env.PROXY_APP + "/reset/password?hash=" + hash;

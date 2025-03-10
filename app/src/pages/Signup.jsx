@@ -264,7 +264,7 @@ export function SignupPage() {
   function SignupRightside() {
     return (
       <>
-        <div className="xl:w-[500px] max-w-full flex flex-col justify-start items-center gap-4 text-center bg-white rounded-lg p-3 shadow-xl border border-slate-100 animate-fall-down">
+        <div className="xl:w-[500px] max-w-full flex flex-col justify-start items-center gap-4 text-center bg-white rounded-lg p-3 shadow-md border border-slate-100 animate-fall-down">
           <img
             src={logoBlack}
             alt="logo"

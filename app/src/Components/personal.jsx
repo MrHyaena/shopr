@@ -157,7 +157,7 @@ export function Personal() {
           <div className="flex justify-center">
             <button
               disabled={isLoading}
-              className="bg-quad cursor-pointer text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+              className="bg-quad cursor-pointer mb-2 text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
               type="submit"
             >
               Aktualizovat
@@ -176,24 +176,26 @@ export function Personal() {
 
   return (
     <>
-      <div className="bg-slate-50 p-10 flex flex-col xl:gap-10 gap-10 xl:pt-10 pt-30 text-textDark">
-        <div className="flex xl:flex-row justify-between items-start xl:items-center flex-col-reverse gap-5">
-          <h1 className="text-3xl font-bold text-heading">Vaše osobní údaje</h1>
+      <div className="bg-slate-50 xl:p-10 p-3 flex flex-col xl:gap-10 gap-10 xl:pt-10 pt-30 text-textDark">
+        <div className="flex xl:flex-row justify-between xl:items-start flex-col-reverse gap-5">
+          <h1 className="text-3xl font-bold text-heading xl:text-start text-center">
+            Vaše osobní údaje
+          </h1>
           <Link
             to="/"
-            className="bg-quad text-textButton hidden xl:block text-center p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+            className="bg-quad text-textButton xl:block self-center text-center p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
           >
             Zpět
           </Link>
         </div>
         <div className=" flex xl:flex-row flex-col gap-10 xl:pb-0 pb-20">
-          <div className="flex flex-col items-start gap-5">
-            <h1 className="text-xl font-bold text-heading">
+          <div className="flex flex-col xl:items-start gap-5">
+            <h1 className="text-xl font-bold text-heading xl:text-start text-center">
               Údaje můžete rovnou upravovat
             </h1>
             <PersonalForm />
           </div>
-          <div className="flex flex-col items-start gap-5 max-w-[700px]">
+          <div className="flex flex-col xl:items-start xl:text-start p-5 gap-5 max-w-[700px]">
             <h1 className="text-xl font-bold text-heading">
               K čemu tyto informace slouží?
             </h1>

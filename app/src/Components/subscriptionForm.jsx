@@ -261,7 +261,7 @@ export function SubscriptionForm({ setLoader }) {
           <div className="flex gap-3">
             <Link
               to="/"
-              className="bg-quad text-textButton mb-5 xl:mb-0 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+              className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
             >
               Zrušit
             </Link>
@@ -812,8 +812,8 @@ export function SubscriptionForm({ setLoader }) {
       <>
         {settingsToggle == 0 && (
           <>
-            <div className="bg-white p-5 rounded-md border border-slate-200 gap-x-10 gap-y-5 grid grid-cols-2 grid-rows-[1fr_80px] min-h-[500px]">
-              <div className="flex flex-col justify-between">
+            <div className="bg-white p-5 rounded-md border border-slate-200 gap-x-10 gap-y-5 xl:grid grid-cols-2 grid-rows-[1fr_80px] min-h-[500px] flex flex-col gap-8">
+              <div className="flex flex-col justify-between gap-5">
                 <div>
                   <h2 className="text-xl font-semibold mb-4 text-heading">
                     Přesný soupis produktů, které chcete do pravidelné
@@ -836,7 +836,7 @@ export function SubscriptionForm({ setLoader }) {
                   Chci standardní objednávku
                 </button>
               </div>
-              <div className="flex flex-col justify-between">
+              <div className="flex flex-col justify-between gap-5">
                 <div>
                   <h2 className="text-xl font-semibold mb-4 text-heading">
                     Mystery balíček plný překvapení
@@ -862,7 +862,7 @@ export function SubscriptionForm({ setLoader }) {
                   setStep(2);
                   handleBack();
                 }}
-                className="bg-quad col-span-2 justify-self-center self-center text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+                className="bg-quad col-span-2 xl:justify-self-center self-center text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               >
                 <FontAwesomeIcon icon={faArrowLeft} /> Zpět
               </button>
@@ -1252,10 +1252,12 @@ export function SubscriptionForm({ setLoader }) {
 
   return (
     <>
-      <div className="bg-slate-50 p-10 flex flex-col gap-5 xl:pt-10 pt-30">
+      <div className="bg-slate-50 xl:p-10 p-2 flex flex-col gap-5 xl:pt-10 pt-30">
         <div className="flex justify-between xl:flex-row flex-col-reverse items-center">
           <h1 className="text-3xl font-bold text-heading text-center">
-            Nastavení předplatného
+            {step == 1 && "Osobní a kontaktní údaje"}
+            {step == 2 && "Nastavení předplatného"}
+            {step == 3 && "Nastavení položek"}
           </h1>
           <Link
             to="/"

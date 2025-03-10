@@ -62,6 +62,7 @@ export function PasswordReset() {
                 <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
                   Nové heslo:
                   <input
+                    type="password"
                     className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                     onChange={(e) => {
                       setError(null);
@@ -73,6 +74,7 @@ export function PasswordReset() {
                 <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
                   Heslo znovu:
                   <input
+                    type="password"
                     className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                     onChange={(e) => {
                       setError(null);
