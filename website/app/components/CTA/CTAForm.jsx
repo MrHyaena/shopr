@@ -38,7 +38,7 @@ export function CTAForm() {
               value={email}
               placeholder="Vložte Váš email"
               type="email"
-              className="bg-white border border-slate-200 p-3 text-xl text-textDark rounded-md placeholder:text-xl w-full"
+              className="bg-white border border-slate-200 p-3 text-xl text-textDark rounded-md placeholder:text-base w-full"
             />
           </label>
 

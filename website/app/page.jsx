@@ -170,7 +170,7 @@ export default function Home() {
     return (
       <>
         <div className=" flex flex-col items-center justify-center pt-30">
-          <div className="max-w-wrapper mx-auto text-center flex flex-col items-center ">
+          <div className="max-w-wrapper mx-auto text-center flex flex-col items-center p-5 xl:p-0">
             <p className="headingSmall">Příklady</p>
             <h2 className="mt-2 my-5">Nechte se inspirovat!</h2>
             <p className="max-w-[600px]">

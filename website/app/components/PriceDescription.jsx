@@ -24,7 +24,7 @@ export default function PriceDescription({ subHeading, description }) {
                 Založit účet ZDARMA
               </a>
 
-              <p className="text-sm font-semibold text-textMedium my-3">
+              <p className="text-sm font-semibold text-textMedium my-3 text-center">
                 Tlačítko vás přenese na formulář pro registraci uživatelského
                 účtu.
               </p>
