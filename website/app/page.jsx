@@ -37,8 +37,8 @@ export default function Home() {
   function HeroSection() {
     return (
       <>
-        <div className="xl:min-h-[900px] pt-10 grid grid-cols-5 min-h-screen items-stretch justify-center overflow-x-hidden">
-          <div className="flex flex-col items-start justify-center h-full gap-5 p-24 col-span-3 max-w-[900px] justify-self-center animate-scale-up-noBounce-delay">
+        <div className="xl:min-h-[900px] pt-10 xl:grid grid-cols-5 min-h-screen items-stretch justify-center overflow-x-hidden xl:p-0 p-5">
+          <div className="flex flex-col items-start justify-center h-full gap-5 xl:p-24 pt-15 col-span-3 max-w-[900px] justify-self-center animate-scale-up-noBounce-delay">
             <h1 className="z-2">
               Předplatné
               <span className="text-quad">
@@ -49,22 +49,16 @@ export default function Home() {
               jen chcete
             </h1>
 
-            <p className="text-xl font-semibold text-textDark z-2">
+            <p className="font-semibold text-textDark z-2">
               Vytvoříme pro Vás předplatné na jakémkoliv e-shopu jen chcete. Už
               nikdy se tak nebudete muset dívat na prázdné balení od doplňků
               stravy, kosmetiky, drogerie nebo čehokoliv jiného.
             </p>
-            <div className="flex gap-5">
-              <a
-                href="https://app.shopr.cz/signup"
-                className="bg-quad shadow-md cursor-pointer rounded-md px-4 py-3 text-textButton font-bold text-xl hover:scale-102 transition-all ease-in-out"
-              >
+            <div className="flex gap-5 xl:flex-row flex-col">
+              <a href="https://app.shopr.cz/signup" className="buttonMiddle">
                 Založit uživatelský účet ZDARMA
               </a>
-              <Link
-                href="/jak-to-funguje"
-                className="bg-white cursor-pointer shadow-md shadow-slate-100 rounded-md px-4 py-3 text-textDark font-bold text-xl hover:scale-102 transition-all ease-in-out border border-slate-200"
-              >
+              <Link href="/jak-to-funguje" className="buttonMiddleWhite">
                 Jak to funguje?
               </Link>
             </div>
@@ -73,7 +67,7 @@ export default function Home() {
           <Image
             src={heroImgTwo}
             alt="hero"
-            className=" col-span-2 object-cover object-left animate-fall-left-noBounce [clip-path:polygon(0%_0%,100%_0%,100%_100%,0%_100%,15%_50%)]"
+            className="xl:block hidden col-span-2 object-cover object-left animate-fall-left-noBounce [clip-path:polygon(0%_0%,100%_0%,100%_100%,0%_100%,15%_50%)]"
           />
         </div>
       </>
@@ -83,14 +77,14 @@ export default function Home() {
   function Benefits() {
     return (
       <>
-        <div className="flex items-center justify-center py-40 pb-50">
+        <div className="flex items-center justify-center xl:py-40 py-20 xl:pb-50">
           <div className="max-w-wrapper flex flex-col items-center justify-start gap-10">
-            <div className="mx-auto text-center flex flex-col items-center">
+            <div className="mx-auto text-center flex flex-col items-center p-5">
               <p className="headingSmall">Proč si založit předplatné?</p>
               <h2 className="mt-2 my-5">
                 Méně starostí, více času, žádný nedostatek
               </h2>
-              <p className="max-w-[600px] font-medium text-textDark text-lg mb-5">
+              <p className="max-w-[600px] font-medium text-textDark mb-5">
                 Známe to všichni. Víme, že potřebujeme něco nakoupit, ale
                 odložíme to na večer. Následně na to zapomeneme, jen aby se
                 tento cyklus opakoval dalších několik dní. Například u některých
@@ -99,61 +93,67 @@ export default function Home() {
                 vyřešili za Vás?
               </p>
             </div>
-            <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-10">
-              <div className="bg-primary shadow-[5px_5px_0px_0px] shadow-quad p-10 rounded-lg flex flex-col items-center justify-center max-w-[300px] gap-5">
+            <div className="xl:grid flex flex-col lg:grid-cols-4 md:grid-cols-2 gap-10">
+              <div className="flex flex-col items-center justify-start max-w-[300px] gap-5">
                 <FontAwesomeIcon
                   icon={faClock}
-                  className="text-white text-5xl"
+                  className="text-quad text-9xl"
                 />
 
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
-                  <h4 className="text-white">Ušetříe vám spoustu času</h4>
-                  <p className="text-white">
+                  <h4 className="text-textDark text-3xl">
+                    Ušetříe vám spoustu času
+                  </h4>
+                  <p className="text-textDark font-semibold">
                     Nemusíte trávit hodiny výběrem zboží po e-shopech, ani v
                     panice běhat do fyzických prodejen
                   </p>
                 </div>
               </div>
-              <div className="bg-primary shadow-[5px_5px_0px_0px] shadow-quad relative top-10 p-10 rounded-lg flex flex-col items-center justify-center max-w-[300px] gap-5">
+              <div className="flex flex-col items-center justify-start max-w-[300px] gap-5">
                 <FontAwesomeIcon
                   icon={faMoneyBill1}
-                  className="text-white text-5xl"
+                  className="text-quad text-9xl"
                 />
 
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
-                  <h4 className="text-white">
+                  <h4 className="text-textDark text-3xl">
                     Zachráníme peníze, držíme budget
                   </h4>
-                  <p className="text-white">
+                  <p className="text-textDark font-semibold">
                     Když nakupujeme, často do našich košíků přihazujeme i
                     zbytečnosti. S námi budete mít budget pod kontrolou.
                   </p>
                 </div>
               </div>
-              <div className="bg-primary p-10 shadow-[5px_5px_0px_0px] shadow-quad rounded-lg flex flex-col items-center justify-center max-w-[300px] gap-5">
+              <div className="flex flex-col items-center justify-start max-w-[300px] gap-5">
                 <FontAwesomeIcon
                   icon={faUmbrellaBeach}
-                  className="text-white text-5xl"
+                  className="text-quad text-9xl"
                 />
 
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
-                  <h4 className="text-white">Přestanete se stresovat</h4>
-                  <p className="text-white">
+                  <h4 className="text-textDark text-3xl">
+                    Přestanete se stresovat
+                  </h4>
+                  <p className="text-textDark font-semibold">
                     Dnes nosíme v hlavě spoustu věcí. Nastavením pravidelných
                     objednávek se části z nich zbavíte bez toho, abyste se
                     museli omezovat.
                   </p>
                 </div>
               </div>
-              <div className="bg-primary shadow-[5px_5px_0px_0px] shadow-quad relative top-10 p-10 rounded-lg flex flex-col items-center justify-center max-w-[300px] gap-5">
+              <div className="flex flex-col items-center justify-start max-w-[300px] gap-5">
                 <FontAwesomeIcon
                   icon={faBoxesStacked}
-                  className="text-white text-5xl"
+                  className="text-quad text-9xl"
                 />
 
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
-                  <h4 className="text-white">Už Vám nebude nic chybět</h4>
-                  <p className="text-white">
+                  <h4 className="text-textDark text-3xl">
+                    Už Vám nebude nic chybět
+                  </h4>
+                  <p className="text-textDark font-semibold">
                     Chybí suplementy, pes nemá co jíst a káva nám došla. Něco je
                     kritické, ostatní ne zas tolik. Všemu ale dokážeme předejít.
                   </p>
@@ -173,18 +173,18 @@ export default function Home() {
           <div className="max-w-wrapper mx-auto text-center flex flex-col items-center ">
             <p className="headingSmall">Příklady</p>
             <h2 className="mt-2 my-5">Nechte se inspirovat!</h2>
-            <p className="max-w-[600px] font-medium text-textDark text-lg">
+            <p className="max-w-[600px]">
               Máme v našich životech spoustu věcí, u kterých si někdy ani
               neuvědomujeme, že je potřebujeme na pravidelné bázi.
             </p>
-            <p className="max-w-[600px] font-medium text-textDark text-lg mt-5">
+            <p className="max-w-[600px] mt-5">
               Nevíte, s čím bychom Vám mohli pomoct? Nechte se inspirovat!
             </p>
           </div>
         </div>
-        <div className=" flex flex-col items-center justify-center">
+        <div className=" flex flex-col items-center justify-center gap-10">
           <div className="bg-white self-stretch flex justify-center py-10">
-            <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
+            <div className="xl:grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10 p-10">
               <div className="self-center justify-self-center">
                 <Image
                   src={suplementy}
@@ -219,8 +219,8 @@ export default function Home() {
             </div>
           </div>
           <div className="bg-slate-50 self-stretch flex justify-center py-10">
-            <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
-              <div className="flex flex-col gap-5 justify-center items-start">
+            <div className="xl:grid flex flex-col-reverse  grid-cols-2 max-w-[1300px] min-h-[600px] gap-10 p-10">
+              <div className="flex flex-col  gap-5 justify-center items-start">
                 <div>
                   <p className="text-lg font-bold text-quad">Mazlíčci</p>
                   <h3>Zvířecí žrádlo a pamlsky</h3>
@@ -247,7 +247,7 @@ export default function Home() {
             </div>
           </div>
           <div className="bg-white self-stretch flex justify-center py-10">
-            <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
+            <div className="xl:grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10 p-10">
               <div className="self-center justify-self-center">
                 <Image src={tea} alt="Káva a čaj" width={500} height={500} />
               </div>
@@ -275,7 +275,7 @@ export default function Home() {
             </div>
           </div>
           <div className="bg-slate-50 self-stretch flex justify-center py-10">
-            <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
+            <div className="xl:grid flex flex-col-reverse grid-cols-2 max-w-[1300px] min-h-[600px] gap-10 p-10">
               <div className="flex flex-col gap-5 justify-center items-start">
                 <div>
                   <p className="text-lg font-bold text-quad">Léky a zdraví</p>
@@ -308,7 +308,7 @@ export default function Home() {
     <>
       <HeroSection />
       <BlackDivider>
-        <p className="text-textLight text-4xl text-center">
+        <p className="text-textLight xl:text-4xl  text-center">
           Odstresujte hlavu a nechte starosti s pravidelnými nákupy na nás!
         </p>
       </BlackDivider>

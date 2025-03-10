@@ -13,7 +13,7 @@ export function CTAForm() {
     <>
       <div className="flex items-center justify-center">
         <form
-          className="bg-white rounded-md shadow-md border border-slate-200 p-20 flex flex-col items-stretch justify-center gap-5 text-center"
+          className="bg-white rounded-md xl:shadow-md border border-slate-200 xl:p-20 p-10 flex flex-col items-stretch justify-center gap-5 text-center"
           onSubmit={(e) => {
             e.preventDefault();
             handleSubmit();
@@ -24,7 +24,7 @@ export function CTAForm() {
             <span className="text-quad">účet zdarma</span> a všechno si nejprve
             vyzkoušejte!
           </h3>
-          <p className="">
+          <p className="font-semibold">
             Vytvoření uživatelského účtu, jeho správa a tvorba předplatných je
             plně zdarma. Platby se spouštějí až ve chvíli, kdy nějaké předplatné
             aktivujete.

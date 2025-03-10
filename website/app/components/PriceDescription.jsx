@@ -7,9 +7,7 @@ export default function PriceDescription({ subHeading, description }) {
             <div className="mx-auto text-center flex flex-col items-center">
               <p className="headingSmall">Ceník</p>
               <h2 className="mt-2 my-5">{subHeading}</h2>
-              <p className="max-w-[600px] font-medium text-textDark text-lg">
-                {description}
-              </p>
+              <p className="max-w-[600px]">{description}</p>
             </div>
 
             <div className="mt-5 max-w-[1200px] mx-auto flex flex-col items-center">

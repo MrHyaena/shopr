@@ -2,51 +2,43 @@
 
 @layer components {
   h1 {
-    font-size: var(--text-6xl);
-    line-height: normal;
-    font-weight: 700;
-    color: var(--color-textDark);
+    @apply xl:text-6xl/18 font-[700] text-textDark text-5xl;
   }
 
   h2 {
-    font-size: var(--text-5xl);
-    line-height: normal;
-    font-weight: 700;
-    color: var(--color-textDark);
+    @apply text-5xl font-[700] text-textDark;
   }
 
   h3 {
-    font-size: var(--text-4xl);
-    line-height: normal;
-    font-weight: 700;
-    color: var(--color-textDark);
+    @apply text-4xl font-[700] text-textDark;
   }
 
   h4 {
-    font-size: var(--text-2xl);
-    line-height: normal;
-    font-weight: 700;
-    color: var(--color-quad);
+    @apply text-2xl font-[700] text-quad;
   }
 
   h5 {
-    font-size: var(--text-lg);
-    line-height: normal;
-    font-weight: 700;
-    color: var(--color-quad);
+    @apply text-lg font-[700] text-quad;
   }
 
   p {
-    font-size: var(--text-lg);
-    color: var(--color-textDark);
-    font-weight: 600;
+    @apply text-lg/9 font-[600] text-textDark;
   }
 
   .headingSmall {
-    font-size: var(--text-2xl);
-    line-height: normal;
-    font-weight: 700;
-    color: var(--color-quad);
+    @apply text-2xl font-[700] text-quad;
+  }
+
+  .buttonSmall {
+    @apply bg-quad text-textButton cursor-pointer text-base font-bold py-2 px-3 rounded-md transition-all ease-in-out hover:scale-105 shadow-md shadow-slate-200 self-stretch;
+  }
+
+  .buttonMiddle {
+    @apply bg-quad shadow-md cursor-pointer rounded-md px-4 py-3 text-textButton font-bold xl:text-xl hover:scale-102 transition-all ease-in-out;
+  }
+
+  .buttonMiddleWhite {
+    @apply bg-white cursor-pointer shadow-md shadow-slate-100 rounded-md px-4 py-3 text-textDark font-bold xl:text-xl hover:scale-102 transition-all ease-in-out border border-slate-200;
   }
 }
 
