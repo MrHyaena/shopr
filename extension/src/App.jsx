@@ -161,7 +161,7 @@ function App() {
         >
           {stage == 1 && (
             <button
-              className="p-1 bg-zinc-300 rounded-sm cursor-pointer text-lg font-semibold"
+              className="p-1 bg-zinc-300 rounded-sm cursor-pointer font-semibold"
               onClick={() => {
                 setStage(2);
               }}
@@ -171,7 +171,7 @@ function App() {
           )}{" "}
           {stage == 2 && (
             <button
-              className="p-1 bg-orange-300 rounded-sm cursor-pointer text-lg font-semibold"
+              className="p-1 bg-orange-300 rounded-sm cursor-pointer font-semibold"
               onClick={() => {
                 setStage(3);
               }}
@@ -181,7 +181,7 @@ function App() {
           )}{" "}
           {stage == 3 && (
             <button
-              className="p-1 bg-green-400 rounded-sm cursor-pointer text-lg font-semibold"
+              className="p-1 bg-green-400 rounded-sm cursor-pointer font-semibold"
               onClick={() => {
                 setStage(1);
               }}
@@ -192,11 +192,11 @@ function App() {
           <a
             href={"https://" + url}
             target="_blank"
-            className="flex items-center gap-2 w-full text-rose-700 text-lg font-semibold"
+            className="flex items-center gap-2 w-full text-rose-700 font-semibold hover:bg-rose-100 rounded-md px-3"
           >
-            {url}
+            Odkaz
           </a>
-          <p className="text-lg font-semibold">{amount}</p>
+          <p className=" font-semibold">{amount}</p>
         </div>
       </>
     );
@@ -249,7 +249,7 @@ function App() {
             </button>
           </div>
           <div className="flex flex-col items-start justify-center gap-3 w-full">
-            <div className="grid grid-cols-[5fr_1fr] w-full gap-5 font-bold bg-slate-200 px-5 text-lg">
+            <div className="grid grid-cols-[5fr_1fr] w-full gap-5 font-bold bg-zinc-200 px-5 text-lg">
               <p>Údaje o předplatném</p>
             </div>
 
@@ -312,15 +312,28 @@ function App() {
               <p className="font-semibold">PSČ:</p>
               <p>{subscription.cityNumber}</p>
             </div>
+            <div className="grid grid-cols-[1fr_1fr] w-full gap-5 px-5">
+              <p className="font-semibold">Webová stránka:</p>
+              {subscription && (
+                <a
+                  className="text-rose-700"
+                  target="_blank"
+                  href={"https://" + subscription.subWebsite}
+                >
+                  Odkaz na web
+                </a>
+              )}
+            </div>
           </div>
           <div className="flex flex-col items-start justify-center w-full">
             {subscription && subscription.itemsType == "standard" && (
               <>
-                <div className="grid grid-cols-[5fr_1fr] w-full gap-5 font-bold bg-slate-200 px-5 text-lg px-5">
+                <div className="grid grid-cols-[5fr_1fr] w-full gap-5 font-bold bg-zinc-200 px-5 text-lg px-5">
                   <p>Položka</p>
 
                   <p>Počet</p>
                 </div>
+
                 {subscription.items.map((item) => {
                   return (
                     <>
@@ -333,12 +346,11 @@ function App() {
 
             {subscription && subscription.itemsType == "mystery" && (
               <>
-                <div className="grid grid-cols-[1fr_1fr] w-full gap-5 font-bold bg-slate-200 px-5 text-lg p-5">
-                  <p>Údaj</p>
-
-                  <p>Hodnota</p>
+                <div className="grid grid-cols-[5fr_1fr] w-full gap-5 font-bold bg-zinc-200 px-5 text-lg px-5">
+                  <p>Údaje o balíčku</p>
                 </div>
-                <div className="grid grid-cols-[1fr_1fr] w-full gap-5 px-5 text-lg font-semibold p-5">
+
+                <div className="grid grid-cols-[1fr_1fr] w-full gap-5 px-5  font-semibold p-5">
                   <p>Maximální hodnota</p>
                   <div className="flex items-center gap-2">
                     <p>{subscription.mysteryItem.amount} Kč</p>
@@ -348,11 +360,11 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="grid grid-cols-[1fr_1fr] w-full gap-5 px-5 text-lg font-semibold  bg-zinc-50 p-5">
+                <div className="grid grid-cols-[1fr_1fr] w-full gap-5 px-5 font-semibold  bg-zinc-50 p-5">
                   <p>Kategorie</p>
                   <p>{subscription.mysteryItem.categories.join(" - ")}</p>
                 </div>
-                <div className="grid grid-cols-[1fr_1fr] w-full gap-5 px-5 text-lg font-semibold p-5">
+                <div className="grid grid-cols-[1fr_1fr] w-full gap-5 px-5  font-semibold p-5">
                   <p>Zpráva</p>
                   <p>{subscription.mysteryItem.message}</p>
                 </div>
