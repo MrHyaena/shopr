@@ -229,7 +229,7 @@ function App() {
 
     return (
       <>
-        <div className="flex flex-col items-center justify-start text-slate-800 w-full gap-3">
+        <div className="flex flex-col items-center justify-start text-slate-900 w-full gap-3">
           <div className="grid grid-cols-[1fr_100px] gap-5 w-full p-5">
             <input
               value={search}
