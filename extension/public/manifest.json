@@ -3,9 +3,15 @@
   "version": "1.0.0",
   "name": "Shopr - Pravidelné objednávky",
   "action": {
-    "default_popup": "index.html"
+    "default_title": "Click to open panel"
   },
-  "permissions": ["scripting", "storage"],
+  "side_panel": {
+    "default_path": "index.html"
+  },
+  "background": {
+    "service_worker": "script.js"
+  },
+  "permissions": ["scripting", "storage", "sidePanel"],
   "host_permissions": ["https://*/*", "https://*/*"],
   "icons": {
     "16": "shopr-favicon.png",

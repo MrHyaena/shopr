@@ -15,7 +15,7 @@ const {
   resetUserPassword,
   activateUser,
 } = require("../controllers/userController");
-const requireAuth = require("../middleware/requireAuth");
+const { requireAuth } = require("../middleware/requireAuth");
 
 //creating router
 const router = express.Router();

@@ -198,8 +198,10 @@ router.post(
           note = linkArray.join(" ");
         }
 
+        console.log(subscription);
+
         const payloadTask = await {
-          subject: "Vyplnit objednávku",
+          subject: "Vyplnit objednávku" + subscription._id,
           type: "task",
           user_id: Number(process.env.PIPEDRIVE_ADMIN_ID),
           deal_id: Number(subscription.pipedriveDealId),

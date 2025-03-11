@@ -4,7 +4,6 @@
 //requirements
 require("dotenv").config();
 const express = require("express");
-const requireAuth = require("../middleware/requireAuth");
 
 //controller functions
 const {
@@ -15,6 +14,7 @@ const {
   updateSubscription,
   deactivateSubscription,
 } = require("../controllers/subscriptionController");
+const { requireAuth } = require("../middleware/requireAuth");
 
 //creating router
 const router = express.Router();

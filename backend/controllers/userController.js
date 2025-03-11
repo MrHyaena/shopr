@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const { sendEmail } = require("../email/sendEmail");
 require("dotenv").config();
 const bcrypt = require("bcrypt");
-const mongoose = require("mongoose");
 const validator = require("validator");
 const { pipedriveApiCallV1 } = require("../functions/pipedriveApiCall");
 const {

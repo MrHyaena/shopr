@@ -4,9 +4,9 @@
 //requirements
 require("dotenv").config();
 const express = require("express");
-const requireAuth = require("../middleware/requireAuth");
 const { sendEmail } = require("../email/sendEmail");
 const { emailTemplateUserMessage } = require("../email/emailTemplates");
+const { requireAuth } = require("../middleware/requireAuth");
 
 //creating router
 const router = express.Router();

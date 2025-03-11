@@ -8,6 +8,7 @@ const subscriptionRouter = require("./routes/subscriptionRouter");
 const stripeRouter = require("./routes/stripeRouter");
 const emailRouter = require("./routes/emailRouter");
 const crmRouter = require("./routes/crmRouter");
+const adminRouter = require("./routes/adminRouter");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
@@ -32,6 +33,9 @@ app.use("/api/email", express.json(), emailRouter);
 
 //router for pipedrive handling
 app.use("/api/pipedrive", express.json(), crmRouter);
+
+//router for admin
+app.use("/api/admin", express.json(), adminRouter);
 
 //starting server and connecting to database
 mongoose
