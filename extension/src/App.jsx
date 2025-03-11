@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faTriangleExclamation,
+} from "@fortawesome/free-solid-svg-icons";
 import logo from "./assets/shopr-icon-white.png";
 
 const apiURL = "http://localhost:4000";
@@ -158,17 +161,17 @@ function App() {
         >
           {stage == 1 && (
             <button
-              className="p-1 bg-zinc-300 rounded-md cursor-pointer text-lg font-semibold"
+              className="p-1 bg-zinc-300 rounded-sm cursor-pointer text-lg font-semibold"
               onClick={() => {
                 setStage(2);
               }}
             >
-              Vloženo
+              Vložit
             </button>
           )}{" "}
           {stage == 2 && (
             <button
-              className="p-1 bg-orange-300 rounded-md cursor-pointer text-lg font-semibold"
+              className="p-1 bg-orange-300 rounded-sm cursor-pointer text-lg font-semibold"
               onClick={() => {
                 setStage(3);
               }}
@@ -178,7 +181,7 @@ function App() {
           )}{" "}
           {stage == 3 && (
             <button
-              className="p-1 bg-green-400 rounded-md cursor-pointer text-lg font-semibold"
+              className="p-1 bg-green-400 rounded-sm cursor-pointer text-lg font-semibold"
               onClick={() => {
                 setStage(1);
               }}
@@ -333,17 +336,23 @@ function App() {
                 <div className="grid grid-cols-[1fr_1fr] w-full gap-5 font-bold bg-slate-200 px-5 text-lg p-5">
                   <p>Údaj</p>
 
-                  <p>Popis</p>
+                  <p>Hodnota</p>
                 </div>
-                <div className="grid grid-cols-[1fr_1fr] w-full gap-5 px-5 text-lg font-semibold bg-amber-100 p-5">
+                <div className="grid grid-cols-[1fr_1fr] w-full gap-5 px-5 text-lg font-semibold p-5">
                   <p>Maximální hodnota</p>
-                  <p>{subscription.mysteryItem.amount} Kč</p>
+                  <div className="flex items-center gap-2">
+                    <p>{subscription.mysteryItem.amount} Kč</p>
+                    <FontAwesomeIcon
+                      icon={faTriangleExclamation}
+                      className="text-amber-500"
+                    />
+                  </div>
                 </div>
-                <div className="grid grid-cols-[1fr_1fr] w-full gap-5 px-5 text-lg font-semibold  p-5">
+                <div className="grid grid-cols-[1fr_1fr] w-full gap-5 px-5 text-lg font-semibold  bg-zinc-50 p-5">
                   <p>Kategorie</p>
                   <p>{subscription.mysteryItem.categories.join(" - ")}</p>
                 </div>
-                <div className="grid grid-cols-[1fr_1fr] w-full gap-5 px-5 text-lg font-semibold bg-zinc-50 p-5">
+                <div className="grid grid-cols-[1fr_1fr] w-full gap-5 px-5 text-lg font-semibold p-5">
                   <p>Zpráva</p>
                   <p>{subscription.mysteryItem.message}</p>
                 </div>
