@@ -40,7 +40,7 @@ export default function Supplements() {
         <Image
           src={heroImg}
           alt="doplnky-stravy-hero"
-          className=" col-span-2 object-cover object-left animate-fall-left-noBounce xl:block hidden"
+          className=" col-span-2 object-cover object-left animate-fall-left-noBounce xl:rounded-none xl:shadow-none xl:mb-0 rounded-md shadow-lg mb-5"
         />
       </BlockHeroSection>
       <BlackDivider>

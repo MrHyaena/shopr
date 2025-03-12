@@ -17,7 +17,7 @@ export function ExamplesGrid({
   return (
     <>
       <div className="flex flex-col items-center justify-center py-30 bg-white">
-        <div className="max-w-wrapper w-full xl:grid flex-col grid-cols-2 items-center justify-center gap-10 gap-y-20">
+        <div className="max-w-wrapper w-full xl:grid flex-col grid-cols-2 items-center justify-center gap-0">
           <div className="xl:grid flex flex-col-reverse grid-cols-2 gap-10 items-center p-5">
             <div className="flex flex-col text-center gap-3">
               <h3 className="text-2xl">{headingOne}</h3>
