@@ -8,8 +8,8 @@ export function BlockHeroSection({
 }) {
   return (
     <>
-      <div className="xl:min-h-[800px] pt-10 grid grid-cols-5 min-h-screen items-stretch justify-center overflow-x-hidden">
-        <div className="flex flex-col items-start justify-center h-full gap-5 p-24 col-span-3 max-w-[900px] justify-self-center animate-scale-up-noBounce-delay">
+      <div className="xl:min-h-[800px] pt-10 xl:grid flex flex-col-reverse grid-cols-5 min-h-screen items-stretch justify-center overflow-x-hidden">
+        <div className="flex flex-col items-start justify-center h-full gap-5 xl:p-24 p-5 col-span-3 max-w-[900px] justify-self-center animate-scale-up-noBounce-delay">
           <h1 className="z-2">
             {headingOne}
             <span className="text-quad">

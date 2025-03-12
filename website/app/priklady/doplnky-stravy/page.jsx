@@ -40,17 +40,17 @@ export default function Supplements() {
         <Image
           src={heroImg}
           alt="doplnky-stravy-hero"
-          className=" col-span-2 object-cover object-left animate-fall-left-noBounce"
+          className=" col-span-2 object-cover object-left animate-fall-left-noBounce xl:block hidden"
         />
       </BlockHeroSection>
       <BlackDivider>
-        <div className="flex items-center justify-evenly gap-10">
-          <p className="text-white text-2xl mt-5">Protein</p>
-          <p className="text-white text-2xl mb-5">Vitamíny</p>
-          <p className="text-white text-2xl mt-5">Minerály</p>
-          <p className="text-white text-2xl mb-5">Tyčinky</p>
-          <p className="text-white text-2xl mt-5">Přírodní doplňky stravy</p>
-          <p className="text-white text-2xl mb-5">Nakopávače</p>
+        <div className="flex flex-col xl:flex-row items-center justify-evenly gap-10">
+          <p className="text-white text-2xl xl:mt-5">Protein</p>
+          <p className="text-white text-2xl xl:mb-5">Vitamíny</p>
+          <p className="text-white text-2xl xl:mt-5">Minerály</p>
+          <p className="text-white text-2xl xl:mb-5">Tyčinky</p>
+          <p className="text-white text-2xl xl:mt-5">Přírodní doplňky stravy</p>
+          <p className="text-white text-2xl xl:mb-5">Nakopávače</p>
         </div>
       </BlackDivider>
       <TextSection

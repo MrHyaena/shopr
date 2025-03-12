@@ -17,7 +17,7 @@ export function ImageTextCheckmarks({
     <>
       <div className=" flex flex-col items-center justify-center">
         <div className="bg-white self-stretch flex justify-center py-10">
-          <div className="grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10">
+          <div className="xl:grid flex flex-col grid-cols-2 max-w-[1300px] min-h-[600px] gap-10 p-5">
             <div className="self-center justify-self-center">
               <Image
                 src={image}

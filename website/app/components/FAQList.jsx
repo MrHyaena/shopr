@@ -13,8 +13,8 @@ export default function FAQList() {
   }
   return (
     <>
-      <div className="col-span-1 min-w-[400px]">
-        <div className="sticky top-40">
+      <div className="col-span-1 xl:min-w-[400px] text-center xl:text-start xl:my-0 my-10">
+        <div className="xl:sticky top-40">
           <h3 className="mb-10">Seznam témat</h3>
 
           <ul className="flex flex-col gap-3 border-l-3 border-quad pl-4">

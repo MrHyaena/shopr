@@ -4,6 +4,7 @@ import PriceDescription from "../components/PriceDescription";
 import QuestionShow from "../components/QuestionsShow";
 import Link from "next/link";
 import { CTA } from "../components/CTA/CTA";
+import { BlackDivider } from "../components/BlackDivider";
 
 export const metadata = {
   title: "Shopr: Cena",
@@ -22,9 +23,8 @@ export default function Price() {
           }
         />
       </div>
-
-      <div className="flex flex-col justify-center items-center py-10 bg-primary">
-        <div className="max-w-wrapper flex flex-col items-center justify-start">
+      <BlackDivider>
+        <div className="max-w-wrapper flex flex-col items-center justify-start px-5">
           <p className="text-center text-textLight">
             Jediná platba, kterou u nás zažijte, je za aktivní předplatné. Za
             každou vyřízenou objednávku, kterou v jakémkoliv předplatném
@@ -32,10 +32,11 @@ export default function Price() {
             čtyřikrát týdně, v čtvrtletním zase jednou za tři měsíce.
           </p>
         </div>
-      </div>
+      </BlackDivider>
+
       <div className="flex flex-col justify-center items-center py-40">
-        <div className="max-w-wrapper grid grid-cols-2 items-start justify-start gap-20">
-          <div className="flex flex-col justify-center items-center gap-2 text-center col-span-2">
+        <div className="max-w-wrapper xl:grid flex flex-col grid-cols-2 items-start justify-start gap-20">
+          <div className="flex flex-col justify-center xl:items-center gap-2 xl:text-center text-start col-span-2 px-5">
             <h4>Otázky</h4>
             <h3>Jak to s platbami funguje?</h3>
           </div>

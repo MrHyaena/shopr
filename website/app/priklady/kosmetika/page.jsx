@@ -37,7 +37,7 @@ export default function Supplements() {
       </BlockHeroSection>
       <BlackDivider>
         <>
-          <div className="flex items-center justify-evenly gap-10">
+          <div className="flex xl:flex-row flex-col items-center justify-evenly gap-10">
             <p className="text-white text-2xl">Hydratace</p>
             <p className="text-white text-2xl">Regenerace</p>
             <p className="text-white text-2xl">Péče</p>

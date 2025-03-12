@@ -13,7 +13,7 @@ export function CTAForm() {
     <>
       <div className="flex items-center justify-center">
         <form
-          className="bg-white rounded-md xl:shadow-md border border-slate-200 xl:p-20 p-10 flex flex-col items-stretch justify-center gap-5 text-center"
+          className="bg-white rounded-md xl:shadow-md border border-slate-200 xl:p-20 p-6 flex flex-col items-stretch justify-center gap-5 text-center"
           onSubmit={(e) => {
             e.preventDefault();
             handleSubmit();

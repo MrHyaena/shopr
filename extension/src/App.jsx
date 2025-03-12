@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "./assets/shopr-icon-white.png";
 
-const apiURL = "http://localhost:4000";
+const apiURL = "https://quick-ninon-martin-dolezal-b45ae6c1.koyeb.app";
 
 function App() {
   const [user, setUser] = useState(null);

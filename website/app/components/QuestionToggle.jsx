@@ -26,7 +26,7 @@ export default function QuestionToggle({ question, answer }) {
           />
         </div>
         {toggle && (
-          <p className="font-medium text-textDark text-lg text-start  col-span-2 px-10 pb-5">
+          <p className="font-medium text-textDark text-lg text-start px-5  col-span-2 pb-5">
             {answer}
           </p>
         )}

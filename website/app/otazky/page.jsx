@@ -12,9 +12,9 @@ export const metadata = {
 export default function Faq() {
   return (
     <>
-      <div className="bg-zinc-50 flex justify-center items-start py-30">
+      <div className="bg-zinc-50 flex justify-center items-start pt-30">
         <div className="max-w-wrapper flex flex-col items-center justify-start gap-10">
-          <div className="flex flex-col items-center py-10">
+          <div className="flex flex-col items-center py-10 text-center p-5">
             <h4>FAQ</h4>
             <h2 className="mt-2 my-5">Nejčastější otázky na jednom místě</h2>
             <p className="font-medium text-textDark text-lg col-span-2 text-center max-w-[600px]">
@@ -27,9 +27,9 @@ export default function Faq() {
           </div>
         </div>
       </div>
-      <div className="bg-zinc-50 flex justify-center items-start pb-30">
+      <div className="bg-zinc-50 flex justify-center items-start pb-30 p-5">
         <div className="max-w-wrapper flex flex-col items-center justify-start gap-10">
-          <div className="grid grid-cols-3 gap-20">
+          <div className="xl:grid grid-cols-3 gap-20">
             <FAQList />
             <FAQQuestion />
           </div>

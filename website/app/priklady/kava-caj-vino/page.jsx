@@ -42,7 +42,7 @@ export default function Supplements() {
       </BlockHeroSection>
       <BlackDivider>
         <>
-          <div className="max-w-wrapper w-full flex items-center justify-evenly">
+          <div className="max-w-wrapper xl:flex-row flex-col gap-10 xl:gap-0 w-full flex items-center justify-evenly">
             <p className="text-white text-2xl">Čaj</p>
             <p className="text-white text-2xl">Káva</p>
             <p className="text-white text-2xl">Víno</p>

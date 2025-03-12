@@ -11,7 +11,7 @@ export function HowDoesItWork() {
       <div className="flex items-center justify-center py-10">
         <div className="max-w-wrapper flex flex-col items-center justify-start gap-10">
           <div>
-            <div className="grid grid-cols-[1fr_2px_1fr] max-w-[1000px] gap-10">
+            <div className="xl:grid flex flex-col-reverse grid-cols-[1fr_2px_1fr] max-w-[1000px] gap-10 p-3">
               <div className=" bg-white border border-slate-200 my-10 rounded-lg shadow-lg mb-20">
                 <h4 className="bg-primary text-white p-10 rounded-t-lg border border-slate-200">
                   Založíte účet
@@ -34,8 +34,8 @@ export function HowDoesItWork() {
                   Založit účet
                 </button>
               </div>
-              <div className="w-1 bg-quad"></div>
-              <div className=" flex flex-col py-10 mb-20">
+              <div className="w-1 bg-quad xl:block hidden"></div>
+              <div className=" flex flex-col xl:py-10 xl:mb-20">
                 <div className="sticky top-80 flex flex-col items-center">
                   <FontAwesomeIcon
                     icon={faFileInvoice}
@@ -48,8 +48,8 @@ export function HowDoesItWork() {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-[1fr_2px_1fr] max-w-[1000px] gap-10">
-              <div className=" flex flex-col p-10 mb-20">
+            <div className="xl:grid flex flex-col grid-cols-[1fr_2px_1fr] max-w-[1000px] gap-10 p-3">
+              <div className=" flex flex-col xl:py-10 xl:mb-20">
                 <div className="sticky top-80 flex flex-col items-center">
                   <FontAwesomeIcon
                     icon={faSliders}
@@ -59,7 +59,7 @@ export function HowDoesItWork() {
                   <h5 className="text-2xl font-medium">Tvorba předplatného</h5>
                 </div>
               </div>
-              <div className="w-1 bg-quad"></div>
+              <div className="w-1 bg-quad xl:block hidden"></div>
               <div className=" bg-white border border-slate-200 my-10 rounded-lg shadow-lg mb-20">
                 <h4 className="bg-primary text-white p-10 rounded-t-lg border border-slate-200">
                   Vytvoříte předplatné
@@ -78,7 +78,7 @@ export function HowDoesItWork() {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-[1fr_2px_1fr] max-w-[1000px] gap-10">
+            <div className="xl:grid flex flex-col-reverse grid-cols-[1fr_2px_1fr] max-w-[1000px] gap-10 p-3">
               <div className=" bg-white border border-slate-200 my-10 rounded-lg shadow-lg  mb-20">
                 <h4 className="bg-primary text-white p-10 rounded-t-lg border border-slate-200">
                   Aktivujete předplatné
@@ -97,8 +97,8 @@ export function HowDoesItWork() {
                   </p>
                 </div>
               </div>
-              <div className="w-1 bg-quad"></div>
-              <div className=" flex flex-col p-10 mb-20">
+              <div className="w-1 bg-quad xl:block hidden"></div>
+              <div className=" flex flex-col xl:py-10 xl:mb-20">
                 <div className="sticky top-80 flex flex-col items-center">
                   <FontAwesomeIcon
                     icon={faCheckToSlot}
