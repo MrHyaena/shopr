@@ -38,17 +38,17 @@ export default function Supplements() {
         <Image
           src={heroImg}
           alt="hero"
-          className=" col-span-2 object-cover object-left animate-fall-left-noBounce xl:rounded-none xl:shadow-none xl:mb-0 rounded-md shadow-lg mb-5"
+          className="lg:aspect-auto aspect-[3/2] col-span-2 object-cover object-center animate-fall-left-noBounce lg:rounded-none lg:shadow-none lg:mb-0 rounded-md shadow-lg mb-5"
         />
       </BlockHeroSection>
       <BlackDivider>
-        <div className="flex xl:flex-row flex-col items-center justify-evenly gap-10">
-          <p className="text-white text-2xl xl:mt-5">Masové kapsičky</p>
-          <p className="text-white text-2xl xl:mb-5">Hračky</p>
-          <p className="text-white text-2xl xl:mt-5">Pamlsky</p>
-          <p className="text-white text-2xl xl:mb-5">Granule</p>
-          <p className="text-white text-2xl xl:mt-5">Podestýlka</p>
-          <p className="text-white text-2xl xl:mb-5">Hygiena</p>
+        <div className="flex lg:flex-row flex-col items-center justify-evenly gap-10">
+          <p className="text-white text-2xl lg:mt-5">Masové kapsičky</p>
+          <p className="text-white text-2xl lg:mb-5">Hračky</p>
+          <p className="text-white text-2xl lg:mt-5">Pamlsky</p>
+          <p className="text-white text-2xl lg:mb-5">Granule</p>
+          <p className="text-white text-2xl lg:mt-5">Podestýlka</p>
+          <p className="text-white text-2xl lg:mb-5">Hygiena</p>
         </div>
       </BlackDivider>
       <HeadingCenter

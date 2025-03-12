@@ -12,7 +12,7 @@ export const metadata = {
 export default function About() {
   return (
     <>
-      <div className="bg-linear-175 from-0% to-40% from-violet-100 to-white flex justify-center items-start py-30 px-5 text-center xl:text-start">
+      <div className="bg-linear-175 from-0% to-40% from-violet-100 to-white flex justify-center items-start py-30 px-5 text-center lg:text-start">
         <div className="max-w-wrapper flex flex-col items-center justify-start">
           <div className="flex flex-col items-center py-10">
             <h4>O nás</h4>
@@ -21,7 +21,7 @@ export default function About() {
             </h2>
           </div>
 
-          <div className="xl:grid grid-cols-2 gap-10">
+          <div className="lg:grid grid-cols-2 gap-10">
             <p className="font-medium text-textDark text-lg col-span-2">
               Rádi bychom se Vám také trochu představili. Koneckonců není špatně
               vědět o základech, na kterých služba stojí. Takže kde jsou naše

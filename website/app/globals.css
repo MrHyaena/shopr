@@ -2,7 +2,7 @@
 
 @layer components {
   h1 {
-    @apply xl:text-6xl/18 font-[700] text-textDark text-5xl;
+    @apply lg:text-6xl/18 font-[700] text-textDark text-5xl;
   }
 
   h2 {
@@ -34,11 +34,11 @@
   }
 
   .buttonMiddle {
-    @apply bg-quad shadow-md cursor-pointer rounded-md px-4 py-3 text-textButton font-bold xl:text-xl hover:scale-102 transition-all ease-in-out;
+    @apply bg-quad shadow-md cursor-pointer rounded-md px-4 py-3 text-textButton font-bold lg:text-xl hover:scale-102 transition-all ease-in-out;
   }
 
   .buttonMiddleWhite {
-    @apply bg-white cursor-pointer shadow-md shadow-slate-100 rounded-md px-4 py-3 text-textDark font-bold xl:text-xl hover:scale-102 transition-all ease-in-out border border-slate-200;
+    @apply bg-white cursor-pointer shadow-md shadow-slate-100 rounded-md px-4 py-3 text-textDark font-bold lg:text-xl hover:scale-102 transition-all ease-in-out border border-slate-200;
   }
 }
 

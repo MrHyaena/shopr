@@ -26,7 +26,7 @@ export default function Howto() {
           <div className="mx-auto text-center flex flex-col items-center">
             <h4 className="headingSmall">Jak to funguje</h4>
             <h2 className="mt-2 my-5 break-words">
-              Vyznaváme jednoduchost, takže nehledejte nic složitého
+              Hlavně nehledejte nic složitého
             </h2>
             <p className="max-w-[600px] font-medium text-textDark text-lg">
               Naše předplatné má především usnadňovat životy. Dává tedy smysl,

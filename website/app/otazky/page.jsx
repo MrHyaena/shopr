@@ -29,7 +29,7 @@ export default function Faq() {
       </div>
       <div className="bg-zinc-50 flex justify-center items-start pb-30 p-5">
         <div className="max-w-wrapper flex flex-col items-center justify-start gap-10">
-          <div className="xl:grid grid-cols-3 gap-20">
+          <div className="lg:grid grid-cols-3 gap-20">
             <FAQList />
             <FAQQuestion />
           </div>

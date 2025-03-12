@@ -18,7 +18,7 @@ export function FourRowGrid({
     <>
       <div className="flex flex-col items-center justify-center pb-30 bg-white">
         <div className="max-w-[1000px] grid grid-rows-4 items-center justify-center gap-10 gap-y-20">
-          <div className="xl:grid flex flex-col gap-3 grid-cols-2 items-center p-5">
+          <div className="lg:grid flex flex-col gap-3 grid-cols-2 items-center p-5">
             <div className="flex flex-col text-start gap-3">
               <h3 className="text-2xl">{headingOne}</h3>
               <p className="">{textOne}</p>
@@ -29,7 +29,7 @@ export function FourRowGrid({
               className="object-cover object-center rounded-md w-100 h-100 justify-self-end shadow-md"
             />
           </div>
-          <div className="xl:grid flex flex-col-reverse gap-3  grid-cols-2  items-center p-5">
+          <div className="lg:grid flex flex-col-reverse gap-3  grid-cols-2  items-center p-5">
             <Image
               src={imageTwo}
               alt="secondImage"
@@ -40,7 +40,7 @@ export function FourRowGrid({
               <p className="">{textTwo}</p>
             </div>
           </div>
-          <div className="xl:grid flex flex-col gap-3  grid-cols-2  items-center p-5">
+          <div className="lg:grid flex flex-col gap-3  grid-cols-2  items-center p-5">
             <div className="flex flex-col text-start gap-3">
               <h3 className="text-2xl">{headingThree}</h3>
               <p className="">{textThree}</p>
@@ -51,7 +51,7 @@ export function FourRowGrid({
               className="object-cover object-center rounded-md w-100 h-100 justify-self-end shadow-md"
             />
           </div>
-          <div className="xl:grid flex flex-col-reverse gap-3 grid-cols-2  items-center p-5">
+          <div className="lg:grid flex flex-col-reverse gap-3 grid-cols-2  items-center p-5">
             <Image
               src={imageFour}
               alt="fourthImage"

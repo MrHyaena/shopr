@@ -32,12 +32,12 @@ export default function Supplements() {
         <Image
           src={heroImg}
           alt="hero"
-          className=" col-span-2 object-cover object-left animate-fall-left-noBounce xl:rounded-none xl:shadow-none xl:mb-0 rounded-md shadow-lg mb-5"
+          className="lg:aspect-auto aspect-[3/2] col-span-2 object-cover object-left animate-fall-left-noBounce lg:rounded-none lg:shadow-none lg:mb-0 rounded-md shadow-lg mb-5"
         />
       </BlockHeroSection>
       <BlackDivider>
         <>
-          <div className="flex xl:flex-row flex-col items-center justify-evenly gap-10">
+          <div className="flex lg:flex-row flex-col items-center justify-evenly gap-10">
             <p className="text-white text-2xl">Hydratace</p>
             <p className="text-white text-2xl">Regenerace</p>
             <p className="text-white text-2xl">Péče</p>

@@ -5,7 +5,7 @@ export default function ReviewGrid() {
     <>
       <div className=" flex flex-col items-center justify-center">
         <div className="bg-slate-50 self-stretch flex justify-center py-30">
-          <div className="xl:grid flex flex-col grid-cols-2 max-w-[1300px] gap-20 items-start xl:p-0 p-5">
+          <div className="lg:grid flex flex-col grid-cols-2 max-w-[1300px] gap-20 items-start lg:p-0 p-5">
             <div className="flex flex-col gap-5 justify-center">
               <div>
                 <p className="text-xl font-bold text-quad">

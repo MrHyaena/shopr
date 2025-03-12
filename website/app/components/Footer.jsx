@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <>
       <footer className="flex bg-primary items-center justify-center py-30">
-        <div className="max-w-wrapper flex xl:flex-row flex-col items-center justify-between w-full gap-5">
+        <div className="max-w-wrapper flex lg:flex-row flex-col items-center justify-between w-full gap-5">
           <div className="mx-auto text-start flex flex-col items-start">
             <p className="text-xl font-bold mt-2 text-w text-white">
               Budeme se na vás těšit!
