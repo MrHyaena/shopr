@@ -182,7 +182,7 @@ export function Contact() {
             </h1>
             <Formular />
           </div>
-          <div className="flex flex-col items-start gap-5 max-w-[700px] p-5">
+          <div className="flex flex-col items-start gap-5 max-w-[700px] px-5">
             <h1 className="text-xl font-bold text-heading">Kontaktní údaje</h1>
             <p className="text-lg font-semibold ">
               Pokud nás chcete kontaktovat přímo na emailovou adresu, můžete to

@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import { useUpdate } from "../hooks/useUpdate";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { deleteUserHandler } from "../functions/deleteUserHandler";
+import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 
-export function Personal() {
+export function Personal({ setLoader }) {
+  const { user, setUser } = useAuthContext();
+  const { deleteUser } = deleteUserHandler();
+
   function PersonalForm() {
-    const { user } = useAuthContext();
-
     const [email, setEmail] = useState("");
     const [firstName, setFirstName] = useState("");
     const [secondName, setSecondName] = useState("");
@@ -174,6 +177,112 @@ export function Personal() {
     );
   }
 
+  function PersonalFormComment() {
+    const [toggleDelete, setToggleDelete] = useState(false);
+    const [checkDelete, setCheckDelete] = useState("");
+    const [errorDelete, setErrorDelete] = useState(null);
+
+    function deleteUserAccount() {
+      if (checkDelete == "smazat účet") {
+        setCheckDelete(null);
+        deleteUser(user, setUser, setLoader, setErrorDelete);
+      }
+
+      if (checkDelete !== "smazat účet") {
+        setErrorDelete(true);
+      }
+    }
+
+    return (
+      <>
+        <div className="flex flex-col xl:items-start xl:text-start px-5 gap-5 max-w-[700px]">
+          <h1 className="text-xl font-bold text-heading">
+            K čemu tyto informace slouží?
+          </h1>
+          <p className="text-lg font-semibold ">
+            Tyto informace používáme pro urychlení procesu tvorby předplatného.
+            Vaše osobní údaje můžete kdykoliv změnit. Aktualizované údaje budou
+            dostupné okamžitě.
+          </p>
+          <h1 className="text-xl font-bold text-heading">
+            Zrušení uživatelského účtu
+          </h1>
+          <p className="text-lg font-semibold ">
+            Svůj účet můžete kdykoliv zrušit kliknutím na tlačítko níže a
+            potvrzením zrušení. Každé aktivní předplatné bude nenávratně
+            deaktivováno a smazáno, stejně tak jako vaše data.
+          </p>
+          <button
+            onClick={() => {
+              setToggleDelete(true);
+            }}
+            className="font-semibold bg-white hover:bg-red-500 text-textDark w-full hover:text-white  text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out  cursor-pointer"
+          >
+            Zrušit účet
+          </button>
+        </div>
+        {toggleDelete && (
+          <div className="fixed top-0 right-0 w-full p-5 h-full bg-primary/50 m-auto flex justify-center items-center">
+            <div className="gap-5 flex flex-col justify-center items-stretch bg-white p-10 rounded-md max-w-[700px]">
+              <h3 className="text-2xl font-bold text-textDark">
+                Potvrďte zrušení účtu
+              </h3>
+              <p className="text-textDark font-semibold">
+                Jakmile účet zušíte, automaticky deaktivujeme a vymažeme každé
+                vaše předplatné. To stejné s vašimi daty. Tato akce je nevratná.
+              </p>
+              <p className="text-textDark font-semibold">
+                Pro potvrzení smazání napište tento text:{" "}
+                <span className="text-quad">smazat účet</span>
+              </p>
+              <input
+                type="text"
+                className="bg-zinc-50 p-3 rounded-lg border border-slate-200 font-semibold"
+                value={checkDelete}
+                onChange={(e) => {
+                  if (errorDelete) {
+                    setErrorDelete(false);
+                  }
+                  setCheckDelete(e.target.value);
+                }}
+              />
+              {errorDelete && (
+                <p className="p-2 bg-errorBg border-2 border-errorBorder rounded-md font-semibold text-medium">
+                  Vložený text se neshoduje s požadovaným textem.
+                </p>
+              )}
+              {errorDelete && (
+                <p className="p-2 bg-errorBg border-2 border-errorBorder rounded-md font-semibold text-medium">
+                  {errorDelete}
+                </p>
+              )}
+              <div className="grid grid-cols-2 w-full gap-5">
+                <button
+                  disabled={checkDelete !== "smazat účet"}
+                  className="p-3 rounded-md bg-deleteButton hover:scale-105  hover:bg-red-500 transition-all ease-in-out cursor-pointer font-semibold text-textButton disabled:hover:scale-100 disabled:border disabled:bg-white disabled:border-slate-200 disabled:cursor-default disabled:text-textLighter"
+                  onClick={() => {
+                    deleteUserAccount();
+                  }}
+                >
+                  Zrušit účet
+                </button>
+
+                <button
+                  className="p-3 rounded-md bg-white border border-slate-200 font-semibold text-textDark cursor-pointer transition-all ease-in-out hover:scale-105"
+                  onClick={() => {
+                    setToggleDelete(false);
+                  }}
+                >
+                  Zpět
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </>
+    );
+  }
+
   return (
     <>
       <div className="bg-slate-50 xl:p-10 p-3 flex flex-col xl:gap-10 gap-10 xl:pt-10 pt-30 text-textDark">
@@ -195,16 +304,7 @@ export function Personal() {
             </h1>
             <PersonalForm />
           </div>
-          <div className="flex flex-col xl:items-start xl:text-start p-5 gap-5 max-w-[700px]">
-            <h1 className="text-xl font-bold text-heading">
-              K čemu tyto informace slouží?
-            </h1>
-            <p className="text-lg font-semibold ">
-              Tyto informace používáme pro urychlení procesu tvorby
-              předplatného. Vaše osobní údaje můžete kdykoliv změnit.
-              Aktualizované údaje budou dostupné okamžitě.
-            </p>
-          </div>
+          <PersonalFormComment />
         </div>
       </div>
     </>

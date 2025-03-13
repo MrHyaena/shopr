@@ -29,7 +29,7 @@ router.post("/login", loginUser);
 router.post("/signup", signupUser);
 
 //delete user
-router.post("/delete", deleteUser);
+router.delete("/delete/:id", requireAuth, deleteUser);
 
 //update user
 router.post("/update", requireAuth, updateUser);

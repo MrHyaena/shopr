@@ -146,7 +146,12 @@ export function SubscriptionForm({ setLoader }) {
     }
 
     return (
-      <form className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg">
+      <form
+        onSubmit={(e) => {
+          handleNext(e);
+        }}
+        className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg"
+      >
         <button
           className="bg-quad text-textButton self-start p-3 text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
           onClick={(e) => {
@@ -163,6 +168,8 @@ export function SubscriptionForm({ setLoader }) {
             <label className="flex flex-col text-heading text-lg font-semibold">
               Jméno
               <input
+                placeholder="Jiří"
+                required={true}
                 value={firstName}
                 onChange={(e) => {
                   setFirstName(e.target.value);
@@ -174,6 +181,8 @@ export function SubscriptionForm({ setLoader }) {
             <label className="flex flex-col text-heading text-lg font-semibold">
               Příjmení
               <input
+                placeholder="Novotný"
+                required={true}
                 value={secondName}
                 onChange={(e) => {
                   setSecondName(e.target.value);
@@ -185,6 +194,8 @@ export function SubscriptionForm({ setLoader }) {
             <label className="flex flex-col text-heading text-lg font-semibold">
               Telefon
               <input
+                placeholder="602605331"
+                required={true}
                 value={phone}
                 onChange={(e) => {
                   setPhone(e.target.value);
@@ -196,6 +207,8 @@ export function SubscriptionForm({ setLoader }) {
             <label className="flex flex-col text-heading text-lg font-semibold">
               Email
               <input
+                placeholder="jirinovotny@gmail.com"
+                required={true}
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -214,6 +227,8 @@ export function SubscriptionForm({ setLoader }) {
             <label className="flex flex-col text--textDark text-lg font-semibold">
               Adresa
               <input
+                placeholder="Řeháčova"
+                required={true}
                 value={address}
                 onChange={(e) => {
                   setAddress(e.target.value);
@@ -225,6 +240,8 @@ export function SubscriptionForm({ setLoader }) {
             <label className="flex flex-col text--textDark text-lg font-semibold">
               Číslo popisné
               <input
+                placeholder="22"
+                required={true}
                 value={addressNumber}
                 onChange={(e) => {
                   setAddressNumber(e.target.value);
@@ -236,6 +253,8 @@ export function SubscriptionForm({ setLoader }) {
             <label className="flex flex-col text--textDark text-lg font-semibold">
               Město
               <input
+                placeholder="Praha 40"
+                required={true}
                 value={city}
                 onChange={(e) => {
                   setCity(e.target.value);
@@ -247,6 +266,8 @@ export function SubscriptionForm({ setLoader }) {
             <label className="flex flex-col text--textDark text-lg font-semibold">
               PSČ
               <input
+                placeholder="14100"
+                required={true}
                 value={cityNumber}
                 onChange={(e) => {
                   setCityNumber(e.target.value);
@@ -266,10 +287,8 @@ export function SubscriptionForm({ setLoader }) {
               Zrušit
             </Link>
             <button
+              type="submit"
               className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
-              onClick={(e) => {
-                handleNext(e);
-              }}
             >
               Pokračovat <FontAwesomeIcon icon={faArrowRight} />
             </button>
@@ -833,7 +852,7 @@ export function SubscriptionForm({ setLoader }) {
                   }}
                   className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
                 >
-                  Chci standardní objednávku
+                  Standardní objednávka
                 </button>
               </div>
               <div className="flex flex-col justify-between gap-5">
@@ -854,7 +873,7 @@ export function SubscriptionForm({ setLoader }) {
                   }}
                   className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
                 >
-                  Chci mystery balíček
+                  Mystery balíček
                 </button>
               </div>
               <button

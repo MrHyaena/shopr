@@ -1,12 +1,17 @@
 //requirements
 const User = require("../models/userModel");
+const Subscription = require("../models/subscriptionModel");
 const Hashcheck = require("../models/hashcheckModel");
 const jwt = require("jsonwebtoken");
 const { sendEmail } = require("../email/sendEmail");
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 const validator = require("validator");
-const { pipedriveApiCallV1 } = require("../functions/pipedriveApiCall");
+const {
+  pipedriveApiCallV1,
+  pipedriveApiCallDeleteV2,
+  pipedriveApiCallV2,
+} = require("../functions/pipedriveApiCall");
 const {
   emailTemplateActivateAccount,
   emailTemplatePasswordChange,
@@ -210,30 +215,53 @@ const loginUser = async (req, res) => {
 
 //delete user controller function
 const deleteUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { id } = req.params;
 
   try {
-    // ------------ VALIDATION OF DATA FROM FORM --------------
-    if (!email || !password) {
-      throw Error("Musíte vyplnit všechna pole");
-    }
-
     // ------------ CHECKING DATABASE FOR USER --------------
-    const user = await User.findOne({ email });
+    const user = await User.findById({ _id: id });
 
     if (!user) {
-      throw Error("Nesprávný email");
+      throw Error("Účet neexistuje");
     }
 
-    // ------------ CHECKING IF PASSWORDS ARE MATCHING --------------
-    const match = await bcrypt.compare(password, user.password);
-
-    if (!match) {
-      throw Error("Nesprávné heslo");
+    // ------------ MONGOOSE - FINDING AND DELETING ALL SUBSCRIPTIONS --------------
+    const pipeDealIdsArray = [];
+    const stripeSubIdsArray = [];
+    const subscriptions = await Subscription.find({ userId: id }).cursor();
+    for (
+      let doc = await subscriptions.next();
+      doc != null;
+      doc = await subscriptions.next()
+    ) {
+      pipeDealIdsArray.push(doc.pipedriveDealId);
+      stripeSubIdsArray.push(doc.stripeSubId);
     }
 
-    // ------------ DELETING USER FROM DATABASE --------------
-    const deletedUser = await User.findByIdAndDelete({ _id: user.id });
+    // ------------ PIPEDRIVE - FINDING AND DELETING ALL ACTIVITIES --------------
+    const pipeActivities = await pipedriveApiCallV2("activities", "GET");
+
+    const activitiesJson = await pipeActivities.json();
+
+    const activitiesForDeletion = await activitiesJson.data.filter(
+      (item) =>
+        item.done == false &&
+        item.person_id == user.pipedrivePersonId &&
+        item.is_deleted == false
+    );
+
+    const activitiesIds = activitiesForDeletion.map((item) => {
+      return item.id;
+    });
+
+    const taskIds = activitiesIds.join(",");
+    const dealIds = pipeDealIdsArray.join(",");
+
+    console.log(taskIds);
+    console.log(dealIds);
+    // ------------ STRIPE - CANCELING ALL SUBSCRIPTIONS --------------
+    console.log(stripeSubIdsArray);
+    //const stripeSubscription = await stripe.subscriptions.cancel(stripeSubId);
 
     res.status(200).json({ deleted: true });
   } catch (error) {

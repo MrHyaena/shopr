@@ -57,7 +57,10 @@ function App() {
                   element={<SubscriptionForm setLoader={setLoader} />}
                 />
                 <Route path="/kontakt" element={<Contact />} />
-                <Route path="/osobni-udaje" element={<Personal />} />
+                <Route
+                  path="/osobni-udaje"
+                  element={<Personal setLoader={setLoader} />}
+                />
                 <Route path="/otazky" element={<Faq />} />
               </Routes>
             </main>
