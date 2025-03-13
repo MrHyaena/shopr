@@ -85,12 +85,12 @@ export function SubscriptionList({ setLoader }) {
               <p className="col-span-1 justify-self-center">Množství</p>
               <p className="col-span-1 justify-self-center">Nahraditelné</p>
             </div>
-            <ul className="text-md font-semibold text-textDark flex flex-col ">
+            <ul className="text-md font-semibold text-textDark flex flex-col even:bg-slate-500">
               {items.map((item, index) => {
                 if (index % 2 == 0) {
                   return (
                     <Fragment key={"subItemToBuy" + item.amount + item.url}>
-                      <li className="bg-slate-100 py-2 px-4 xl:hidden">
+                      <li className=" py-2 px-4 xl:hidden even:bg-slate-500">
                         <div className="flex gap-2">
                           <p className="text-textDark font-bold">URL:</p>
                           <a
@@ -112,9 +112,9 @@ export function SubscriptionList({ setLoader }) {
                           </p>
                         </div>
                       </li>
-                      <li className="bg-slate-100 py-2 px-4 xl:grid hidden items-center grid-cols-4">
+                      <li className=" py-2 px-4 xl:grid hidden items-center grid-cols-4 even:bg-slate-500">
                         <a
-                          className="col-span-2 text-textA"
+                          className="col-span-2 text-textA break-all"
                           href={"https://" + item.url}
                           target="_blank"
                         >
@@ -145,7 +145,7 @@ export function SubscriptionList({ setLoader }) {
                             </a>
                           </div>
                           <div className="flex gap-2">
-                            <p className="text-textDark font-bold">Počet:</p>
+                            <p className="text-textDark font-bold">Množství:</p>
                             <p className="">{item.amount}</p>
                           </div>
                           <div className="flex gap-2">
@@ -158,7 +158,7 @@ export function SubscriptionList({ setLoader }) {
                         <li className="py-2 px-4 xl:grid grid-cols-4 items-center  hidden">
                           <a
                             href={"https://" + item.url}
-                            className="col-span-2 text-textA"
+                            className="col-span-2 text-textA break-all"
                             target="_blank"
                           >
                             {item.url}

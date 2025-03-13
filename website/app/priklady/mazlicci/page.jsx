@@ -43,12 +43,12 @@ export default function Supplements() {
       </BlockHeroSection>
       <BlackDivider>
         <div className="flex lg:flex-row flex-col items-center justify-evenly gap-10">
-          <p className="text-white text-2xl lg:mt-5">Masové kapsičky</p>
-          <p className="text-white text-2xl lg:mb-5">Hračky</p>
-          <p className="text-white text-2xl lg:mt-5">Pamlsky</p>
-          <p className="text-white text-2xl lg:mb-5">Granule</p>
-          <p className="text-white text-2xl lg:mt-5">Podestýlka</p>
-          <p className="text-white text-2xl lg:mb-5">Hygiena</p>
+          <p className="text-white text-2xl">Masové kapsičky</p>
+          <p className="text-white text-2xl">Hračky</p>
+          <p className="text-white text-2xl">Pamlsky</p>
+          <p className="text-white text-2xl">Granule</p>
+          <p className="text-white text-2xl">Podestýlka</p>
+          <p className="text-white text-2xl">Hygiena</p>
         </div>
       </BlackDivider>
       <HeadingCenter

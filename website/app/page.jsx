@@ -77,7 +77,7 @@ export default function Home() {
   function Benefits() {
     return (
       <>
-        <div className="flex items-center justify-center lg:py-40 py-20 lg:pb-50">
+        <div className="flex items-center justify-center lg:py-40 py-20 lg:pb-50 p-5">
           <div className="max-w-wrapper flex flex-col items-center justify-start gap-10">
             <div className="mx-auto text-center flex flex-col items-center p-5">
               <p className="headingSmall">Proč si založit předplatné?</p>
@@ -182,7 +182,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className=" flex flex-col items-center justify-center gap-10">
+        <div className=" flex flex-col items-center justify-center gap-10 px-5">
           <div className="bg-white self-stretch flex justify-center py-10">
             <div className="lg:grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10 p-10">
               <div className="self-center justify-self-center">
@@ -308,7 +308,7 @@ export default function Home() {
     <>
       <HeroSection />
       <BlackDivider>
-        <p className="text-textLight lg:text-4xl  text-center">
+        <p className="text-textLight lg:text-4xl  text-center p-5">
           Odstresujte hlavu a nechte starosti s pravidelnými nákupy na nás!
         </p>
       </BlackDivider>
