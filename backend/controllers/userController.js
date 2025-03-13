@@ -218,16 +218,17 @@ const deleteUser = async (req, res) => {
   const { id } = req.params;
 
   try {
-    // ------------ CHECKING DATABASE FOR USER --------------
-    const user = await User.findById({ _id: id });
+    // ------------ MONGOOSE - CHECKING DATABASE FOR USER AND DELETING HIM --------------
+    const user = await User.findByIdAndDelete({ _id: id });
 
     if (!user) {
       throw Error("Účet neexistuje");
     }
 
-    // ------------ MONGOOSE - FINDING AND DELETING ALL SUBSCRIPTIONS --------------
+    // ------------ MONGOOSE - FINDING ALL SUBSCRIPTIONS AND GETTING THEIR DATA--------------
     const pipeDealIdsArray = [];
     const stripeSubIdsArray = [];
+    const mongoSubArray = [];
     const subscriptions = await Subscription.find({ userId: id }).cursor();
     for (
       let doc = await subscriptions.next();
@@ -236,32 +237,67 @@ const deleteUser = async (req, res) => {
     ) {
       pipeDealIdsArray.push(doc.pipedriveDealId);
       stripeSubIdsArray.push(doc.stripeSubId);
+      mongoSubArray.push(doc._id);
+    }
+
+    // ------------ MONGOOSE - DELETING ALL SUBSCRIPTIONS --------------
+    for (let i = 0; i < mongoSubArray.length; i++) {
+      const subscriptions = await Subscription.findByIdAndDelete({
+        _id: mongoSubArray[i],
+      });
     }
 
     // ------------ PIPEDRIVE - FINDING AND DELETING ALL ACTIVITIES --------------
+    //getting all the tasks
     const pipeActivities = await pipedriveApiCallV2("activities", "GET");
 
     const activitiesJson = await pipeActivities.json();
-
+    //filtering the tasks with conditions
     const activitiesForDeletion = await activitiesJson.data.filter(
       (item) =>
         item.done == false &&
         item.person_id == user.pipedrivePersonId &&
         item.is_deleted == false
     );
-
+    //creating array from task ids
     const activitiesIds = activitiesForDeletion.map((item) => {
       return item.id;
     });
 
+    //getting the ids in the joined strings
     const taskIds = activitiesIds.join(",");
     const dealIds = pipeDealIdsArray.join(",");
 
-    console.log(taskIds);
-    console.log(dealIds);
+    //function call for actual deletion
+    const pipeDeleteActivitiesBulkcall = await pipedriveApiCallV1(
+      "activities?ids=" + taskIds,
+      "DELETE"
+    );
+
+    const pipeDeleteDealsBulkcall = await pipedriveApiCallV1(
+      "deals?ids=" + dealIds,
+      "DELETE"
+    );
+
     // ------------ STRIPE - CANCELING ALL SUBSCRIPTIONS --------------
-    console.log(stripeSubIdsArray);
-    //const stripeSubscription = await stripe.subscriptions.cancel(stripeSubId);
+    for (let i = 0; i < stripeSubIdsArray.length; i++) {
+      const stripeSubscription = await stripe.subscriptions.cancel(
+        stripeSubIdsArray[i]
+      );
+    }
+
+    // ------------ EMAIL - DELETION SUCCESS --------------
+    const fromEmail = process.env.SMTP_EMAIL_INFO;
+    const toEmail = user.email;
+    const subject = "Váš učet byl plně zrušen";
+    const emailBody = `<h4>Dobr&yacute; den!</h4>
+<h2>V&aacute;&scaron; &uacute;čet v na&scaron;&iacute; aplikaci Shopr byl plně zru&scaron;en.</h2>
+<p>V&scaron;echna předplatn&aacute; jsou deaktivov&aacute;na. Z va&scaron;&iacute; karty se t&iacute;m p&aacute;dem nebudou strh&aacute;vat ž&aacute;dn&eacute; dal&scaron;&iacute; platby. Stejně tak jsme smazali va&scaron;e uživatelsk&eacute; &uacute;daje.</p>
+<p>Samozřejmě n&aacute;s mrz&iacute;, že odch&aacute;z&iacute;te, nicm&eacute;ně to naprosto ch&aacute;peme. Je zbytečn&eacute; platit za službu, kterou nepouž&iacute;v&aacute;te, př&iacute;padně kterou nepotřebujete, nebo s n&iacute; nejste spokojeni.</p>
+<p>Přejeme V&aacute;m do budoucna to nejlep&scaron;&iacute; a budeme doufat, že se je&scaron;tě někdy zastav&iacute;te.</p>
+<p>S pozdravem,</p>
+<p>T&yacute;m Shopr</p>`;
+    sendEmail(fromEmail, toEmail, subject, emailBody);
 
     res.status(200).json({ deleted: true });
   } catch (error) {

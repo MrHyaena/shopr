@@ -1,12 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../hooks/useAuthContext";
-import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 const apiURL = import.meta.env.VITE_API_URL;
+const websiteURL = import.meta.env.VITE_WEBSITE_URL;
 
 // FUNCTION FOR DELETING SUBSCRIPTIONS
 export function deleteUserHandler() {
-  const navigate = useNavigate();
-
   async function deleteUser(user, setUser, setLoader, setErrorDelete) {
     const response = await fetch(apiURL + "/api/user/delete/" + user.id, {
       method: "DELETE",
@@ -20,7 +16,7 @@ export function deleteUserHandler() {
 
     if (response.ok) {
       localStorage.clear();
-      window.location.href = "https://shopr.cz";
+      window.location.href = websiteURL;
     }
 
     if (!response.ok) {
