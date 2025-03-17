@@ -178,6 +178,13 @@ export function Navbar() {
               <>
                 <ul className="flex flex-col gap-5 py-10 text-lg font-bold items-start">
                   <li>
+                    <Link href="/">
+                      <p className="font-bold text-textLight  text-base hover:text-quad transition-all ease-in-out">
+                        Domů
+                      </p>
+                    </Link>
+                  </li>
+                  <li>
                     <Link href="/jak-to-funguje">
                       <p className="font-bold text-textLight  text-base hover:text-quad transition-all ease-in-out">
                         Jak to funguje
@@ -185,12 +192,12 @@ export function Navbar() {
                     </Link>
                   </li>
                   <li>
-                    <p
-                      className="font-bold text-textLight   text-base hover:text-quad transition-all ease-in-out"
-                      id="togglePriklady"
+                    <Link
+                      href="/priklady/doplnky-stravy"
+                      className=" text-base text-textLight hover:text-quad transition-all ease-in-out"
                     >
                       Příklady
-                    </p>
+                    </Link>
                   </li>
                   <li>
                     <ul className="flex flex-col gap-5 ml-5">

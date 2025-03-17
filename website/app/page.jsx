@@ -5,7 +5,10 @@ import Newsletter from "./components/Newsletter";
 //Images
 import Image from "next/image";
 
-import heroImg from "../public/hero-image.png";
+import suplement from "./_img/suplement.png";
+import clock from "./_img/clock.png";
+import money from "./_img/money.png";
+import stress from "./_img/nostress.png";
 
 import catFood from "./_img/examples/cat-food.png";
 import suplementy from "./_img/examples/suplementy.png";
@@ -95,10 +98,7 @@ export default function Home() {
             </div>
             <div className="lg:grid flex flex-col lg:grid-cols-4 md:grid-cols-2 gap-10">
               <div className="flex flex-col items-center justify-start max-w-[300px] gap-5">
-                <FontAwesomeIcon
-                  icon={faClock}
-                  className="text-quad text-9xl"
-                />
+                <Image src={clock} alt="Ušetříme Vám čas" />
 
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
                   <h4 className="text-textDark text-3xl">
@@ -106,15 +106,12 @@ export default function Home() {
                   </h4>
                   <p className="text-textDark font-semibold">
                     Nemusíte trávit hodiny výběrem zboží po e-shopech, ani v
-                    panice běhat do fyzických prodejen
+                    panice běhat do fyzických prodejen. My to vyřešíme za Vás.
                   </p>
                 </div>
               </div>
               <div className="flex flex-col items-center justify-start max-w-[300px] gap-5">
-                <FontAwesomeIcon
-                  icon={faMoneyBill1}
-                  className="text-quad text-9xl"
-                />
+                <Image src={money} alt="Ušetříte s námi peníze" />
 
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
                   <h4 className="text-textDark text-3xl">
@@ -127,14 +124,11 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex flex-col items-center justify-start max-w-[300px] gap-5">
-                <FontAwesomeIcon
-                  icon={faUmbrellaBeach}
-                  className="text-quad text-9xl"
-                />
+                <Image src={stress} alt="Zbavíme Vás stresu" />
 
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
                   <h4 className="text-textDark text-3xl">
-                    Přestanete se stresovat
+                    Odstraníme nepotřebný stresu
                   </h4>
                   <p className="text-textDark font-semibold">
                     Dnes nosíme v hlavě spoustu věcí. Nastavením pravidelných
@@ -144,14 +138,14 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex flex-col items-center justify-start max-w-[300px] gap-5">
-                <FontAwesomeIcon
-                  icon={faBoxesStacked}
-                  className="text-quad text-9xl"
+                <Image
+                  src={suplement}
+                  alt="Už nikdy nebudete řešit prázdné balení"
                 />
 
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
                   <h4 className="text-textDark text-3xl">
-                    Už Vám nebude nic chybět
+                    Zatočíme s prázdnými baleními
                   </h4>
                   <p className="text-textDark font-semibold">
                     Chybí suplementy, pes nemá co jíst a káva nám došla. Něco je
