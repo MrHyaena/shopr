@@ -10,7 +10,7 @@ export function BlackDivider({ children }) {
           backgroundSize: "cover",
           backgroundPosition: "0px",
         }}
-        className=" flex flex-col items-center justify-center py-15  lg:mb-15"
+        className=" flex flex-col items-center justify-center py-15"
       >
         <div className="max-w-wrapper w-full">{children}</div>
       </div>

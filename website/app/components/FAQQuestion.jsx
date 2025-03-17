@@ -34,7 +34,7 @@ export default function FAQQuestion() {
             <QuestionToggle
               question={"Kdo řeší případné problémy s objednávkou?"}
               answer={
-                "naší prací je zprostředkování objednávky, tedy i její správné nastavení. Veškeré ostatní problémy plynoucí z dopravy, vadných kusů a podobně řešíte se samotným e-shopem."
+                "Naší prací je zprostředkování objednávky, tedy i její správné nastavení. Veškeré ostatní problémy plynoucí z dopravy, vadných kusů a podobně řešíte se samotným e-shopem."
               }
             />
           </div>
@@ -70,12 +70,6 @@ export default function FAQQuestion() {
               }
             />{" "}
             <QuestionToggle
-              question={"Lze platební metodu změnit?"}
-              answer={
-                "Samozřejmě je to možné, avšak jen do určité míry. Můžete změnit kartu, kterou využíváte, stejně tak jako typ platebního nástroje, pokud je dostupná náhrada."
-              }
-            />{" "}
-            <QuestionToggle
               question={"Můžu platby kdykoliv zrušit?"}
               answer={
                 "Samozřejmě! Předplatné lze kdykoliv deaktivovat, čímž se přeruší všechny následující pravidelné platby. Předplatné pak můžete kdykoliv znovu aktivovat a navázat na předchozí platby."
@@ -92,7 +86,7 @@ export default function FAQQuestion() {
                 "Přišlo mi něco jiného, než mám v předplatném. Mám nárok na vrácení peněz?"
               }
               answer={
-                "Pokud jsme v objednávce něco pokazili, máte nárok na vrácení celé částky za danou objednávku."
+                "Pokud jsme v objednávce něco pokazili, máte nárok na vrácení celé částky za danou objednávku. Jestliže jde o chybu e-shopu nebo dopravce, musíte to řešit s daným e-shopem."
               }
             />
             <QuestionToggle
@@ -112,14 +106,12 @@ export default function FAQQuestion() {
             <QuestionToggle
               question={"Můžu udělat předplatné na jakémkoliv eshopu?"}
               answer={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                "Předplatné můžete vytvořit na jakémkoliv e-shopu, na kterém je dostupná platba skrze dobírku nebo kartu při převzetí. Jiné omezení není."
               }
             />{" "}
             <QuestionToggle
               question={"Je omezený počet položek v předplatném?"}
-              answer={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
-              }
+              answer={"Položek v předplatném můžete mít kolik jenom chcete."}
             />{" "}
             <QuestionToggle
               question={"Je omezený počet předplatných?"}
@@ -130,25 +122,25 @@ export default function FAQQuestion() {
             <QuestionToggle
               question={"Lze předplatné kdykoliv smazat??"}
               answer={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                "Předplatné můžete kdykoliv smazat a znovu vytvořit. Před smazáním je akorát potřeba předplatné deaktivovat, což zabere zhruba 20 sekund."
               }
             />
             <QuestionToggle
               question={"Lze předplatné kdykoliv deaktivovat?"}
               answer={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                "Ano. Předplatné můžete deaktivovat přímo z aplikace. Zabere to asi 20 sekund. Po deaktivace se okamžitě vypínají všechny další platby. Jestliže byste chtěli předplatné znovu aktivovat, bude potřeba znovu vyplnit platební údaje."
               }
             />
             <QuestionToggle
               question={"Můžu změnit jak často se objednávka udělá?"}
               answer={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                "Samozřejmě. Interval lze kdykoliv změnit. Po jeho aktualizaci se upraví i interval strhávaných plateb."
               }
             />
             <QuestionToggle
               question={"Můžu objednávku vytvořit pro někoho jiného?"}
               answer={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                "Zde fungují stejná pravidla, jako když objednáváte z e-shopu přímo sami za sebe."
               }
             />
           </div>
@@ -188,7 +180,7 @@ export default function FAQQuestion() {
             <QuestionToggle
               question={"Můžu své osobní údaje změnit?"}
               answer={
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur dolores cumque maxime hic cum repellendus omnis esse nam laudantium minima soluta ex tempora debitis, harum deleniti dolorum incidunt delectus quos?"
+                "Kromě emailu, který slouží jako indentifikátor vašeho účtu, můžete změnit jakýkoliv údaj chcete."
               }
             />{" "}
             <QuestionToggle

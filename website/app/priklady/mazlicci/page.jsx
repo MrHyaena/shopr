@@ -83,7 +83,7 @@ export default function Supplements() {
         text={`Od našeho útlého věku jsme se pohybovali v domácnosti, kde bylo vždy přítomné nějaké zvíře. Nejprve pes,
              poté přibyla kočka, pak další raťafák a ještě jedna čičina. Společně jsme s nimi vyrůstali, obědvali, ale také jsme řešili nepříjemné a velice smutné situace.
               V průběhu dospívání jsme také přebrali nějaké povinnosti a postupně jsme zjistili, že péče o čtyřnohého kamaráda není jen o drbání a mazlení,
-               ale je potřeba také pravidelně krmit, vyčesávat, chodit na procházky, věnovat jim pozornost a delat spoustu dalších úkolů. Když je pak člověk dospělý,
+               ale je potřeba také pravidelně krmit, vyčesávat, chodit na procházky, věnovat jim pozornost a dělat spoustu dalších úkolů. Když je pak člověk dospělý,
                 přibudou k tomu starosti běžného života. Je to prostě spousta stresu a my chceme ukázat, že se dá i tato činnost a mozková kapacita delegovat na někoho jiného.
             `}
       />

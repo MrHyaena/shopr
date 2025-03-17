@@ -72,6 +72,8 @@
   --color-subIcon: var(--color-slate-500);
   --color-subItem: var(--color-slate-800);
 
+  --spacing-pad: 120px;
+
   --animate-fall-down: fall-down 0.8s ease-in-out forwards;
   --animate-fall-down-faster: fall-down 0.7s ease-in-out forwards;
 

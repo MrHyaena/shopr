@@ -17,7 +17,7 @@ export default function FAQList() {
         <div className="lg:sticky top-40">
           <h3 className="mb-10">Seznam témat</h3>
 
-          <ul className="flex flex-col gap-3 border-l-3 border-quad pl-4">
+          <ul className="flex flex-col gap-3 xl:border-l-3 border-quad pl-4">
             <li>
               <h5
                 className="cursor-pointer transition-all ease-in-out hover:pl-3"

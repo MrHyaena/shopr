@@ -24,7 +24,7 @@ export function HowDoesItWork() {
                   </p>
                   <p className="px-10">
                     Údaje potřebujeme buď k tomu, abychom Vám vytvořili do
-                    systému přístup, nebo k usnadnění vaší budoucí práce s
+                    systému přístup, a k usnadnění vaší budoucí práce s
                     předplatnými. Kromě emailu je samozřejmě možné každý z nich
                     změnit, takže si z toho nemusíte dělat nějak těžkou hlavu.
                   </p>
@@ -85,10 +85,10 @@ export function HowDoesItWork() {
                 </h4>
                 <div className="flex flex-col gap-5 my-10">
                   <p className="px-10">
-                    Posledním a nejdůležitějším krokem je aktivace předplatného.
-                    Abychom Vám poskytli co nejbezpečnější službu a ochránili
-                    vaše platební údaje, navázali jsme spolupráci s firmou
-                    Stripe, která řeší platby pro miliony lidí po celém světě.
+                    Posledním krokem je aktivace předplatného. Abychom Vám
+                    poskytli co nejbezpečnější službu a ochránili vaše platební
+                    údaje, navázali jsme spolupráci s firmou Stripe, která řeší
+                    platby pro miliony lidí po celém světě.
                   </p>
                   <p className="px-10">
                     Pro Vás je to už jen standardní vyplnění údajů z karty. Když

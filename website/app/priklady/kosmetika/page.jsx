@@ -47,11 +47,7 @@ export default function Supplements() {
           </div>
         </>
       </BlackDivider>
-      <HeadingCenter
-        subheading={"Co pro Vás můžeme udělat?"}
-        heading={"Pomůžeme Vám dát vašim miláčkům to nejlepší"}
-        textHeading={`Že nevíte, s čím vším bychom Vám mohli pomoci? Pojďme se tedy společně podívat na několik příkladů, ve kterých určitě uvidíte nějaký potenciál.`}
-      />
+
       <ImageTextCheckmarks
         subHeading={"Proč si to nezjednodušit?"}
         heading={"Nechte pravidelný nákup kosmetiky na nás!"}

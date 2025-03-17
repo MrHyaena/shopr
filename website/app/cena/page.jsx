@@ -15,7 +15,7 @@ export const metadata = {
 export default function Price() {
   return (
     <>
-      <div className=" bg-linear-150 from-0% to-40% from-violet-100 to-white">
+      <div className=" ">
         <div className="flex justify-center items-start py-30 ">
           <div className="max-w-wrapper flex flex-col items-center justify-start">
             <div className=" p-4">
@@ -82,7 +82,7 @@ export default function Price() {
           <QuestionShow
             question={"Je omezený počet předplatných?"}
             answer={
-              "Předplatných si můžete vytvořit kolik jenom potřebujete. To stejné pak platí i na ty aktivní, nicméně za ty si již z Vložené karty strháváme částku ve stanoveném intervalu."
+              "Předplatných si můžete vytvořit kolik jenom potřebujete. To stejné pak platí i na ty aktivní, nicméně za ty si již z vložené karty strháváme částku ve stanoveném intervalu."
             }
           />
           <QuestionShow
@@ -106,10 +106,10 @@ export default function Price() {
           <QuestionShow
             question={"Jak se počítá celková částka?"}
             answer={
-              "Částka je vždy stejná, nicméně se liší prodlevy mezi jednotlivými platbami. Ta je nastavená podle typu předplatného. Jestliže budete mít aktivované předplatné jednou za dva týdny, pak se platba z karty strhne jednou za dva týdny. Částky se nesčítají, jdou vždy samostatně. To Vám zajišťuje možnost kdykoliv předplatné zrušit a neřešit pak vrácení částky, která se nevyužila."
+              "Částka je vždy stejná, nicméně se liší prodleva mezi jednotlivými platbami. Ta je nastavená podle typu předplatného. Jestliže budete mít aktivované předplatné jednou za dva týdny, pak se platba z karty strhne jednou za dva týdny. Částky se nesčítají, jdou vždy samostatně. To Vám zajišťuje možnost kdykoliv předplatné zrušit a neřešit pak vrácení částky, která se nevyužila."
             }
           />
-          <div className="flex flex-col justify-center items-center gap-10 text-center col-span-2">
+          <div className="flex flex-col justify-center items-center gap-10 text-center col-span-2 p-3">
             <h3>Pokud máte další otázky, můžete se podívat do našeho FAQ</h3>
             <Link
               href="/otazky"

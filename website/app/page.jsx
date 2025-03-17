@@ -37,8 +37,8 @@ export default function Home() {
   function HeroSection() {
     return (
       <>
-        <div className="lg:min-h-[900px] pt-10 lg:grid grid-cols-5 min-h-screen items-stretch justify-center overflow-x-hidden lg:p-0 p-5">
-          <div className="flex flex-col items-start justify-center h-full gap-5 lg:p-24 pt-15 col-span-3 max-w-[900px] justify-self-center animate-scale-up-noBounce-delay">
+        <div className="min-h-[800px] flex flex-col lg:grid grid-cols-5  items-stretch justify-center overflow-x-hidden lg:p-0 p-5">
+          <div className="flex flex-col items-start justify-center h-full gap-5 lg:p-15  col-span-3 max-w-[900px] justify-self-center animate-scale-up-noBounce-delay">
             <h1 className="z-2">
               Předplatné
               <span className="text-quad">
@@ -77,8 +77,8 @@ export default function Home() {
   function Benefits() {
     return (
       <>
-        <div className="flex items-center justify-center lg:py-40 py-20 lg:pb-50 p-5">
-          <div className="max-w-wrapper flex flex-col items-center justify-start gap-10">
+        <div className="flex items-center justify-center lg:py-pad py-20 p-5">
+          <div className="max-w-wrapper flex flex-col items-center justify-center gap-10">
             <div className="mx-auto text-center flex flex-col items-center p-5">
               <p className="headingSmall">Proč si založit předplatné?</p>
               <h2 className="mt-2 my-5">
@@ -88,9 +88,9 @@ export default function Home() {
                 Známe to všichni. Víme, že potřebujeme něco nakoupit, ale
                 odložíme to na večer. Následně na to zapomeneme, jen aby se
                 tento cyklus opakoval dalších několik dní. Například u některých
-                cvičebních suplementů to může znamenat ztrátů účinku, a to jen
-                kvůli tomu, že jsme prostě neměli kapacitu. Co kdybychom to
-                vyřešili za Vás?
+                cvičebních suplementů to může znamenat ztrátu účinku, a to jen
+                kvůli tomu, že jsme prostě neměli mentální kapacitu. Co
+                kdybychom to vyřešili za Vás?
               </p>
             </div>
             <div className="lg:grid flex flex-col lg:grid-cols-4 md:grid-cols-2 gap-10">
@@ -102,7 +102,7 @@ export default function Home() {
 
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
                   <h4 className="text-textDark text-3xl">
-                    Ušetříe vám spoustu času
+                    Ušetříme vám spoustu času
                   </h4>
                   <p className="text-textDark font-semibold">
                     Nemusíte trávit hodiny výběrem zboží po e-shopech, ani v
@@ -118,11 +118,11 @@ export default function Home() {
 
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
                   <h4 className="text-textDark text-3xl">
-                    Zachráníme peníze, držíme budget
+                    Zachráníme peníze, podržíme budget
                   </h4>
                   <p className="text-textDark font-semibold">
                     Když nakupujeme, často do našich košíků přihazujeme i
-                    zbytečnosti. S námi budete mít budget pod kontrolou.
+                    zbytečnosti. S naší službou budete mít budget pod kontrolou.
                   </p>
                 </div>
               </div>
@@ -312,7 +312,8 @@ export default function Home() {
           Odstresujte hlavu a nechte starosti s pravidelnými nákupy na nás!
         </p>
       </BlackDivider>
-      <Benefits /> <ReviewGrid />
+      <Benefits />
+      <ReviewGrid />
       <WhyToTry />
       <PriceDescription
         subHeading={"Jedna cena, žádné komplikace"}
@@ -323,7 +324,7 @@ export default function Home() {
       <CTA
         subHeading={"Využijte svůj čas smysluplně"}
         heading={"Nechte pravidelné objednávky na nás!"}
-        text={`Věříme, že máte v živote lepší věci na práci než se neustále zabývat tím, že jste na něco zapomněli nebo že Vám někde něco chybí. Od toho jsme tu my. Devadesát korun je rozdíl mezi stresem a klidem.`}
+        text={`Věříme, že máte v živote lepší věci na práci než se neustále zabývat tím, že jste na něco zapomněli nebo že Vám někde něco chybí. Od toho jsme tu my. Sto korun je rozdíl mezi stresem a klidem.`}
       />
     </>
   );

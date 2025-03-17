@@ -25,7 +25,7 @@ export function Navbar() {
       <>
         <nav
           id="nav-bar"
-          className="fixed z-20 lg:flex justify-center w-full hidden animate-fall-down-noBounce"
+          className="fixed z-20 lg:flex justify-center w-full hidden animate-fall-down-noBounce h-[80px] mt-[-80px]"
         >
           <div
             className="bg-white border border-slate-50  py-2 px-10  shadow-lg grid grid-cols-5 items-center w-[100%] z-20"
@@ -156,7 +156,7 @@ export function Navbar() {
 
     return (
       <>
-        <nav className="fixed z-20 lg:flex justify-center w-full lg:animate-fall-down-noBounce lg:hidden">
+        <nav className="mt-[-56px] fixed z-20 justify-center w-full lg:animate-fall-down-noBounce lg:hidden">
           <div className="bg-zinc-950 py-2 px-5  shadow-lg  z-20">
             <div className="flex justify-between items-center w-[100%]">
               <Link href="https://www.shopr.cz">
