@@ -37,10 +37,10 @@ export default function About() {
               <p className="font-medium text-textDark text-lg col-span-2">
                 Provozovatelem těchto stránek je fyzická osoba Martin Doležal,
                 IČO 10796509, se sídlem Víta Nejedlého 666/18, Praha 3, dále jen
-                jako správce. Správce lze kontaktovat na adresu info@shopr.cz,
-                případně poslat dopis na adresu Svatá Maří 131, Svatá Maří
-                38501. Na těchto kontaktech můžete uplatnit Vaše dále popsaná
-                práva.
+                jako správce. Správce lze kontaktovat na emailové adrese
+                info@shopr.cz, případně poslat dopis na adresu Svatá Maří 131,
+                Svatá Maří 38501. Na těchto kontaktech můžete uplatnit Vaše dále
+                popsaná práva.
               </p>
             </div>
             <div className="flex flex-col gap-10">
