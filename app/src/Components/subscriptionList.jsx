@@ -588,7 +588,7 @@ export function SubscriptionList({ setLoader }) {
               <a
                 href={"https://" + subWebsite}
                 target="_blank"
-                className="xl:w-10 flex justify-center xl:block hidden"
+                className="xl:w-10 justify-center xl:block hidden"
               >
                 <img
                   src={"https://" + subWebsite + "/favicon.ico"}

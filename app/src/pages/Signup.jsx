@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSignup } from "../hooks/useSignup";
 import { Link, useSearchParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,7 +19,7 @@ export function SignupPage() {
     return (
       <>
         <div className=" bg-white w-full py-2">
-          <div className="flex justify-between items-center gap-5">
+          <div className="flex justify-between items-center gap-5 mb-4">
             <h5 className="text-lg font-semibold text-textDark text-start">
               {question}
             </h5>
@@ -32,7 +32,7 @@ export function SignupPage() {
             />
           </div>
           {toggle && (
-            <p className="font-medium text-textDark text-lg text-start  col-span-2">
+            <p className="font-semibold text-textDarker text-lg text-start  col-span-2">
               {answer}
             </p>
           )}
@@ -42,9 +42,9 @@ export function SignupPage() {
   }
 
   function SignupForm() {
-    let [searchParams] = useSearchParams();
+    let [searchParams, setSearchParams] = useSearchParams("");
 
-    const [email, setEmail] = useState(searchParams.get("email"));
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordCheck, setPasswordCheck] = useState("");
 
@@ -56,7 +56,16 @@ export function SignupPage() {
     const [city, setCity] = useState("");
     const [cityNumber, setCityNumber] = useState("");
 
+    const [terms, setTerms] = useState(false);
+
     const { signup, error, isLoading, message } = useSignup();
+
+    useEffect(() => {
+      let emailParam = searchParams.get("email");
+      if (emailParam) {
+        setEmail(emailParam);
+      }
+    }, []);
 
     async function handleSubmit(e) {
       e.preventDefault();
@@ -71,6 +80,7 @@ export function SignupPage() {
         addressNumber,
         city,
         cityNumber,
+        terms,
       };
 
       await signup(data);
@@ -80,7 +90,7 @@ export function SignupPage() {
         {!isLoading ? (
           <>
             {!message ? (
-              <>
+              <div className="bg-white flex xl:grid grid-cols-2 flex-col-reverse gap-8 p-5 border rounded-xl border-slate-200 shadow-xl animate-fall-down-faster xl:max-w-[60%]">
                 <form
                   className="flex flex-col gap-5 p-2"
                   onSubmit={handleSubmit}
@@ -226,6 +236,41 @@ export function SignupPage() {
                       </label>
                     </div>
                   </fieldset>
+                  <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
+                    <div className="flex gap-3 xl:flex-row flex-col">
+                      <label className="flex flex-row-reverse gap-3 text--textDark text-lg font-semibold col-span-6">
+                        <p>
+                          Seznamil/a jsem se a souhlasím s{" "}
+                          <a
+                            href="https://shopr.cz/obchodni-podminky"
+                            target="_blank"
+                            className="text-quad"
+                          >
+                            Obchodními podmínkami
+                          </a>{" "}
+                          a{" "}
+                          <a
+                            href="https://shopr.cz/gdpr"
+                            target="_blank"
+                            className="text-quad"
+                          >
+                            Zásadami pro ochranu osobních údajů (GDPR)
+                          </a>{" "}
+                          služby Shopr
+                        </p>
+                        <input
+                          checked={terms}
+                          value="trie"
+                          name="city"
+                          type="checkbox"
+                          className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                          onChange={(e) => {
+                            setTerms(!terms);
+                          }}
+                        ></input>
+                      </label>
+                    </div>
+                  </fieldset>
                   <button
                     disabled={isLoading}
                     className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
@@ -246,16 +291,21 @@ export function SignupPage() {
                   )}
                 </form>
                 <SignupRightside />
-              </>
+              </div>
             ) : (
               <AfterSignup message={message} />
             )}{" "}
           </>
         ) : (
-          <FontAwesomeIcon
-            icon={faSpinner}
-            className="animate-rotate text-4xl"
-          />
+          <div className="flex flex-col items-center justify-center gap-5">
+            <p className="font-bold animate-scale-up">
+              Vydržte, připravujeme Váš účet
+            </p>
+            <FontAwesomeIcon
+              icon={faSpinner}
+              className="animate-rotate text-4xl"
+            />
+          </div>
         )}
       </>
     );
@@ -264,12 +314,14 @@ export function SignupPage() {
   function SignupRightside() {
     return (
       <>
-        <div className="xl:w-[500px] max-w-full flex flex-col justify-start items-center gap-4 text-center bg-white rounded-lg p-3 shadow-md border border-slate-100 animate-fall-down">
-          <img
-            src={logoBlack}
-            alt="logo"
-            className="max-h-16 animate-scale-up justify-self-center"
-          />
+        <div className="max-w-full flex flex-col justify-start items-center gap-4 text-center bg-white rounded-lg p-3 shadow-md border border-slate-100 animate-fall-down">
+          <a href="https://shopr.cz">
+            <img
+              src={logoBlack}
+              alt="logo"
+              className="max-h-16 animate-scale-up justify-self-center"
+            />
+          </a>
           <div className="flex flex-col gap-3 p-4">
             <p className="text-lg font-semibold text-textDark">
               Děkujeme, že to s námi chcete vyzkoušet! Jakmile vyplníte formulář
@@ -305,17 +357,19 @@ export function SignupPage() {
   function AfterSignup({ message }) {
     return (
       <>
-        <div className="flex flex-col gap-5 items-center">
-          <img src={logoBlack} alt="logo" className="w-20" />
-          <h2 className="font-bold text-center p-2 bg-messageBg rounded-lg border-2 border-messageBorder max-w-[250px]">
-            {message}
-          </h2>
-          <Link
-            to="/login"
-            className="bg-quad text-center text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
-          >
-            Zpět na přihlášení
-          </Link>
+        <div className="bg-white flex  flex-col-reverse gap-8 p-5 border rounded-xl border-slate-200 shadow-xl animate-fall-down-faster xl:max-w-[60%]">
+          <div className="flex flex-col gap-5 items-center">
+            <img src={logoBlack} alt="logo" className="w-20" />
+            <h2 className="font-bold text-center p-2 bg-messageBg rounded-lg border-2 border-messageBorder max-w-[250px]">
+              {message}
+            </h2>
+            <Link
+              to="/login"
+              className="bg-quad text-center text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+            >
+              Zpět na přihlášení
+            </Link>
+          </div>
         </div>
       </>
     );
@@ -324,11 +378,7 @@ export function SignupPage() {
   return (
     <>
       <div className="bg-slate-50 flex flex-col justify-center items-center min-h-screen p-5 xl:p-0">
-        <div className="bg-white flex xl:flex-row flex-col-reverse gap-8 p-5 border rounded-xl border-slate-200 shadow-xl animate-fall-down-faster">
-          <>
-            <SignupForm />
-          </>
-        </div>
+        <SignupForm />
       </div>
     </>
   );

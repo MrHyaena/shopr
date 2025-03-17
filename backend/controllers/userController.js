@@ -37,10 +37,22 @@ const signupUser = async (req, res) => {
     addressNumber,
     city,
     cityNumber,
+    terms,
   } = data;
   try {
     // ------------ VALIDATION OF DATA FROM FORM --------------
-    if (!email || !password || !firstName || !secondName || !phone) {
+    if (
+      !email ||
+      !password ||
+      !firstName ||
+      !secondName ||
+      !phone ||
+      !address ||
+      !addressNumber ||
+      !city ||
+      !cityNumber ||
+      !terms
+    ) {
       throw Error("Musíte vyplnit všechna pole");
     }
 
@@ -107,6 +119,7 @@ const signupUser = async (req, res) => {
       addressNumber,
       city,
       cityNumber,
+      terms,
     });
 
     // ------------------- EMAIL VERIFICATION - creating database hash record and sending email with URL request for checking ----------------------------

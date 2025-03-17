@@ -47,6 +47,9 @@ const userSchema = new Schema(
     cityNumber: {
       type: String,
     },
+    terms: {
+      type: Boolean,
+    },
   },
   { timestamps: true }
 );
