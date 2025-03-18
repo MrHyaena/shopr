@@ -9,17 +9,6 @@ export const metadata = {
 };
 
 export default function About() {
-  function Part({ heading, text }) {
-    return (
-      <>
-        <div className="lg:grid grid-cols-2 gap-10">
-          <h3>{heading}</h3>
-          <p className="font-medium text-textDark text-lg col-span-2">{text}</p>
-        </div>
-      </>
-    );
-  }
-
   return (
     <>
       <div className=" flex justify-center items-start py-30 px-5 text-center lg:text-start">
