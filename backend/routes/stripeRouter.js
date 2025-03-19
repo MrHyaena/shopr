@@ -41,49 +41,48 @@ router.get(
       itemsType,
     } = req.params;
 
-    if (!subId) {
-      return res.status(404).json("Plan does not exist");
-    }
-
-    if (!subFrequency) {
-      return res.status(404).json("You need to set up subFrequency");
-    }
-    // ---------------------- STRIPE - creating checkout session ----------------------
-
-    let priceId;
-
-    switch (subFrequency.toLowerCase()) {
-      case "weekly":
-        priceId = process.env.PLAN_WEEKLY;
-        break;
-      case "biweekly":
-        priceId = process.env.PLAN_BIWEEKLY;
-        break;
-      case "monthly":
-        priceId = process.env.PLAN_MONTHLY;
-        break;
-      case "bimonthly":
-        priceId = process.env.PLAN_BIMONTHLY;
-        break;
-      case "quarterly":
-        priceId = process.env.PLAN_QUARTERLY;
-        break;
-    }
-
-    let description =
-      "Typ předplatného: Standard // Nazev předplatného: " +
-      req.body.subName +
-      " // E-shop: " +
-      req.body.subWebsite;
-    if (itemsType == "mystery") {
-      description =
-        "Typ předplatného: Mystery // Nazev předplatného: " +
-        subName +
-        " // E-shop: " +
-        subWebsite;
-    }
-
     try {
+      if (!subId) {
+        throw Error("Plan does not exist");
+      }
+
+      if (!subFrequency) {
+        throw Error("You need to set up subFrequency");
+      }
+      // ---------------------- STRIPE - creating checkout session ----------------------
+
+      let priceId;
+
+      switch (subFrequency.toLowerCase()) {
+        case "weekly":
+          priceId = process.env.PLAN_WEEKLY;
+          break;
+        case "biweekly":
+          priceId = process.env.PLAN_BIWEEKLY;
+          break;
+        case "monthly":
+          priceId = process.env.PLAN_MONTHLY;
+          break;
+        case "bimonthly":
+          priceId = process.env.PLAN_BIMONTHLY;
+          break;
+        case "quarterly":
+          priceId = process.env.PLAN_QUARTERLY;
+          break;
+      }
+
+      let description =
+        "Typ předplatného: Standard // Nazev předplatného: " +
+        req.body.subName +
+        " // E-shop: " +
+        req.body.subWebsite;
+      if (itemsType == "mystery") {
+        description =
+          "Typ předplatného: Mystery // Nazev předplatného: " +
+          subName +
+          " // E-shop: " +
+          subWebsite;
+      }
       const session = await stripe.checkout.sessions.create({
         mode: "subscription",
         line_items: [
@@ -104,6 +103,8 @@ router.get(
         success_url: `${process.env.PROXY_SERVER}/api/stripe/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${process.env.PROXY_APP}/app`,
       });
+
+      console.log(session);
       res.status(200).json(session.url);
     } catch (error) {
       res.send(400).json(error);
@@ -184,7 +185,18 @@ router.post(
         const subId = stripeObject.subscription_details.metadata.subId;
         console.log(subId);
 
-        const subscription = await Subscription.findById(subId);
+        // --------------------- MONGOOSE - updating subscription payment day -----------------
+        const epoch = stripeObject.lines.data.period.end;
+        const date = new Date(epoch * 1000);
+        const paymentDate =
+          date.getDate() + "." + date.getMonth() + "." + date.getFullYear();
+
+        const subscription = await Subscription.findByIdAndUpdate(
+          {
+            _id: subId,
+          },
+          { nextPaymentDate: paymentDate }
+        );
 
         // ---------------------- PIPEDRIVE - creating task when invoice is payed----------------------
         let note;

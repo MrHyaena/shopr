@@ -61,8 +61,8 @@ const createSubscription = async (req, res) => {
     cityNumber,
     subName,
     subWebsite,
+    nextPaymentDate,
     subFrequency,
-    subDay,
     subDeliveryMethod,
     subDeliveryAddress,
     itemsType,
@@ -106,9 +106,7 @@ const createSubscription = async (req, res) => {
   if (!subFrequency) {
     emptyFields.push("Frekvence doručování");
   }
-  if (!subDay) {
-    emptyFields.push("Preferovaný den objednání");
-  }
+
   if (!subDeliveryMethod) {
     emptyFields.push("Způsob doručení");
   }
@@ -163,8 +161,7 @@ const createSubscription = async (req, res) => {
       "6fe93496fbed53b575f74a3f2c417c3a2835b8ec": subWebsite.toString(),
       //Subscription frequency
       "324eb38d42174b3aa9a863a9b17f113e8a0e7e49": subFrequency.toString(),
-      //Prefered day
-      "5eae91790af43786f5240c32e6e11d83ece79a89": subDay.toString(),
+
       //Delivery method
       "312b6dcc95b0ba9ed831633b403a4403a40b31dd": subDeliveryMethod.toString(),
       //Delivery address
@@ -233,8 +230,8 @@ const createSubscription = async (req, res) => {
       cityNumber,
       subName,
       subWebsite,
+      nextPaymentDate,
       subFrequency,
-      subDay,
       subDeliveryMethod,
       subDeliveryAddress,
       itemsType,
@@ -301,7 +298,6 @@ const updateSubscription = async (req, res) => {
     subName,
     subWebsite,
     subFrequency,
-    subDay,
     subDeliveryMethod,
     subDeliveryAddress,
     itemsType,
@@ -367,8 +363,7 @@ const updateSubscription = async (req, res) => {
       "6fe93496fbed53b575f74a3f2c417c3a2835b8ec": subWebsite.toString(),
       //Subscription frequency
       "324eb38d42174b3aa9a863a9b17f113e8a0e7e49": subFrequency.toString(),
-      //Prefered day
-      "5eae91790af43786f5240c32e6e11d83ece79a89": subDay.toString(),
+
       //Delivery method
       "312b6dcc95b0ba9ed831633b403a4403a40b31dd": subDeliveryMethod.toString(),
       //Delivery address
@@ -526,7 +521,7 @@ const deactivateSubscription = async (req, res) => {
     // ---------------------- MONGOOSE - updating active to false ----------------------
     const subscription = await Subscription.findOneAndUpdate(
       { _id: subId },
-      { active: false }
+      { active: false, nextPaymentDate: "empty" }
     );
 
     // ---------------------- PIPEDRIVE - updating stage ----------------------

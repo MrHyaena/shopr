@@ -46,7 +46,7 @@ export function SubscriptionList({ setLoader }) {
       subName,
       subWebsite,
       subFrequency,
-      subDay,
+      nextPaymentDate,
       subDeliveryMethod,
       subDeliveryAddress,
       itemsType,
@@ -148,17 +148,13 @@ export function SubscriptionList({ setLoader }) {
                 Nastavení předplatného
               </h3>
               <div className="flex flex-col font-semibold text-textDark">
-                <div className="grid-cols-2 gap-3 py-2 px-4 text-md font-semibold text-textLight bg-zinc-700 hidden">
-                  <p className="col-span-1">Údaj</p>
-                  <p className="col-span-1">Hodnota</p>
-                </div>
-                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 bg-slate-100">
+                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 even:bg-slate-100">
                   <h4 className="text-heading font-bold text-textDark">
                     Název předplatného:
                   </h4>
                   <p>{subName}</p>
                 </div>
-                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 ">
+                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 even:bg-slate-100">
                   <h4 className="text-heading font-bold text-textDark">
                     E-shop:
                   </h4>
@@ -170,19 +166,8 @@ export function SubscriptionList({ setLoader }) {
                     {subWebsite}
                   </a>
                 </div>
-                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 bg-slate-100">
-                  <h4 className="text-heading font-bold text-textDark">
-                    Den objednání:
-                  </h4>
-                  <p>
-                    {subDay == "monday" && "Pondělí"}
-                    {subDay == "tuesday" && "Úterý"}
-                    {subDay == "wednesday" && "Středa"}
-                    {subDay == "thursday" && "Čtvrtek"}
-                    {subDay == "friday" && "Pátek"}
-                  </p>
-                </div>
-                <div className="grid grid-cols-2 gap-3 py-2 px-4 ">
+
+                <div className="grid grid-cols-2 gap-3 py-2 px-4 even:bg-slate-100">
                   <h4 className="text-heading font-bold text-textDark">
                     Frekvence:
                   </h4>
@@ -194,7 +179,7 @@ export function SubscriptionList({ setLoader }) {
                     {subFrequency == "quarterly" && "Jednou za tři měsíce"}
                   </p>
                 </div>
-                <div className="grid grid-cols-2 gap-3 py-2 px-4 bg-slate-100">
+                <div className="grid grid-cols-2 gap-3 py-2 px-4 even:bg-slate-100">
                   <h4 className="text-heading font-bold text-textDark">
                     Způsob doručení:
                   </h4>
@@ -203,26 +188,22 @@ export function SubscriptionList({ setLoader }) {
                     {subDeliveryMethod == "dropbox" && "Box/výdejní místé"}
                   </p>
                 </div>
-                <div className="grid grid-cols-2 gap-3 py-2 px-4">
+                <div className="grid grid-cols-2 gap-3 py-2 px-4 even:bg-slate-100">
                   <h4 className="text-heading font-bold text-textDark">
                     Zákaznické ID:
                   </h4>
                   <p className="break-all">{stripeCustomerId}</p>
                 </div>
-                <div className="grid grid-cols-2 gap-3 py-2 px-4 bg-slate-100">
+                <div className="grid grid-cols-2 gap-3 py-2 px-4 even:bg-slate-100">
                   <h4 className="text-heading font-bold text-textDark">
                     Platební ID:
                   </h4>
                   <p className="break-all">
-                    {stripeSubId !== "empty" ? (
-                      stripeSubId
-                    ) : (
-                      <p>Předplatné je neaktivní</p>
-                    )}
+                    {active ? stripeSubId : <p>Předplatné je neaktivní</p>}
                   </p>
                 </div>
                 {subDeliveryMethod !== "courier" && (
-                  <div className="grid grid-cols-2 border-slate-300 py-2 px-4 ">
+                  <div className="grid grid-cols-2 border-slate-300 py-2 px-4 even:bg-slate-100">
                     <h4 className="text-heading font-bold text-textDark">
                       Výdejní místo:
                     </h4>
@@ -288,47 +269,47 @@ export function SubscriptionList({ setLoader }) {
               </h3>
 
               <div className="text-textDark font-semibold ">
-                <div className="grid grid-cols-2  gap-3 border-slate-300 py-2 px-4 bg-slate-100">
+                <div className="grid grid-cols-2  gap-3 border-slate-300 py-2 px-4 even:bg-slate-100">
                   <h4 className="text-heading font-bold text-textDark">
                     Jméno:
                   </h4>
                   <p>{firstName}</p>
                 </div>
-                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 ">
+                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 even:bg-slate-100">
                   <h4 className="text-heading font-bold text-textDark">
                     Příjmení:
                   </h4>
                   <p>{secondName}</p>
                 </div>
-                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 bg-slate-100">
+                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 even:bg-slate-100">
                   <h4 className="text-heading font-bold text-textDark">
                     Telefon:
                   </h4>
                   <p>{phone}</p>
                 </div>
-                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 ">
+                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 even:bg-slate-100">
                   <h4 className="text-heading font-bold text-textDark">
                     Email:
                   </h4>
                   <p className="break-all">{email}</p>
                 </div>
-                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 bg-slate-100">
+                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 even:bg-slate-100">
                   <h4 className="text-heading font-bold text-textDark">
                     Adresa:
                   </h4>
                   <p>{address}</p>
                 </div>
-                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 ">
+                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 even:bg-slate-100">
                   <h4 className="text-heading font-bold text-textDark">ČP:</h4>
                   <p>{addressNumber}</p>
                 </div>
-                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 bg-slate-100">
+                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 even:bg-slate-100">
                   <h4 className="text-heading font-bold  text-textDark">
                     Město:
                   </h4>
                   <p>{city}</p>
                 </div>
-                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 ">
+                <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 even:bg-slate-100">
                   <h4 className="text-heading font-bold text-textDark">PSČ:</h4>
                   <p>{cityNumber}</p>
                 </div>
@@ -400,18 +381,7 @@ export function SubscriptionList({ setLoader }) {
                   {subWebsite}
                 </a>
               </div>
-              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 bg-slate-100">
-                <h4 className="text-heading font-bold text-textDark">
-                  Den objednání:
-                </h4>
-                <p>
-                  {subDay == "monday" && "Pondělí"}
-                  {subDay == "tuesday" && "Úterý"}
-                  {subDay == "wednesday" && "Středa"}
-                  {subDay == "thursday" && "Čtvrtek"}
-                  {subDay == "friday" && "Pátek"}
-                </p>
-              </div>
+
               <div className="grid grid-cols-2 gap-3 py-2 px-4 ">
                 <h4 className="text-heading font-bold text-textDark">
                   Frekvence:
@@ -574,12 +544,26 @@ export function SubscriptionList({ setLoader }) {
               </p>
               <p className="text-textDarker text-[12px] mb-2 font-medium">
                 Webová stránka:{" "}
-                <span className="text-textLighter">{subWebsite}</span>
+                <a
+                  target="_blank"
+                  href={"https://" + subWebsite}
+                  className="text-textLighter"
+                >
+                  {subWebsite}
+                </a>
               </p>
               <p className="text-textDarker text-[12px] mb-2 font-medium">
                 Typ:{" "}
                 <span className="text-textLighter">
                   {itemsType == "standard" ? "Standardní" : "Mystery balíček"}
+                </span>
+              </p>
+              <p className="text-textDarker text-[12px] mb-2 font-medium">
+                Datum další platby:{" "}
+                <span className="text-textLighter">
+                  {nextPaymentDate == "empty"
+                    ? "Předplatné není aktivní"
+                    : nextPaymentDate}
                 </span>
               </p>
             </div>

@@ -70,9 +70,8 @@ const subscriptionSchema = new Schema(
       type: String,
       required: true,
     },
-    subDay: {
+    nextPaymentDate: {
       type: String,
-      required: true,
     },
     subDeliveryMethod: {
       type: String,

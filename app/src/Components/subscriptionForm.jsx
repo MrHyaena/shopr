@@ -43,8 +43,8 @@ export function SubscriptionForm({ setLoader }) {
     cityNumber: "",
     subName: "",
     subWebsite: "",
+    nextPaymentDate: "empty",
     subFrequency: "weekly",
-    subDay: "monday",
     subDeliveryMethod: "courier",
     subDeliveryAddress: "",
     itemsType: "empty",
@@ -74,8 +74,8 @@ export function SubscriptionForm({ setLoader }) {
         cityNumber: sub.cityNumber,
         subName: sub.subName,
         subWebsite: sub.subWebsite,
+        nextPaymentDate: sub.nextPaymentDate,
         subFrequency: sub.subFrequency,
-        subDay: sub.subDay,
         subDeliveryMethod: sub.subDeliveryMethod,
         subDeliveryAddress: sub.subDeliveryAddress,
         itemsType: sub.itemsType,
@@ -340,7 +340,6 @@ export function SubscriptionForm({ setLoader }) {
     const [subName, setSubName] = useState(formData.subName);
     const [subWebsite, setSubWebsite] = useState(formData.subWebsite);
     const [subFrequency, setSubFrequency] = useState(formData.subFrequency);
-    const [subDay, setSubDay] = useState(formData.subDay);
     const [subDeliveryMethod, setSubDeliveryMethod] = useState(
       formData.subDeliveryMethod
     );
@@ -386,13 +385,7 @@ export function SubscriptionForm({ setLoader }) {
       }
 
       e.preventDefault();
-      if (
-        !subName ||
-        !subWebsite ||
-        !subFrequency ||
-        !subDay ||
-        !subDeliveryMethod
-      ) {
+      if (!subName || !subWebsite || !subFrequency || !subDeliveryMethod) {
         setError("Nejsou vyplněná všechna pole");
       } else if (subDeliveryMethod == "dropbox" && !subDeliveryAddress) {
         setError("Není vyplněná adresa zásilkovny");
@@ -402,7 +395,6 @@ export function SubscriptionForm({ setLoader }) {
           subName,
           subWebsite: newURL,
           subFrequency,
-          subDay,
           subDeliveryMethod,
           subDeliveryAddress,
         };
@@ -477,22 +469,7 @@ export function SubscriptionForm({ setLoader }) {
                 <option value="quarterly">Jednou za tři měsíce</option>
               </select>
             </label>
-            <label className="flex flex-col text-heading text-lg font-semibold">
-              Preferovaný den objednání
-              <select
-                value={subDay}
-                onChange={(e) => {
-                  setSubDay(e.target.value);
-                }}
-                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
-              >
-                <option value="monday">Pondělí</option>
-                <option value="tuseday">Úterý</option>
-                <option value="wednesday">Středa</option>
-                <option value="thursday">Čtvrtek</option>
-                <option value="friday">Pátek</option>
-              </select>
-            </label>
+
             <label className="flex flex-col text-heading text-lg font-semibold">
               Způsob doručení
               <select
@@ -546,7 +523,6 @@ export function SubscriptionForm({ setLoader }) {
                   subName,
                   subWebsite,
                   subFrequency,
-                  subDay,
                   subDeliveryMethod,
                   subDeliveryAddress,
                 };
@@ -637,12 +613,10 @@ export function SubscriptionForm({ setLoader }) {
 
     //mystery input states
     const [mysteryItem, setMysteryItem] = useState(formData.mysteryItem);
-
     const [mysteryCategories, setMysteryCategories] = useState([
       ...formData.mysteryItem.categories,
     ]);
     const [mysteryCategoriesInput, setMysteryCategoriesInput] = useState("");
-
     const [settingsToggle, setSettingsToggle] = useState(0);
 
     //create or patch subscription hooks
@@ -780,8 +754,8 @@ export function SubscriptionForm({ setLoader }) {
         cityNumber: formData.cityNumber,
         subName: formData.subName,
         subWebsite: formData.subWebsite,
+        nextPaymentDate: formData.nextPaymentDate,
         subFrequency: formData.subFrequency,
-        subDay: formData.subDay,
         subDeliveryMethod: formData.subDeliveryMethod,
         subDeliveryAddress: formData.subDeliveryAddress,
         itemsType: itemsType,
