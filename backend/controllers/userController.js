@@ -394,15 +394,16 @@ const updateUser = async (req, res) => {
     }
 
     // ------------- STRIPE - creating customer ----------------
-    const customer = await stripe.customers.update(user.stripeCustomerId, {
-      name: firstName + " " + secondName,
-      email: email,
-      phone: phone,
-    });
 
-    if (!customer) {
+    try {
+      const customer = await stripe.customers.update(user.stripeCustomerId, {
+        name: firstName + " " + secondName,
+        email: email,
+        phone: phone,
+      });
+    } catch {
       throw Error(
-        "Omlouváme se, účet nelze vytvořit. Chyba je na naší straně. (Stripe)"
+        "Omlouváme se, ale údaje nelze změnit. Chyba je na naší straně. (Stripe)"
       );
     }
 

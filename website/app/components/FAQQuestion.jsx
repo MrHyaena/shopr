@@ -16,7 +16,7 @@ export default function FAQQuestion() {
             <QuestionToggle
               question={"Kdo nese odpovědnost za převzetí objednávky?"}
               answer={
-                "Naše služba je založená jako zrpostředkovatel objednávek na jiných e-shopech vaším jménem. Výsledný vztah je tedy mezi Vámi a e-shopem, respektive firmou provozující daný e-shop. Naše služba nese odpovědnost pouze za špatně vyplněnou objednávku."
+                "Naše služba funguje jako zprostředkovatel objednávek na jiných e-shopech Vaším jménem. Výsledný vztah je tedy mezi Vámi a e-shopem, respektive firmou provozující daný e-shop. Naše služba nese odpovědnost pouze za špatně vyplněnou objednávku."
               }
             />{" "}
             <QuestionToggle
@@ -78,7 +78,7 @@ export default function FAQQuestion() {
             <QuestionToggle
               question={"Můžu zažádat o vrácení peněz?"}
               answer={
-                "Jelikož jsme služba, je to s vrácením plateb složitější. Pokud již platba proběhla a my jsme objednávku vyřídili, poté není možné peníze vrátit. Samozřejmě existují případy, ve kterých se společně dokážeme domluvit. Pokud nějaký takový problém máte, napište nám na adresu info@shopr.cz."
+                "Jelikož jsme služba, je to s vrácením plateb složitější. Pokud již platba proběhla a my jsme objednávku vyřídili do 48 hodin od zaplacení, poté není možné peníze vrátit. Samozřejmě existují případy, ve kterých se společně dokážeme domluvit. Pokud nějaký takový problém máte, napište nám na adresu info@shopr.cz."
               }
             />
             <QuestionToggle
@@ -92,7 +92,7 @@ export default function FAQQuestion() {
             <QuestionToggle
               question={"Jak často se platby strhávají?"}
               answer={
-                "Platby se strhávají podle intervalu nastaveném v předplatném. Nabízíme možnosti od jednoho týdne do tří měsíců."
+                "Platby se strhávají podle intervalu nastaveném v předplatném. Nabízíme možnosti od jednoho týdne do tří měsíců a můžete to kdykoliv změnit."
               }
             />
           </div>

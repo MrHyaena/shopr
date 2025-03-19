@@ -8,8 +8,6 @@ export function useUpdate() {
   const { user, setUser } = useAuthContext();
 
   async function update(data, setLoader, setError, setMessage) {
-    console.log("useUpdate");
-
     setIsLoading(true);
     setError(null);
     setMessage(null);
@@ -27,7 +25,6 @@ export function useUpdate() {
     const json = await response.json();
 
     if (!response.ok) {
-      console.log(json);
       setIsLoading(false);
       setError(json);
     }
@@ -38,8 +35,7 @@ export function useUpdate() {
       localStorage.setItem("user", JSON.stringify(json));
 
       // update the auth context
-      console.log(json);
-      setMessage("Váš účet byl aktualizován.");
+      setMessage(true);
       setIsLoading(false);
       setUser({ ...user, ...data });
     }

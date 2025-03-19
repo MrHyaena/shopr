@@ -175,8 +175,8 @@ export function Contact() {
             Zpět
           </Link>
         </div>
-        <div className="flex xl:flex-row flex-col gap-10 xl:pb-0 pb-20">
-          <div className="flex flex-col xl:items-start items-center gap-5 xl:w-[40%]">
+        <div className=" flex xl:grid grid-cols-2 flex-col gap-10 xl:pb-0 pb-20">
+          <div className="flex flex-col xl:items-start gap-5">
             <h1 className="text-xl font-bold text-heading xl:text-start text-center">
               Kontaktní formulář
             </h1>

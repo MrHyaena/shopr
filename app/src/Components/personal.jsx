@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { deleteUserHandler } from "../functions/deleteUserHandler";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-export function Personal({ setLoader }) {
+export function Personal() {
   const { user, setUser } = useAuthContext();
   const { deleteUser } = deleteUserHandler();
 
@@ -19,7 +21,8 @@ export function Personal({ setLoader }) {
     const [city, setCity] = useState("");
     const [cityNumber, setCityNumber] = useState("");
     const [error, setError] = useState(null);
-    const [message, setMessage] = useState(null);
+    const [message, setMessage] = useState(false);
+    const [loader, setLoader] = useState(false);
 
     useEffect(() => {
       setEmail(user.email);
@@ -52,16 +55,27 @@ export function Personal({ setLoader }) {
     }
     return (
       <>
+        {isLoading && (
+          <div className="w-screen h-screen bg-black/80 flex flex-col gap-4 items-center justify-center absolute top-0 left-0 z-40">
+            <FontAwesomeIcon
+              icon={faSpinner}
+              className="text-6xl text-white animate-rotate"
+            />
+            <p className="text-textLight text-2xl font-semibold">
+              Pracujeme na tom...
+            </p>
+          </div>
+        )}
         <form
-          className="flex flex-col gap-5 xl:p-10 p-2 bg-white border border-slate-200 rounded-md"
+          className="flex flex-col gap-5 xl:p-10 p-2 bg-white border border-slate-200 rounded-md self-stretch"
           onSubmit={handleSubmit}
         >
           <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-5">
             <legend className="text-xl font-semibold text-slate-900">
               Osobní údaje
             </legend>
-            <div className="flex gap-3 xl:flex-row flex-col">
-              <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+            <div className="flex gap-3 xl:grid grid-cols-2 flex-col">
+              <label className="flex flex-col text--textDark text-lg font-semibold">
                 Jméno:
                 <input
                   name="firstName"
@@ -73,7 +87,7 @@ export function Personal({ setLoader }) {
                   value={firstName}
                 ></input>
               </label>
-              <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+              <label className="flex flex-col text--textDark text-lg font-semibold">
                 Příjmení:
                 <input
                   name="secondName"
@@ -86,8 +100,8 @@ export function Personal({ setLoader }) {
                 ></input>
               </label>
             </div>
-            <div className="flex gap-3 xl:flex-row flex-col">
-              <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+            <div className="flex gap-3 xl:grid grid-cols-2 flex-col">
+              <label className="flex flex-col text--textDark text-lg font-semibold">
                 Telefon:
                 <input
                   name="phone"
@@ -106,8 +120,8 @@ export function Personal({ setLoader }) {
             <legend className="text-xl font-semibold text-slate-900">
               Adresa dodání
             </legend>
-            <div className="flex gap-3 xl:flex-row flex-col">
-              <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+            <div className="flex gap-3 xl:grid grid-cols-2 flex-col">
+              <label className="flex flex-col text--textDark text-lg font-semibold">
                 Ulice:
                 <input
                   name="address"
@@ -119,7 +133,7 @@ export function Personal({ setLoader }) {
                   value={address}
                 ></input>
               </label>
-              <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+              <label className="flex flex-col text--textDark text-lg font-semibold">
                 Číslo popisné:
                 <input
                   name="addressNumber"
@@ -132,8 +146,8 @@ export function Personal({ setLoader }) {
                 ></input>
               </label>
             </div>
-            <div className="flex gap-3 xl:flex-row flex-col">
-              <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+            <div className="flex gap-3 xl:grid grid-cols-2 flex-col">
+              <label className="flex flex-col text--textDark text-lg font-semibold">
                 Město:
                 <input
                   name="city"
@@ -145,7 +159,7 @@ export function Personal({ setLoader }) {
                   value={city}
                 ></input>
               </label>
-              <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+              <label className="flex flex-col text--textDark text-lg font-semibold">
                 PSČ:
                 <input
                   name="cityNumber"
@@ -175,8 +189,8 @@ export function Personal({ setLoader }) {
             </h2>
           )}
           {message && (
-            <h2 className="font-bold text-center p-2 bg-messageBg rounded-lg border-2 border-messageBorder max-w-[250px]">
-              {message}
+            <h2 className="font-bold text-center p-2 bg-messageBg rounded-lg border-2 border-messageBorder">
+              Vaše údaje jsou úspěšně změněné.
             </h2>
           )}
         </form>
@@ -304,7 +318,7 @@ export function Personal({ setLoader }) {
             Zpět
           </Link>
         </div>
-        <div className=" flex xl:flex-row flex-col gap-10 xl:pb-0 pb-20">
+        <div className=" flex xl:grid grid-cols-2 flex-col gap-10 xl:pb-0 pb-20">
           <div className="flex flex-col xl:items-start gap-5">
             <h1 className="text-xl font-bold text-heading xl:text-start text-center">
               Údaje můžete rovnou upravovat
