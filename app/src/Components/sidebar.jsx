@@ -145,8 +145,8 @@ export function Sidebar() {
     return (
       <div className="xl:hidden fixed top-0 w-full z-50">
         <div className="bg-primary border-slate-200 shadow-slate-200 text-white sticky top-0">
-          <div className="flex justify-between p-5">
-            <img src={logo} alt="logo" className="h-10" />
+          <div className="flex justify-between p-3">
+            <img src={logo} alt="logo" className="h-8" />
             <button
               onClick={() => {
                 setToggleMenu(!toggleMenu);
@@ -162,7 +162,7 @@ export function Sidebar() {
                   setToggleMenu(false);
                 }}
                 to="/app"
-                className="text-xl font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
+                className="text-lg font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
               >
                 Moje předplatné
               </Link>
@@ -172,7 +172,7 @@ export function Sidebar() {
                   setToggleMenu(false);
                 }}
                 to="/app/osobni-udaje"
-                className="text-xl font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
+                className="text-lg font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
               >
                 Osobní údaje
               </Link>
@@ -181,19 +181,19 @@ export function Sidebar() {
                   setToggleMenu(false);
                 }}
                 to="/app/kontakt"
-                className="text-xl font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
+                className="text-lg font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
               >
                 Kontakt
               </Link>
               <Link
                 target="_blank"
                 to="https://shopr.cz/otazky"
-                className="text-xl font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
+                className="text-lg font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
               >
                 FAQ
               </Link>
               <button
-                className="text-xl font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 mt-20 w-full text-center"
+                className="text-lg font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
                 onClick={handleLogout}
               >
                 Odhlásit

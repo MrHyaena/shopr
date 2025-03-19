@@ -832,7 +832,7 @@ export function SubscriptionList({ setLoader }) {
               <div className="grid grid-cols-2 w-full gap-5">
                 <button
                   disabled={!checkActivate}
-                  className="p-3 rounded-md bg-deleteButton hover:scale-105  hover:bg-red-500 transition-all ease-in-out cursor-pointer font-semibold text-textButton disabled:hover:scale-100 disabled:border disabled:bg-white disabled:border-slate-200 disabled:cursor-default disabled:text-textLighter"
+                  className="p-3 rounded-md bg-emerald-500 hover:scale-105  hover:bg-emerald-600 transition-all ease-in-out cursor-pointer font-semibold text-textButton disabled:hover:scale-100 disabled:border disabled:bg-white disabled:border-slate-200 disabled:cursor-default disabled:text-textLighter"
                   onClick={(e) => {
                     e.preventDefault();
                     setToggleDeactivate(false);
