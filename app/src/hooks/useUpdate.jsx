@@ -3,15 +3,16 @@ import { useAuthContext } from "./useAuthContext";
 const apiURL = import.meta.env.VITE_API_URL;
 
 export function useUpdate() {
-  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
 
   const { user, setUser } = useAuthContext();
 
-  async function update(data) {
+  async function update(data, setLoader, setError, setMessage) {
     console.log("useUpdate");
+
     setIsLoading(true);
     setError(null);
+    setMessage(null);
 
     const response = await fetch(apiURL + "/api/user/update", {
       mode: "cors",
@@ -26,8 +27,9 @@ export function useUpdate() {
     const json = await response.json();
 
     if (!response.ok) {
+      console.log(json);
       setIsLoading(false);
-      setError(json.error);
+      setError(json);
     }
 
     if (response.ok) {
@@ -37,10 +39,11 @@ export function useUpdate() {
 
       // update the auth context
       console.log(json);
+      setMessage("Váš účet byl aktualizován.");
       setIsLoading(false);
       setUser({ ...user, ...data });
     }
   }
 
-  return { update, isLoading, error };
+  return { update, isLoading };
 }

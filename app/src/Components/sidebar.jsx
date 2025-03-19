@@ -12,14 +12,23 @@ import {
 import { faComments } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import logo from "/public/shopr-icon-white.png";
 import logoBig from "/public/shopr-logo-white.png";
 
 export function Sidebar() {
   const { logout } = useLogout();
-  const [activeButton, setActiveButton] = useState(1);
+  const [activeButton, setActiveButton] = useState("/app");
+
+  function setPath() {
+    const pathname = window.location.pathname;
+    setActiveButton(pathname);
+  }
+
+  useEffect(() => {
+    setPath();
+  }, []);
 
   function handleLogout() {
     logout();
@@ -34,10 +43,10 @@ export function Sidebar() {
               <img src={logo} alt="logo" className="h-12" />
             </a>
             <div className="flex flex-col items-center gap-2  p-4 row-span-5 self-center">
-              {activeButton == 1 ? (
+              {activeButton == "/app" ? (
                 <Link
                   onClick={() => {
-                    setActiveButton(1);
+                    setActiveButton("/app");
                   }}
                   to="/app"
                   className="cursor-pointer text-sm font-semibold flex flex-col gap-3 bg-white text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
@@ -48,7 +57,7 @@ export function Sidebar() {
               ) : (
                 <Link
                   onClick={() => {
-                    setActiveButton(1);
+                    setActiveButton("/app");
                   }}
                   to="/app"
                   className="cursor-pointer text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
@@ -57,10 +66,10 @@ export function Sidebar() {
                   Moje předplatné
                 </Link>
               )}
-              {activeButton == 2 ? (
+              {activeButton == "/app/osobni-udaje" ? (
                 <Link
                   onClick={() => {
-                    setActiveButton(2);
+                    setActiveButton("/app/osobni-udaje");
                   }}
                   to="/app/osobni-udaje"
                   className="cursor-pointer text-sm font-semibold flex flex-col gap-3 bg-white text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
@@ -71,7 +80,7 @@ export function Sidebar() {
               ) : (
                 <Link
                   onClick={() => {
-                    setActiveButton(2);
+                    setActiveButton("/app/osobni-udaje");
                   }}
                   to="/app/osobni-udaje"
                   className="cursor-pointer text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
@@ -80,10 +89,10 @@ export function Sidebar() {
                   Osobní údaje
                 </Link>
               )}
-              {activeButton == 3 ? (
+              {activeButton == "/app/kontakt" ? (
                 <Link
                   onClick={() => {
-                    setActiveButton(3);
+                    setActiveButton("/app/kontakt");
                   }}
                   to="/app/kontakt"
                   className="cursor-pointer text-sm font-semibold flex flex-col gap-3 bg-white text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
@@ -94,7 +103,7 @@ export function Sidebar() {
               ) : (
                 <Link
                   onClick={() => {
-                    setActiveButton(3);
+                    setActiveButton("/app/kontakt");
                   }}
                   to="/app/kontakt"
                   className="cursor-pointer text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
@@ -103,33 +112,18 @@ export function Sidebar() {
                   Kontakt
                 </Link>
               )}
-              {activeButton == 4 ? (
-                <Link
-                  onClick={() => {
-                    setActiveButton();
-                  }}
-                  to="/app/otazky"
-                  className="cursor-pointer text-sm font-semibold flex flex-col gap-3 bg-white text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
-                >
-                  <FontAwesomeIcon
-                    icon={faClipboardQuestion}
-                    className="text-2xl"
-                  />
-                  Jak to funguje?
-                </Link>
-              ) : (
-                <Link
-                  to="https://shopr.cz/otazky"
-                  target="_blank"
-                  className="text-sm cursor-pointer font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
-                >
-                  <FontAwesomeIcon
-                    icon={faClipboardQuestion}
-                    className="text-2xl"
-                  />
-                  Otázky
-                </Link>
-              )}
+
+              <Link
+                to="https://shopr.cz/otazky"
+                target="_blank"
+                className="text-sm cursor-pointer font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
+              >
+                <FontAwesomeIcon
+                  icon={faClipboardQuestion}
+                  className="text-2xl"
+                />
+                Otázky
+              </Link>
             </div>
             <div className="flex justify-center">
               <button

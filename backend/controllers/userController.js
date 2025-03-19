@@ -150,7 +150,7 @@ const signupUser = async (req, res) => {
     });
 
     const URL =
-      process.env.PROXY_SERVER +
+      process.env.PROXY_APP +
       "/api/user/activate/authorized/?hash=" +
       emailHash;
 
@@ -347,17 +347,6 @@ const updateUser = async (req, res) => {
   } = data;
 
   try {
-    const {
-      email,
-      firstName,
-      secondName,
-      phone,
-      address,
-      addressNumber,
-      city,
-      cityNumber,
-    } = data;
-
     // ------------ VALIDATION OF DATA --------------
     if (
       !email ||
@@ -372,22 +361,54 @@ const updateUser = async (req, res) => {
       throw Error("Musíte vyplnit všechna pole");
     }
 
-    // ------------ CHECKING IF USER EXISTS --------------
+    // ------------ MONGOOSE - CHECKING IF USER EXISTS --------------
     const user = await User.findOne({ email });
 
     if (!user) {
       throw Error("Nesprávný email");
     }
 
-    // ------------ UPDATING USER --------------
+    // ------------ MONGOOSE - UPDATING USER --------------
     const updateUser = await User.findByIdAndUpdate(
       { _id: user.id },
       { firstName, secondName, phone, address, addressNumber, city, cityNumber }
     );
 
+    // ------------ PIPEDRIVE - UPDATING CONTACT
+    const payload = {
+      name: firstName + " " + secondName,
+      email: email,
+      phone: phone,
+    };
+
+    const pipeResponse = await pipedriveApiCallV1(
+      "persons/" + user.pipedrivePersonId,
+      "PUT",
+      payload
+    );
+
+    console.log(pipeResponse);
+
+    if (!pipeResponse.ok) {
+      throw Error("Něco se pokazilo. (Pipedrive)");
+    }
+
+    // ------------- STRIPE - creating customer ----------------
+    const customer = await stripe.customers.update(user.stripeCustomerId, {
+      name: firstName + " " + secondName,
+      email: email,
+      phone: phone,
+    });
+
+    if (!customer) {
+      throw Error(
+        "Omlouváme se, účet nelze vytvořit. Chyba je na naší straně. (Stripe)"
+      );
+    }
+
     res.status(200).json({ ...data });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json(error.message);
   }
 };
 

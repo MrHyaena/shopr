@@ -18,6 +18,8 @@ export function Personal({ setLoader }) {
     const [addressNumber, setAddressNumber] = useState("");
     const [city, setCity] = useState("");
     const [cityNumber, setCityNumber] = useState("");
+    const [error, setError] = useState(null);
+    const [message, setMessage] = useState(null);
 
     useEffect(() => {
       setEmail(user.email);
@@ -30,7 +32,7 @@ export function Personal({ setLoader }) {
       setCityNumber(user.cityNumber);
     }, []);
 
-    const { update, isLoading, error } = useUpdate();
+    const { update, isLoading } = useUpdate();
 
     async function handleSubmit(e) {
       console.log("starting submit");
@@ -46,7 +48,7 @@ export function Personal({ setLoader }) {
         cityNumber,
       };
 
-      await update(data);
+      await update(data, setLoader, setError, setMessage);
     }
     return (
       <>
@@ -170,6 +172,11 @@ export function Personal({ setLoader }) {
           {error && (
             <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
               {error}
+            </h2>
+          )}
+          {message && (
+            <h2 className="font-bold text-center p-2 bg-messageBg rounded-lg border-2 border-messageBorder max-w-[250px]">
+              {message}
             </h2>
           )}
         </form>
