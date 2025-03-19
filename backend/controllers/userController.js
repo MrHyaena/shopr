@@ -253,6 +253,8 @@ const deleteUser = async (req, res) => {
       throw Error("Účet neexistuje");
     }
 
+    console.log("mongoose delete user");
+
     // ------------ MONGOOSE - FINDING ALL SUBSCRIPTIONS AND GETTING THEIR DATA--------------
     const pipeDealIdsArray = [];
     const stripeSubIdsArray = [];
@@ -268,12 +270,16 @@ const deleteUser = async (req, res) => {
       mongoSubArray.push(doc._id);
     }
 
+    console.log("mongoose find all subscriptions");
+
     // ------------ MONGOOSE - DELETING ALL SUBSCRIPTIONS --------------
     for (let i = 0; i < mongoSubArray.length; i++) {
       const subscriptions = await Subscription.findByIdAndDelete({
         _id: mongoSubArray[i],
       });
     }
+
+    console.log("mongoose delete all subscription");
 
     // ------------ PIPEDRIVE - FINDING AND DELETING ALL ACTIVITIES --------------
     //getting all the tasks
@@ -292,6 +298,8 @@ const deleteUser = async (req, res) => {
       return item.id;
     });
 
+    console.log("getting all tasks");
+
     //getting the ids in the joined strings
     const taskIds = activitiesIds.join(",");
     const dealIds = pipeDealIdsArray.join(",");
@@ -302,10 +310,14 @@ const deleteUser = async (req, res) => {
       "DELETE"
     );
 
+    console.log("pipedrive tasks delete");
+
     const pipeDeleteDealsBulkcall = await pipedriveApiCallV1(
       "deals?ids=" + dealIds,
       "DELETE"
     );
+
+    console.log("pipderive deals delete");
 
     // ------------ STRIPE - CANCELING ALL SUBSCRIPTIONS --------------
     for (let i = 0; i < stripeSubIdsArray.length; i++) {
@@ -313,6 +325,8 @@ const deleteUser = async (req, res) => {
         stripeSubIdsArray[i]
       );
     }
+
+    console.log("stripe subscriptions");
 
     // ------------ EMAIL - DELETION SUCCESS --------------
     const fromEmail = process.env.SMTP_EMAIL_INFO;
@@ -326,6 +340,8 @@ const deleteUser = async (req, res) => {
 <p>S pozdravem,</p>
 <p>T&yacute;m Shopr</p>`;
     sendEmail(fromEmail, toEmail, subject, emailBody);
+
+    console.log("email");
 
     res.status(200).json({ deleted: true });
   } catch (error) {
