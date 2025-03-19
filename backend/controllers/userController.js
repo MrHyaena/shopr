@@ -56,6 +56,21 @@ const signupUser = async (req, res) => {
       throw Error("Musíte vyplnit všechna pole");
     }
 
+    //password validation
+    if (password.length < 6) {
+      throw Error("Heslo musí mít alespoň 6 znaků");
+    }
+
+    const letterArray = password.split("");
+    const checkArray = await letterArray.filter(
+      (item) => isFinite(item) && !isNaN(item)
+    );
+    console.log(letterArray);
+
+    if (checkArray.length == 0) {
+      throw Error("Heslo musí mít alespoň jedno číslo");
+    }
+
     if (!validator.isEmail(email)) {
       throw Error("Emailová adresa není platná");
     }
@@ -410,7 +425,7 @@ const resetUserEmail = async (req, res) => {
 
 const resetUserPassword = async (req, res) => {
   const hash = req.query.hash;
-  const password = req.body.password;
+  const { password, passwordCheck } = req.body;
   const hashObject = await Hashcheck.findOne({ token: hash });
   console.log(hashObject.userId);
   //Dates
@@ -423,6 +438,26 @@ const resetUserPassword = async (req, res) => {
       throw Error(
         "Změna hesla již není možná. Časový limit 15 minut byl přesažen. Zopakujte prosím požadavek na změnu hesla."
       );
+    }
+
+    if (!password && !passwordCheck) {
+      throw Error("Musíte vyplnit obě pole");
+    }
+    if (password !== passwordCheck) {
+      throw Error("Hesla se musí shodovat.");
+    }
+    if (password.length < 6) {
+      throw Error("Heslo musí mít délku alespoň 6 znaků");
+    }
+
+    const letterArray = password.split("");
+    const checkArray = await letterArray.filter(
+      (item) => isFinite(item) && !isNaN(item)
+    );
+    console.log(letterArray);
+
+    if (checkArray.length == 0) {
+      throw Error("Heslo musí mít alespoň jedno číslo");
     }
 
     const salt = await bcrypt.genSalt(10);

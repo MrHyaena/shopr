@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import logoBlack from "/public/shopr-logo.png";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 const apiURL = import.meta.env.VITE_API_URL;
 
 export function PasswordReset() {
@@ -10,41 +11,53 @@ export function PasswordReset() {
   const [error, setError] = useState();
   const [message, setMessage] = useState();
   const [utm, setUtm] = useSearchParams();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    if (!password && !passwordCheck) {
-      setError("Musíte vyplnit obě pole");
-    } else if (password !== passwordCheck) {
-      setError("Hesla se musí shodovat.");
-    } else if (password.length < 6) {
-      setError("Heslo musí mít délku alespoň 6 znaků");
-    } else {
-      const response = await fetch(
-        apiURL + "/api/user/reset/authorized?hash=" + utm.get("hash"),
-        {
-          method: "POST",
-          mode: "cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ password: password }),
-        }
-      );
-
-      const json = response.json();
-
-      if (!response.ok) {
-        setError(json);
+    const response = await fetch(
+      apiURL + "/api/user/reset/authorized?hash=" + utm.get("hash"),
+      {
+        method: "POST",
+        mode: "cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          password: password,
+          passwordCheck: passwordCheck,
+        }),
       }
+    );
 
-      if (response.ok) {
-        setMessage(json);
-      }
+    const json = response.json();
+
+    if (!response.ok) {
+      setIsLoading(false);
+
+      setError(json);
+    }
+
+    if (response.ok) {
+      setIsLoading(false);
+
+      setMessage(json);
     }
   };
 
   return (
     <>
+      {isLoading && (
+        <div className="w-screen h-screen bg-black/80 flex flex-col gap-4 items-center justify-center absolute top-0 left-0 z-40">
+          <FontAwesomeIcon
+            icon={faSpinner}
+            className="text-6xl text-white animate-rotate"
+          />
+          <p className="text-textLight text-2xl font-semibold">
+            Pracujeme na tom...
+          </p>
+        </div>
+      )}
       <div className="bg-slate-50 flex flex-col xl:grid xl:grid-rows-[1fr_2fr_1fr] xl:justify-center xl:pt-0 justify-center items-center h-screen">
         <img
           src={logoBlack}

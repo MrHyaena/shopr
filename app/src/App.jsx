@@ -79,11 +79,11 @@ function App() {
             element={user ? <ProtectedRoute /> : <Navigate to="/login" />}
           />
           <Route
-            path="login"
+            path="/login"
             element={!user ? <LoginPage /> : <Navigate to="/app" />}
           />
           <Route
-            path="signup"
+            path="/signup"
             element={!user ? <SignupPage /> : <Navigate to="/app" />}
           />
           <Route path="reset/password" element={<PasswordReset />} />
