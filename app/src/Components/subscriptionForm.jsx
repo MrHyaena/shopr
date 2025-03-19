@@ -818,7 +818,7 @@ export function SubscriptionForm({ setLoader }) {
                     setItemsType("standard");
                     setSettingsToggle(1);
                   }}
-                  className="buttonRedMedium"
+                  className="bg-quad text-textButton self-stretch xl:p-3 p-2 xl:text-lg text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
                 >
                   Standardní objednávka
                 </button>
@@ -839,7 +839,7 @@ export function SubscriptionForm({ setLoader }) {
                     setItemsType("mystery");
                     setSettingsToggle(2);
                   }}
-                  className="buttonRedMedium"
+                  className="bg-quad text-textButton self-stretch xl:p-3 p-2 xl:text-lg text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
                 >
                   Mystery balíček
                 </button>
@@ -849,7 +849,7 @@ export function SubscriptionForm({ setLoader }) {
                   setStep(2);
                   handleBack();
                 }}
-                className="buttonRedMedium"
+                className="bg-quad text-textButton self-center xl:p-3 p-2 xl:text-lg text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               >
                 <FontAwesomeIcon icon={faArrowLeft} /> Zpět
               </button>
@@ -1040,7 +1040,7 @@ export function SubscriptionForm({ setLoader }) {
                     <label className="flex flex-col text--textDark text-lg font-semibold">
                       Zpráva
                       <textarea
-                        value={mysteryItem.message == "emtpy" && ""}
+                        value={mysteryItem.message}
                         name="amount"
                         className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                         placeholder="Přál bych si kombinaci proteinových tyčinek a ořechů"
