@@ -33,7 +33,12 @@ export function emailTemplatePasswordChange(changeUrl) {
   return body;
 }
 
-export function emailTemplateUserMessage(message, email) {
-  let body = `<h2>uživatelská zpráva</h2><p>${message}</p><p>${email}</p>`;
+export function emailTemplateUserMessage(
+  subject,
+  message,
+  email,
+  subscription
+) {
+  let body = `<h2>Předmět:</h2><p>${subject}</p><h2>Uživatelská zpráva:</h2><p>${message}</p><h3>Problémové předplatné:</h3><p>${subscription}</p><h3>Email pro odpověď:</h3><p>${email}</p>`;
   return body;
 }

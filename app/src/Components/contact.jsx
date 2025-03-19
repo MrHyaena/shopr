@@ -1,4 +1,4 @@
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
@@ -15,11 +15,13 @@ export function Contact() {
     const [problemToggle, setProblemToggle] = useState(false);
     const { user } = useAuthContext();
     const [subject, setSubject] = useState("");
+    const [loader, setLoader] = useState(false);
 
     const [error, setError] = useState(null);
     const [responseOk, setResponseOk] = useState(null);
 
     async function handleSend() {
+      setLoader(true);
       const messageObject = {
         email: email,
         subject: subject,
@@ -46,119 +48,134 @@ export function Contact() {
         const json = await response.json();
 
         if (response.ok) {
+          setLoader(false);
           setError(null);
           setResponseOk(json);
         }
 
         if (!response.ok) {
+          setLoader(false);
           setError(json);
         }
       }
     }
 
     return (
-      <form
-        className="flex flex-col gap-5 xl:p-10 px-5 pt-5 bg-white border border-slate-200 rounded-lg w-full"
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSend();
-        }}
-      >
-        <div className="grid gap-5">
-          <label className="flex flex-col text-heading text-lg font-semibold">
-            Email, na který budeme odpovídat
-            <input
-              value={email}
-              onChange={(e) => {
-                setError(null);
-                setEmail(e.target.value);
-              }}
-              type="email"
-              className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input "
-            ></input>
-          </label>
-          <label className="flex flex-col text-heading text-lg font-semibold">
-            Předmět emailu
-            <input
-              value={subject}
-              onChange={(e) => {
-                setError(null);
-                setSubject(e.target.value);
-              }}
-              type="text"
-              className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input "
-            ></input>
-          </label>
-          <label className="flex flex-col text-heading text-lg font-semibold">
-            Máte problém s nějakým předplatným?
-            <select
-              value={problemToggle}
-              className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
-              onChange={(e) => {
-                setError(null);
-                setProblemToggle(!problemToggle);
-              }}
-            >
-              <option value="false">Ne</option>
-              <option value="true">Ano</option>
-            </select>
-          </label>
-          {problemToggle && (
+      <>
+        {loader && (
+          <div className="w-screen h-screen bg-black/80 flex flex-col gap-4 items-center justify-center absolute top-0 left-0 z-40">
+            <FontAwesomeIcon
+              icon={faSpinner}
+              className="text-6xl text-white animate-rotate"
+            />
+            <p className="text-textLight text-2xl font-semibold">
+              Pracujeme na tom...
+            </p>
+          </div>
+        )}
+        <form
+          className="flex flex-col gap-5 xl:p-10 px-5 pt-5 bg-white border border-slate-200 rounded-lg w-full"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSend();
+          }}
+        >
+          <div className="grid gap-5">
             <label className="flex flex-col text-heading text-lg font-semibold">
-              Vyberte předplatné
+              Email, na který budeme odpovídat
+              <input
+                value={email}
+                onChange={(e) => {
+                  setError(null);
+                  setEmail(e.target.value);
+                }}
+                type="email"
+                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input "
+              ></input>
+            </label>
+            <label className="flex flex-col text-heading text-lg font-semibold">
+              Předmět emailu
+              <input
+                value={subject}
+                onChange={(e) => {
+                  setError(null);
+                  setSubject(e.target.value);
+                }}
+                type="text"
+                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input "
+              ></input>
+            </label>
+            <label className="flex flex-col text-heading text-lg font-semibold">
+              Máte problém s nějakým předplatným?
               <select
-                value={problem}
-                name="subProblem"
+                value={problemToggle}
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                 onChange={(e) => {
                   setError(null);
-                  setProblem(e.target.value);
+                  setProblemToggle(!problemToggle);
                 }}
               >
-                <option value="">Vyberte předplatné</option>
-                {subscriptions.map((sub, index) => {
-                  return (
-                    <option key={"subSelect" + sub._id} value={sub.subName}>
-                      {sub.subName}
-                    </option>
-                  );
-                })}
+                <option value="false">Ne</option>
+                <option value="true">Ano</option>
               </select>
             </label>
-          )}
-        </div>
-        <label className="flex flex-col text-heading text-lg font-semibold">
-          Vaše zpráva
-          <textarea
-            value={message}
-            onChange={(e) => {
-              setError(null);
-              setMessage(e.target.value);
-            }}
-            className="bg-slate-50 min-h-[150px] border border-slate-300 rounded p-2 text-md font-semibold text-input resize-none"
-          ></textarea>
-        </label>
+            {problemToggle && (
+              <label className="flex flex-col text-heading text-lg font-semibold">
+                Vyberte předplatné
+                <select
+                  value={problem}
+                  name="subProblem"
+                  className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                  onChange={(e) => {
+                    setError(null);
+                    setProblem(e.target.value);
+                  }}
+                >
+                  <option value="">Vyberte předplatné</option>
+                  {subscriptions.map((sub, index) => {
+                    return (
+                      <option key={"subSelect" + sub._id} value={sub.subName}>
+                        {sub.subName}
+                      </option>
+                    );
+                  })}
+                </select>
+              </label>
+            )}
+          </div>
+          <label className="flex flex-col text-heading text-lg font-semibold">
+            Vaše zpráva
+            <textarea
+              value={message}
+              onChange={(e) => {
+                setError(null);
+                setMessage(e.target.value);
+              }}
+              className="bg-slate-50 min-h-[150px] border border-slate-300 rounded p-2 text-md font-semibold text-input resize-none"
+            ></textarea>
+          </label>
 
-        <div className="mx-auto">
-          {responseOk == null && (
-            <button className="bg-quad cursor-pointer text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200">
-              Odeslat
-            </button>
-          )}
-        </div>
-        <div className="flex justify-center">
-          {error && (
-            <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
-              {error}
-            </h2>
-          )}
-          {responseOk && (
-            <h2 className="font-bold text-center p-2 bg-messageBg rounded-lg border-2 border-messageBorder max-w-[250px]">
-              {responseOk}
-            </h2>
-          )}
-        </div>
-      </form>
+          <div className="mx-auto">
+            {responseOk == null && (
+              <button className="bg-quad cursor-pointer text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200">
+                Odeslat
+              </button>
+            )}
+          </div>
+          <div className="flex justify-center">
+            {error && (
+              <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
+                {error}
+              </h2>
+            )}
+            {responseOk && (
+              <h2 className="font-bold text-center p-2 bg-messageBg rounded-lg border-2 border-messageBorder max-w-[250px]">
+                {responseOk}
+              </h2>
+            )}
+          </div>
+        </form>
+      </>
     );
   }
   return (

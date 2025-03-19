@@ -19,8 +19,13 @@ router.post("/usercontact", requireAuth, async (req, res) => {
 
   let fromEmail = "zakaznik@shopr.cz";
   let toEmail = "info@shopr.cz";
-  let subject = "Shopr - Zákazník - " + data.subject;
-  let emailBody = emailTemplateUserMessage(data.message, data.email);
+  let subject = "Shopr - Zákaznická zpráva - " + data.subject;
+  let emailBody = emailTemplateUserMessage(
+    data.subject,
+    data.message,
+    data.email,
+    data.subscription
+  );
 
   try {
     const response = await sendEmail(fromEmail, toEmail, subject, emailBody);
