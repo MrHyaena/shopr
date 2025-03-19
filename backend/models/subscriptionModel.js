@@ -73,6 +73,7 @@ const subscriptionSchema = new Schema(
     nextPaymentDate: {
       type: String,
     },
+
     subDeliveryMethod: {
       type: String,
       required: true,
@@ -88,6 +89,9 @@ const subscriptionSchema = new Schema(
     },
     mysteryItem: {
       type: Object,
+    },
+    termsAgreement: {
+      type: Boolean,
     },
   },
   { timestamps: true }

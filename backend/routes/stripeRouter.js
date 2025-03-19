@@ -99,6 +99,7 @@ router.get(
           description: description,
           metadata: { subId: subId, userId: userId },
         },
+        consent_collection: { terms_of_service: "required" },
         customer: stripeCustomerId,
         success_url: `${process.env.PROXY_SERVER}/api/stripe/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${process.env.PROXY_APP}/app`,
@@ -123,6 +124,7 @@ router.get("/success", express.json(), async (req, res) => {
         active: true,
         stripeSubId: session.subscription,
         stripeCustomerId: session.customer,
+        termsAgreement: true,
       }
     );
 
@@ -197,6 +199,8 @@ router.post(
           (date.getMonth() + 1) +
           "." +
           date.getFullYear();
+
+        console.log(paymentDate);
 
         const subscription = await Subscription.findByIdAndUpdate(
           {

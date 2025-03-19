@@ -3,6 +3,18 @@
 @layer base {
 }
 
+.buttonRedBig {
+  @apply bg-quad text-textButton self-start xl:p-3 p-2 xl:text-lg text-base font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer;
+}
+
+.buttonRedMedium {
+  @apply bg-quad text-textButton self-start xl:p-3 p-2 xl:text-lg text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer;
+}
+
+.buttonRedSmall {
+  @apply bg-quad text-textButton self-start xl:p-3 p-2 xl:text-lg text-base font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer;
+}
+
 @theme {
   --color-primary: var(--color-zinc-950);
   --color-secondary: var(--color-zinc-900);

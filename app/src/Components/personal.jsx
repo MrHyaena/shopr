@@ -22,7 +22,6 @@ export function Personal() {
     const [cityNumber, setCityNumber] = useState("");
     const [error, setError] = useState(null);
     const [message, setMessage] = useState(false);
-    const [loader, setLoader] = useState(false);
 
     useEffect(() => {
       setEmail(user.email);
@@ -51,7 +50,7 @@ export function Personal() {
         cityNumber,
       };
 
-      await update(data, setLoader, setError, setMessage);
+      await update(data, setError, setMessage);
     }
     return (
       <>
@@ -203,6 +202,8 @@ export function Personal() {
     const [checkDelete, setCheckDelete] = useState("");
     const [errorDelete, setErrorDelete] = useState(null);
 
+    const [loader, setLoader] = useState();
+
     function deleteUserAccount() {
       if (checkDelete == "smazat účet") {
         setCheckDelete(null);
@@ -216,6 +217,17 @@ export function Personal() {
 
     return (
       <>
+        {loader && (
+          <div className="w-screen h-screen bg-black/80 flex flex-col gap-4 items-center justify-center absolute top-0 left-0 z-40">
+            <FontAwesomeIcon
+              icon={faSpinner}
+              className="text-6xl text-white animate-rotate"
+            />
+            <p className="text-textLight text-2xl font-semibold">
+              Pracujeme na tom...
+            </p>
+          </div>
+        )}
         <div className="flex flex-col xl:items-start xl:text-start px-5 gap-5 max-w-[700px]">
           <h1 className="text-xl font-bold text-heading">
             K čemu tyto informace slouží?

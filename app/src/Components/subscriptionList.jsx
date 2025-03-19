@@ -64,6 +64,10 @@ export function SubscriptionList({ setLoader }) {
     const [checkDeactivate, setCheckDeactivate] = useState("");
     const [errorDeactivate, setErrorDeactivate] = useState(false);
 
+    const [toggleActivate, setToggleActivate] = useState(false);
+    const [checkActivate, setCheckActivate] = useState("");
+    const [errorActivate, setErrorActivate] = useState(false);
+
     const editURL = "/app/form/" + _id;
 
     function SubDetailsStandard() {
@@ -536,9 +540,9 @@ export function SubscriptionList({ setLoader }) {
 
     return (
       <>
-        <div className="bg-white xl:p-7 p-2 rounded-lg border border-slate-200 shadow-md shadow-slate-200 xl:grid grid-cols-2 gap-4 animate-fall-left">
-          <div className="mb-3 xl:mb-0">
-            <div className="xl:flex gap-10 mb-2 xl:mb-2">
+        <div className="bg-white xl:p-6 p-2 rounded-lg border border-slate-200 shadow-md shadow-slate-200 xl:grid xl:grid-cols-2 grid-cols-5 gap-4 animate-fall-left">
+          <div className="mb-3 xl:mb-0 xl:block flex flex-col-reverse xl:col-span-1 col-span-3">
+            <div className="xl:flex gap-7 mt-5 xl:mt-0 xl:mb-2">
               <p className="text-textDarker text-[12px] mb-2 font-medium">
                 ID: <span className="text-textLighter">{_id}</span>
               </p>
@@ -562,13 +566,13 @@ export function SubscriptionList({ setLoader }) {
                 Datum další platby:{" "}
                 <span className="text-textLighter">
                   {nextPaymentDate == "empty"
-                    ? "Předplatné není aktivní"
+                    ? "Předplatné je neaktivní"
                     : nextPaymentDate}
                 </span>
               </p>
             </div>
 
-            <div className="flex xl:flex-row flex-col xl:gap-5 gap-2 items-center justify-center xl:justify-start">
+            <div className="flex xl:flex-row flex-col-reverse xl:gap-5 gap-2 xl:items-center items-start justify-center xl:justify-start">
               <a
                 href={"https://" + subWebsite}
                 target="_blank"
@@ -587,28 +591,25 @@ export function SubscriptionList({ setLoader }) {
               <h2 className="xl:text-2xl text-xl text-textDark font-bold xl:mr-5">
                 {subName}
               </h2>
-              {active && (
+              {active ? (
                 <div className="bg-emerald-500 rounded-md flex text-base lg:text-ml items-center justify-center gap-2 px-3 py-1 font-semibold text-white shadow-sm">
                   <FontAwesomeIcon icon={faCashRegister} />
                   Aktivní
                 </div>
+              ) : (
+                <div className="bg-slate-600 rounded-md flex text-base lg:text-ml items-center justify-center gap-2 px-3 py-1 font-semibold text-white shadow-sm">
+                  <FontAwesomeIcon icon={faCashRegister} />
+                  Neaktivní
+                </div>
               )}
             </div>
           </div>
-          <div className="flex xl:flex-row gap-2 xl:gap-6 xl:items-center xl:justify-end justify-center">
+          <div className="flex flex-col xl:flex-row gap-2 xl:gap-6 xl:items-center xl:justify-end justify-center col-span-2 xl:col-span-1">
             {!active && (
               <>
                 <button
                   onClick={() => {
-                    activateSubscriptionHandler(
-                      _id,
-                      subName,
-                      subWebsite,
-                      subFrequency,
-                      stripeCustomerId,
-                      user,
-                      itemsType
-                    );
+                    setToggleActivate(true);
                   }}
                   className=" text-textDark cursor-pointer hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-quad"
                 >
@@ -770,6 +771,91 @@ export function SubscriptionList({ setLoader }) {
                   onClick={(e) => {
                     e.preventDefault();
                     setToggleDeactivate(false);
+                  }}
+                >
+                  Zpět
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+        {toggleActivate && (
+          <div className="fixed top-0 right-0 w-full p-5 h-full bg-primary/50 m-auto flex justify-center items-center z-30">
+            <div className="gap-5 flex flex-col justify-center items-stretch bg-white p-10 rounded-md max-w-[700px]">
+              <h3 className="text-2xl font-bold text-textDark">
+                Aktivace předplatného
+              </h3>
+              <p className="text-textDark font-semibold">
+                Předplatné se aktivuje zaplacením první platby. Abyste tak mohli
+                učinit, potvrďte nám obchodní podmínky níže a klikněte na
+                tlačítko "Aktivovat předplaatné", které Vás přenese k platebnímu
+                terminálu.
+              </p>
+
+              <label className="flex flex-row gap-3 text--textDark text-md font-semibold col-span-6">
+                <input
+                  type="checkbox"
+                  className="bg-zinc-50 p-3 rounded-lg border border-slate-200 font-semibold"
+                  value="true"
+                  onChange={(e) => {
+                    if (errorDeactivate) {
+                      setErrorActivate(false);
+                    }
+                    setCheckActivate(!checkActivate);
+                  }}
+                />{" "}
+                <p>
+                  Seznamil/a jsem se a souhlasím s{" "}
+                  <a
+                    href="https://shopr.cz/obchodni-podminky"
+                    target="_blank"
+                    className="text-quad"
+                  >
+                    Obchodními podmínkami
+                  </a>{" "}
+                  a{" "}
+                  <a
+                    href="https://shopr.cz/gdpr"
+                    target="_blank"
+                    className="text-quad"
+                  >
+                    Zásadami pro ochranu osobních údajů (GDPR)
+                  </a>{" "}
+                  služby Shopr.
+                </p>
+              </label>
+              {errorActivate && (
+                <p className="p-2 bg-errorBg border-2 border-errorBorder rounded-md font-semibold text-medium">
+                  Vložený text se neshoduje se jménem.
+                </p>
+              )}
+              <div className="grid grid-cols-2 w-full gap-5">
+                <button
+                  disabled={!checkActivate}
+                  className="p-3 rounded-md bg-deleteButton hover:scale-105  hover:bg-red-500 transition-all ease-in-out cursor-pointer font-semibold text-textButton disabled:hover:scale-100 disabled:border disabled:bg-white disabled:border-slate-200 disabled:cursor-default disabled:text-textLighter"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setToggleDeactivate(false);
+                    setCheckDeactivate(null);
+                    activateSubscriptionHandler(
+                      _id,
+                      subName,
+                      subWebsite,
+                      subFrequency,
+                      stripeCustomerId,
+                      user,
+                      itemsType
+                    );
+                  }}
+                >
+                  Přejít k platbě
+                </button>
+
+                <button
+                  className="p-3 rounded-md bg-white border border-slate-200 font-semibold text-textDark cursor-pointer transition-all ease-in-out hover:scale-105"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setToggleActivate(false);
                   }}
                 >
                   Zpět

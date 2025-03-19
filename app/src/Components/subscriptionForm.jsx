@@ -153,7 +153,7 @@ export function SubscriptionForm({ setLoader }) {
         className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg"
       >
         <button
-          className="bg-quad text-textButton self-start p-3 text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+          className="buttonRedMedium"
           onClick={(e) => {
             inputUserInfo(e);
           }}
@@ -280,16 +280,10 @@ export function SubscriptionForm({ setLoader }) {
         </fieldset>
         <div className="flex flex-col items-center gap-5">
           <div className="flex gap-3">
-            <Link
-              to="/"
-              className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
-            >
+            <Link to="/" className="buttonRedMedium">
               Zrušit
             </Link>
-            <button
-              type="submit"
-              className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
-            >
+            <button type="submit" className="buttonRedMedium">
               Pokračovat <FontAwesomeIcon icon={faArrowRight} />
             </button>
           </div>
@@ -515,7 +509,7 @@ export function SubscriptionForm({ setLoader }) {
         <div className="flex flex-col gap-5 items-center">
           <div className="flex gap-3">
             <button
-              className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+              className="buttonRedMedium"
               onClick={(e) => {
                 e.preventDefault();
                 const object = {
@@ -535,7 +529,7 @@ export function SubscriptionForm({ setLoader }) {
               <FontAwesomeIcon icon={faArrowLeft} /> Zpět
             </button>
             <button
-              className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+              className="buttonRedMedium"
               onClick={(e) => {
                 handleNext(e);
               }}
@@ -824,7 +818,7 @@ export function SubscriptionForm({ setLoader }) {
                     setItemsType("standard");
                     setSettingsToggle(1);
                   }}
-                  className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+                  className="buttonRedMedium"
                 >
                   Standardní objednávka
                 </button>
@@ -845,7 +839,7 @@ export function SubscriptionForm({ setLoader }) {
                     setItemsType("mystery");
                     setSettingsToggle(2);
                   }}
-                  className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+                  className="buttonRedMedium"
                 >
                   Mystery balíček
                 </button>
@@ -855,7 +849,7 @@ export function SubscriptionForm({ setLoader }) {
                   setStep(2);
                   handleBack();
                 }}
-                className="bg-quad col-span-2 xl:justify-self-center self-center text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+                className="buttonRedMedium"
               >
                 <FontAwesomeIcon icon={faArrowLeft} /> Zpět
               </button>
@@ -950,7 +944,7 @@ export function SubscriptionForm({ setLoader }) {
               <div className="flex flex-col items-center gap-5">
                 <div className="flex gap-3">
                   <button
-                    className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+                    className="buttonRedMedium"
                     onClick={() => {
                       setSettingsToggle(0);
                       setItemsType("empty");
@@ -960,7 +954,7 @@ export function SubscriptionForm({ setLoader }) {
                   </button>
                   <button
                     disabled={isLoading}
-                    className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+                    className="buttonRedMedium"
                     onClick={(e) => {
                       e.preventDefault();
                       handleSend(e);
@@ -1046,7 +1040,7 @@ export function SubscriptionForm({ setLoader }) {
                     <label className="flex flex-col text--textDark text-lg font-semibold">
                       Zpráva
                       <textarea
-                        value={mysteryItem.message}
+                        value={mysteryItem.message == "emtpy" && ""}
                         name="amount"
                         className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                         placeholder="Přál bych si kombinaci proteinových tyčinek a ořechů"
@@ -1107,7 +1101,7 @@ export function SubscriptionForm({ setLoader }) {
               <div className="flex flex-col items-center gap-5">
                 <div className="flex gap-3">
                   <button
-                    className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+                    className="buttonRedMedium"
                     onClick={() => {
                       setSettingsToggle(0);
                       setItemsType("empty");
@@ -1117,7 +1111,7 @@ export function SubscriptionForm({ setLoader }) {
                   </button>
                   <button
                     disabled={isLoading}
-                    className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+                    className="buttonRedMedium"
                     onClick={(e) => {
                       e.preventDefault();
                       handleSend();
@@ -1247,14 +1241,14 @@ export function SubscriptionForm({ setLoader }) {
     <>
       <div className="bg-slate-50 xl:p-10 p-2 flex flex-col gap-5 xl:pt-10 pt-30">
         <div className="flex justify-between xl:flex-row flex-col-reverse items-center">
-          <h1 className="text-3xl font-bold text-heading text-center">
+          <h1 className="xl:text-3xl text-xl font-bold text-heading text-center">
             {step == 1 && "Osobní a kontaktní údaje"}
             {step == 2 && "Nastavení předplatného"}
             {step == 3 && "Nastavení položek"}
           </h1>
           <Link
             to="/"
-            className="bg-quad text-textButton mb-5 xl:mb-0 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+            className="bg-quad text-textButton mb-5 xl:mb-0 p-3 xl:text-xl text-md font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
           >
             Zpět
           </Link>

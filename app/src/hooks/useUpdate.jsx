@@ -7,7 +7,7 @@ export function useUpdate() {
 
   const { user, setUser } = useAuthContext();
 
-  async function update(data, setLoader, setError, setMessage) {
+  async function update(data, setError, setMessage) {
     setIsLoading(true);
     setError(null);
     setMessage(null);

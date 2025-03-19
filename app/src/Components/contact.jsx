@@ -181,13 +181,13 @@ export function Contact() {
   return (
     <>
       <div className="bg-slate-50 xl:p-10 p-3 flex flex-col xl:gap-10 gap-10 xl:pt-10 pt-30 text-textDark">
-        <div className="flex xl:flex-row justify-between items-center flex-col-reverse gap-5 xl:text-start text-center">
-          <h1 className="text-3xl font-bold text-heading0">
+        <div className="flex xl:flex-row justify-between xl:items-start flex-col-reverse gap-5">
+          <h1 className="text-3xl font-bold text-heading xl:text-start text-center">
             Trápí Vás nějaký problém? Napište nám!
           </h1>
           <Link
             to="/"
-            className="bg-quad  text-textButton hidden xl:block text-center p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+            className="bg-quad text-textButton xl:block self-center text-center p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
           >
             Zpět
           </Link>

@@ -34,10 +34,18 @@ const signupAdmin = async (req, res) => {
 
 const loginAdmin = async (req, res) => {
   const { email, password } = req.body;
+
   try {
+    if (!email || !password) {
+      throw Error("Chybí údaj");
+    }
     const user = await Admin.findOne({ email });
 
     const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+      throw Error("Nesprávný email nebo heslo.");
+    }
 
     const token = createToken(user._id);
 

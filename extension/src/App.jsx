@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "./assets/shopr-icon-white.png";
 
-const apiURL = "https://quick-ninon-martin-dolezal-b45ae6c1.koyeb.app";
+const apiURL = "https://api.shopr.cz";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -76,8 +76,7 @@ function App() {
       }
 
       if (!response.ok) {
-        console.log(response);
-        setError("Něco se pokazilo");
+        setError(userData);
       }
     }
 
