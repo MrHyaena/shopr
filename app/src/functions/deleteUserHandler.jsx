@@ -23,7 +23,7 @@ export function deleteUserHandler() {
 
     if (!response.ok) {
       setLoader(false);
-      setErrorDelete("Bad");
+      setErrorDelete(json);
     }
   }
 

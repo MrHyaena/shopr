@@ -246,15 +246,6 @@ const deleteUser = async (req, res) => {
   const { id } = req.params;
 
   try {
-    // ------------ MONGOOSE - CHECKING DATABASE FOR USER AND DELETING HIM --------------
-    const user = await User.findByIdAndDelete({ _id: id });
-
-    if (!user) {
-      throw Error("Účet neexistuje");
-    }
-
-    console.log("mongoose delete user");
-
     // ------------ MONGOOSE - FINDING ALL SUBSCRIPTIONS AND GETTING THEIR DATA--------------
     const pipeDealIdsArray = [];
     const stripeSubIdsArray = [];
@@ -265,12 +256,35 @@ const deleteUser = async (req, res) => {
       doc != null;
       doc = await subscriptions.next()
     ) {
+      console.log(doc.stripeSubId);
+      if (doc.stripeSubId != "empty") {
+        stripeSubIdsArray.push(doc.stripeSubId);
+      }
       pipeDealIdsArray.push(doc.pipedriveDealId);
-      stripeSubIdsArray.push(doc.stripeSubId);
       mongoSubArray.push(doc._id);
     }
 
     console.log("mongoose find all subscriptions");
+
+    // ------------ STRIPE - CANCELING ALL SUBSCRIPTIONS --------------
+    if (stripeSubIdsArray.length > 0) {
+      for (let i = 0; i < stripeSubIdsArray.length; i++) {
+        const stripeSubscription = await stripe.subscriptions.cancel(
+          stripeSubIdsArray[i]
+        );
+      }
+    }
+
+    console.log("stripe delete all subscriptions");
+
+    // ------------ MONGOOSE - CHECKING DATABASE FOR USER AND DELETING HIM --------------
+    const user = await User.findByIdAndDelete({ _id: id });
+
+    if (!user) {
+      throw Error("Účet neexistuje");
+    }
+
+    console.log("mongoose delete user");
 
     // ------------ MONGOOSE - DELETING ALL SUBSCRIPTIONS --------------
     for (let i = 0; i < mongoSubArray.length; i++) {
@@ -318,15 +332,6 @@ const deleteUser = async (req, res) => {
     );
 
     console.log("pipderive deals delete");
-
-    // ------------ STRIPE - CANCELING ALL SUBSCRIPTIONS --------------
-    for (let i = 0; i < stripeSubIdsArray.length; i++) {
-      const stripeSubscription = await stripe.subscriptions.cancel(
-        stripeSubIdsArray[i]
-      );
-    }
-
-    console.log("stripe subscriptions");
 
     // ------------ EMAIL - DELETION SUCCESS --------------
     const fromEmail = process.env.SMTP_EMAIL_INFO;
