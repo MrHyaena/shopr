@@ -107,7 +107,7 @@ router.get(
       console.log(session);
       res.status(200).json(session.url);
     } catch (error) {
-      res.send(400).json(error);
+      res.send(400).json(error.message);
     }
   }
 );

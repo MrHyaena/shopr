@@ -150,7 +150,7 @@ const signupUser = async (req, res) => {
     });
 
     const URL =
-      process.env.PROXY_APP +
+      process.env.PROXY_SERVER +
       "/api/user/activate/authorized/?hash=" +
       emailHash;
 
