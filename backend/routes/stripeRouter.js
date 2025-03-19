@@ -104,7 +104,6 @@ router.get(
         cancel_url: `${process.env.PROXY_APP}/app`,
       });
 
-      console.log(session);
       res.status(200).json(session.url);
     } catch (error) {
       res.send(400).json(error.message);
@@ -183,13 +182,21 @@ router.post(
         const stripeObject = event.data.object;
 
         const subId = stripeObject.subscription_details.metadata.subId;
-        console.log(subId);
 
         // --------------------- MONGOOSE - updating subscription payment day -----------------
-        const epoch = stripeObject.lines.data.period.end;
+        const subscriptionStripe = await stripe.subscriptions.retrieve(
+          stripeObject.subscription
+        );
+
+        console.log(subscriptionStripe);
+        const epoch = subscriptionStripe.current_period_end;
         const date = new Date(epoch * 1000);
         const paymentDate =
-          date.getDate() + "." + date.getMonth() + "." + date.getFullYear();
+          date.getDate() +
+          "." +
+          (date.getMonth() + 1) +
+          "." +
+          date.getFullYear();
 
         const subscription = await Subscription.findByIdAndUpdate(
           {
@@ -209,8 +216,6 @@ router.post(
           });
           note = linkArray.join(" ");
         }
-
-        console.log(subscription);
 
         const payloadTask = await {
           subject: "Vyplnit objednávku - " + subscription._id,

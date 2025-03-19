@@ -44,6 +44,6 @@ router.get("/", getSubscriptions);
 router.get("/:id", getSubscription);
 
 //deactivate subscription route
-router.get("/deactivate/:subId/:stripeSubId", deactivateSubscription);
+router.get("/deactivate/:subId/:stripeSubId/:userId", deactivateSubscription);
 
 module.exports = router;

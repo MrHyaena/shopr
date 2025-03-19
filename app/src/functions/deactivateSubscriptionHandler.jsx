@@ -10,7 +10,13 @@ export async function deactivateSubscriptionHandler(
 ) {
   setLoader(true);
   const response = await fetch(
-    apiURL + "/api/subscriptions/deactivate/" + subId + "/" + stripeSubId,
+    apiURL +
+      "/api/subscriptions/deactivate/" +
+      subId +
+      "/" +
+      stripeSubId +
+      "/" +
+      user.id,
     {
       method: "GET",
       mode: "cors",

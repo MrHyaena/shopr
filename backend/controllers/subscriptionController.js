@@ -512,7 +512,7 @@ const updateSubscription = async (req, res) => {
 };
 
 const deactivateSubscription = async (req, res) => {
-  const { subId, stripeSubId } = req.params;
+  const { subId, stripeSubId, userId } = req.params;
 
   try {
     // ---------------------- STRIPE - canceling cubscription ----------------------
@@ -559,8 +559,9 @@ const deactivateSubscription = async (req, res) => {
     );
 
     const subscriptions = await Subscription.find();
+    const filteredArray = subscriptions.filter((item) => item.userId == userId);
 
-    const subscriptionArray = Object.values(subscriptions);
+    const subscriptionArray = Object.values(filteredArray);
 
     res.status(200).json({ subscriptions: subscriptionArray });
   } catch (error) {
