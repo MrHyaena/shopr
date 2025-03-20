@@ -88,6 +88,11 @@ export function SubscriptionForm({ setLoader }) {
     }
   }, []);
 
+  //useEffect for scrolling to top
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [step]);
+
   //step one of form
   function StepOne() {
     const [firstName, setFirstName] = useState(formData.firstName);
@@ -626,6 +631,11 @@ export function SubscriptionForm({ setLoader }) {
         setSettingsToggle(2);
       }
     }, []);
+
+    //useEffect for scrolling to top
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, [settingsToggle]);
 
     //useEffect for updating mysteryItem
     useEffect(() => {

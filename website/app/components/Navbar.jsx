@@ -177,21 +177,33 @@ export function Navbar() {
             {toggleMenu && (
               <>
                 <ul className="flex flex-col gap-5 py-10 text-lg font-bold items-start">
-                  <li>
+                  <li
+                    onClick={() => {
+                      setToggleMenu(false);
+                    }}
+                  >
                     <Link href="/">
                       <p className="font-bold text-textLight  text-base hover:text-quad transition-all ease-in-out">
                         Domů
                       </p>
                     </Link>
                   </li>
-                  <li>
+                  <li
+                    onClick={() => {
+                      setToggleMenu(false);
+                    }}
+                  >
                     <Link href="/jak-to-funguje">
                       <p className="font-bold text-textLight  text-base hover:text-quad transition-all ease-in-out">
                         Jak to funguje
                       </p>
                     </Link>
                   </li>
-                  <li>
+                  <li
+                    onClick={() => {
+                      setToggleMenu(false);
+                    }}
+                  >
                     <Link
                       href="/priklady/doplnky-stravy"
                       className=" text-base text-textLight hover:text-quad transition-all ease-in-out"
@@ -201,7 +213,11 @@ export function Navbar() {
                   </li>
                   <li>
                     <ul className="flex flex-col gap-5 ml-5">
-                      <li>
+                      <li
+                        onClick={() => {
+                          setToggleMenu(false);
+                        }}
+                      >
                         <Link
                           href="/priklady/doplnky-stravy"
                           className=" text-base text-textLight hover:text-quad transition-all ease-in-out"
@@ -209,7 +225,11 @@ export function Navbar() {
                           Doplňky stravy
                         </Link>
                       </li>
-                      <li>
+                      <li
+                        onClick={() => {
+                          setToggleMenu(false);
+                        }}
+                      >
                         <Link
                           href="/priklady/mazlicci"
                           className=" text-base text-textLight hover:text-quad transition-all ease-in-out"
@@ -217,7 +237,11 @@ export function Navbar() {
                           Mazlíčci
                         </Link>
                       </li>
-                      <li>
+                      <li
+                        onClick={() => {
+                          setToggleMenu(false);
+                        }}
+                      >
                         <Link
                           href="/priklady/kava-caj-vino"
                           className=" text-base text-textLight hover:text-quad transition-all ease-in-out"
@@ -225,7 +249,11 @@ export function Navbar() {
                           Káva, čaj a víno
                         </Link>
                       </li>
-                      <li>
+                      <li
+                        onClick={() => {
+                          setToggleMenu(false);
+                        }}
+                      >
                         <Link
                           href="/priklady/kosmetika"
                           className=" text-base text-textLight hover:text-quad transition-all ease-in-out"
@@ -235,21 +263,33 @@ export function Navbar() {
                       </li>
                     </ul>
                   </li>
-                  <li>
+                  <li
+                    onClick={() => {
+                      setToggleMenu(false);
+                    }}
+                  >
                     <Link href="/cena">
                       <p className="font-bold text-textLight  text-base hover:text-quad transition-all ease-in-out">
                         Cena
                       </p>
                     </Link>
                   </li>
-                  <li>
+                  <li
+                    onClick={() => {
+                      setToggleMenu(false);
+                    }}
+                  >
                     <Link href="/o-nas">
                       <p className="font-bold text-textLight  text-base hover:text-quad transition-all ease-in-out">
                         O nás
                       </p>
                     </Link>
                   </li>
-                  <li>
+                  <li
+                    onClick={() => {
+                      setToggleMenu(false);
+                    }}
+                  >
                     <Link href="/otazky">
                       <p className="font-bold text-textLight  text-base hover:text-quad transition-all ease-in-out">
                         Otázky
@@ -257,7 +297,11 @@ export function Navbar() {
                     </Link>
                   </li>
 
-                  <li>
+                  <li
+                    onClick={() => {
+                      setToggleMenu(false);
+                    }}
+                  >
                     <Link
                       href="https://app.shopr.cz/signup"
                       className="bg-quad text-textButton cursor-pointer text-base font-bold py-2 px-3 text-md rounded-md transition-all ease-in-out hover:scale-105  self-stretch"
@@ -265,7 +309,11 @@ export function Navbar() {
                       Vytvořit účet
                     </Link>
                   </li>
-                  <li>
+                  <li
+                    onClick={() => {
+                      setToggleMenu(false);
+                    }}
+                  >
                     <Link
                       href="https://app.shopr.cz"
                       className="text-base hover:text-quad transition-all ease-in-out"

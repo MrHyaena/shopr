@@ -40,7 +40,7 @@ export default function Home() {
   function HeroSection() {
     return (
       <>
-        <div className="min-h-[800px] flex flex-col lg:grid grid-cols-5  items-stretch justify-center overflow-x-hidden lg:p-0 p-5">
+        <div className="xl:min-h-[800px] flex flex-col lg:grid grid-cols-5  items-stretch xl:justify-center justify-start overflow-x-hidden lg:p-0 p-5">
           <div className="flex flex-col items-start justify-center h-full gap-5 lg:p-15  col-span-3 max-w-[900px] justify-self-center animate-scale-up-noBounce-delay">
             <h1 className="z-2">
               Předplatné
@@ -176,7 +176,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className=" flex flex-col items-center justify-center gap-10 px-5">
+        <div className=" flex flex-col items-center justify-center gap-10 ">
           <div className="bg-white self-stretch flex justify-center py-10">
             <div className="lg:grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10 p-10">
               <div className="self-center justify-self-center">

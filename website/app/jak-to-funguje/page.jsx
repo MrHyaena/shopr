@@ -21,7 +21,7 @@ export const metadata = {
 export default function Howto() {
   return (
     <>
-      <div className="flex items-center justify-center pt-30 pb-20 p-3">
+      <div className="flex items-center justify-center xl:pt-30 xl:pb-20 py-10 p-3">
         <div className="max-w-wrapper flex flex-col items-center justify-start gap-10">
           <div className="mx-auto text-center flex flex-col items-center">
             <h4 className="headingSmall">Jak to funguje</h4>

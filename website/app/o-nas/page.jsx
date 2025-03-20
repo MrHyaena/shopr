@@ -12,7 +12,7 @@ export const metadata = {
 export default function About() {
   return (
     <>
-      <div className=" flex justify-center items-start py-30 px-5 text-center lg:text-start">
+      <div className=" flex justify-center items-start xl:py-30 px-5 text-center lg:text-start">
         <div className="max-w-wrapper flex flex-col items-center justify-start">
           <div className="flex flex-col items-center py-10">
             <h4>O nás</h4>

@@ -5,6 +5,8 @@ import { Navbar } from "./components/Navbar";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import Footer from "./components/Footer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import UpButton from "./components/UpButton";
 config.autoAddCss = false;
 
 const geistSans = Geist({
@@ -29,6 +31,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} lg:mt-[80px] mt-[56px]`}
       >
+        <UpButton />
         <Navbar />
         {children}
         <Footer />

@@ -12,7 +12,7 @@ export const metadata = {
 export default function Faq() {
   return (
     <>
-      <div className="bg-zinc-50 flex justify-center items-start pt-30">
+      <div className="bg-zinc-50 flex justify-center items-start xl:pt-30">
         <div className="max-w-wrapper flex flex-col items-center justify-start gap-10">
           <div className="flex flex-col items-center py-10 text-center p-5">
             <h4>FAQ</h4>
