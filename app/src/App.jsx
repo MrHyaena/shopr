@@ -19,6 +19,7 @@ import { Faq } from "./Components/faq";
 import { PasswordReset } from "./pages/PasswordReset";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpider, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { ScrollToTop } from "./functions/ScrollTopFunction";
 
 function App() {
   const { user } = useAuthContext();
@@ -73,6 +74,8 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <ScrollToTop />
+
         <Routes>
           <Route
             path="/app/*"
