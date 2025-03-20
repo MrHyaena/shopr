@@ -55,7 +55,7 @@ export function Personal() {
     return (
       <>
         {isLoading && (
-          <div className="w-screen h-screen bg-black/80 flex flex-col gap-4 items-center justify-center absolute top-0 left-0 z-40">
+          <div className="w-screen h-screen bg-black/80 flex flex-col gap-4 items-center justify-center fixed top-0 left-0 z-40">
             <FontAwesomeIcon
               icon={faSpinner}
               className="text-6xl text-white animate-rotate"
@@ -218,7 +218,7 @@ export function Personal() {
     return (
       <>
         {loader && (
-          <div className="w-screen h-screen bg-black/80 flex flex-col gap-4 items-center justify-center absolute top-0 left-0 z-40">
+          <div className="w-screen h-screen bg-black/80 flex flex-col gap-4 items-center justify-center fixed top-0 left-0 z-40">
             <FontAwesomeIcon
               icon={faSpinner}
               className="text-6xl text-white animate-rotate"

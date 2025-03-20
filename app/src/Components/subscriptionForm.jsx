@@ -481,27 +481,21 @@ export function SubscriptionForm({ setLoader }) {
                 className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               >
                 <option value="courier">Nejlevnější kurýr</option>
-                <option value="dropbox">Zásilkovna</option>
+                <option value="dropbox">Výdejní místo</option>
               </select>
             </label>
             {subDeliveryMethod == "dropbox" && (
               <label className="flex flex-col text-heading text-lg font-semibold">
-                Vložte odkaz na zásilkovnu
-                <div className="flex gap-2 justify-evenly">
-                  <a
-                    className="w-[25%] p-2 bg-white border border-slate-300 rounded-md text-center"
-                    href="https://www.zasilkovna.cz/pobocky"
-                    target="_blank"
-                  >
-                    Najít zásilkovnu
-                  </a>
+                Vložte odkaz na místo, kde chcete objednávku vyzvednout. Adresu
+                či odkaz okopírujte z nabídky v e-shopu.
+                <div className="w-full mt-2">
                   <input
                     value={subDeliveryAddress}
                     onChange={(e) => {
                       setSubDeliveryAddress(e.target.value);
                     }}
                     type="text"
-                    className="bg-slate-50 border border-slate-300 rounded-md p-2 text-md font-semibold text-input w-[75%]"
+                    className="bg-slate-50 border border-slate-300 rounded-md p-2 text-md font-semibold text-input w-full"
                     placeholder="https://www.zasilkovna.cz/pobocky/z-box-golcuv-jenikov-5-kvetna-8
 "
                   ></input>
@@ -859,7 +853,7 @@ export function SubscriptionForm({ setLoader }) {
                   setStep(2);
                   handleBack();
                 }}
-                className="bg-quad text-textButton self-center xl:p-3 p-2 xl:text-lg text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+                className="bg-quad col-span-2 xl:self-center self-stretch text-textButton xl:p-3 p-2 xl:text-lg text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               >
                 <FontAwesomeIcon icon={faArrowLeft} /> Zpět
               </button>
@@ -1048,7 +1042,7 @@ export function SubscriptionForm({ setLoader }) {
                     </label>
 
                     <label className="flex flex-col text--textDark text-lg font-semibold">
-                      Zpráva
+                      Zpráva k objednávce
                       <textarea
                         value={mysteryItem.message}
                         name="amount"
@@ -1085,22 +1079,24 @@ export function SubscriptionForm({ setLoader }) {
                             }
                           }}
                         />
-                        <input
-                          min={300}
-                          max={9999}
-                          type="range"
-                          className="accent-quad"
-                          value={mysteryItem.amount}
-                          onChange={(e) => {
-                            setMysteryItem({
-                              ...mysteryItem,
-                              amount: e.target.value,
-                            });
-                          }}
-                        />
-                        <div className="col-start-2 flex items-center justify-between">
-                          <p>300</p>
-                          <p>9999</p>
+                        <div>
+                          <input
+                            min={300}
+                            max={9999}
+                            type="range"
+                            className="accent-quad w-full"
+                            value={mysteryItem.amount}
+                            onChange={(e) => {
+                              setMysteryItem({
+                                ...mysteryItem,
+                                amount: e.target.value,
+                              });
+                            }}
+                          />
+                          <div className="col-start-2 flex items-center justify-between">
+                            <p className=" text-sm">min. 300</p>
+                            <p className=" text-sm">max. 9999</p>
+                          </div>
                         </div>
                       </div>
                     </label>
