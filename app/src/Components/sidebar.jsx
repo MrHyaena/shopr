@@ -161,8 +161,17 @@ export function Sidebar() {
                 onClick={() => {
                   setToggleMenu(false);
                 }}
+                to="/app/form"
+                className="bg-quad text-textButton cursor-pointer text-base font-bold py-2 px-3 text-md rounded-md transition-all ease-in-out hover:scale-105  self-stretch"
+              >
+                Nové předplatné
+              </Link>
+              <Link
+                onClick={() => {
+                  setToggleMenu(false);
+                }}
                 to="/app"
-                className="text-lg font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
+                className="text-base font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
               >
                 Moje předplatné
               </Link>
@@ -172,7 +181,7 @@ export function Sidebar() {
                   setToggleMenu(false);
                 }}
                 to="/app/osobni-udaje"
-                className="text-lg font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
+                className="text-base font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
               >
                 Osobní údaje
               </Link>
@@ -181,19 +190,19 @@ export function Sidebar() {
                   setToggleMenu(false);
                 }}
                 to="/app/kontakt"
-                className="text-lg font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
+                className="text-base font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
               >
                 Kontakt
               </Link>
               <Link
                 target="_blank"
                 to="https://shopr.cz/otazky"
-                className="text-lg font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
+                className="text-base font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
               >
                 FAQ
               </Link>
               <button
-                className="text-lg font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
+                className="text-base font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
                 onClick={handleLogout}
               >
                 Odhlásit
