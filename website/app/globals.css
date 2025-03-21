@@ -218,6 +218,7 @@
 
   --animate-scale-up: scale-up ease-out 0.5s forwards;
   --animate-scale-up-delay: scale-up ease-out 0.5s both 0.8s;
+  --animate-scale-up-delay-forward: scale-up ease-out 0.5s forwards 0.8s;
 
   @keyframes scale-up {
     0% {
