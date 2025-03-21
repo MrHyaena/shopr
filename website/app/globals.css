@@ -237,7 +237,7 @@
     100% {
       opacity: 1;
 
-      transform: scale(0px);
+      transform: scale(1);
     }
   }
 
