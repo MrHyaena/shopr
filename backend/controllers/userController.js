@@ -163,7 +163,8 @@ const signupUser = async (req, res) => {
       fromEmail,
       toEmail,
       subject,
-      emailBody
+      emailBody,
+      false
     );
 
     //create token
@@ -344,7 +345,7 @@ const deleteUser = async (req, res) => {
 <p>Přejeme V&aacute;m do budoucna to nejlep&scaron;&iacute; a budeme doufat, že se je&scaron;tě někdy zastav&iacute;te.</p>
 <p>S pozdravem,</p>
 <p>T&yacute;m Shopr</p>`;
-    sendEmail(fromEmail, toEmail, subject, emailBody);
+    sendEmail(fromEmail, toEmail, subject, emailBody, false);
 
     console.log("email");
 
@@ -458,7 +459,13 @@ const resetUserEmail = async (req, res) => {
     const fromEmail = process.env.SMTP_EMAIL_INFO;
     const toEmail = email;
     const subject = "Shopr - Žádost o změnu hesla";
-    const response = await sendEmail(fromEmail, toEmail, subject, emailBody);
+    const response = await sendEmail(
+      fromEmail,
+      toEmail,
+      subject,
+      emailBody,
+      false
+    );
   }
 
   res.json(

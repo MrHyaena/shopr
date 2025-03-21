@@ -13,7 +13,7 @@ const router = express.Router();
 
 // ---------------------- SERVER ROUTES ----------------------
 
-//activate subscription route
+//send user message
 router.post("/usercontact", requireAuth, async (req, res) => {
   const data = req.body;
 
@@ -28,7 +28,14 @@ router.post("/usercontact", requireAuth, async (req, res) => {
   );
 
   try {
-    const response = await sendEmail(fromEmail, toEmail, subject, emailBody);
+    const response = await sendEmail(
+      fromEmail,
+      toEmail,
+      subject,
+      emailBody,
+      true,
+      data.email
+    );
     res.status(200).json("Zpráva úspěšně odeslána");
   } catch {
     res.status(400).json("Zprávu se nepodařilo odeslat");
