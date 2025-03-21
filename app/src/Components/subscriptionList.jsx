@@ -873,7 +873,7 @@ export function SubscriptionList({ setLoader }) {
   return (
     <>
       <div
-        className="bg-slate-50 xl:p-10 p-3 flex flex-col xl:gap-10 gap-5 rounded-2xl min-h-screen xl:pt-10 pt-30 xl:pb-0 pb-30 overflow-hidden"
+        className="bg-slate-50 xl:p-10 p-3 flex flex-col xl:gap-10 gap-5 rounded-2xl min-h-screen xl:pt-10 pt-30 xl:pb-30 pb-30 overflow-hidden"
         key="subList"
       >
         <div className="xl:flex xl:flex-row flex-col-reverse items-center justify-between xl:gap-0 gap-5 hidden">
