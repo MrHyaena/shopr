@@ -172,7 +172,7 @@ export default function FAQQuestion() {
           </h3>
           <div className="flex flex-col gap-8">
             <QuestionToggle
-              question={"K čemu ptořebujete mé osobní údaje?"}
+              question={"K čemu potřebujete mé osobní údaje?"}
               answer={
                 "osobní slouží pro zjednodušení celého systému. Údaje můžete na jedno kliknutí nahrát do formuláře při nastavování předplatného, což šetří spoustu času."
               }
@@ -180,7 +180,7 @@ export default function FAQQuestion() {
             <QuestionToggle
               question={"Můžu své osobní údaje změnit?"}
               answer={
-                "Kromě emailu, který slouží jako indentifikátor vašeho účtu, můžete změnit jakýkoliv údaj chcete."
+                "Kromě emailu, který slouží jako identifikátor vašeho účtu, můžete změnit jakýkoliv údaj chcete."
               }
             />{" "}
             <QuestionToggle

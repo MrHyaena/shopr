@@ -45,7 +45,7 @@ export default function About() {
               <p className="max-w-[600px] font-medium text-textDark text-lg">
                 Kromě nějakých svalů máme totiž také trable s pravidelnými
                 nákupy. Snažíme se být plně investovaní v pro nás smysluplných
-                věcech a tak nějak už nezbývá mentální kapacita a pamět na
+                věcech a tak nějak už nezbývá mentální kapacita a paměť na
                 doplňování zásob. Vždy jsme se k tomu dostali i dva týdny a více
                 poté, co nám daná látka došla. A to je někdy, jak si jistě umíte
                 představit, dost pozdě.

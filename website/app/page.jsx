@@ -220,8 +220,8 @@ export default function Home() {
                   <h3>Zvířecí žrádlo a pamlsky</h3>
                 </div>
                 <p>
-                  Zvířata jsou součastí našich domovů od nepaměti. Když si
-                  nějaké pořídíme, máme také za nového člena domácnosti
+                  Zvířata jsou součástí našich domovů od nepaměti. Když si
+                  nějaké pořídíme, získáme za nového člena domácnosti
                   odpovědnost v podobě krmení, venčení, změny podestýlky apod.
                 </p>
                 <p>
