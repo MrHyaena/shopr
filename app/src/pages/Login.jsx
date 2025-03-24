@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 import { Link } from "react-router-dom";
 import logoBlack from "/public/shopr-logo.png";
@@ -19,6 +19,24 @@ export function LoginPage() {
     window.captchaState = (e) => {
       setCaptcha(true);
     };
+
+    useEffect(() => {
+      // select all turnstiles
+      const turnstileContainers = document.querySelectorAll(".cf-turnstile");
+
+      turnstileContainers.forEach((turnstileContainer) => {
+        turnstileContainer.innerHTML = "";
+        if (window && window.turnstile) {
+          // re-render all turnstiles
+          window.turnstile.render(turnstileContainer, {
+            sitekey: "0x4AAAAAABCVC8NJR-IpXB1O",
+            callback: function (token) {
+              setCaptcha(true);
+            },
+          });
+        }
+      });
+    }, []);
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -112,6 +130,10 @@ export function LoginPage() {
             </p>
           </div>
         </div>
+        <script
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+          async
+        ></script>
       </>
     );
   }
@@ -232,10 +254,6 @@ export function LoginPage() {
 
         {reset ? <Reset /> : <Login />}
       </div>
-      <script
-        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-        async
-      ></script>
     </>
   );
 }
