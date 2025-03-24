@@ -15,6 +15,7 @@ const {
 const {
   emailTemplateActivateAccount,
   emailTemplatePasswordChange,
+  emailTemplateDeleteUser,
 } = require("../email/emailTemplates");
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
@@ -186,6 +187,9 @@ const signupUser = async (req, res) => {
       cityNumber,
     });
   } catch (error) {
+    const user = await User.findOneAndDelete({
+      email: email,
+    });
     res.status(400).json({ error: error.message });
   }
 };
@@ -338,13 +342,7 @@ const deleteUser = async (req, res) => {
     const fromEmail = process.env.SMTP_EMAIL_INFO;
     const toEmail = user.email;
     const subject = "Váš učet byl plně zrušen";
-    const emailBody = `<h4>Dobr&yacute; den!</h4>
-<h2>V&aacute;&scaron; &uacute;čet v na&scaron;&iacute; aplikaci Shopr byl plně zru&scaron;en.</h2>
-<p>V&scaron;echna předplatn&aacute; jsou deaktivov&aacute;na. Z va&scaron;&iacute; karty se t&iacute;m p&aacute;dem nebudou strh&aacute;vat ž&aacute;dn&eacute; dal&scaron;&iacute; platby. Stejně tak jsme smazali va&scaron;e uživatelsk&eacute; &uacute;daje.</p>
-<p>Samozřejmě n&aacute;s mrz&iacute;, že odch&aacute;z&iacute;te, nicm&eacute;ně to naprosto ch&aacute;peme. Je zbytečn&eacute; platit za službu, kterou nepouž&iacute;v&aacute;te, př&iacute;padně kterou nepotřebujete, nebo s n&iacute; nejste spokojeni.</p>
-<p>Přejeme V&aacute;m do budoucna to nejlep&scaron;&iacute; a budeme doufat, že se je&scaron;tě někdy zastav&iacute;te.</p>
-<p>S pozdravem,</p>
-<p>T&yacute;m Shopr</p>`;
+    const emailBody = emailTemplateDeleteUser(user.email);
     sendEmail(fromEmail, toEmail, subject, emailBody, false);
 
     console.log("email");

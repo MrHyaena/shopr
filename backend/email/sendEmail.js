@@ -29,6 +29,13 @@ async function sendEmail(
     subject: subject,
     html: emailBody,
     replyTo: replyToContact,
+    attachments: [
+      {
+        filename: "shopr-background.png",
+        path: "./public/images/shopr-google.png",
+        cid: "logo@nodemailer.com",
+      },
+    ],
   });
 
   return response;

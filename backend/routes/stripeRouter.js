@@ -16,6 +16,7 @@ const {
 const { sendEmail } = require("../email/sendEmail");
 const {
   emailTemplateActivateSubscription,
+  emailTemplatePaymentCompleted,
 } = require("../email/emailTemplates");
 const endpointSecret = process.env.STRIPE_WEBHOOK;
 
@@ -144,10 +145,16 @@ router.get("/success", express.json(), async (req, res) => {
     );
 
     // ---------------------- EMAIL - sending confirmation email ----------------------
+    const user = await User.findById({ _id: subscription.userId });
+
     const fromEmail = process.env.SMTP_EMAIL_INFO;
-    const toEmail = subscription.email;
-    const subject = "Shopr - Předplatné aktivováno";
-    const emailBody = emailTemplateActivateSubscription(subscription.subName);
+    const toEmail = user.email;
+    const subject = "Předplatné aktivováno";
+    const emailBody = emailTemplateActivateSubscription(
+      subscription.subName,
+      subscription.subWebsite,
+      process.env.PROXY_APP
+    );
 
     sendEmail(fromEmail, toEmail, subject, emailBody);
 
@@ -238,6 +245,19 @@ router.post(
         );
 
         console.log("task created successfully");
+
+        const user = await User.findById({ _id: subscription.userId });
+
+        const fromEmail = process.env.SMTP_EMAIL_INFO;
+        const toEmail = user.email;
+        const subject = "Platba za předplatné";
+        const emailBody = emailTemplatePaymentCompleted(
+          subscription.subName,
+          subscription.subWebsite,
+          process.env.PROXY_APP
+        );
+
+        sendEmail(fromEmail, toEmail, subject, emailBody);
 
         res.status(200).json({ message: "task created successfully" });
       } catch (error) {

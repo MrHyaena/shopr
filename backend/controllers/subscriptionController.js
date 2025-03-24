@@ -1,10 +1,16 @@
 require("dotenv").config();
 const {
+  emailTemplateDeactivateSubscription,
+} = require("../email/emailTemplates");
+const { sendEmail } = require("../email/sendEmail");
+const {
   pipedriveApiCallV1,
   pipedriveApiCallV2,
   pipedriveApiCallDeleteV2,
 } = require("../functions/pipedriveApiCall");
 const Subscription = require("../models/subscriptionModel");
+const User = require("../models/userModel");
+
 const mongoose = require("mongoose");
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
@@ -562,6 +568,21 @@ const deactivateSubscription = async (req, res) => {
     const filteredArray = subscriptions.filter((item) => item.userId == userId);
 
     const subscriptionArray = Object.values(filteredArray);
+
+    // ---------------------- EMAIL - sending deactivation email ----------------------
+
+    const user = await User.findById({ _id: subscription.userId });
+
+    const fromEmail = process.env.SMTP_EMAIL_INFO;
+    const toEmail = user.email;
+    const subject = "Předplatné deaktivováno";
+    const emailBody = emailTemplateDeactivateSubscription(
+      subscription.subName,
+      subscription.subWebsite,
+      process.env.PROXY_APP
+    );
+
+    sendEmail(fromEmail, toEmail, subject, emailBody);
 
     res.status(200).json({ subscriptions: subscriptionArray });
   } catch (error) {
