@@ -196,9 +196,32 @@ const signupUser = async (req, res) => {
 
 //login user controller function
 const loginUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, captchaToken } = req.body;
+  console.log(captchaToken);
 
   try {
+    // -------------- TURNSTILE CAPTCHA VERIFICATION ----------
+
+    const captcha = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          secret: process.env.TURNSTILE_SECRET,
+          response: captchaToken,
+        }),
+      }
+    );
+
+    console.log(captcha);
+
+    if (!captcha.ok) {
+      throw Error("Ověření Captcha se nepovedlo. Zkuste to prosím znovu.");
+    }
+
     // ------------ VALIDATION OF DATA FROM FORM --------------
     if (!email || !password) {
       throw Error("Musíte vyplnit všechna pole");

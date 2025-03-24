@@ -14,11 +14,19 @@ export function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { login, error, isLoading } = useLogin();
+    const [captcha, setCaptcha] = useState(false);
+
+    window.captchaState = (e) => {
+      setCaptcha(true);
+    };
 
     const handleSubmit = async (e) => {
       e.preventDefault();
 
-      await login({ email, password });
+      const formData = new FormData(e.target);
+      const captchaToken = formData.get("cf-turnstile-response");
+
+      await login({ email, password, captchaToken });
     };
     return (
       <>
@@ -36,7 +44,7 @@ export function LoginPage() {
         <div className="bg-white flex xl:flex-row flex-col-reverse border rounded-xl border-slate-200 shadow-lg animate-fall-right-faster">
           <form
             className="flex flex-col gap-5 xl:py-10 py-5 px-5 xl:px-0 xl:pl-10"
-            onSubmit={handleSubmit}
+            onSubmit={(e) => handleSubmit(e)}
           >
             <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
               <legend className="text-xl font-semibold text-slate-900 mb-5">
@@ -76,12 +84,18 @@ export function LoginPage() {
               </p>
             </fieldset>
             <button
-              disabled={isLoading}
-              className="bg-quad text-textButton xl:m-3 m-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+              disabled={isLoading || !captcha}
+              className="bg-quad disabled:bg-gray-500 disabled:hover:scale-100 disabled:cursor-default text-textButton xl:m-3 m-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               type="submit"
             >
               Přihlásit se
             </button>
+            <div
+              className="cf-turnstile"
+              data-sitekey="0x4AAAAAABCVC8NJR-IpXB1O"
+              data-theme="light"
+              data-callback="captchaState"
+            ></div>
             <Link
               to="/signup"
               className="text-center font-semibold hover:scale-105 transition-all ease-in-out"
@@ -218,6 +232,10 @@ export function LoginPage() {
 
         {reset ? <Reset /> : <Login />}
       </div>
+      <script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+        async
+      ></script>
     </>
   );
 }
