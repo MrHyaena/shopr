@@ -28,6 +28,7 @@ import heroImgTwo from "./_img/hero.jpg";
 import Link from "next/link";
 import { BlackDivider } from "./components/BlackDivider";
 import { CTA } from "./components/CTA/CTA";
+import FAQSmall from "./components/FAQ/FAQSmall";
 
 //Metadata
 export const metadata = {
@@ -315,6 +316,7 @@ export default function Home() {
           "Celý uživatelský účet, jeho nastavení a tvorba předplatných je zdarma. Platba probíhá pouze ve chvíli, kdy máte u nějakého e-shopu předplatné aktivované a my pro Vás zajišťujeme pravidelné objednávky."
         }
       />
+      <FAQSmall />
       <CTA
         subHeading={"Využijte svůj čas smysluplně"}
         heading={"Nechte pravidelné objednávky na nás!"}

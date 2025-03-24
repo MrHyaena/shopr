@@ -1,3 +1,5 @@
+//Emaily byly vytvořené skrze software Amazon SES UI Client, který se dá stáhnout na Microsoft store
+
 //Emaily týkající se předplatných a plateb
 export function emailTemplateActivateSubscription(subName, subWebsite, appUrl) {
   let body = `<!doctype html>

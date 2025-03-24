@@ -1,6 +1,6 @@
 import React from "react";
-import FAQQuestion from "../components/FAQQuestion";
-import FAQList from "../components/FAQList";
+import FAQList from "../components/FAQ/FAQList";
+import FAQQuestion from "../components/FAQ/FAQQuestion";
 
 //Metadata
 export const metadata = {

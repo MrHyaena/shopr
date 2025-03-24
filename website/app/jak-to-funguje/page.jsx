@@ -10,6 +10,7 @@ import ReviewOne from "../components/ReviewOne";
 import { HowDoesItWork } from "../components/HowDoesItWork";
 import { CTABlock } from "../components/CTA/CTABlock";
 import { HeadingCenter } from "../components/Heading/HeadingCenter";
+import FAQSmall from "../components/FAQ/FAQSmall";
 
 //Metadata
 export const metadata = {
@@ -40,6 +41,7 @@ export default function Howto() {
         </div>
       </div>
       <HowDoesItWork />
+      <FAQSmall />
       <CTABlock />
     </>
   );

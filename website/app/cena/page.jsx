@@ -1,7 +1,7 @@
 import React from "react";
 import Newsletter from "../components/Newsletter";
 import PriceDescription from "../components/PriceDescription";
-import QuestionShow from "../components/QuestionsShow";
+import QuestionShow from "../components/FAQ/QuestionsShow";
 import Link from "next/link";
 import { CTA } from "../components/CTA/CTA";
 import { BlackDivider } from "../components/BlackDivider";

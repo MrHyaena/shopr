@@ -10,10 +10,10 @@ export function HowDoesItWork() {
     <>
       <div className="flex items-center justify-center py-10">
         <div className="max-w-wrapper flex flex-col items-center justify-start gap-10">
-          <div>
-            <div className="lg:grid flex flex-col-reverse grid-cols-[1fr_2px_1fr] max-w-[1000px] gap-10 p-3">
+          <div className="p-3">
+            <div className="lg:grid flex flex-col-reverse grid-cols-[1fr_2px_1fr] max-w-[1000px] gap-10">
               <div className=" bg-white border border-slate-200 my-10 rounded-lg shadow-lg mb-20">
-                <h4 className="bg-primary text-white p-10 rounded-t-lg border border-slate-200">
+                <h4 className="bg-primary text-white p-10 rounded-t-lg  border-slate-200">
                   Založíte účet
                 </h4>
                 <div className="flex flex-col gap-5 my-10">
@@ -48,7 +48,7 @@ export function HowDoesItWork() {
                 </div>
               </div>
             </div>
-            <div className="lg:grid flex flex-col grid-cols-[1fr_2px_1fr] max-w-[1000px] gap-10 p-3">
+            <div className="lg:grid flex flex-col grid-cols-[1fr_2px_1fr] max-w-[1000px] gap-10">
               <div className=" flex flex-col lg:py-10 lg:mb-20">
                 <div className="sticky top-80 flex flex-col items-center">
                   <FontAwesomeIcon
@@ -60,7 +60,7 @@ export function HowDoesItWork() {
                 </div>
               </div>
               <div className="w-1 bg-quad lg:block hidden"></div>
-              <div className=" bg-white border border-slate-200 my-10 rounded-lg shadow-lg mb-20">
+              <div className=" bg-white  border-slate-200 my-10 rounded-lg shadow-lg mb-20">
                 <h4 className="bg-primary text-white p-10 rounded-t-lg border border-slate-200">
                   Vytvoříte předplatné
                 </h4>
@@ -78,8 +78,8 @@ export function HowDoesItWork() {
                 </div>
               </div>
             </div>
-            <div className="lg:grid flex flex-col-reverse grid-cols-[1fr_2px_1fr] max-w-[1000px] gap-10 p-3">
-              <div className=" bg-white border border-slate-200 my-10 rounded-lg shadow-lg  mb-20">
+            <div className="lg:grid flex flex-col-reverse grid-cols-[1fr_2px_1fr] max-w-[1000px] gap-10">
+              <div className=" bg-white  border-slate-200 my-10 rounded-lg shadow-lg  mb-20">
                 <h4 className="bg-primary text-white p-10 rounded-t-lg border border-slate-200">
                   Aktivujete předplatné
                 </h4>

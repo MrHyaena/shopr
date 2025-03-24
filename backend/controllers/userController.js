@@ -157,7 +157,7 @@ const signupUser = async (req, res) => {
 
     const toEmail = email;
     const fromEmail = process.env.SMTP_EMAIL_INFO;
-    const subject = "Shopr - Aktivace účtu";
+    const subject = "Aktivace účtu";
     const emailBody = emailTemplateActivateAccount(URL);
 
     const emailResponse = await sendEmail(
@@ -456,7 +456,7 @@ const resetUserEmail = async (req, res) => {
     const emailBody = emailTemplatePasswordChange(url);
     const fromEmail = process.env.SMTP_EMAIL_INFO;
     const toEmail = email;
-    const subject = "Shopr - Žádost o změnu hesla";
+    const subject = "Žádost o změnu hesla";
     const response = await sendEmail(
       fromEmail,
       toEmail,
