@@ -7,7 +7,6 @@ const userRouter = require("./routes/userRouter");
 const subscriptionRouter = require("./routes/subscriptionRouter");
 const stripeRouter = require("./routes/stripeRouter");
 const emailRouter = require("./routes/emailRouter");
-const crmRouter = require("./routes/crmRouter");
 const adminRouter = require("./routes/adminRouter");
 const pipedriveRouter = require("./routes/pipedriveRouter");
 
@@ -36,13 +35,10 @@ app.use("/api/stripe", stripeRouter);
 //router for stripe handling
 app.use("/api/email", express.json(), emailRouter);
 
-//router for pipedrive handling
-app.use("/api/pipedrive", express.json(), crmRouter);
-
 //router for admin
 app.use("/api/admin", express.json(), adminRouter);
 
-//router for admin
+//router for pipedrive
 app.use("/api/pipedrive", express.json(), pipedriveRouter);
 
 //starting server and connecting to database

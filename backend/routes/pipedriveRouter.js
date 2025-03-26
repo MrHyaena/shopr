@@ -20,8 +20,7 @@ router.post("/webhook/activity/update", express.json(), async (req, res) => {
   const data = req.body.data;
   const previous = req.body.previous;
 
-  console.log(req.headers["php-auth-user"]);
-  console.log(req.headers["php-auth-pw"]);
+  console.log(req.headers);
 
   try {
     if (
@@ -32,7 +31,7 @@ router.post("/webhook/activity/update", express.json(), async (req, res) => {
       // ---------------------- MONGOOSE - create record of subscription ----------------------
 
       const personId = data.person_id;
-      const subscription = Subscription.findOne({
+      const subscription = await Subscription.findOne({
         pipedrivePersonId: personId,
       });
 
