@@ -12,10 +12,10 @@ export const metadata = {
 export default function About() {
   return (
     <>
-      <div className=" flex justify-center items-start xl:py-30 xl:px-5 px-3 text-center lg:text-start">
+      <div className=" flex justify-center items-start xl:py-30 pb-30 xl:px-5 px-3 text-center lg:text-start">
         <div className="max-w-wrapper flex flex-col items-center justify-start">
           <div className=" flex flex-col items-center justify-center py-20">
-            <div className="max-w-wrapper mx-auto text-center flex flex-col items-center ">
+            <div className="max-w-wrapper mx-auto xl:text-center flex flex-col xl:items-center items-start text-start">
               <p className="headingSmall">GDPR</p>
               <h2 className="mt-2 my-5">Podmínky ochrany osobních údajů</h2>
               <p className="max-w-[700px]">
@@ -26,7 +26,7 @@ export default function About() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-20">
+          <div className="flex flex-col text-start gap-20">
             {/* Vymezení základních pojmů */}
             <div className="flex flex-col gap-10">
               <h3>1. Vymezení základních pojmů</h3>

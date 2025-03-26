@@ -248,6 +248,8 @@ router.post(
 
         const user = await User.findById({ _id: subscription.userId });
 
+        // ---------------------- EMAIL - payment succeeded----------------------
+
         const fromEmail = process.env.SMTP_EMAIL_INFO;
         const toEmail = user.email;
         const subject = "Platba za předplatné";

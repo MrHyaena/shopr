@@ -10,10 +10,10 @@ export const metadata = {
 export default function page() {
   return (
     <>
-      <div className=" flex justify-center items-start xl:py-30 xl:px-5 px-3 text-center lg:text-start">
+      <div className=" flex justify-center items-start xl:py-30 pb-30 xl:px-5 px-3 text-center lg:text-start">
         <div className="max-w-wrapper flex flex-col items-center justify-start">
           <div className=" flex flex-col items-center justify-center py-20">
-            <div className="max-w-wrapper mx-auto text-center flex flex-col items-center ">
+            <div className="max-w-wrapper mx-auto xl:text-center flex flex-col xl:items-center items-start text-start">
               <p className="headingSmall">Základ používání aplikace</p>
               <h2 className="mt-2 my-5">Obchodní podmínky</h2>
               <p className="max-w-[700px]">
@@ -25,7 +25,7 @@ export default function page() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-20">
+          <div className="flex flex-col text-start gap-20">
             {/* Vymezení základních pojmů */}
             <div className="flex flex-col gap-10">
               <h3>1. Vymezení základních pojmů</h3>
@@ -358,6 +358,19 @@ export default function page() {
                 <span className="font-bold text-2xl">3.12.</span> Poskytovatel
                 nemá odpovědnost za jednání internetového obchodu a za jakékoliv
                 problémy, které by z toho mohly pro uživatele plynout.
+              </p>
+              <p>
+                <span className="font-bold text-2xl">3.13.</span> Poskytovatel
+                má povinnost dát uživateli informaci o datumu následující platby
+                za aktivní předplatné a jeho vyplnění. Poskytovatel tuto
+                informaci předává skrze uživatelský účet, kde ji poskytovatel
+                najde u konkrétního předplatného.
+              </p>
+              <p>
+                <span className="font-bold text-2xl">3.14.</span> Poskytovatel
+                má povinnost informovat uživatele o provedené platbě. Informaci
+                poskytovatel předává na emailovou adresu, kterou uživatel zadává
+                při registraci účtu.
               </p>
             </div>
             {/* Poplatky a úhrady */}
