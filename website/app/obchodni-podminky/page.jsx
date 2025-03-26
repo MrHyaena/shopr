@@ -78,7 +78,7 @@ export default function page() {
               <p>
                 <span className="font-bold text-2xl">1.7.</span> Vyplněním
                 předplatného se rozumí vytvoření a dokončení objednávky podle
-                uživatelem zadaných parametrů v zadaném online obchodu.
+                uživatelem zadaných parametrů v cílovém internetovém obchodu.
               </p>
               <p>
                 <span className="font-bold text-2xl">1.8.</span> Aplikací se
@@ -142,9 +142,12 @@ export default function page() {
               </p>
               <p>
                 <span className="font-bold text-2xl">1.18.</span> Záznamem o
-                vyplnění předplatného se rozumí záznam údajů ke konkrétnímu času
-                a datu, který je neměnný. Využívá se pro případné budoucí spory
-                týkající se správnosti vyplnění předplatného.
+                vyplnění předplatného se rozumí záznam údajů o předplatném ke
+                konkrétnímu času a datu, který je neměnný. Záznam je vytvořen ve
+                chvíli, kdy poskytovatel vyplní předplatné, tedy v moment
+                objednání zboží z cílového internetového obchodu. Využívá se pro
+                případné budoucí spory týkající se správnosti vyplnění
+                předplatného.
               </p>
             </div>
             {/* Práva a povinnosti uživatele */}

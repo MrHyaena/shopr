@@ -9,6 +9,7 @@ const stripeRouter = require("./routes/stripeRouter");
 const emailRouter = require("./routes/emailRouter");
 const crmRouter = require("./routes/crmRouter");
 const adminRouter = require("./routes/adminRouter");
+const pipedriveRouter = require("./routes/pipedriveRouter");
 
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -40,6 +41,9 @@ app.use("/api/pipedrive", express.json(), crmRouter);
 
 //router for admin
 app.use("/api/admin", express.json(), adminRouter);
+
+//router for admin
+app.use("/api/pipedrive", express.json(), pipedriveRouter);
 
 //starting server and connecting to database
 mongoose
