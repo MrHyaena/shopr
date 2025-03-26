@@ -20,7 +20,6 @@ router.post("/webhook/activity/update", express.json(), async (req, res) => {
   const data = req.body.data;
   const previous = req.body.previous;
   const authHeader = req.headers.authorization;
-  console.log(auth);
 
   if (!auth) {
     throw Error("Chybí autorizace");
