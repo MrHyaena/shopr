@@ -19,8 +19,21 @@ const router = express.Router();
 router.post("/webhook/activity/update", express.json(), async (req, res) => {
   const data = req.body.data;
   const previous = req.body.previous;
+  const authHeader = req.headers.authorization;
+  console.log(auth);
 
-  console.log(req.headers);
+  if (!auth) {
+    throw Error("Chybí autorizace");
+  }
+
+  const auth = new Buffer.from(authHeader.split(" ")[1], "base64")
+    .toString()
+    .split(":");
+  const user = auth[0];
+  const pass = auth[1];
+
+  console.log(user);
+  console.log(pass);
 
   try {
     if (
