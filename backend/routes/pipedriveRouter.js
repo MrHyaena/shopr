@@ -21,7 +21,6 @@ router.post("/webhook/activity/update", express.json(), async (req, res) => {
   const previous = req.body.previous;
   const authHeader = req.headers.authorization;
 
-  console.log(authHeader);
   if (!authHeader) {
     throw Error("Chybí autorizace");
   }
@@ -32,8 +31,14 @@ router.post("/webhook/activity/update", express.json(), async (req, res) => {
   const user = auth[0];
   const pass = auth[1];
 
-  console.log(user);
-  console.log(pass);
+  if (
+    user != process.env.PIPEDRIVE_UPDATE_WEBHOOK_USERNAME &&
+    pass != process.env.PIPEDRIVE_UPDATE_WEBHOOK_PASSWORD
+  ) {
+    throw Error("Nejste authorizovaní");
+  }
+
+  console.log("Ověření proběhlo v pořádku");
 
   try {
     if (
