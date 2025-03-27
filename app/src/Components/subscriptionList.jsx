@@ -203,7 +203,7 @@ export function SubscriptionList({ setLoader }) {
                     Platební ID:
                   </h4>
                   <p className="break-all">
-                    {active ? stripeSubId : <p>Předplatné je neaktivní</p>}
+                    {active ? stripeSubId : "Předplatné je neaktivní"}
                   </p>
                 </div>
                 {subDeliveryMethod !== "courier" && (
@@ -226,6 +226,7 @@ export function SubscriptionList({ setLoader }) {
                         className="font-semibold text-textDark w-full hover:border-quad hover:text-textButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-quad  cursor-pointer"
                         onClick={() => {
                           activateSubscriptionHandler(
+                            setUser,
                             _id,
                             subName,
                             subWebsite,
@@ -682,6 +683,7 @@ export function SubscriptionList({ setLoader }) {
                       deleteSubscriptionHandler(
                         _id,
                         user,
+                        setUser,
                         subscriptions,
                         setSubscriptions,
                         setLoader
@@ -753,6 +755,7 @@ export function SubscriptionList({ setLoader }) {
                         _id,
                         stripeSubId,
                         user,
+                        setUser,
                         setSubscriptions,
                         setLoader
                       );
@@ -838,6 +841,7 @@ export function SubscriptionList({ setLoader }) {
                     setToggleDeactivate(false);
                     setCheckDeactivate(null);
                     activateSubscriptionHandler(
+                      setUser,
                       _id,
                       subName,
                       subWebsite,

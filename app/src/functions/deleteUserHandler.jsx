@@ -1,3 +1,5 @@
+import { tokenExpired } from "./tokenExpired";
+
 const apiURL = import.meta.env.VITE_API_URL;
 const websiteURL = import.meta.env.VITE_WEBSITE_URL;
 
@@ -24,6 +26,7 @@ export function deleteUserHandler() {
     if (!response.ok) {
       setLoader(false);
       setErrorDelete(json);
+      tokenExpired(json, setUser);
     }
   }
 

@@ -1,11 +1,13 @@
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
+import { tokenExpired } from "./tokenExpired";
 const apiURL = import.meta.env.VITE_API_URL;
 
 // FUNCTION FOR DELETING SUBSCRIPTIONS
 export async function deleteSubscriptionHandler(
   subId,
   user,
+  setUser,
   subscriptions,
   setSubscriptions,
   setLoader
@@ -31,6 +33,7 @@ export async function deleteSubscriptionHandler(
 
   if (!response.ok) {
     setLoader(false);
+    tokenExpired(json, setUser);
     console.log(response);
   }
 }

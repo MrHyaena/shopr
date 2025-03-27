@@ -28,8 +28,9 @@ export function useLogin() {
 
     if (response.ok) {
       // save the user to local storage
-
-      localStorage.setItem("user", JSON.stringify(json));
+      if (data.remember) {
+        localStorage.setItem("user", JSON.stringify(json));
+      }
 
       // update the auth context
       setUser({ ...json });

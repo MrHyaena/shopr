@@ -21,7 +21,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 //create token function
 function createToken(_id) {
-  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "3d" });
+  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "1s" });
 }
 
 //signup user controller function
@@ -42,18 +42,7 @@ const signupUser = async (req, res) => {
   } = data;
   try {
     // ------------ VALIDATION OF DATA FROM FORM --------------
-    if (
-      !email ||
-      !password ||
-      !firstName ||
-      !secondName ||
-      !phone ||
-      !address ||
-      !addressNumber ||
-      !city ||
-      !cityNumber ||
-      !terms
-    ) {
+    if (!email || !password || !firstName || !secondName || !phone || !terms) {
       throw Error("Musíte vyplnit všechna pole");
     }
 
@@ -62,11 +51,14 @@ const signupUser = async (req, res) => {
       throw Error("Heslo musí mít alespoň 6 znaků");
     }
 
+    if (password != passwordCheck) {
+      throw Error("Hesla se musí shodovat");
+    }
+
     const letterArray = password.split("");
     const checkArray = await letterArray.filter(
       (item) => isFinite(item) && !isNaN(item)
     );
-    console.log(letterArray);
 
     if (checkArray.length == 0) {
       throw Error("Heslo musí mít alespoň jedno číslo");
@@ -131,10 +123,6 @@ const signupUser = async (req, res) => {
       firstName,
       secondName,
       phone,
-      address,
-      addressNumber,
-      city,
-      cityNumber,
       terms,
     });
 
@@ -196,31 +184,28 @@ const signupUser = async (req, res) => {
 
 //login user controller function
 const loginUser = async (req, res) => {
-  const { email, password, captchaToken } = req.body;
-  console.log(captchaToken);
+  const { email, password } = req.body;
 
   try {
     // -------------- TURNSTILE CAPTCHA VERIFICATION ----------
 
-    const captcha = await fetch(
-      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          secret: process.env.TURNSTILE_SECRET,
-          response: captchaToken,
-        }),
-      }
-    );
-
-    console.log(captcha);
-
-    if (!captcha.ok) {
-      throw Error("Ověření Captcha se nepovedlo. Zkuste to prosím znovu.");
-    }
+    //const captcha = await fetch(
+    //  "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+    //  {
+    //    method: "POST",
+    //    headers: {
+    //      "Content-Type": "application/json",
+    //    },
+    //    body: JSON.stringify({
+    //      secret: process.env.TURNSTILE_SECRET,
+    //      response: captchaToken,
+    //    }),
+    //  }
+    //);
+    //
+    //if (!captcha.ok) {
+    //  throw Error("Ověření Captcha se nepovedlo. Zkuste to prosím znovu.");
+    //}
 
     // ------------ VALIDATION OF DATA FROM FORM --------------
     if (!email || !password) {
@@ -284,7 +269,6 @@ const deleteUser = async (req, res) => {
       doc != null;
       doc = await subscriptions.next()
     ) {
-      console.log(doc.stripeSubId);
       if (doc.stripeSubId != "empty") {
         stripeSubIdsArray.push(doc.stripeSubId);
       }
@@ -391,16 +375,7 @@ const updateUser = async (req, res) => {
 
   try {
     // ------------ VALIDATION OF DATA --------------
-    if (
-      !email ||
-      !firstName ||
-      !secondName ||
-      !phone ||
-      !address ||
-      !addressNumber ||
-      !city ||
-      !cityNumber
-    ) {
+    if (!email || !firstName || !secondName || !phone) {
       throw Error("Musíte vyplnit všechna pole");
     }
 
@@ -429,8 +404,6 @@ const updateUser = async (req, res) => {
       "PUT",
       payload
     );
-
-    console.log(pipeResponse);
 
     if (!pipeResponse.ok) {
       throw Error("Něco se pokazilo. (Pipedrive)");
@@ -498,7 +471,6 @@ const resetUserPassword = async (req, res) => {
   const hash = req.query.hash;
   const { password, passwordCheck } = req.body;
   const hashObject = await Hashcheck.findOne({ token: hash });
-  console.log(hashObject.userId);
   //Dates
   const hashObjectDate = await hashObject.createdAt.getTime();
   const nowDate = await Date.now();
@@ -525,7 +497,6 @@ const resetUserPassword = async (req, res) => {
     const checkArray = await letterArray.filter(
       (item) => isFinite(item) && !isNaN(item)
     );
-    console.log(letterArray);
 
     if (checkArray.length == 0) {
       throw Error("Heslo musí mít alespoň jedno číslo");
@@ -540,7 +511,6 @@ const resetUserPassword = async (req, res) => {
         password: hash,
       }
     );
-    console.log(user);
 
     if (!user) {
       throw Error(
@@ -578,6 +548,29 @@ const activateUser = async (req, res) => {
   }
 };
 
+const authorization = async (req, res) => {
+  // verify authentication
+  const { authorization } = req.headers;
+
+  if (!authorization) {
+    throw Error("Authorization token required");
+  }
+
+  const token = authorization.split(" ")[1];
+
+  try {
+    const { _id } = jwt.verify(token, process.env.SECRET);
+
+    res.status(200).json("VerificationSuccess");
+  } catch (error) {
+    console.log(error);
+    res.status(401).json({
+      error: "Request is not authorized/user logged out",
+      errorMessage: error.name,
+    });
+  }
+};
+
 module.exports = {
   signupUser,
   loginUser,
@@ -586,4 +579,5 @@ module.exports = {
   resetUserEmail,
   resetUserPassword,
   activateUser,
+  authorization,
 };

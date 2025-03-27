@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { tokenExpired } from "../functions/tokenExpired";
 const apiURL = import.meta.env.VITE_API_URL;
 
 export function Contact() {
@@ -13,7 +14,7 @@ export function Contact() {
     const [problem, setProblem] = useState("");
     const [message, setMessage] = useState("");
     const [problemToggle, setProblemToggle] = useState(false);
-    const { user } = useAuthContext();
+    const { user, setUser } = useAuthContext();
     const [subject, setSubject] = useState("");
     const [loader, setLoader] = useState(false);
 
@@ -56,6 +57,7 @@ export function Contact() {
         if (!response.ok) {
           setLoader(false);
           setError(json);
+          tokenExpired(json, setUser);
         }
       }
     }

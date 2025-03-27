@@ -1,4 +1,7 @@
+import { tokenExpired } from "./tokenExpired";
+
 export async function activateSubscriptionHandler(
+  setUser,
   subId,
   subName,
   subWebsite,
@@ -9,7 +12,7 @@ export async function activateSubscriptionHandler(
 ) {
   const apiURL = import.meta.env.VITE_API_URL;
 
-  const session = await fetch(
+  const response = await fetch(
     apiURL +
       "/api/stripe/activate/" +
       user.id +
@@ -35,9 +38,13 @@ export async function activateSubscriptionHandler(
     }
   );
 
-  if (session.ok) {
-    const json = await session.json();
+  const json = await response.json();
 
+  if (response.ok) {
     window.location.href = json;
+  }
+
+  if (!response.ok) {
+    tokenExpired(json, setUser);
   }
 }

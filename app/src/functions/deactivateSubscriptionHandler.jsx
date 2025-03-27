@@ -1,3 +1,5 @@
+import { tokenExpired } from "./tokenExpired";
+
 const apiURL = import.meta.env.VITE_API_URL;
 
 // FUNCTION FOR DELETING SUBSCRIPTIONS
@@ -5,6 +7,7 @@ export async function deactivateSubscriptionHandler(
   subId,
   stripeSubId,
   user,
+  setUser,
   setSubscriptions,
   setLoader
 ) {
@@ -38,7 +41,7 @@ export async function deactivateSubscriptionHandler(
 
   if (!response.ok) {
     setLoader(false);
-
+    tokenExpired(json, setUser);
     console.log(response);
   }
 }

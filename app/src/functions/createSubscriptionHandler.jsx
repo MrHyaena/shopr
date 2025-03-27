@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { Link, Navigate, redirect, useNavigate } from "react-router-dom";
+import { tokenExpired } from "./tokenExpired";
 
 export function createSubscriptionHandler() {
   const [error, setError] = useState(null);
@@ -39,6 +40,7 @@ export function createSubscriptionHandler() {
       setLoader(false);
       setIsLoading(false);
       setError(json.error);
+      tokenExpired(json, setUser);
       return;
     }
 
