@@ -39,5 +39,5 @@ export function useLogin() {
     }
   }
 
-  return { login, isLoading, error };
+  return { login, isLoading, error, setError };
 }

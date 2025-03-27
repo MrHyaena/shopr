@@ -5,7 +5,13 @@ const websiteURL = import.meta.env.VITE_WEBSITE_URL;
 
 // FUNCTION FOR DELETING SUBSCRIPTIONS
 export function deleteUserHandler() {
-  async function deleteUser(user, setUser, setLoader, setErrorDelete) {
+  async function deleteUser(
+    user,
+    setUser,
+    setExpired,
+    setLoader,
+    setErrorDelete
+  ) {
     setLoader(true);
     const response = await fetch(apiURL + "/api/user/delete/" + user.id, {
       method: "DELETE",
@@ -26,7 +32,7 @@ export function deleteUserHandler() {
     if (!response.ok) {
       setLoader(false);
       setErrorDelete(json);
-      tokenExpired(json, setUser);
+      tokenExpired(json, setUser, setExpired);
     }
   }
 

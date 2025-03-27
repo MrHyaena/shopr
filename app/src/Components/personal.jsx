@@ -6,10 +6,12 @@ import { deleteUserHandler } from "../functions/deleteUserHandler";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { useExpiredContext } from "../hooks/useExpiredContext";
 
 export function Personal() {
   const { user, setUser } = useAuthContext();
   const { deleteUser } = deleteUserHandler();
+  const { setExpired } = useExpiredContext();
 
   function PersonalForm() {
     const [email, setEmail] = useState("");
@@ -220,7 +222,7 @@ export function Personal() {
     function deleteUserAccount() {
       if (checkDelete == "smazat účet") {
         setCheckDelete(null);
-        deleteUser(user, setUser, setLoader, setErrorDelete);
+        deleteUser(user, setUser, setExpired, setLoader, setErrorDelete);
       }
 
       if (checkDelete !== "smazat účet") {

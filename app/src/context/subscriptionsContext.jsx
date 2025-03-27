@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { tokenExpired } from "../functions/tokenExpired";
+import { useExpiredContext } from "../hooks/useExpiredContext";
 const apiURL = import.meta.env.VITE_API_URL;
 
 export const SubscriptionContext = createContext();
@@ -8,6 +9,7 @@ export const SubscriptionContext = createContext();
 export const SubscriptionContextProvider = ({ children }) => {
   const [subscriptions, setSubscriptions] = useState([]);
   const { user, setUser } = useAuthContext();
+  const { setExpired } = useExpiredContext();
 
   useEffect(() => {
     console.log(user);
@@ -29,7 +31,7 @@ export const SubscriptionContextProvider = ({ children }) => {
       }
 
       if (!response.ok) {
-        tokenExpired(json, setUser);
+        tokenExpired(json, setUser, setExpired);
       }
     };
 

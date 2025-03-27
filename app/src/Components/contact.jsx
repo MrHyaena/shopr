@@ -5,11 +5,13 @@ import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { tokenExpired } from "../functions/tokenExpired";
+import { useExpiredContext } from "../hooks/useExpiredContext";
 const apiURL = import.meta.env.VITE_API_URL;
 
 export function Contact() {
   function Formular() {
     const { subscriptions } = useSubscriptionContext();
+    const { setExpired } = useExpiredContext();
     const [email, setEmail] = useState("");
     const [problem, setProblem] = useState("");
     const [message, setMessage] = useState("");
@@ -57,7 +59,7 @@ export function Contact() {
         if (!response.ok) {
           setLoader(false);
           setError(json);
-          tokenExpired(json, setUser);
+          tokenExpired(json, setUser, setExpired);
         }
       }
     }

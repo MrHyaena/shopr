@@ -2,6 +2,7 @@ import { tokenExpired } from "./tokenExpired";
 
 export async function activateSubscriptionHandler(
   setUser,
+  setExpired,
   subId,
   subName,
   subWebsite,
@@ -45,6 +46,6 @@ export async function activateSubscriptionHandler(
   }
 
   if (!response.ok) {
-    tokenExpired(json, setUser);
+    tokenExpired(json, setUser, setExpired);
   }
 }

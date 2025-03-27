@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 import { tokenExpired } from "../functions/tokenExpired";
+import { useExpiredContext } from "./useExpiredContext";
 const apiURL = import.meta.env.VITE_API_URL;
 
 export function useUpdate() {
   const [isLoading, setIsLoading] = useState(null);
 
   const { user, setUser } = useAuthContext();
+  const { setExpired } = useExpiredContext();
 
   async function update(data, setError, setMessage) {
     setIsLoading(true);
@@ -28,7 +30,7 @@ export function useUpdate() {
     if (!response.ok) {
       setIsLoading(false);
       setError(json);
-      tokenExpired(json, setUser);
+      tokenExpired(json, setUser, setExpired);
     }
 
     if (response.ok) {

@@ -8,6 +8,7 @@ export async function deleteSubscriptionHandler(
   subId,
   user,
   setUser,
+  setExpired,
   subscriptions,
   setSubscriptions,
   setLoader
@@ -33,7 +34,7 @@ export async function deleteSubscriptionHandler(
 
   if (!response.ok) {
     setLoader(false);
-    tokenExpired(json, setUser);
+    tokenExpired(json, setUser, setExpired);
     console.log(response);
   }
 }

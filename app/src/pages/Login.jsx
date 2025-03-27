@@ -6,6 +6,7 @@ import logoBlack from "/public/shopr-logo.png";
 import { useReset } from "../hooks/useReset";
 import { ErrorWindow } from "../Components/errorWindow";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { useExpiredContext } from "../hooks/useExpiredContext";
 
 export function LoginPage() {
   const [reset, setReset] = useState(false);
@@ -13,7 +14,8 @@ export function LoginPage() {
   function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { login, error, isLoading } = useLogin();
+    const { expired } = useExpiredContext();
+    const { login, error, setError, isLoading } = useLogin();
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -23,6 +25,12 @@ export function LoginPage() {
 
       await login({ email, password, remember });
     };
+
+    useEffect(() => {
+      if (expired) {
+        setError(expired);
+      }
+    }, []);
     return (
       <>
         {isLoading && (
@@ -101,7 +109,6 @@ export function LoginPage() {
             >
               Zaregistrovat se
             </Link>
-            {error && <ErrorWindow error={error} />}
           </form>
 
           <div className="xl:w-[300px] xl:flex hidden flex-col items-center gap-3 justify-center bg-white text-textDark m-6 shadow-lg  rounded-lg border border-slate-100  p-10 overflow-clip animate-fall-up-delay">
@@ -111,6 +118,7 @@ export function LoginPage() {
             </p>
           </div>
         </div>
+        {error && <ErrorWindow error={error} />}
       </>
     );
   }

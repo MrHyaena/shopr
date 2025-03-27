@@ -3,11 +3,13 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { Link, Navigate, redirect, useNavigate } from "react-router-dom";
 import { tokenExpired } from "./tokenExpired";
+import { useExpiredContext } from "../hooks/useExpiredContext";
 
 export function createSubscriptionHandler() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const { user, setUser } = useAuthContext();
+  const { setExpired } = useExpiredContext();
   const { subscriptions, setSubscriptions } = useSubscriptionContext();
   const navigate = useNavigate();
   const apiURL = import.meta.env.VITE_API_URL;
@@ -40,7 +42,7 @@ export function createSubscriptionHandler() {
       setLoader(false);
       setIsLoading(false);
       setError(json.error);
-      tokenExpired(json, setUser);
+      tokenExpired(json, setUser, setExpired);
       return;
     }
 

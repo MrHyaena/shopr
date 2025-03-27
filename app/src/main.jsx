@@ -4,13 +4,16 @@ import "./index.css";
 import App from "./App.jsx";
 import { AuthContextProvider } from "./context/authContext.jsx";
 import { SubscriptionContextProvider } from "./context/subscriptionsContext.jsx";
+import { ExpiredContextProvider } from "./context/expiredContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthContextProvider>
-      <SubscriptionContextProvider>
-        <App />
-      </SubscriptionContextProvider>
+      <ExpiredContextProvider>
+        <SubscriptionContextProvider>
+          <App />
+        </SubscriptionContextProvider>
+      </ExpiredContextProvider>
     </AuthContextProvider>
   </StrictMode>
 );

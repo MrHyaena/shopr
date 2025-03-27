@@ -9,6 +9,7 @@ import {
   useParams,
 } from "react-router-dom";
 import { tokenExpired } from "./tokenExpired";
+import { useExpiredContext } from "../hooks/useExpiredContext";
 const apiURL = import.meta.env.VITE_API_URL;
 
 export function patchSubscriptionHandler() {
@@ -16,6 +17,7 @@ export function patchSubscriptionHandler() {
   const [isLoading, setIsLoading] = useState(null);
   const { user, setUser } = useAuthContext();
   const { subscriptions, setSubscriptions } = useSubscriptionContext();
+  const { setExpired } = useExpiredContext();
   const navigate = useNavigate();
 
   async function patchSubscription(
@@ -64,7 +66,7 @@ export function patchSubscriptionHandler() {
       setLoader(false);
       setIsLoading(false);
       setError(json.error);
-      tokenExpired(json, setUser);
+      tokenExpired(json, setUser, setExpired);
       return;
     }
 

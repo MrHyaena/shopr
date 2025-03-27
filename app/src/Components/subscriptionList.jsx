@@ -19,11 +19,13 @@ import { SubscriptionMissing } from "./subscriptionMissing";
 import shopLogo from "/public/shop-solid.png";
 import { deactivateSubscriptionHandler } from "../functions/deactivateSubscriptionHandler";
 import { activateSubscriptionHandler } from "../functions/activateSubscriptionHandler";
+import { useExpiredContext } from "../hooks/useExpiredContext";
 const apiURL = import.meta.env.VITE_API_URL;
 
 export function SubscriptionList({ setLoader }) {
   const { subscriptions, setSubscriptions } = useSubscriptionContext();
   const { user, setUser } = useAuthContext();
+  const { setExpired } = useExpiredContext();
 
   // FUNCTION FOR GENERATING SUBSCRIPTION TABS
 
@@ -225,16 +227,7 @@ export function SubscriptionList({ setLoader }) {
                       <button
                         className="font-semibold text-textDark w-full hover:border-quad hover:text-textButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-quad  cursor-pointer"
                         onClick={() => {
-                          activateSubscriptionHandler(
-                            setUser,
-                            _id,
-                            subName,
-                            subWebsite,
-                            subFrequency,
-                            stripeCustomerId,
-                            user,
-                            itemsType
-                          );
+                          setToggleActivate(true);
                         }}
                       >
                         Aktivovat předplatné
@@ -445,15 +438,7 @@ export function SubscriptionList({ setLoader }) {
                     <button
                       className="font-semibold text-textDark w-full hover:border-quad hover:text-textButton text-lg border border-slate-200 p-3 rounded-md transition-all ease-in-out hover:bg-quad  cursor-pointer"
                       onClick={() => {
-                        activateSubscriptionHandler(
-                          _id,
-                          subName,
-                          subWebsite,
-                          subFrequency,
-                          stripeCustomerId,
-                          user,
-                          itemsType
-                        );
+                        setToggleActivate(true);
                       }}
                     >
                       Aktivovat předplatné
@@ -684,6 +669,7 @@ export function SubscriptionList({ setLoader }) {
                         _id,
                         user,
                         setUser,
+                        setExpired,
                         subscriptions,
                         setSubscriptions,
                         setLoader
@@ -756,6 +742,7 @@ export function SubscriptionList({ setLoader }) {
                         stripeSubId,
                         user,
                         setUser,
+                        setExpired,
                         setSubscriptions,
                         setLoader
                       );
@@ -842,6 +829,7 @@ export function SubscriptionList({ setLoader }) {
                     setCheckDeactivate(null);
                     activateSubscriptionHandler(
                       setUser,
+                      setExpired,
                       _id,
                       subName,
                       subWebsite,
@@ -877,7 +865,7 @@ export function SubscriptionList({ setLoader }) {
   return (
     <>
       <div
-        className="bg-slate-50 xl:p-10 p-3 flex flex-col xl:gap-10 gap-5 rounded-2xl min-h-screen xl:pt-10 pt-30 xl:pb-30 pb-30 overflow-hidden"
+        className="bg-slate-50 xl:p-10 p-3 flex flex-col xl:gap-10 gap-5 rounded-2xl min-h-screen xl:pt-10 pt-18 xl:pb-30 pb-30 overflow-hidden"
         key="subList"
       >
         <div className="xl:flex xl:flex-row flex-col-reverse items-center justify-between xl:gap-0 gap-5 hidden">

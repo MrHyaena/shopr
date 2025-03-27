@@ -8,6 +8,7 @@ export async function deactivateSubscriptionHandler(
   stripeSubId,
   user,
   setUser,
+  setExpired,
   setSubscriptions,
   setLoader
 ) {
@@ -41,7 +42,7 @@ export async function deactivateSubscriptionHandler(
 
   if (!response.ok) {
     setLoader(false);
-    tokenExpired(json, setUser);
+    tokenExpired(json, setUser, setExpired);
     console.log(response);
   }
 }
