@@ -586,7 +586,6 @@ const deactivateSubscription = async (req, res) => {
 
     res.status(200).json({ subscriptions: subscriptionArray });
   } catch (error) {
-    console.log(error);
     res.status(400).json({ error: error.message });
   }
 };

@@ -853,7 +853,7 @@ export function SubscriptionForm({ setLoader }) {
                   setStep(2);
                   handleBack();
                 }}
-                className="bg-quad col-span-2 xl:self-center self-stretch text-textButton xl:p-3 p-2 xl:text-lg text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+                className="bg-quad col-span-2 xl:self-center self-stretch text-textButton xl:p-3 p-2 xl:text-lg text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-[102%] hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               >
                 <FontAwesomeIcon icon={faArrowLeft} /> Zpět
               </button>

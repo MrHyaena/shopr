@@ -21,11 +21,11 @@ export default function QuestionToggle({ question, answer }) {
             onClick={() => {
               setToggle(!toggle);
             }}
-            className="text-2xl flex items-center justify-center bg-quad rounded-lg shadow-md text-white cursor-pointer w-13 h-13"
+            className="text-2xl flex items-center justify-center bg-quad rounded-lg shadow-md text-white cursor-pointer p-3 w-13 h-13"
           >
             {toggle ? (
               <FontAwesomeIcon
-                className="animate-chevron-rotate"
+                className="animate-chevron-rotate "
                 icon={faChevronDown}
               />
             ) : (

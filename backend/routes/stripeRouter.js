@@ -4,7 +4,6 @@
 //requirements
 require("dotenv").config();
 const express = require("express");
-const requireAuth = require("../middleware/requireAuth");
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 const Subscription = require("../models/subscriptionModel");
 const User = require("../models/userModel");
@@ -18,6 +17,8 @@ const {
   emailTemplateActivateSubscription,
   emailTemplatePaymentCompleted,
 } = require("../email/emailTemplates");
+const { requireAuth } = require("../middleware/requireAuth");
+
 const endpointSecret = process.env.STRIPE_WEBHOOK;
 
 //controller functions
@@ -30,6 +31,7 @@ const router = express.Router();
 //activate subscription route - creating cheackout session
 router.get(
   "/activate/:userId/:subId/:subName/:subWebsite/:subFrequency/:stripeCustomerId/:itemsType",
+  requireAuth,
   express.json(),
   async (req, res) => {
     const {
@@ -197,7 +199,6 @@ router.post(
           stripeObject.subscription
         );
 
-        console.log(subscriptionStripe);
         const epoch = subscriptionStripe.current_period_end;
         const date = new Date(epoch * 1000);
         const paymentDate =
@@ -206,8 +207,6 @@ router.post(
           (date.getMonth() + 1) +
           "." +
           date.getFullYear();
-
-        console.log(paymentDate);
 
         const subscription = await Subscription.findByIdAndUpdate(
           {

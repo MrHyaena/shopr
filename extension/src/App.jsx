@@ -8,10 +8,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "./assets/shopr-icon-white.png";
 
-const apiURL = "https://api.shopr.cz";
+const apiURL = "http://localhost:4000";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     chrome.storage.local.get("user", async (result) => {
@@ -55,7 +56,6 @@ function App() {
   function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState(null);
 
     async function login() {
       const response = await fetch(apiURL + "/api/admin/login", {
@@ -223,6 +223,14 @@ function App() {
 
       if (response.ok) {
         setSubscription(json);
+      }
+
+      if (!response.ok) {
+        if (json.errorMessage == "TokenExpiredError") {
+          setUser(null);
+          chrome.storage.local.remove("user");
+          setError("Relace vypršela, přihlašte se znovu.");
+        }
       }
     }
 

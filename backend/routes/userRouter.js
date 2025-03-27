@@ -14,6 +14,7 @@ const {
   resetUserEmail,
   resetUserPassword,
   activateUser,
+  authorization,
 } = require("../controllers/userController");
 const { requireAuth } = require("../middleware/requireAuth");
 
@@ -21,6 +22,9 @@ const { requireAuth } = require("../middleware/requireAuth");
 const router = express.Router();
 
 // ---------------------- SERVER ROUTES ----------------------
+
+//authorization - check jwt token
+router.get("/authorization", authorization);
 
 //login route
 router.post("/login", loginUser);

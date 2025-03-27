@@ -90,7 +90,7 @@ export function SignupPage() {
         {!isLoading ? (
           <>
             {!message ? (
-              <div className="bg-white flex xl:grid grid-cols-2 flex-col-reverse gap-8 p-5 border rounded-xl border-slate-200 shadow-xl animate-fall-down-faster xl:max-w-[60%]">
+              <div className="bg-white flex xl:grid grid-cols-2 flex-col-reverse gap-8 p-5 border rounded-xl border-slate-200 shadow-xl animate-fall-down-faster xl:max-w-[50%]">
                 <form
                   className="flex flex-col gap-5 p-2"
                   onSubmit={handleSubmit}
@@ -99,8 +99,8 @@ export function SignupPage() {
                     <legend className="text-xl font-semibold text-slate-900">
                       Zaregistrovat se
                     </legend>
-                    <div className="flex gap-3 xl:flex-row flex-col">
-                      <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+                    <div className="grid grid-cols-2 gap-3">
+                      <label className="flex flex-col text--textDark text-lg font-semibold">
                         Jméno:
                         <input
                           name="firstName"
@@ -112,7 +112,7 @@ export function SignupPage() {
                           value={firstName}
                         ></input>
                       </label>
-                      <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+                      <label className="flex flex-col text--textDark text-lg font-semibold">
                         Příjmení:
                         <input
                           name="secondName"
@@ -124,9 +124,7 @@ export function SignupPage() {
                           value={secondName}
                         ></input>
                       </label>
-                    </div>
-                    <div className="flex gap-3 xl:flex-row flex-col">
-                      <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+                      <label className="flex flex-col text--textDark text-lg font-semibold">
                         Telefon:
                         <input
                           name="phone"
@@ -138,7 +136,7 @@ export function SignupPage() {
                           value={phone}
                         ></input>
                       </label>
-                      <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+                      <label className="flex flex-col text--textDark text-lg font-semibold">
                         Email:
                         <input
                           name="email"
@@ -150,9 +148,7 @@ export function SignupPage() {
                           value={email}
                         ></input>
                       </label>
-                    </div>
-                    <div className="flex gap-3 xl:flex-row flex-col">
-                      <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+                      <label className="flex flex-col text--textDark text-lg font-semibold">
                         Heslo:
                         <input
                           name="password"
@@ -164,7 +160,7 @@ export function SignupPage() {
                           value={password}
                         ></input>
                       </label>
-                      <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+                      <label className="flex flex-col text--textDark text-lg font-semibold">
                         Heslo znovu:
                         <input
                           name="passwordCheck"
@@ -177,65 +173,11 @@ export function SignupPage() {
                         ></input>
                       </label>
                     </div>
+                    <div className="flex gap-3 xl:flex-row flex-col"></div>
+                    <div className="flex gap-3 xl:flex-row flex-col"></div>
+                    <div className="flex gap-3 xl:flex-row flex-col"></div>
                   </fieldset>
 
-                  <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
-                    <legend className="text-xl font-semibold text-slate-900">
-                      Adresa dodání
-                    </legend>
-                    <div className="flex gap-3 xl:flex-row flex-col">
-                      <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
-                        Ulice:
-                        <input
-                          name="address"
-                          type="text"
-                          className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
-                          onChange={(e) => {
-                            setAddress(e.target.value);
-                          }}
-                          value={address}
-                        ></input>
-                      </label>
-                      <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
-                        Číslo popisné:
-                        <input
-                          name="addressNumber"
-                          type="text"
-                          className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
-                          onChange={(e) => {
-                            setAddressNumber(e.target.value);
-                          }}
-                          value={addressNumber}
-                        ></input>
-                      </label>
-                    </div>
-                    <div className="flex gap-3 xl:flex-row flex-col">
-                      <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
-                        Město:
-                        <input
-                          name="city"
-                          type="text"
-                          className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
-                          onChange={(e) => {
-                            setCity(e.target.value);
-                          }}
-                          value={city}
-                        ></input>
-                      </label>
-                      <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
-                        PSČ:
-                        <input
-                          name="cityNumber"
-                          type="text"
-                          className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
-                          onChange={(e) => {
-                            setCityNumber(e.target.value);
-                          }}
-                          value={cityNumber}
-                        ></input>
-                      </label>
-                    </div>
-                  </fieldset>
                   <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
                     <div className="flex gap-3 xl:flex-row flex-col">
                       <label className="flex flex-row-reverse gap-3 text--textDark text-lg font-semibold col-span-6">
@@ -330,30 +272,15 @@ export function SignupPage() {
               e-shopu jen chcete.
             </p>
           </div>
-          <div className="flex flex-col items-center p-4 w-full">
-            <QuestionToggle
-              question={"Je registrace a vedení účtu zdarma?"}
-              answer="Vedení i registrace účtu jsou zcela zdarma. Platíte malou částku pouze v případě, že máte aktivní předplatné."
-            />
-            <QuestionToggle
-              question={"Můžu účet kdykoliv zrušit nebo změnit?"}
-              answer="Samozřejmě. Účet můžete zrušit z klientské sekce. Vaše údaje
-                okamžitě smažeme společně se všemi předplatnými. Údaje lze kdykoliv změnit, stačí se jen přihlásit a přejít do
-                sekce profilu."
-            />
-            <QuestionToggle
-              question={"K čemu potřebujeme tyto údaje?"}
-              answer="Každé předplatné vyžaduje kontaktní a dodací údaje. Abychom
-                Vám usnadnili v budoucnu práci, přidáme tyto údaje k
-                uživatelskému účtu. Budete je poté moci nastavit na jedno
-                kliknutí."
-            />
-          </div>
+          <a href="https://www.shopr.cz/otazky" target="_blank">
+            <button className="bg-quad p-3 text-xl font-semibold text-textLight rounded-md transition-all ease-in-out hover:scale-105 cursor-pointer">
+              Často kladené otázky
+            </button>
+          </a>
         </div>
       </>
     );
   }
-
   function AfterSignup({ message }) {
     return (
       <>

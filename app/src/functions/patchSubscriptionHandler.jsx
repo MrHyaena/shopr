@@ -8,6 +8,7 @@ import {
   useNavigate,
   useParams,
 } from "react-router-dom";
+import { tokenExpired } from "./tokenExpired";
 const apiURL = import.meta.env.VITE_API_URL;
 
 export function patchSubscriptionHandler() {
@@ -63,6 +64,7 @@ export function patchSubscriptionHandler() {
       setLoader(false);
       setIsLoading(false);
       setError(json.error);
+      tokenExpired(json, setUser);
       return;
     }
 

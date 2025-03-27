@@ -14,37 +14,14 @@ export function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { login, error, isLoading } = useLogin();
-    const [captcha, setCaptcha] = useState(false);
-
-    window.captchaState = (e) => {
-      setCaptcha(true);
-    };
-
-    useEffect(() => {
-      // select all turnstiles
-      const turnstileContainers = document.querySelectorAll(".cf-turnstile");
-
-      turnstileContainers.forEach((turnstileContainer) => {
-        turnstileContainer.innerHTML = "";
-        if (window && window.turnstile) {
-          // re-render all turnstiles
-          window.turnstile.render(turnstileContainer, {
-            sitekey: "0x4AAAAAABCVC8NJR-IpXB1O",
-            callback: function (token) {
-              setCaptcha(true);
-            },
-          });
-        }
-      });
-    }, []);
 
     const handleSubmit = async (e) => {
       e.preventDefault();
 
-      const formData = new FormData(e.target);
-      const captchaToken = formData.get("cf-turnstile-response");
+      let formData = new FormData(document.querySelector("#submitForm"));
+      let remember = formData.get("rememberCheckbox");
 
-      await login({ email, password, captchaToken });
+      await login({ email, password, remember });
     };
     return (
       <>
@@ -63,9 +40,10 @@ export function LoginPage() {
           <form
             className="flex flex-col gap-5 xl:py-10 py-5 px-5 xl:px-0 xl:pl-10"
             onSubmit={(e) => handleSubmit(e)}
+            id="submitForm"
           >
-            <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
-              <legend className="text-xl font-semibold text-slate-900 mb-5">
+            <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-3 flex flex-col">
+              <legend className="text-xl font-semibold text-slate-900">
                 Přihlašte se
               </legend>
               <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
@@ -101,19 +79,22 @@ export function LoginPage() {
                 Zapomenuté heslo
               </p>
             </fieldset>
+            <label className="flex gap-3 font-medium text-sm text-textDark mx-3 cursor-pointer justify-center">
+              <input
+                value="true"
+                type="checkbox"
+                name="rememberCheckbox"
+                id="rememberCheckbox"
+              />
+              Zapamatovat na 90 dní
+            </label>
             <button
-              disabled={isLoading || !captcha}
-              className="bg-quad disabled:bg-gray-500 disabled:hover:scale-100 disabled:cursor-default text-textButton xl:m-3 m-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+              className="bg-quad disabled:bg-gray-500 disabled:hover:scale-100 disabled:cursor-default text-textButton xl:mx-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               type="submit"
             >
               Přihlásit se
             </button>
-            <div
-              className="cf-turnstile"
-              data-sitekey="0x4AAAAAABCVC8NJR-IpXB1O"
-              data-theme="light"
-              data-callback="captchaState"
-            ></div>
+
             <Link
               to="/signup"
               className="text-center font-semibold hover:scale-105 transition-all ease-in-out"
@@ -130,10 +111,6 @@ export function LoginPage() {
             </p>
           </div>
         </div>
-        <script
-          src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-          async
-        ></script>
       </>
     );
   }

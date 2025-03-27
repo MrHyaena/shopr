@@ -75,7 +75,7 @@ export function Personal() {
             </legend>
             <div className="flex gap-3 xl:grid grid-cols-2 flex-col">
               <label className="flex flex-col text--textDark text-lg font-semibold">
-                Jméno:
+                Jméno (povinné):
                 <input
                   name="firstName"
                   type="text"
@@ -87,7 +87,7 @@ export function Personal() {
                 ></input>
               </label>
               <label className="flex flex-col text--textDark text-lg font-semibold">
-                Příjmení:
+                Příjmení (povinné):
                 <input
                   name="secondName"
                   type="text"
@@ -101,7 +101,7 @@ export function Personal() {
             </div>
             <div className="flex gap-3 xl:grid grid-cols-2 flex-col">
               <label className="flex flex-col text--textDark text-lg font-semibold">
-                Telefon:
+                Telefon (povinné):
                 <input
                   name="phone"
                   type="number"
@@ -110,6 +110,19 @@ export function Personal() {
                     setPhone(e.target.value);
                   }}
                   value={phone}
+                ></input>
+              </label>
+              <label className="flex flex-col text--textDark text-lg font-semibold">
+                Email (nelze měnit):
+                <input
+                  disabled={true}
+                  name="email"
+                  type="email"
+                  className="bg-slate-200 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                  onChange={(e) => {
+                    setPhone(e.target.value);
+                  }}
+                  value={email}
                 ></input>
               </label>
             </div>

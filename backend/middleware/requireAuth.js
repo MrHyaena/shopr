@@ -19,10 +19,11 @@ const requireAuth = async (req, res, next) => {
 
     next();
   } catch (error) {
-    console.log(error);
-    res
-      .status(401)
-      .json({ error: "Request is not authorized/user logged out" });
+    console.log("tokenExpired");
+    res.status(401).json({
+      error: "Request is not authorized/user logged out",
+      errorMessage: error.name,
+    });
   }
 };
 
@@ -43,10 +44,11 @@ const requireAdminAuth = async (req, res, next) => {
 
     next();
   } catch (error) {
-    console.log(error);
-    res
-      .status(401)
-      .json({ error: "Request is not authorized/user logged out" });
+    console.log("tokenExpired");
+    res.status(401).json({
+      error: "Request is not authorized/user logged out",
+      errorMessage: error.name,
+    });
   }
 };
 
