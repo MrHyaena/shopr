@@ -44,19 +44,15 @@ export default function Supplements() {
         />
       </BlockHeroSection>
       <BlackDivider>
-        <div className="flex flex-col lg:flex-row items-center justify-evenly gap-10">
-          <p className="text-white text-2xl">Protein</p>
-          <p className="text-white text-2xl">Vitamíny</p>
-          <p className="text-white text-2xl">Minerály</p>
-          <p className="text-white text-2xl">Tyčinky</p>
-          <p className="text-white text-2xl">Přírodní doplňky stravy</p>
-          <p className="text-white text-2xl">Nakopávače</p>
-        </div>
+        <p className="text-textLight lg:text-4xl text-2xl text-center p-5">
+          Suplementy se musí brát pravidelně, tak co kdybychom Vám s tím
+          pomohli?
+        </p>
       </BlackDivider>
       <TextSection
         subHeading={"Pravidelnost je základ"}
         heading={"Aneb konec prázdným balením!"}
-        text={`Dodržování zdravého životního stylu a správné výživy není jen o volbě kvalitních produktů, ale hlavně o jejich pravidelném užívání. Vitamíny a minerály prospívají tělu jen tehdy, když je doplňujeme soustavně, proteiny jsou nejúčinnější při dlouhodobé podpoře svalového růstu a regenerace, a i zdravé pochoutky mají smysl, pokud jsou součástí vyváženého jídelníčku. Kolikrát už se vám ale stalo, že jste sáhli do skříně pro oblíbený doplněk a zjistili, že je balení prázdné? S pravidelnou zásobou už se nemusíte starat, jestli vám došly vitamíny, chybí minerály nebo zda si můžete dopřát svůj oblíbený proteinový shake. Doplňování výživy by nemělo být náhodné – udělejte z něj automatickou součást svého zdravého režimu a dopřejte tělu přesně to, co potřebuje, bez zbytečných výpadků!`}
+        text={`Vitamíny, minerály a další doplňky prospívají tělu jen tehdy, když je doplňujeme soustavně, proteiny jsou nejúčinnější při dlouhodobé podpoře svalového růstu a regenerace, a i zdravé pochoutky mají smysl, pokud jsou součástí vyváženého jídelníčku. Kolikrát už se vám ale stalo, že jste sáhli do skříně pro oblíbený doplněk a zjistili, že je balení prázdné? S pravidelnou zásobou už se nemusíte o to nemusíte starat!`}
       />
 
       <ExamplesGrid

@@ -41,16 +41,10 @@ export default function Supplements() {
         />
       </BlockHeroSection>
       <BlackDivider>
-        <>
-          <div className="max-w-wrapper lg:flex-row flex-col gap-10 lg:gap-0 w-full flex items-center justify-evenly">
-            <p className="text-white text-2xl">Čaj</p>
-            <p className="text-white text-2xl">Káva</p>
-            <p className="text-white text-2xl">Víno</p>
-            <p className="text-white text-2xl">Koření</p>
-            <p className="text-white text-2xl">Čokoláda</p>
-            <p className="text-white text-2xl">Sladkosti</p>
-          </div>
-        </>
+        <p className="text-textLight lg:text-4xl text-2xl text-center p-5">
+          Byla by škoda rozhodit ranní kávové rituály zjištěním, že už žádné
+          nemáte
+        </p>
       </BlackDivider>
       <TextSection
         subHeading={"Pravidelné objednávky"}

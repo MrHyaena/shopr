@@ -29,10 +29,11 @@ export function HowDoesItWork() {
                     změnit, takže si z toho nemusíte dělat nějak těžkou hlavu.
                   </p>
                 </div>
-
-                <button className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold py-2 px-3 text-textButton cursor-pointer mx-10 mb-10">
-                  Založit účet
-                </button>
+                <a href="https://app.shopr.cz/signup">
+                  <button className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold py-2 px-3 text-textButton cursor-pointer mx-10 mb-10">
+                    Založit účet
+                  </button>
+                </a>
               </div>
               <div className="w-1 bg-quad lg:block hidden"></div>
               <div className=" flex flex-col lg:py-10 lg:mb-20">

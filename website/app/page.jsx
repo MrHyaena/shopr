@@ -43,7 +43,17 @@ export default function Home() {
       <>
         <div className="xl:min-h-[800px] flex flex-col lg:grid grid-cols-5  items-stretch xl:justify-center justify-start overflow-x-hidden lg:p-0 p-5 py-10 lg:py-0">
           <div className="flex flex-col items-start justify-center h-full gap-5 lg:p-15  col-span-3 max-w-[900px] justify-self-center animate-scale-up-noBounce-delay">
-            <h1 className="z-2">
+            <h1 className="z-2 xl:hidden">
+              Předplatné
+              <span className="text-quad">
+                {" "}
+                <br />
+                na jakémkoliv <br />
+                e-shopu <br />
+              </span>{" "}
+              jen chcete
+            </h1>
+            <h1 className="z-2 hidden xl:block">
               Předplatné
               <span className="text-quad">
                 {" "}
@@ -303,7 +313,7 @@ export default function Home() {
     <>
       <HeroSection />
       <BlackDivider>
-        <p className="text-textLight lg:text-4xl  text-center p-5">
+        <p className="text-textLight lg:text-4xl text-2xl text-center p-5">
           Odstresujte hlavu a nechte starosti s pravidelnými nákupy na nás!
         </p>
       </BlackDivider>

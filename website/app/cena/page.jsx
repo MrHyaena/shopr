@@ -54,7 +54,7 @@ export default function Price() {
 
       <BlackDivider>
         <div className="max-w-wrapper flex flex-col items-center justify-start px-5">
-          <p className="text-center text-textLight">
+          <p className="text-center xl:text-2xl text-xl text-textLight">
             Jediná platba, kterou u nás zažijte, je za aktivní předplatné. Za
             každou vyřízenou objednávku, kterou v jakémkoliv předplatném
             uděláme, se z karty strhne cena výše. Za týdenní předplatné to bude
@@ -63,8 +63,8 @@ export default function Price() {
         </div>
       </BlackDivider>
 
-      <div className="flex flex-col justify-center items-center py-40">
-        <div className="max-w-wrapper lg:grid flex flex-col grid-cols-2 items-start justify-start gap-20">
+      <div className="flex flex-col justify-center items-center pt-20">
+        <div className="max-w-wrapper lg:grid flex flex-col grid-cols-2 items-start justify-start xl:gap-15 gap-10">
           <div className="flex flex-col justify-center lg:items-center gap-2 lg:text-center text-start col-span-2 px-5">
             <h4>Otázky</h4>
             <h3>Jak to s platbami funguje?</h3>

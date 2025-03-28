@@ -13,10 +13,11 @@ export function CTABlock() {
               to na večer. Následně na to zapomeneme, jen aby se tento cyklus
               opakoval dalších několik dní. Pojďme to jednou a provždy vyřešit!
             </p>
-
-            <button className="bg-quad w-full rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-2xl font-semibold p-3 text-textButton cursor-pointer my-10">
-              Založit účet
-            </button>
+            <a href="https://app.shopr.cz/signup">
+              <button className="bg-quad w-full rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-2xl font-semibold p-3 text-textButton cursor-pointer my-10">
+                Založit účet
+              </button>
+            </a>
           </div>
         </div>
       </div>

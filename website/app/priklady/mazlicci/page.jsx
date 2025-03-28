@@ -44,14 +44,9 @@ export default function Supplements() {
         />
       </BlockHeroSection>
       <BlackDivider>
-        <div className="flex lg:flex-row flex-col items-center justify-evenly gap-10">
-          <p className="text-white text-2xl">Masové kapsičky</p>
-          <p className="text-white text-2xl">Hračky</p>
-          <p className="text-white text-2xl">Pamlsky</p>
-          <p className="text-white text-2xl">Granule</p>
-          <p className="text-white text-2xl">Podestýlka</p>
-          <p className="text-white text-2xl">Hygiena</p>
-        </div>
+        <p className="text-textLight lg:text-4xl text-2xl text-center p-5">
+          Zaříďte pro vaše mazlíčky stálou zásobu pochoutek
+        </p>
       </BlackDivider>
       <HeadingCenter
         subheading={"Co pro Vás můžeme udělat?"}

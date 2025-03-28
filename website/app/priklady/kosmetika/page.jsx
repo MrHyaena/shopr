@@ -36,16 +36,10 @@ export default function Supplements() {
         />
       </BlockHeroSection>
       <BlackDivider>
-        <>
-          <div className="flex lg:flex-row flex-col items-center justify-evenly gap-10">
-            <p className="text-white text-2xl">Hydratace</p>
-            <p className="text-white text-2xl">Regenerace</p>
-            <p className="text-white text-2xl">Péče</p>
-            <p className="text-white text-2xl">Krása</p>
-            <p className="text-white text-2xl">Výživa</p>
-            <p className="text-white text-2xl">Zdraví</p>
-          </div>
-        </>
+        <p className="text-textLight lg:text-4xl/normal text-2xl text-center p-5">
+          Plná kosmetická taštička je základem mnoha spokojených domácností
+          #vlastnizkusenost
+        </p>
       </BlackDivider>
 
       <ImageTextCheckmarks
