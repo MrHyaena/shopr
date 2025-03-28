@@ -21,7 +21,7 @@ export default function About() {
             </h2>
           </div>
 
-          <div className="lg:grid grid-cols-2 gap-10">
+          <div className=" grid-cols-2 gap-10 flex flex-col gap-3">
             <p className="font-medium text-textDark text-lg col-span-2">
               Rádi bychom se Vám také trochu představili. Koneckonců není špatně
               vědět o základech, na kterých služba stojí. Takže kde jsou naše
@@ -33,34 +33,23 @@ export default function About() {
               potřeba vydržet poměrně dlouhou dobu, než začnou něco dělat. A zde
               přichází problém.
             </p>
-            <Image
-              src={img}
-              style={{ objectFit: "cover" }}
-              alt="story"
-              className="rounded-md shadow-lg max-h-[400px] w-auto self-center object-cover my-10"
-              width="auto"
-              height="auto"
-            />
-            <div className="flex flex-col gap-5">
-              <p className="max-w-[600px] font-medium text-textDark text-lg">
-                Kromě nějakých svalů máme totiž také trable s pravidelnými
-                nákupy. Snažíme se být plně investovaní v pro nás smysluplných
-                věcech a tak nějak už nezbývá mentální kapacita a paměť na
-                doplňování zásob. Vždy jsme se k tomu dostali i dva týdny a více
-                poté, co nám daná látka došla. A to je někdy, jak si jistě umíte
-                představit, dost pozdě.
-              </p>
-              <p className="max-w-[600px] font-medium text-textDark text-lg">
-                Na trhu jsme nenašli žádnou službu, která by tohle řešila.
-                E-shopy zaměřené na suplementy standardně nákupy skrze
-                předplatné nenabízejí. Rozhodli jsme se, že to zkusíme změnit a
-                vytvoříme službu, která by s tím pomáhala nejen nám, ale i
-                ostatním lidem se stejnými problémy. V průběhu jsme si pak už
-                domysleli, že by to šlo rozšířit na všechno možné - léky, krmení
-                pro zvířata, materiál pro různé výtvarné koníčky, kávu a mnoho
-                dalšího.
-              </p>
-            </div>
+
+            <p className="font-medium text-textDark text-lg col-span-2">
+              Máme totiž také trable s pravidelnými nákupy. Snažíme se být plně
+              investovaní v pro nás smysluplných věcech a tak nějak už nezbývá
+              mentální kapacita a paměť na doplňování zásob. Vždy jsme se k tomu
+              dostali i dva týdny a více poté, co nám daná látka došla. A to je
+              někdy, jak si jistě umíte představit, dost pozdě.
+            </p>
+            <p className="font-medium text-textDark text-lg col-span-2">
+              Na trhu jsme nenašli žádnou službu, která by tohle řešila. E-shopy
+              zaměřené na suplementy standardně nákupy skrze předplatné
+              nenabízejí. Rozhodli jsme se, že to zkusíme změnit a vytvoříme
+              službu, která by s tím pomáhala nejen nám, ale i ostatním lidem se
+              stejnými problémy. V průběhu jsme si pak už domysleli, že by to
+              šlo rozšířit na všechno možné - léky, krmení pro zvířata, materiál
+              pro různé výtvarné koníčky, kávu a mnoho dalšího.
+            </p>
             <p className="font-medium text-textDark text-lg col-span-2">
               Doufáme, že se Vám s námi bude spolupracovat dobře. Snažíme se
               službu neustále zlepšovat a posouvat kupředu, avšak ne vždy to jde

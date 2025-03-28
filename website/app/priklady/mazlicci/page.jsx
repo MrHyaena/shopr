@@ -1,6 +1,8 @@
 import Image from "next/image";
 import React from "react";
 import heroImg from "./cat-dog.jpg";
+import relax from "./pet-relax.jpg";
+
 import dogToy from "./dog-toy.jpg";
 import dogCare from "./dog-care.jpg";
 import catVit from "./cat-vitamins.jpg";
@@ -95,7 +97,7 @@ export default function Supplements() {
         checkTwo={"Budete mít vaše doplňky stravy vždy po ruce"}
         checkThree={"Zbavíme Vás starostí a stresu"}
         buttonText={"Vytvořte si u nás uživatelský účet a všechno vyzkoušejte"}
-        image={heroImg}
+        image={relax}
       />
       <CTABlock />
     </>

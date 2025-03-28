@@ -3,10 +3,13 @@ import { useEffect, useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 import { Link } from "react-router-dom";
 import logoBlack from "/public/shopr-logo.png";
+import background from "/public/background.jpg";
+
 import { useReset } from "../hooks/useReset";
 import { ErrorWindow } from "../Components/errorWindow";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faCheckSquare, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useExpiredContext } from "../hooks/useExpiredContext";
+import MessageWindow from "../Components/messageWindow";
 
 export function LoginPage() {
   const [reset, setReset] = useState(false);
@@ -14,12 +17,12 @@ export function LoginPage() {
   function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { expired } = useExpiredContext();
+    const { expired, setExpired } = useExpiredContext();
     const { login, error, setError, isLoading } = useLogin();
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-
+      setExpired(null);
       let formData = new FormData(document.querySelector("#submitForm"));
       let remember = formData.get("rememberCheckbox");
 
@@ -44,17 +47,24 @@ export function LoginPage() {
             </p>
           </div>
         )}
-        <div className="bg-white flex xl:flex-row flex-col-reverse border rounded-xl border-slate-200 shadow-lg animate-fall-right-faster">
+        <div className="flex flex-col items-center justify-center gap-6 w-full animate-fall-down-faster">
+          <div className="flex flex-col justify-center items-center text-center gap-3">
+            <h1 className="text-2xl font-semibold">Přihlašte se</h1>
+            <p className="font-medium">
+              Pokud ještě nemáte účet, přejděte na{" "}
+              <Link className="underline text-quad" to="/signup">
+                registraci
+              </Link>
+              .
+            </p>
+          </div>
           <form
-            className="flex flex-col gap-5 xl:py-10 py-5 px-5 xl:px-0 xl:pl-10"
+            className="flex flex-col gap-5 xl:w-[50%] w-full"
             onSubmit={(e) => handleSubmit(e)}
             id="submitForm"
           >
-            <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-3 flex flex-col">
-              <legend className="text-xl font-semibold text-slate-900">
-                Přihlašte se
-              </legend>
-              <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+            <fieldset className=" gap-3 flex flex-col">
+              <label className="flex flex-col text-textDark text-md font-semibold col-span-6">
                 Email:
                 <input
                   name="email"
@@ -66,7 +76,7 @@ export function LoginPage() {
                   value={email}
                 ></input>
               </label>
-              <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+              <label className="flex flex-col text-textDark text-md font-semibold col-span-6">
                 Heslo:
                 <input
                   name="password"
@@ -97,12 +107,11 @@ export function LoginPage() {
               Zapamatovat na 90 dní
             </label>
             <button
-              className="bg-quad disabled:bg-gray-500 disabled:hover:scale-100 disabled:cursor-default text-textButton xl:mx-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
+              className="bg-quad disabled:bg-gray-500 disabled:hover:scale-100 disabled:cursor-default text-textButton py-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               type="submit"
             >
               Přihlásit se
             </button>
-
             <Link
               to="/signup"
               className="text-center font-semibold hover:scale-105 transition-all ease-in-out"
@@ -110,15 +119,8 @@ export function LoginPage() {
               Zaregistrovat se
             </Link>
           </form>
-
-          <div className="xl:w-[300px] xl:flex hidden flex-col items-center gap-3 justify-center bg-white text-textDark m-6 shadow-lg  rounded-lg border border-slate-100  p-10 overflow-clip animate-fall-up-delay">
-            <h2 className="text-2xl font-semibold">Vítejte!</h2>
-            <p className="text-center font-semibold">
-              Pokud ještě nemáte účet, klepněte na tlačítko Zaregistrovat se.
-            </p>
-          </div>
+          {error && <ErrorWindow error={error} />}
         </div>
-        {error && <ErrorWindow error={error} />}
       </>
     );
   }
@@ -127,10 +129,11 @@ export function LoginPage() {
     const [email, setEmail] = useState("");
 
     const { reset, error, isLoading, message, setError } = useReset();
+    const { setExpired } = useExpiredContext();
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-
+      setExpired(null);
       if (!email) {
         setError("Je potřeba vyplnit email.");
       } else {
@@ -151,17 +154,18 @@ export function LoginPage() {
             </p>
           </div>
         )}
-        <div className="bg-white flex xl:flex-row flex-col-reverse border rounded-xl border-slate-200 shadow-lg animate-fall-right-faster">
-          <form
-            className="flex flex-col items-center gap-2 xl:py-10 py-5 px-5 xl:px-0 xl:pl-10"
-            onSubmit={handleSubmit}
-          >
+        <div className="flex flex-col items-center justify-center gap-6 w-full animate-scale-up">
+          <div className="flex flex-col justify-center items-center text-center gap-3">
+            <h1 className="text-2xl font-semibold">Zapomněli jste heslo?</h1>
+            <p className="font-medium">
+              Ničemu to nevadí. Jednoduše zadejte email a postupujte podle
+              instrukcí.
+            </p>
+          </div>
+          <form className="flex flex-col items-center" onSubmit={handleSubmit}>
             {!message ? (
               <>
-                <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-5">
-                  <legend className="text-xl font-semibold text-slate-900">
-                    Změna hesla
-                  </legend>
+                <fieldset className="py-4">
                   <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
                     Uživatelský email:
                     <input
@@ -177,7 +181,7 @@ export function LoginPage() {
                 </fieldset>
                 <button
                   disabled={isLoading}
-                  className="bg-quad text-textButton xl:m-3 m-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 self-stretch"
+                  className="bg-quad text-textButton my-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 self-stretch"
                   type="submit"
                 >
                   Odeslat
@@ -200,9 +204,7 @@ export function LoginPage() {
               </>
             ) : (
               <>
-                <h2 className="font-bold text-center p-2 bg-messageBg rounded-lg border-2 border-messageBorder max-w-[250px]">
-                  {message}
-                </h2>
+                <MessageWindow message={message} />
                 <button
                   onClick={() => {
                     setReset(!reset);
@@ -215,14 +217,6 @@ export function LoginPage() {
               </>
             )}
           </form>
-
-          <div className="w-[300px] flex flex-col items-center gap-3 justify-center bg-white border border-slate-100 m-6 shadow-lg  rounded-xl text-textDark p-10 overflow-clip animate-fall-up-delay">
-            <h2 className="text-2xl font-semibold"></h2>
-            <p className="text-center font-semibold">
-              Po klepnutí na tlačítko Odeslat Vám přijde email s odkazem pro
-              změnu hesla.
-            </p>
-          </div>
         </div>
       </>
     );
@@ -230,14 +224,39 @@ export function LoginPage() {
 
   return (
     <>
-      <div className="bg-slate-50 flex flex-col xl:grid xl:grid-rows-[1fr_2fr_1fr] xl:justify-center xl:pt-0 justify-center items-center h-screen">
-        <img
-          src={logoBlack}
-          alt="logo"
-          className="xl:max-h-24 xl:mb-0 mb-5 max-h-16 animate-scale-up-delay justify-self-center"
-        />
+      <div className="xl:grid grid-cols-5 flex items-center justify-center min-h-screen ">
+        <div className="col-span-2 flex flex-col items-center justify-center gap-6 p-3">
+          <a href="https://www.shopr.cz">
+            <img src={logoBlack} className="w-30 animate-fall-down" />
+          </a>
+          {reset ? <Reset /> : <Login />}
+        </div>
 
-        {reset ? <Reset /> : <Login />}
+        <div
+          className="col-span-3 h-screen w-full bg-amber-200 xl:flex hidden items-center justify-center"
+          style={{
+            backgroundImage: `url(${background})`,
+            backgroundSize: "cover",
+          }}
+        >
+          <div className="w-[50%] bg-white rounded-md p-10 flex flex-col items-start justify-center gap-5 animate-fall-left">
+            <h2 className="text-xl font-semibold">
+              Vítáme Vás v naší aplikaci!
+            </h2>
+            <p className="text-textDark font-semibold">
+              Ať už jste tu úplně noví nebo se k nám (doufejme) spokojeně
+              vracíte, vítejte a děkujeme. Každý den na naší službe pracujeme a
+              zlepšujeme ji na všech frontách. Sice máme nápadů hodně, ale jde
+              nám především o vaše pohodlí. Pokud byste proto měli jakýkoliv
+              nápad, který by Vám zásadně zpříjemnil používání, napište nám jej
+              prosím na adresu{" "}
+              <a href="mailto:info@shopr.cz" className="text-quad">
+                info@shopr.cz
+              </a>
+              .
+            </p>
+          </div>
+        </div>
       </div>
     </>
   );

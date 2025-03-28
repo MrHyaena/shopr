@@ -34,8 +34,8 @@
 
   --color-errorBg: var(--color-red-50);
   --color-errorBorder: var(--color-red-200);
-  --color-messageBg: var(--color-emerald-200);
-  --color-messageBorder: var(--color-emerald-300);
+  --color-messageBg: var(--color-emerald-50);
+  --color-messageBorder: var(--color-emerald-200);
 
   --color-input: var(--color-slate-700);
   --color-subIcon: var(--color-slate-500);
