@@ -224,7 +224,7 @@ export function LoginPage() {
 
   return (
     <>
-      <div className="xl:grid grid-cols-5 flex items-center justify-center min-h-screen ">
+      <div className="xl:grid grid-cols-5 items-center justify-center xl:min-h-screen">
         <div className="col-span-2 flex flex-col items-center justify-center gap-6 p-3">
           <a href="https://www.shopr.cz">
             <img src={logoBlack} className="w-30 animate-fall-down" />
@@ -233,7 +233,7 @@ export function LoginPage() {
         </div>
 
         <div
-          className="col-span-3 h-screen w-full bg-amber-200 xl:flex hidden items-center justify-center"
+          className="col-span-3 h-screen w-full xl:flex hidden items-center justify-center"
           style={{
             backgroundImage: `url(${background})`,
             backgroundSize: "cover",

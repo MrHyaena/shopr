@@ -21,7 +21,7 @@ export default function About() {
             </h2>
           </div>
 
-          <div className=" grid-cols-2 gap-10 flex flex-col gap-3">
+          <div className=" grid-cols-2 gap-10 flex flex-col">
             <p className="font-medium text-textDark text-lg col-span-2">
               Rádi bychom se Vám také trochu představili. Koneckonců není špatně
               vědět o základech, na kterých služba stojí. Takže kde jsou naše

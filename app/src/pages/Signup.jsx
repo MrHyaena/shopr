@@ -250,7 +250,7 @@ export function SignupPage() {
   return (
     <>
       <>
-        <div className="xl:grid grid-cols-5 flex items-center justify-center min-h-screen ">
+        <div className="xl:grid grid-cols-5 items-center justify-center ">
           <div className="col-span-2 flex flex-col items-center justify-center gap-6 p-3">
             <a href="https://www.shopr.cz">
               <img src={logoBlack} className="w-30 animate-fall-down" />

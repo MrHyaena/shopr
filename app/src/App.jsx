@@ -15,7 +15,6 @@ import { SignupPage } from "./pages/Signup";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { Contact } from "./Components/contact";
 import { Personal } from "./Components/personal";
-import { Faq } from "./Components/faq";
 import { PasswordReset } from "./pages/PasswordReset";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpider, faSpinner } from "@fortawesome/free-solid-svg-icons";
@@ -62,7 +61,6 @@ function App() {
                   path="/osobni-udaje"
                   element={<Personal setLoader={setLoader} />}
                 />
-                <Route path="/otazky" element={<Faq />} />
               </Routes>
             </main>
           </div>
