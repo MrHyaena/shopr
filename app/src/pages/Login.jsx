@@ -249,7 +249,7 @@ export function LoginPage() {
               Vítáme Vás v naší aplikaci!
             </h2>
             <p className="text-textDark font-semibold">
-              Ať už jste tu úplně noví nebo se k nám (doufejme) spokojeně
+              Ať už jste tu úplně poprvé nebo se k nám (doufejme) spokojeně
               vracíte, vítejte a děkujeme. Každý den na naší službe pracujeme a
               zlepšujeme ji na všech frontách. Sice máme nápadů hodně, ale jde
               nám především o vaše pohodlí. Pokud byste proto měli jakýkoliv
