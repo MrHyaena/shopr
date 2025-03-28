@@ -168,7 +168,7 @@ export function LoginPage() {
           >
             {!message ? (
               <>
-                <fieldset className="py-4">
+                <fieldset className="">
                   <label className="flex flex-col text-textDark text-md font-semibold col-span-6">
                     Uživatelský email:
                     <input
@@ -184,7 +184,7 @@ export function LoginPage() {
                 </fieldset>
                 <button
                   disabled={isLoading}
-                  className="bg-quad text-textButton my-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 self-stretch"
+                  className="bg-quad text-textButton my-3 xl:my-0 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 self-stretch"
                   type="submit"
                 >
                   Odeslat
@@ -207,7 +207,7 @@ export function LoginPage() {
               </>
             ) : (
               <>
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center mb-2">
                   <MessageWindow message={message} />
                 </div>
                 <button
@@ -215,7 +215,7 @@ export function LoginPage() {
                     setReset(!reset);
                   }}
                   to="/signup"
-                  className="bg-quad text-textButton xl:m-3 m-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 self-stretch"
+                  className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 self-stretch"
                 >
                   Vrátit se na přihlášení
                 </button>
