@@ -50,7 +50,7 @@ export function LoginPage() {
         <div className="flex flex-col items-center justify-center gap-6 w-full animate-fall-down-faster">
           <div className="flex flex-col justify-center items-center text-center gap-3">
             <h1 className="text-2xl font-semibold">Přihlašte se</h1>
-            <p className="font-medium">
+            <p className="font-medium xl:max-w-[80%]">
               Pokud ještě nemáte účet, přejděte na{" "}
               <Link className="underline text-quad" to="/signup">
                 registraci
@@ -157,16 +157,19 @@ export function LoginPage() {
         <div className="flex flex-col items-center justify-center gap-6 w-full animate-scale-up">
           <div className="flex flex-col justify-center items-center text-center gap-3">
             <h1 className="text-2xl font-semibold">Zapomněli jste heslo?</h1>
-            <p className="font-medium">
+            <p className="font-medium xl:max-w-[80%]">
               Ničemu to nevadí. Jednoduše zadejte email a postupujte podle
               instrukcí.
             </p>
           </div>
-          <form className="flex flex-col items-center" onSubmit={handleSubmit}>
+          <form
+            className="flex flex-col xl:gap-5 xl:w-[50%] w-full "
+            onSubmit={handleSubmit}
+          >
             {!message ? (
               <>
                 <fieldset className="py-4">
-                  <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+                  <label className="flex flex-col text-textDark text-md font-semibold col-span-6">
                     Uživatelský email:
                     <input
                       name="email"
@@ -204,7 +207,9 @@ export function LoginPage() {
               </>
             ) : (
               <>
-                <MessageWindow message={message} />
+                <div className="flex items-center justify-center">
+                  <MessageWindow message={message} />
+                </div>
                 <button
                   onClick={() => {
                     setReset(!reset);

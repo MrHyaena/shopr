@@ -213,9 +213,8 @@ export function SignupPage() {
   function AfterSignup({ message }) {
     return (
       <>
-        <div className="bg-white flex  flex-col-reverse gap-8 p-5 border rounded-xl border-slate-200 shadow-xl animate-fall-down-faster xl:max-w-[60%]">
+        <div className=" animate-fall-down-faster">
           <div className="flex flex-col gap-5 items-center">
-            <img src={logoBlack} alt="logo" className="w-20" />
             <MessageWindow message={message} />
             <Link
               to="/login"

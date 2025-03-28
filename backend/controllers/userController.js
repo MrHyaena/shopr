@@ -479,7 +479,7 @@ const resetUserPassword = async (req, res) => {
   try {
     if (nowDate - hashObjectDate > tenMinutes) {
       throw Error(
-        "Změna hesla již není možná. Časový limit 15 minut byl přesažen. Zopakujte prosím požadavek na změnu hesla."
+        "Změna hesla již není možná. Časový limit 15 minut byl přesažen. Přejděte na přihlašovací obrazovku a zopakujte prosím požadavek na změnu hesla."
       );
     }
 
