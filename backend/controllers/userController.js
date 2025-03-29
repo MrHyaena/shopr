@@ -21,7 +21,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 //create token function
 function createToken(_id) {
-  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "2s" });
+  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "90d" });
 }
 
 //signup user controller function
