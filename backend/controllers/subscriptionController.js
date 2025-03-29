@@ -156,6 +156,11 @@ const createSubscription = async (req, res) => {
       deliveryAddress = "empty";
     }
 
+    let mysteryMessage = mysteryItem.message;
+    if (mysteryMessage == "") {
+      mysteryMessage = "empty";
+    }
+
     const payload = {
       title: "Předplatné - " + subName,
       value: Number(subPriceValue),
@@ -199,8 +204,7 @@ const createSubscription = async (req, res) => {
       //ItemsType
       c2ec04237b8817bfcc272cb085cb2f321cfeab4f: itemsType.toString(),
       //Mystery message
-      "932e8f086a595364fe31c2b63d9e7952c5c2c201":
-        mysteryItem.message.toString(),
+      "932e8f086a595364fe31c2b63d9e7952c5c2c201": mysteryMessage.toString(),
       //Mystery amount
       "0c0ede36a57daf67eaeb95a275b8c220cada4510": mysteryItem.amount.toString(),
       //Mystery categories
@@ -401,8 +405,7 @@ const updateSubscription = async (req, res) => {
       //ItemsType
       c2ec04237b8817bfcc272cb085cb2f321cfeab4f: itemsType.toString(),
       //Mystery message
-      "932e8f086a595364fe31c2b63d9e7952c5c2c201":
-        mysteryItem.message.toString(),
+      "932e8f086a595364fe31c2b63d9e7952c5c2c201": mysteryMessage.toString(),
       //Mystery amount
       "0c0ede36a57daf67eaeb95a275b8c220cada4510": mysteryItem.amount.toString(),
       //Mystery categories
@@ -418,7 +421,7 @@ const updateSubscription = async (req, res) => {
   );
 
   const pipeDeal = await pipeResponse.json();
-
+  console.log(pipeDeal);
   if (!pipeResponse.ok) {
     throw Error(
       "Omlouváme se, předplatné nelze vytvořit. Chyba je na naší straně. (Pipedrive)"

@@ -567,7 +567,7 @@ export function SubscriptionList({ setLoader }) {
                 <img
                   src={"https://" + subWebsite + "/favicon.ico"}
                   alt="icon"
-                  className=" max-h-8 max-w-8"
+                  className=" max-h-8 max-w-8 rounded-md"
                   onError={(e) => {
                     e.target.src = shopLogo;
                   }}

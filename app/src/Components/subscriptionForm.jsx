@@ -729,9 +729,6 @@ export function SubscriptionForm({ setLoader }) {
         newMysteryItem.categories.push("Všechny kategorie");
       }
 
-      if (newMysteryItem.message == "") {
-        newMysteryItem.message = "empty";
-      }
       console.log(mysteryItem);
       console.log(newMysteryItem);
 
@@ -1046,7 +1043,7 @@ export function SubscriptionForm({ setLoader }) {
                       <textarea
                         value={mysteryItem.message}
                         name="amount"
-                        className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                        className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input resize-none"
                         placeholder="Přál bych si kombinaci proteinových tyčinek a ořechů"
                         onChange={(e) => {
                           setMysteryItem({
@@ -1063,7 +1060,7 @@ export function SubscriptionForm({ setLoader }) {
                           name="changable"
                           id="changable"
                           type="number"
-                          className="bg-slate-50 border border-slate-300 p-2 text-lg font-semibold text-input "
+                          className="bg-slate-50 border border-slate-300 p-2 text-lg font-semibold text-input rounded-md"
                           value={mysteryItem.amount}
                           onChange={(e) => {
                             setMysteryItem({
