@@ -76,19 +76,18 @@ function App() {
 
         <Routes>
           <Route
-            path="/app/*"
+            path="/*"
             element={user ? <ProtectedRoute /> : <Navigate to="/login" />}
           />
           <Route
             path="/login"
-            element={!user ? <LoginPage /> : <Navigate to="/app" />}
+            element={!user ? <LoginPage /> : <Navigate to="/" />}
           />
           <Route
             path="/signup"
-            element={!user ? <SignupPage /> : <Navigate to="/app" />}
+            element={!user ? <SignupPage /> : <Navigate to="/" />}
           />
-          <Route path="reset/password" element={<PasswordReset />} />
-          <Route path="/" element={<Navigate to="/app" />} />
+          <Route path="/reset/password" element={<PasswordReset />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -105,7 +105,7 @@ router.get(
         consent_collection: { terms_of_service: "required" },
         customer: stripeCustomerId,
         success_url: `${process.env.PROXY_SERVER}/api/stripe/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${process.env.PROXY_APP}/app`,
+        cancel_url: `${process.env.PROXY_APP}/`,
       });
 
       res.status(200).json(session.url);

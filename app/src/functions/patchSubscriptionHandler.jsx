@@ -83,7 +83,7 @@ export function patchSubscriptionHandler() {
         }
       });
       setSubscriptions([...newSubscription]);
-      navigate("/app");
+      navigate("/");
       return;
     }
   }

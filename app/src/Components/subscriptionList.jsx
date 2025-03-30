@@ -71,7 +71,7 @@ export function SubscriptionList({ setLoader }) {
     const [checkActivate, setCheckActivate] = useState("");
     const [errorActivate, setErrorActivate] = useState(false);
 
-    const editURL = "/app/form/" + _id;
+    const editURL = "/form/" + _id;
 
     function SubDetailsStandard() {
       return (
@@ -875,7 +875,7 @@ export function SubscriptionList({ setLoader }) {
             Vaše předplatné
           </h1>
           <Link
-            to="/app/form"
+            to="/form"
             className="bg-quad text-center shadow-md text-textButton xl:p-3 p-2 xl:text-xl text-base font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary"
           >
             Nové předplatné

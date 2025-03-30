@@ -19,7 +19,7 @@ import logoBig from "/public/shopr-logo-white.png";
 
 export function Sidebar() {
   const { logout } = useLogout();
-  const [activeButton, setActiveButton] = useState("/app");
+  const [activeButton, setActiveButton] = useState("/");
 
   function setPath() {
     const pathname = window.location.pathname;
@@ -43,12 +43,12 @@ export function Sidebar() {
               <img src={logo} alt="logo" className="h-12" />
             </a>
             <div className="flex flex-col items-center gap-2  p-4 row-span-5 self-center">
-              {activeButton == "/app" ? (
+              {activeButton == "/" ? (
                 <Link
                   onClick={() => {
-                    setActiveButton("/app");
+                    setActiveButton("/");
                   }}
-                  to="/app"
+                  to="/"
                   className="cursor-pointer text-sm font-semibold flex flex-col gap-3 bg-white text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
                 >
                   <FontAwesomeIcon icon={faArrowsSpin} className="text-2xl" />
@@ -57,21 +57,21 @@ export function Sidebar() {
               ) : (
                 <Link
                   onClick={() => {
-                    setActiveButton("/app");
+                    setActiveButton("/");
                   }}
-                  to="/app"
+                  to="/"
                   className="cursor-pointer text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
                 >
                   <FontAwesomeIcon icon={faArrowsSpin} className="text-2xl" />
                   Moje předplatné
                 </Link>
               )}
-              {activeButton == "/app/osobni-udaje" ? (
+              {activeButton == "/osobni-udaje" ? (
                 <Link
                   onClick={() => {
-                    setActiveButton("/app/osobni-udaje");
+                    setActiveButton("/osobni-udaje");
                   }}
-                  to="/app/osobni-udaje"
+                  to="/osobni-udaje"
                   className="cursor-pointer text-sm font-semibold flex flex-col gap-3 bg-white text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
                 >
                   <FontAwesomeIcon icon={faUser} className="text-2xl" />
@@ -80,21 +80,21 @@ export function Sidebar() {
               ) : (
                 <Link
                   onClick={() => {
-                    setActiveButton("/app/osobni-udaje");
+                    setActiveButton("/osobni-udaje");
                   }}
-                  to="/app/osobni-udaje"
+                  to="/osobni-udaje"
                   className="cursor-pointer text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
                 >
                   <FontAwesomeIcon icon={faUser} className="text-2xl" />
                   Osobní údaje
                 </Link>
               )}
-              {activeButton == "/app/kontakt" ? (
+              {activeButton == "/kontakt" ? (
                 <Link
                   onClick={() => {
-                    setActiveButton("/app/kontakt");
+                    setActiveButton("/kontakt");
                   }}
-                  to="/app/kontakt"
+                  to="/kontakt"
                   className="cursor-pointer text-sm font-semibold flex flex-col gap-3 bg-white text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
                 >
                   <FontAwesomeIcon icon={faComment} className="text-2xl" />
@@ -103,9 +103,9 @@ export function Sidebar() {
               ) : (
                 <Link
                   onClick={() => {
-                    setActiveButton("/app/kontakt");
+                    setActiveButton("/kontakt");
                   }}
-                  to="/app/kontakt"
+                  to="/kontakt"
                   className="cursor-pointer text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
                 >
                   <FontAwesomeIcon icon={faComment} className="text-2xl" />
@@ -161,7 +161,7 @@ export function Sidebar() {
                 onClick={() => {
                   setToggleMenu(false);
                 }}
-                to="/app/form"
+                to="/form"
                 className="bg-quad text-textButton cursor-pointer text-base font-bold py-2 px-3 text-md rounded-md transition-all ease-in-out hover:scale-105 self-start"
               >
                 Nové předplatné
@@ -170,7 +170,7 @@ export function Sidebar() {
                 onClick={() => {
                   setToggleMenu(false);
                 }}
-                to="/app"
+                to="/"
                 className="text-base font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
               >
                 Moje předplatné
@@ -180,7 +180,7 @@ export function Sidebar() {
                 onClick={() => {
                   setToggleMenu(false);
                 }}
-                to="/app/osobni-udaje"
+                to="/osobni-udaje"
                 className="text-base font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
               >
                 Osobní údaje
@@ -189,7 +189,7 @@ export function Sidebar() {
                 onClick={() => {
                   setToggleMenu(false);
                 }}
-                to="/app/kontakt"
+                to="/kontakt"
                 className="text-base font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
               >
                 Kontakt

@@ -52,7 +52,7 @@ export function createSubscriptionHandler() {
       const newObject = subscriptions;
       newObject.splice(newObject.length, 0, { ...json });
       setSubscriptions(newObject);
-      navigate("/app");
+      navigate("/");
       return;
     }
   }

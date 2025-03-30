@@ -45,7 +45,7 @@ export function useUpdate() {
       setIsLoading(false);
       setUser({ ...user, ...data });
       navigate({
-        pathname: "/app/osobni-udaje",
+        pathname: "/osobni-udaje",
         search: "?result=true",
       });
     }
