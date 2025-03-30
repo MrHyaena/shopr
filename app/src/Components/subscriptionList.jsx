@@ -20,6 +20,7 @@ import shopLogo from "/public/shop-solid.png";
 import { deactivateSubscriptionHandler } from "../functions/deactivateSubscriptionHandler";
 import { activateSubscriptionHandler } from "../functions/activateSubscriptionHandler";
 import { useExpiredContext } from "../hooks/useExpiredContext";
+import { ErrorWindowApp } from "./errorWindowApp";
 const apiURL = import.meta.env.VITE_API_URL;
 
 export function SubscriptionList({ setLoader }) {
@@ -75,7 +76,7 @@ export function SubscriptionList({ setLoader }) {
     function SubDetailsStandard() {
       return (
         <div
-          className="col-span-2 grid xl:grid-cols-3 gap-y-5 gap-x-10"
+          className="col-span-3 grid xl:grid-cols-3 gap-y-5 gap-x-10"
           key={"SubDetailsStandard" + _id}
         >
           <div className="xl:col-span-2">
@@ -321,7 +322,7 @@ export function SubscriptionList({ setLoader }) {
     function SubDetailsMystery() {
       return (
         <div
-          className="col-span-2 grid xl:grid-cols-3 gap-y-5 gap-x-10"
+          className="col-span-3 grid xl:grid-cols-3 gap-y-5 gap-x-10"
           key={"SubDetailsStandard" + _id}
         >
           <div className="">
@@ -653,9 +654,9 @@ export function SubscriptionList({ setLoader }) {
                 }}
               />
               {errorDelete && (
-                <p className="p-2 bg-errorBg border-2 border-errorBorder rounded-md font-semibold text-medium">
-                  Vložený text se neshoduje se jménem.
-                </p>
+                <ErrorWindowApp
+                  error={"Vložený text se neshoduje se jménem."}
+                />
               )}
               <div className="grid grid-cols-2 w-full gap-5">
                 <button
@@ -725,9 +726,9 @@ export function SubscriptionList({ setLoader }) {
                 }}
               />
               {errorDeactivate && (
-                <p className="p-2 bg-errorBg border-2 border-errorBorder rounded-md font-semibold text-medium">
-                  Vložený text se neshoduje se jménem.
-                </p>
+                <ErrorWindowApp
+                  error={"Vložený text se neshoduje se jménem."}
+                />
               )}
               <div className="grid grid-cols-2 w-full gap-5">
                 <button
@@ -816,9 +817,9 @@ export function SubscriptionList({ setLoader }) {
                 </p>
               </label>
               {errorActivate && (
-                <p className="p-2 bg-errorBg border-2 border-errorBorder rounded-md font-semibold text-medium">
-                  Vložený text se neshoduje se jménem.
-                </p>
+                <ErrorWindowApp
+                  error={"Vložený text se neshoduje se jménem."}
+                />
               )}
               <div className="grid grid-cols-2 w-full gap-5">
                 <button

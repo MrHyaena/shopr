@@ -375,8 +375,26 @@ const updateUser = async (req, res) => {
 
   try {
     // ------------ VALIDATION OF DATA --------------
-    if (!email || !firstName || !secondName || !phone) {
-      throw Error("Musíte vyplnit všechna pole");
+    const missingData = [];
+    if (!email) {
+      missingData.push("Email");
+    }
+
+    if (!firstName) {
+      missingData.push("Jméno");
+    }
+
+    if (!secondName) {
+      missingData.push("Příjmení");
+    }
+
+    if (!phone) {
+      missingData.push("Telefon");
+    }
+
+    if (missingData.length > 0) {
+      const missingJoin = missingData.join(" / ");
+      throw Error("Musíte vyplnit všechna pole, chybí: " + missingJoin);
     }
 
     // ------------ MONGOOSE - CHECKING IF USER EXISTS --------------

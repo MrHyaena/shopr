@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
 import { useUpdate } from "../hooks/useUpdate";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { deleteUserHandler } from "../functions/deleteUserHandler";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useExpiredContext } from "../hooks/useExpiredContext";
-import { MessageWindow } from "./messageWindow";
-import { ErrorWindow } from "./errorWindow";
+import { ErrorWindowApp } from "./errorWindowApp";
+import { MessageWindowApp } from "./messageWindowApp";
 
 export function Personal() {
   const { user, setUser } = useAuthContext();
   const { deleteUser } = deleteUserHandler();
   const { setExpired } = useExpiredContext();
+  let [searchParams] = useSearchParams();
 
   function PersonalForm() {
     const [email, setEmail] = useState("");
@@ -36,6 +37,10 @@ export function Personal() {
       setAddressNumber(user.addressNumber);
       setCity(user.city);
       setCityNumber(user.cityNumber);
+
+      if (searchParams.get("result") == "true") {
+        setMessage("Vaše údaje jsou úspěšně změněné.");
+      }
     }, []);
 
     const { update, isLoading } = useUpdate();
@@ -199,8 +204,8 @@ export function Personal() {
             </button>
           </div>
           <div className="flex items-center justify-center w-full">
-            {error && <ErrorWindow error={error} />}
-            {message && <MessageWindow message={message} />}
+            {error && <ErrorWindowApp error={error} />}
+            {message && <MessageWindowApp message={message} />}
           </div>
         </form>
       </>
@@ -290,15 +295,11 @@ export function Personal() {
                 }}
               />
               {errorDelete && (
-                <p className="p-2 bg-errorBg border-2 border-errorBorder rounded-md font-semibold text-medium">
-                  Vložený text se neshoduje s požadovaným textem.
-                </p>
+                <ErrorWindowApp
+                  error={"Vložený text se neshoduje s požadovaným textem."}
+                />
               )}
-              {errorDelete && (
-                <p className="p-2 bg-errorBg border-2 border-errorBorder rounded-md font-semibold text-medium">
-                  {errorDelete}
-                </p>
-              )}
+              {errorDelete && <ErrorWindowApp error={errorDelete} />}
               <div className="grid grid-cols-2 w-full gap-5">
                 <button
                   disabled={checkDelete !== "smazat účet"}

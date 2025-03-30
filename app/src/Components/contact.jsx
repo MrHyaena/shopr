@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { tokenExpired } from "../functions/tokenExpired";
 import { useExpiredContext } from "../hooks/useExpiredContext";
+import { ErrorWindowApp } from "./errorWindowApp";
+import { MessageWindowApp } from "./messageWindowApp";
 const apiURL = import.meta.env.VITE_API_URL;
 
 export function Contact() {
@@ -167,16 +169,8 @@ export function Contact() {
             )}
           </div>
           <div className="flex justify-center">
-            {error && (
-              <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
-                {error}
-              </h2>
-            )}
-            {responseOk && (
-              <h2 className="font-bold text-center p-2 bg-messageBg rounded-lg border-2 border-messageBorder max-w-[250px]">
-                {responseOk}
-              </h2>
-            )}
+            {error && <ErrorWindowApp error={error} />}
+            {responseOk && <MessageWindowApp message={responseOk} />}
           </div>
         </form>
       </>

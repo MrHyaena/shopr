@@ -17,6 +17,7 @@ import { createSubscriptionHandler } from "../functions/createSubscriptionHandle
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { patchSubscriptionHandler } from "../functions/patchSubscriptionHandler";
+import { ErrorWindowApp } from "./errorWindowApp";
 
 export function SubscriptionForm({ setLoader }) {
   //step state is for changing steps in form
@@ -293,11 +294,7 @@ export function SubscriptionForm({ setLoader }) {
             </button>
           </div>
 
-          {error && (
-            <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
-              {error}
-            </h2>
-          )}
+          {error && <ErrorWindowApp error={error} />}
         </div>
       </form>
     );
@@ -537,11 +534,7 @@ export function SubscriptionForm({ setLoader }) {
             </button>
           </div>
 
-          {error && (
-            <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
-              {error}
-            </h2>
-          )}
+          {error && <ErrorWindowApp error={error} />}
         </div>
       </form>
     );
@@ -800,7 +793,7 @@ export function SubscriptionForm({ setLoader }) {
       <>
         {settingsToggle == 0 && (
           <>
-            <div className="bg-white p-5 rounded-md border border-slate-200 gap-3 xl:grid grid-cols-2 grid-rows-[1fr_0px] min-h-[500px] flex flex-col">
+            <div className="bg-white p-5 rounded-md border border-slate-200 gap-3 xl:grid grid-cols-2 grid-rows-[1fr_80px] min-h-[500px] flex flex-col">
               <div className="flex flex-col justify-between gap-5">
                 <div>
                   <h2 className="text-xl font-semibold mb-4 text-heading">
@@ -965,11 +958,7 @@ export function SubscriptionForm({ setLoader }) {
                   </button>
                 </div>
 
-                {error && (
-                  <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
-                    {error}
-                  </h2>
-                )}
+                {error && <ErrorWindowApp error={error} />}
               </div>
             </form>
             <StepThreeCommentStandard />
@@ -1123,11 +1112,7 @@ export function SubscriptionForm({ setLoader }) {
                   </button>
                 </div>
 
-                {error && (
-                  <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
-                    {error}
-                  </h2>
-                )}
+                {error && <ErrorWindowApp error={error} />}
               </div>
             </div>
             <StepThreeCommentMystery />

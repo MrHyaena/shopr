@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 import { tokenExpired } from "../functions/tokenExpired";
 import { useExpiredContext } from "./useExpiredContext";
+import { createSearchParams, useNavigate } from "react-router-dom";
 const apiURL = import.meta.env.VITE_API_URL;
 
 export function useUpdate() {
   const [isLoading, setIsLoading] = useState(null);
+  const navigate = useNavigate();
 
   const { user, setUser } = useAuthContext();
   const { setExpired } = useExpiredContext();
@@ -42,6 +44,10 @@ export function useUpdate() {
       setMessage("Vaše údaje jsou úspěšně změněné.");
       setIsLoading(false);
       setUser({ ...user, ...data });
+      navigate({
+        pathname: "/app/osobni-udaje",
+        search: "?result=true",
+      });
     }
   }
 
