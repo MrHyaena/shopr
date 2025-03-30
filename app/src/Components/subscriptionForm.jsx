@@ -289,7 +289,7 @@ export function SubscriptionForm({ setLoader }) {
               Zrušit
             </Link>
             <button type="submit" className="buttonRedMedium">
-              Pokračovat <FontAwesomeIcon icon={faArrowRight} />
+              Pokračovat
             </button>
           </div>
 
@@ -525,7 +525,7 @@ export function SubscriptionForm({ setLoader }) {
                 setStep(1);
               }}
             >
-              <FontAwesomeIcon icon={faArrowLeft} /> Zpět
+              Zpět
             </button>
             <button
               className="buttonRedMedium"
@@ -533,7 +533,7 @@ export function SubscriptionForm({ setLoader }) {
                 handleNext(e);
               }}
             >
-              Pokračovat <FontAwesomeIcon icon={faArrowRight} />
+              Pokračovat
             </button>
           </div>
 
@@ -800,7 +800,7 @@ export function SubscriptionForm({ setLoader }) {
       <>
         {settingsToggle == 0 && (
           <>
-            <div className="bg-white p-5 rounded-md border border-slate-200 gap-x-10 gap-y-5 xl:grid grid-cols-2 grid-rows-[1fr_80px] min-h-[500px] flex flex-col gap-8">
+            <div className="bg-white p-5 rounded-md border border-slate-200 gap-3 xl:grid grid-cols-2 grid-rows-[1fr_0px] min-h-[500px] flex flex-col">
               <div className="flex flex-col justify-between gap-5">
                 <div>
                   <h2 className="text-xl font-semibold mb-4 text-heading">
@@ -852,7 +852,7 @@ export function SubscriptionForm({ setLoader }) {
                 }}
                 className="bg-quad col-span-2 xl:self-center self-stretch text-textButton xl:p-3 p-2 xl:text-lg text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-[102%] hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               >
-                <FontAwesomeIcon icon={faArrowLeft} /> Zpět
+                Zpět
               </button>
             </div>
             <StepThreeCommentSettings />
@@ -951,7 +951,7 @@ export function SubscriptionForm({ setLoader }) {
                       setItemsType("empty");
                     }}
                   >
-                    <FontAwesomeIcon icon={faArrowLeft} /> Zpět na výběr
+                    Zvolit jiný typ předplatného{" "}
                   </button>
                   <button
                     disabled={isLoading}
@@ -962,7 +962,6 @@ export function SubscriptionForm({ setLoader }) {
                     }}
                   >
                     {id ? "Aktualizovat předplatné" : "Vytvořit předplatné"}{" "}
-                    <FontAwesomeIcon icon={faCheck} />
                   </button>
                 </div>
 
@@ -1110,7 +1109,7 @@ export function SubscriptionForm({ setLoader }) {
                       setItemsType("empty");
                     }}
                   >
-                    <FontAwesomeIcon icon={faArrowLeft} /> Zpět na výběr
+                    Zvolit jiný typ předplatného{" "}
                   </button>
                   <button
                     disabled={isLoading}
@@ -1120,8 +1119,7 @@ export function SubscriptionForm({ setLoader }) {
                       handleSend();
                     }}
                   >
-                    {id ? "Aktualizovat předplatné" : "Vytvořit předplatné"}{" "}
-                    <FontAwesomeIcon icon={faCheck} />
+                    {id ? "Aktualizovat předplatné" : "Vytvořit předplatné"}
                   </button>
                 </div>
 

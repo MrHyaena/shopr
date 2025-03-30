@@ -156,13 +156,13 @@ export function Sidebar() {
             </button>
           </div>
           {toggleMenu && (
-            <div className="flex flex-col justify-start items-center gap-2  p-4 row-span-5 self-center">
+            <div className="flex flex-col justify-start items-center gap-2  p-4 pb-8 row-span-5 self-center">
               <Link
                 onClick={() => {
                   setToggleMenu(false);
                 }}
                 to="/app/form"
-                className="bg-quad text-textButton cursor-pointer text-base font-bold py-2 px-3 text-md rounded-md transition-all ease-in-out hover:scale-105  self-stretch"
+                className="bg-quad text-textButton cursor-pointer text-base font-bold py-2 px-3 text-md rounded-md transition-all ease-in-out hover:scale-105 self-start"
               >
                 Nové předplatné
               </Link>
@@ -202,7 +202,7 @@ export function Sidebar() {
                 FAQ
               </Link>
               <button
-                className="text-base font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
+                className="text-base font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center mt-10"
                 onClick={handleLogout}
               >
                 Odhlásit

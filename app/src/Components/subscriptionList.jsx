@@ -526,8 +526,8 @@ export function SubscriptionList({ setLoader }) {
 
     return (
       <>
-        <div className="bg-white xl:p-6 p-2 rounded-lg border border-slate-200 shadow-md shadow-slate-200 xl:grid xl:grid-cols-2 grid-cols-5 gap-4 animate-fall-left">
-          <div className="mb-3 xl:mb-0 xl:block flex flex-col-reverse xl:col-span-1 col-span-3">
+        <div className="bg-white xl:p-6 p-2 rounded-lg border border-slate-200 shadow-md shadow-slate-200 xl:grid xl:grid-cols-3 grid-cols-5 gap-4 animate-fall-left">
+          <div className="mb-3 xl:mb-0 xl:block flex flex-col-reverse xl:col-span-2 col-span-3">
             <div className="xl:flex gap-7 mt-5 xl:mt-0 xl:mb-2">
               <p className="text-textDarker text-[12px] mb-2 font-medium">
                 ID: <span className="text-textLighter">{_id}</span>
@@ -559,24 +559,27 @@ export function SubscriptionList({ setLoader }) {
             </div>
 
             <div className="flex xl:flex-row flex-col-reverse xl:gap-5 gap-2 xl:items-center items-start justify-center xl:justify-start">
-              <a
-                href={"https://" + subWebsite}
-                target="_blank"
-                className="xl:w-10 justify-center xl:block hidden"
-              >
-                <img
-                  src={"https://" + subWebsite + "/favicon.ico"}
-                  alt="icon"
-                  className=" max-h-8 max-w-8 rounded-md"
-                  onError={(e) => {
-                    e.target.src = shopLogo;
-                  }}
-                />
-              </a>
+              <div className="flex gap-3 items-center flex-row-reverse xl:flex-row">
+                <a
+                  href={"https://" + subWebsite}
+                  target="_blank"
+                  className="xl:w-10 justify-center xl:block"
+                >
+                  <img
+                    src={"https://" + subWebsite + "/favicon.ico"}
+                    alt="icon"
+                    className=" h-6 rounded-md"
+                    onError={(e) => {
+                      e.target.src = shopLogo;
+                    }}
+                  />
+                </a>
 
-              <h2 className="xl:text-2xl text-xl text-textDark font-bold xl:mr-5">
-                {subName}
-              </h2>
+                <h2 className="xl:text-2xl text-xl text-textDark font-bold xl:mr-5">
+                  {subName}
+                </h2>
+              </div>
+
               {active ? (
                 <div className="bg-emerald-500 rounded-md flex text-base lg:text-ml items-center justify-center gap-2 px-3 py-1 font-semibold text-white shadow-sm">
                   <FontAwesomeIcon icon={faCashRegister} />
@@ -609,7 +612,6 @@ export function SubscriptionList({ setLoader }) {
               className=" text-textDark hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-quad"
             >
               Upravit
-              <FontAwesomeIcon icon={faPen} className="hidden" />
             </Link>
             <button
               onClick={() => {
@@ -618,7 +620,6 @@ export function SubscriptionList({ setLoader }) {
               className="text-md font-semibold flex gap-3 items-center border hover:text-textButton hover:shadow-md hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2 transition-all ease-in-out cursor-pointer"
             >
               {toggle ? "Zavřít" : "Detail"}
-              <FontAwesomeIcon icon={faMagnifyingGlass} className="text-lg" />
             </button>
           </div>
 
@@ -868,11 +869,13 @@ export function SubscriptionList({ setLoader }) {
         className="bg-slate-50 xl:p-10 p-3 flex flex-col xl:gap-10 gap-5 rounded-2xl min-h-screen xl:pt-10 pt-18 xl:pb-30 pb-30 overflow-hidden"
         key="subList"
       >
-        <div className="xl:flex xl:flex-row flex-col-reverse items-center justify-between xl:gap-0 gap-5 hidden">
-          <h1 className="text-3xl font-bold text-textDark">Vaše předplatné</h1>
+        <div className="flex flex-row items-center justify-between xl:gap-0 gap-5">
+          <h1 className="xl:text-3xl  text-2xl font-bold text-textDark">
+            Vaše předplatné
+          </h1>
           <Link
             to="/app/form"
-            className="bg-quad text-center shadow-md text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary"
+            className="bg-quad text-center shadow-md text-textButton xl:p-3 p-2 xl:text-xl text-base font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary"
           >
             Nové předplatné
           </Link>
