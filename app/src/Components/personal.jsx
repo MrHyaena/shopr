@@ -7,6 +7,8 @@ import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useExpiredContext } from "../hooks/useExpiredContext";
+import { MessageWindow } from "./messageWindow";
+import { ErrorWindow } from "./errorWindow";
 
 export function Personal() {
   const { user, setUser } = useAuthContext();
@@ -23,7 +25,7 @@ export function Personal() {
     const [city, setCity] = useState("");
     const [cityNumber, setCityNumber] = useState("");
     const [error, setError] = useState(null);
-    const [message, setMessage] = useState(false);
+    const [message, setMessage] = useState(null);
 
     useEffect(() => {
       setEmail(user.email);
@@ -196,17 +198,10 @@ export function Personal() {
               Aktualizovat
             </button>
           </div>
-
-          {error && (
-            <h2 className="font-bold text-center p-2 bg-errorBg rounded-lg border-2 border-errorBorder">
-              {error}
-            </h2>
-          )}
-          {message && (
-            <h2 className="font-bold text-center p-2 bg-messageBg rounded-lg border-2 border-messageBorder">
-              Vaše údaje jsou úspěšně změněné.
-            </h2>
-          )}
+          <div className="flex items-center justify-center w-full">
+            {error && <ErrorWindow error={error} />}
+            {message && <MessageWindow message={message} />}
+          </div>
         </form>
       </>
     );

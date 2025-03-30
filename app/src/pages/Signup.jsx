@@ -13,7 +13,7 @@ import {
 import logoBlack from "/public/shopr-logo.png";
 import background from "/public/background.jpg";
 import { ErrorWindow } from "../Components/errorWindow";
-import MessageWindow from "../Components/messageWindow";
+import { MessageWindow } from "../Components/messageWindow";
 
 export function SignupPage() {
   function SignupForm() {

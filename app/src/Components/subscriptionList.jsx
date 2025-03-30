@@ -361,13 +361,13 @@ export function SubscriptionList({ setLoader }) {
                 <p className="col-span-1">Údaj</p>
                 <p className="col-span-1">Hodnota</p>
               </div>
-              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 bg-slate-100">
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 even:bg-slate-100">
                 <h4 className="text-heading font-bold text-textDark">
                   Název předplatného:
                 </h4>
                 <p>{subName}</p>
               </div>
-              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 ">
+              <div className="grid grid-cols-2 gap-3 border-slate-300 py-2 px-4 even:bg-slate-100">
                 <h4 className="text-heading font-bold text-textDark">
                   E-shop:
                 </h4>
@@ -380,7 +380,7 @@ export function SubscriptionList({ setLoader }) {
                 </a>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 py-2 px-4 ">
+              <div className="grid grid-cols-2 gap-3 py-2 px-4 even:bg-slate-100">
                 <h4 className="text-heading font-bold text-textDark">
                   Frekvence:
                 </h4>
@@ -392,7 +392,7 @@ export function SubscriptionList({ setLoader }) {
                   {subFrequency == "quarterly" && "Jednou za tři měsíce"}
                 </p>
               </div>
-              <div className="grid grid-cols-2 gap-3 py-2 px-4 bg-slate-100">
+              <div className="grid grid-cols-2 gap-3 py-2 px-4  even:bg-slate-100">
                 <h4 className="text-heading font-bold text-textDark">
                   Způsob doručení:
                 </h4>
@@ -401,13 +401,13 @@ export function SubscriptionList({ setLoader }) {
                   {subDeliveryMethod == "dropbox" && "Box/výdejní místé"}
                 </p>
               </div>
-              <div className="grid grid-cols-2 gap-3 py-2 px-4">
+              <div className="grid grid-cols-2 gap-3 py-2 px-4 even:bg-slate-100">
                 <h4 className="text-heading font-bold text-textDark">
                   Zákaznické ID:
                 </h4>
                 <p className="break-all">{stripeCustomerId}</p>
               </div>
-              <div className="grid grid-cols-2 gap-3 py-2 px-4 bg-slate-100">
+              <div className="grid grid-cols-2 gap-3 py-2 px-4 even:bg-slate-100">
                 <h4 className="text-heading font-bold text-textDark">
                   Platební ID:
                 </h4>

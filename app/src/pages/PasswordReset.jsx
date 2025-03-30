@@ -6,7 +6,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 const apiURL = import.meta.env.VITE_API_URL;
 import background from "/public/background.jpg";
 import { ErrorWindow } from "../Components/errorWindow";
-import MessageWindow from "../Components/messageWindow";
+import { MessageWindow } from "../Components/messageWindow";
 
 export function PasswordReset() {
   const [passwordCheck, setPasswordCheck] = useState("");

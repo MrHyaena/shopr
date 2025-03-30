@@ -39,7 +39,7 @@ export function useUpdate() {
       localStorage.setItem("user", JSON.stringify({ ...user, ...data }));
 
       // update the auth context
-      setMessage(true);
+      setMessage("Vaše údaje jsou úspěšně změněné.");
       setIsLoading(false);
       setUser({ ...user, ...data });
     }
