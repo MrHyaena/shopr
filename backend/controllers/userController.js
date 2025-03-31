@@ -42,8 +42,33 @@ const signupUser = async (req, res) => {
   } = data;
   try {
     // ------------ VALIDATION OF DATA FROM FORM --------------
-    if (!email || !password || !firstName || !secondName || !phone || !terms) {
-      throw Error("Musíte vyplnit všechna pole");
+
+    const missingData = [];
+
+    if (!email) {
+      missingData.push("Email");
+    }
+
+    if (!password) {
+      missingData.push("Heslo");
+    }
+
+    if (!firstName) {
+      missingData.push("Jméno");
+    }
+
+    if (!secondName) {
+      missingData.push("Příjmení");
+    }
+
+    if (!phone) {
+      missingData.push("Telefon");
+    }
+
+    if (missingData.length > 0) {
+      throw Error(
+        "Musíte vyplnit všechna pole. Chybí: " + missingData.join(" | ")
+      );
     }
 
     //password validation
@@ -63,6 +88,13 @@ const signupUser = async (req, res) => {
     if (checkArray.length == 0) {
       throw Error("Heslo musí mít alespoň jedno číslo");
     }
+
+    //Term accepted
+    if (terms == false) {
+      throw Error("Musíte souhlasit s obchodními podmínkami a Podmínkami GDPR");
+    }
+
+    //User Exists or not
 
     if (!validator.isEmail(email)) {
       throw Error("Emailová adresa není platná");
@@ -269,7 +301,7 @@ const deleteUser = async (req, res) => {
       doc != null;
       doc = await subscriptions.next()
     ) {
-      if (doc.stripeSubId != "empty") {
+      if (doc.active == true) {
         stripeSubIdsArray.push(doc.stripeSubId);
       }
       pipeDealIdsArray.push(doc.pipedriveDealId);
@@ -353,6 +385,7 @@ const deleteUser = async (req, res) => {
     sendEmail(fromEmail, toEmail, subject, emailBody, false);
 
     console.log("email");
+    console.log("User deletion was successful");
 
     res.status(200).json({ deleted: true });
   } catch (error) {

@@ -233,7 +233,7 @@ export function SignupPage() {
       <>
         <p className="font-semibold text-textDark">
           Děkujeme, že to s námi chcete vyzkoušet! Jakmile vyplníte formulář na
-          levé straně, vytvoříme pro Vás v našem systému uživatelský účet. V něm
+          levé straně, založíme pro Vás v našem systému uživatelský účet. V něm
           si následně můžete vytvořit předplatné u jakéhokoliv e-shopu jen
           chcete.
         </p>

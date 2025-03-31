@@ -5,6 +5,7 @@ import {
   faChevronUp,
   faGears,
   faGift,
+  faGlobe,
   faHouseUser,
   faMagnifyingGlass,
   faPen,
@@ -70,6 +71,8 @@ export function SubscriptionList({ setLoader }) {
     const [toggleActivate, setToggleActivate] = useState(false);
     const [checkActivate, setCheckActivate] = useState("");
     const [errorActivate, setErrorActivate] = useState(false);
+
+    const [errorImage, setErrorImage] = useState(false);
 
     const editURL = "/form/" + _id;
 
@@ -566,14 +569,21 @@ export function SubscriptionList({ setLoader }) {
                   target="_blank"
                   className="xl:w-10 justify-center xl:block"
                 >
-                  <img
-                    src={"https://" + subWebsite + "/favicon.ico"}
-                    alt="icon"
-                    className=" h-6 rounded-md"
-                    onError={(e) => {
-                      e.target.src = shopLogo;
-                    }}
-                  />
+                  {!errorImage ? (
+                    <img
+                      src={"https://" + subWebsite + "/favicon.ico"}
+                      alt="icon"
+                      className=" h-6 rounded-md"
+                      onError={() => {
+                        setErrorImage(true);
+                      }}
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={faGlobe}
+                      className=" text-xl rounded-md"
+                    />
+                  )}
                 </a>
 
                 <h2 className="xl:text-2xl text-xl text-textDark font-bold xl:mr-5">
@@ -595,7 +605,19 @@ export function SubscriptionList({ setLoader }) {
             </div>
           </div>
           <div className="flex flex-col xl:flex-row gap-2 xl:gap-6 xl:items-center xl:justify-end justify-center col-span-2 xl:col-span-1">
-            {!active && (
+            {!active ? (
+              <>
+                <button
+                  onClick={() => {
+                    setToggleActivate(true);
+                  }}
+                  className=" text-textDark cursor-pointer hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-emerald-500 hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-emerald-500"
+                >
+                  Aktivovat předplatné
+                  <FontAwesomeIcon icon={faCashRegister} className="hidden" />
+                </button>
+              </>
+            ) : (
               <>
                 <button
                   onClick={() => {
@@ -603,7 +625,7 @@ export function SubscriptionList({ setLoader }) {
                   }}
                   className=" text-textDark cursor-pointer hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-quad"
                 >
-                  Aktivovat předplatné
+                  Deaktivovat předplatné
                   <FontAwesomeIcon icon={faCashRegister} className="hidden" />
                 </button>
               </>

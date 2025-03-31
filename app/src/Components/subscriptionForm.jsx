@@ -407,7 +407,7 @@ export function SubscriptionForm({ setLoader }) {
           <legend className="text-xl font-semibold text-heading mb-5">
             Parametry předplatného
           </legend>
-          <div className="grid gap-5">
+          <div className="grid gap-3">
             <label className="flex flex-col text-heading text-lg font-semibold">
               Název předplatného
               <input
@@ -442,8 +442,9 @@ export function SubscriptionForm({ setLoader }) {
               </div>
               <div>
                 <p>
-                  Je nutné, aby měl e-shop platbu dobírkou. Pokud e-shop tuto
-                  možnost nenabízí, pak nedokážeme vytvořit předplatné.
+                  Je nutné, aby měl e-shop platbu dobírkou/při převzetí. Pokud
+                  e-shop tuto možnost nenabízí, pak nedokážeme vytvořit
+                  předplatné.
                 </p>
               </div>
             </div>
@@ -487,6 +488,7 @@ export function SubscriptionForm({ setLoader }) {
                 či odkaz okopírujte z nabídky v e-shopu.
                 <div className="w-full mt-2">
                   <input
+                    required={true}
                     value={subDeliveryAddress}
                     onChange={(e) => {
                       setSubDeliveryAddress(e.target.value);

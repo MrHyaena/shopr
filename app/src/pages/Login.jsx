@@ -244,23 +244,46 @@ export function LoginPage() {
             backgroundSize: "cover",
           }}
         >
-          <div className="w-[50%] bg-white rounded-md p-10 flex flex-col items-start justify-center gap-5 animate-fall-left">
-            <h2 className="text-xl font-semibold">
-              Vítáme Vás v naší aplikaci!
-            </h2>
-            <p className="text-textDark font-semibold">
-              Ať už jste tu úplně poprvé nebo se k nám (doufejme) spokojeně
-              vracíte, vítejte a děkujeme. Každý den na naší službe pracujeme a
-              zlepšujeme ji na všech frontách. Sice máme nápadů hodně, ale jde
-              nám především o vaše pohodlí. Pokud byste proto měli jakýkoliv
-              nápad, který by Vám zásadně zpříjemnil používání, napište nám jej
-              prosím na adresu{" "}
-              <a href="mailto:info@shopr.cz" className="text-quad">
-                info@shopr.cz
-              </a>
-              .
-            </p>
-          </div>
+          {reset ? (
+            <>
+              <div className="w-[50%] bg-white rounded-md p-10 flex flex-col items-start justify-center gap-5 animate-fall-left">
+                <h2 className="text-xl font-semibold">
+                  Jak obnova hesla funguje
+                </h2>
+                <p className="text-textDark font-semibold">
+                  Na emailovou adresu, kterou zadáte do pole vlevo, Vám přijde
+                  zpráva s odkazem. Budete mít 15 minut na to, abyste na odkaz
+                  kliknuli a heslo změnili. Pokud to nestihnete, bude nutné
+                  požadavek opakovat. Pokud byste měli jakýkoliv problém,
+                  napište nám prosím na adresu{" "}
+                  <a href="mailto:info@shopr.cz" className="text-quad">
+                    info@shopr.cz
+                  </a>
+                  .
+                </p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="w-[50%] bg-white rounded-md p-10 flex flex-col items-start justify-center gap-5 animate-fall-left">
+                <h2 className="text-xl font-semibold">
+                  Vítáme Vás v naší aplikaci!
+                </h2>
+                <p className="text-textDark font-semibold">
+                  Ať už jste tu úplně poprvé nebo se k nám (doufejme) spokojeně
+                  vracíte, vítejte a děkujeme. Každý den na naší službe
+                  pracujeme a zlepšujeme ji na všech frontách. Sice máme nápadů
+                  hodně, ale jde nám především o vaše pohodlí. Pokud byste proto
+                  měli jakýkoliv nápad, který by Vám zásadně zpříjemnil
+                  používání, napište nám jej prosím na adresu{" "}
+                  <a href="mailto:info@shopr.cz" className="text-quad">
+                    info@shopr.cz
+                  </a>
+                  .
+                </p>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>
