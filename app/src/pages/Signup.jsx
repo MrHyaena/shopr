@@ -91,7 +91,7 @@ export function SignupPage() {
                   className="text-6xl text-white animate-rotate"
                 />
                 <p className="text-textLight text-2xl font-semibold">
-                  Pracujeme na tom...
+                  Začínáme vytvářet váš účet...
                 </p>
               </div>
             )}

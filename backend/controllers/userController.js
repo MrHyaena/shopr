@@ -202,6 +202,20 @@ const signupUser = async (req, res) => {
       false
     );
 
+    // ------------------- EMAIL NOTIFICATION - for admin ----------------------------
+    const adminEmail = "admin@shopr.cz";
+    const fromAdmin = "App - info <info@shopr.cz>";
+    const adminSubject = "Nový uživatel";
+    const adminBody = "<h1>Registrace nového uživatele.</h1>";
+
+    const adminResponse = await sendEmail(
+      fromAdmin,
+      adminEmail,
+      adminSubject,
+      adminBody,
+      false
+    );
+
     //create token
     const token = createToken(user._id);
 
