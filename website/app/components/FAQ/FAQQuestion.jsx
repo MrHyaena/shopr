@@ -108,6 +108,12 @@ export default function FAQQuestion() {
               answer={
                 "Předplatné můžete vytvořit na jakémkoliv e-shopu, na kterém je dostupná platba skrze dobírku nebo kartu při převzetí. Jiné omezení není."
               }
+            />
+            <QuestionToggle
+              question={"Do kdy od platby mi objednávku vyřídíte?"}
+              answer={
+                "Objednávky jsme povinni vyřídit do 48 hodin od zaplacení předplatného. Pokud se nám to z nějakého důvodu nepovede, máte nárok na vrácení peněz za související platbu."
+              }
             />{" "}
             <QuestionToggle
               question={"Je omezený počet položek v předplatném?"}
@@ -174,9 +180,15 @@ export default function FAQQuestion() {
             <QuestionToggle
               question={"K čemu potřebujete mé osobní údaje?"}
               answer={
-                "osobní slouží pro zjednodušení celého systému. Údaje můžete na jedno kliknutí nahrát do formuláře při nastavování předplatného, což šetří spoustu času."
+                "osobní slouží pro zjednodušení celého systému. Údaje můžete na jedno kliknutí nahrát do formuláře při nastavování předplatného, což šetří spoustu času. Pokud s tím při registraci souhlasíte, používáme Váš email k marketingovým účelům. Slibujeme ale, že Vás nebudeme spamovat jako spousta jiných služeb. Naším cílem je Vás hlavně informovat o nových funkcích, které do služby přidáme."
               }
             />{" "}
+            <QuestionToggle
+              question={"Můžu zrušit marketingový souhlas?"}
+              answer={
+                "Marketingový souhlas můžete zrušit kdykoliv chcete. Stačí nám jen napsat na email info@shopr.cz."
+              }
+            />
             <QuestionToggle
               question={"Můžu své osobní údaje změnit?"}
               answer={
