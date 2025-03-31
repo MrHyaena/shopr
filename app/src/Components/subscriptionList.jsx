@@ -1,14 +1,17 @@
 import {
+  faBan,
   faCartShopping,
   faCashRegister,
   faChevronDown,
   faChevronUp,
+  faCircleStop,
   faGears,
   faGift,
   faGlobe,
   faHouseUser,
   faMagnifyingGlass,
   faPen,
+  faStop,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useEffect, useState } from "react";
@@ -626,7 +629,7 @@ export function SubscriptionList({ setLoader }) {
                   className=" text-textDark cursor-pointer hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-quad"
                 >
                   Deaktivovat předplatné
-                  <FontAwesomeIcon icon={faCashRegister} className="hidden" />
+                  <FontAwesomeIcon icon={faBan} className="hidden" />
                 </button>
               </>
             )}

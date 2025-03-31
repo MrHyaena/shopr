@@ -2,6 +2,7 @@
 const User = require("../models/userModel");
 const Subscription = require("../models/subscriptionModel");
 const Hashcheck = require("../models/hashcheckModel");
+const Agreement = require("../models/agreementModel");
 const jwt = require("jsonwebtoken");
 const { sendEmail } = require("../email/sendEmail");
 require("dotenv").config();
@@ -39,6 +40,7 @@ const signupUser = async (req, res) => {
     city,
     cityNumber,
     terms,
+    marketing,
   } = data;
   try {
     // ------------ VALIDATION OF DATA FROM FORM --------------
@@ -156,6 +158,18 @@ const signupUser = async (req, res) => {
       secondName,
       phone,
       terms,
+      marketing,
+    });
+
+    // ------------------- MONGOOSE - creating agreement record ----------------------------
+
+    const agreement = await Agreement.create({
+      firstName,
+      secondName,
+      email,
+      phone,
+      terms,
+      marketing,
     });
 
     // ------------------- EMAIL VERIFICATION - creating database hash record and sending email with URL request for checking ----------------------------

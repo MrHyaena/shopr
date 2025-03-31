@@ -50,6 +50,9 @@ const userSchema = new Schema(
     terms: {
       type: Boolean,
     },
+    marketing: {
+      type: Boolean,
+    },
   },
   { timestamps: true }
 );

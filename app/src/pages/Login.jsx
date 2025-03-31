@@ -89,7 +89,7 @@ export function LoginPage() {
                 ></input>
               </label>
               <p
-                className="font-semibold underline text-textDark text-sm cursor-pointer"
+                className="font-semibold underline text-textDark text-sm cursor-pointer self-start"
                 onClick={() => {
                   setReset(!reset);
                 }}

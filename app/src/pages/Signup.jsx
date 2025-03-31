@@ -33,6 +33,7 @@ export function SignupPage() {
     const [cityNumber, setCityNumber] = useState("");
 
     const [terms, setTerms] = useState(false);
+    const [marketing, setMarketing] = useState(false);
 
     useEffect(() => {
       let emailParam = searchParams.get("email");
@@ -43,6 +44,23 @@ export function SignupPage() {
 
     async function handleSubmit(e) {
       e.preventDefault();
+
+      let formData = new FormData(document.querySelector("#submitForm"));
+      let termsData = formData.get("termsInput");
+      let marketingData = formData.get("marketingInput");
+
+      if (termsData == null) {
+        termsData = false;
+      } else {
+        termsData = true;
+      }
+
+      if (marketingData == null) {
+        marketingData = false;
+      } else {
+        marketingData = true;
+      }
+
       const data = {
         email,
         password,
@@ -54,8 +72,11 @@ export function SignupPage() {
         addressNumber,
         city,
         cityNumber,
-        terms,
+        terms: termsData,
+        marketing: marketingData,
       };
+
+      console.log(data);
 
       await signup(data);
     }
@@ -74,7 +95,11 @@ export function SignupPage() {
                 </p>
               </div>
             )}
-            <div className=" flex flex-col gap-5 animate-fall-down-faster xl:max-w-[50%]">
+            <form
+              id="submitForm"
+              onSubmit={(e) => handleSubmit(e)}
+              className=" flex flex-col gap-5 animate-fall-down-faster xl:max-w-[50%]"
+            >
               {error && <ErrorWindow error={error} />}
               <div className="flex flex-col justify-center items-center text-center gap-3">
                 <h1 className="text-2xl font-semibold">Zaregistrujte se</h1>
@@ -111,7 +136,9 @@ export function SignupPage() {
                     type="number"
                     className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                     onChange={(e) => {
-                      setPhone(e.target.value);
+                      if (e.target.value < 1000000000) {
+                        setPhone(e.target.value);
+                      }
                     }}
                     value={phone}
                   ></input>
@@ -154,7 +181,7 @@ export function SignupPage() {
                 </label>
               </div>
 
-              <div className="flex gap-3 xl:flex-row flex-col">
+              <div className="flex gap-3 flex-col">
                 <label className="flex flex-row-reverse gap-3 text--textDark text-lg font-semibold col-span-6">
                   <p className="text-base">
                     Seznamil/a jsem se a souhlasím s{" "}
@@ -176,9 +203,9 @@ export function SignupPage() {
                     služby Shopr
                   </p>
                   <input
+                    name="termsInput"
                     checked={terms}
-                    value="trie"
-                    name="city"
+                    value="true"
                     type="checkbox"
                     className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                     onChange={(e) => {
@@ -186,9 +213,24 @@ export function SignupPage() {
                     }}
                   ></input>
                 </label>
+                <label className="flex flex-row-reverse gap-3 text--textDark text-lg font-semibold col-span-6">
+                  <p className="text-base">
+                    Chci od služby Shopr dostávat obchodní a marketingová
+                    sdělení
+                  </p>
+                  <input
+                    name="marketingInput"
+                    checked={marketing}
+                    value="true"
+                    type="checkbox"
+                    className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                    onChange={(e) => {
+                      setMarketing(!marketing);
+                    }}
+                  ></input>
+                </label>
               </div>
               <button
-                onClick={(e) => handleSubmit(e)}
                 disabled={isLoading}
                 className="bg-quad text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
                 type="submit"
@@ -201,7 +243,7 @@ export function SignupPage() {
               >
                 Přihlásit se
               </Link>
-            </div>
+            </form>
           </>
         ) : (
           <AfterSignup message={message} />

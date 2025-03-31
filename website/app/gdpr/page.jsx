@@ -142,7 +142,7 @@ export default function About() {
                 funkcí Aplikace), které již Uživateli poskytl. K tomu uděluje
                 uživatel souhlas zaškrtnutím políčka při registraci účtu.
                 Souhlas se uděluje na dobu trvání smluvních závazku a lze jej
-                kdykoliv odvolat..
+                kdykoliv odvolat.
               </p>
               <p>
                 <span className="font-bold text-2xl">3.3.</span> Souhlas platí

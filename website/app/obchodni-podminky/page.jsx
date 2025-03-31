@@ -161,10 +161,13 @@ export default function page() {
                 skrze ní poskytovatel komunikovat s uživatelem.
               </p>
               <p>
-                <span className="font-bold text-2xl">2.2.</span> Uživatel
-                souhlasí, aby mu byla ze strany poskytovatele zasílána obchodní
-                sdělení. Tento souhlas je kdykoli odvolatelný, ať pro jednotlivý
-                druh sdělení či všechna obchodní sdělení.
+                <span className="font-bold text-2xl">2.2.</span> Uživatel má
+                možnost při registraci dobrovolně odsouhlasit odběr obchodních
+                sdělení zaškrtnutím políčka s textem "Chci od služby Shopr
+                dostávat obchodní a marketingová sdělení". Tento souhlas je
+                kdykoli odvolatelný, ať pro jednotlivý druh sdělení či všechna
+                obchodní sdělení. Uživatel může souhlas odvolat zaslaním
+                požadavku na emailovou adresu info@shopr.cz.
               </p>
               <p>
                 <span className="font-bold text-2xl">2.3.</span> Uživatel je
