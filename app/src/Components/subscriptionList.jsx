@@ -895,8 +895,8 @@ export function SubscriptionList({ setLoader }) {
         className="bg-slate-50 xl:p-10 p-3 flex flex-col xl:gap-10 gap-5 rounded-2xl min-h-screen xl:pt-10 pt-18 xl:pb-30 pb-30 overflow-hidden"
         key="subList"
       >
-        <div className="flex flex-row items-center justify-between xl:gap-0 gap-5">
-          <h1 className="xl:text-3xl  text-2xl font-bold text-textDark">
+        <div className="xl:flex flex-row items-center justify-between xl:gap-0 gap-5 hidden">
+          <h1 className="xl:text-3xl  text-xl font-bold text-textDark">
             Vaše předplatné
           </h1>
           <Link

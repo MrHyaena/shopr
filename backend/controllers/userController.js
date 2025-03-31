@@ -29,7 +29,6 @@ function createToken(_id) {
 const signupUser = async (req, res) => {
   const data = req.body;
   const {
-    email,
     password,
     passwordCheck,
     firstName,
@@ -42,6 +41,9 @@ const signupUser = async (req, res) => {
     terms,
     marketing,
   } = data;
+
+  const email = data.email.toLowerCase();
+
   try {
     // ------------ VALIDATION OF DATA FROM FORM --------------
 
@@ -75,7 +77,9 @@ const signupUser = async (req, res) => {
 
     //password validation
     if (password.length < 6) {
-      throw Error("Heslo musí mít alespoň 6 znaků");
+      throw Error(
+        "Heslo musí mít alespoň 6 znaků, z toho minimálně jedno číslo."
+      );
     }
 
     if (password != passwordCheck) {
@@ -88,7 +92,9 @@ const signupUser = async (req, res) => {
     );
 
     if (checkArray.length == 0) {
-      throw Error("Heslo musí mít alespoň jedno číslo");
+      throw Error(
+        "Heslo musí mít alespoň 6 znaků, z toho minimálně jedno číslo."
+      );
     }
 
     //Term accepted
@@ -150,7 +156,7 @@ const signupUser = async (req, res) => {
 
     const user = await User.create({
       active: false,
-      email,
+      email: email,
       password: hash,
       pipedrivePersonId: pipePerson.data.id,
       stripeCustomerId: customer.id,
@@ -272,7 +278,7 @@ const loginUser = async (req, res) => {
       throw Error("Musíte vyplnit všechna pole");
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: email.toLowerCase() });
 
     if (!user) {
       throw Error("Nesprávný email nebo heslo.");
