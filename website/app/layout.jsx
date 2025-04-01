@@ -7,6 +7,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import Footer from "./components/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UpButton from "./components/UpButton";
+import Script from "next/script";
 config.autoAddCss = false;
 
 const geistSans = Geist({
@@ -31,6 +32,13 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} lg:mt-[80px] mt-[56px]`}
       >
+        <script
+          id="Cookiebot"
+          src="https://consent.cookiebot.com/uc.js"
+          data-cbid="0db73977-b2f2-4fda-a24e-2a08bdee8b21"
+          data-blockingmode="auto"
+          type="text/javascript"
+        ></script>
         <UpButton />
         <Navbar />
         {children}
