@@ -19,9 +19,16 @@ import { PasswordReset } from "./pages/PasswordReset";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpider, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { ScrollToTop } from "./functions/ScrollTopFunction";
+import TagManager from "react-gtm-module";
 
 function App() {
   const { user } = useAuthContext();
+
+  const tagManagerArguments = {
+    gtmId: "GT-K52GJGNC",
+  };
+
+  TagManager.initialize(tagManagerArguments);
 
   function ProtectedRoute() {
     const [loader, setLoader] = useState(false);
