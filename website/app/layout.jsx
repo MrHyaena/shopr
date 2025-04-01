@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "./components/Navbar";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -26,9 +27,27 @@ export const metadata = {
     "Objednáváte doplňky stravy, pečujete o zvířata, nebo třeba milujete čaj? Založte si pravidelné objednávky na jakémkoliv e-shopu jen chcete. Objednávky vyřídíme za Vás, vy si zboží jen převezmete.",
 };
 
+function GoogleTag() {
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "AW-16899008701");
+
+  return (
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=AW-16899008701"
+    ></script>
+  );
+}
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <GoogleTagManager gtmId="GT-K52GJGNC" />
       <body
         className={`${geistSans.variable} ${geistMono.variable} lg:mt-[80px] mt-[56px]`}
       >
@@ -39,6 +58,7 @@ export default function RootLayout({ children }) {
           data-blockingmode="auto"
           type="text/javascript"
         ></script>
+
         <UpButton />
         <Navbar />
         {children}
