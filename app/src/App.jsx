@@ -14,9 +14,16 @@ import { LoginPage } from "./pages/LoginPage";
 import { SignupPage } from "./pages/SignupPage";
 import { PasswordReset } from "./pages/PasswordReset";
 import { ContactForm } from "./pages/ContactForm";
+import TagManager from "react-gtm-module";
 
 function App() {
   const { user } = useAuthContext();
+
+  const tagManagerArguments = {
+    gtmId: "GT-K52GJGNC",
+  };
+
+  TagManager.initialize(tagManagerArguments);
 
   function ProtectedRoute() {
     const [loader, setLoader] = useState(false);
