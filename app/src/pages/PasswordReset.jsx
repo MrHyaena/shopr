@@ -5,8 +5,8 @@ import logoBlack from "/public/shopr-logo.png";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 const apiURL = import.meta.env.VITE_API_URL;
 import background from "/public/background.jpg";
-import { ErrorWindow } from "../Components/errorWindow";
-import { MessageWindow } from "../Components/messageWindow";
+import { ErrorWindow } from "../Components/responseWindows/errorWindow";
+import { MessageWindow } from "../Components/responseWindows/messageWindow";
 
 export function PasswordReset() {
   const [passwordCheck, setPasswordCheck] = useState("");

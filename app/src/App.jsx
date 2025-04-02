@@ -1,24 +1,19 @@
 import { useEffect, useState } from "react";
 import { Sidebar } from "./Components/sidebar";
-import { SubscriptionList } from "./Components/subscriptionList";
-import {
-  Route,
-  Navigate,
-  createBrowserRouter,
-  createRoutesFromElements,
-  BrowserRouter,
-  Routes,
-} from "react-router-dom";
-import { SubscriptionForm } from "./Components/subscriptionForm";
-import { LoginPage } from "./pages/Login";
-import { SignupPage } from "./pages/Signup";
+import { Route, Navigate, BrowserRouter, Routes } from "react-router-dom";
+
 import { useAuthContext } from "./hooks/useAuthContext";
-import { Contact } from "./Components/contact";
-import { Personal } from "./Components/personal";
-import { PasswordReset } from "./pages/PasswordReset";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpider, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { ScrollToTop } from "./functions/ScrollTopFunction";
+import { AccountDetails } from "./pages/AccountDetails";
+import { SubscriptionForm } from "./pages/SubscriptionForm";
+import { Homepage } from "./pages/Homepage";
+import { LoginPage } from "./pages/LoginPage";
+import { SignupPage } from "./pages/SignupPage";
+import { PasswordReset } from "./pages/PasswordReset";
+import { ContactForm } from "./pages/ContactForm";
 
 function App() {
   const { user } = useAuthContext();
@@ -44,10 +39,7 @@ function App() {
           <div>
             <main>
               <Routes>
-                <Route
-                  path="*"
-                  element={<SubscriptionList setLoader={setLoader} />}
-                />
+                <Route path="*" element={<Homepage setLoader={setLoader} />} />
                 <Route
                   path="/form"
                   element={<SubscriptionForm setLoader={setLoader} />}
@@ -56,10 +48,10 @@ function App() {
                   path="/form/:id"
                   element={<SubscriptionForm setLoader={setLoader} />}
                 />
-                <Route path="/kontakt" element={<Contact />} />
+                <Route path="/kontakt" element={<ContactForm />} />
                 <Route
                   path="/osobni-udaje"
-                  element={<Personal setLoader={setLoader} />}
+                  element={<AccountDetails setLoader={setLoader} />}
                 />
               </Routes>
             </main>

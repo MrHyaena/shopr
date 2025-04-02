@@ -7,10 +7,10 @@ import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useExpiredContext } from "../hooks/useExpiredContext";
-import { ErrorWindowApp } from "./errorWindowApp";
-import { MessageWindowApp } from "./messageWindowApp";
+import { ErrorWindowApp } from "../Components/responseWindows/errorWindowApp";
+import { MessageWindowApp } from "../Components/responseWindows/messageWindowApp";
 
-export function Personal() {
+export function AccountDetails() {
   const { user, setUser } = useAuthContext();
   const { deleteUser } = deleteUserHandler();
   const { setExpired } = useExpiredContext();

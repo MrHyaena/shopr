@@ -6,10 +6,10 @@ import logoBlack from "/public/shopr-logo.png";
 import background from "/public/background.jpg";
 
 import { useReset } from "../hooks/useReset";
-import { ErrorWindow } from "../Components/errorWindow";
+import { ErrorWindow } from "../Components/responseWindows/errorWindow";
 import { faCheckSquare, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useExpiredContext } from "../hooks/useExpiredContext";
-import { MessageWindow } from "../Components/messageWindow";
+import { MessageWindow } from "../Components/responseWindows/messageWindow";
 
 export function LoginPage() {
   const [reset, setReset] = useState(false);

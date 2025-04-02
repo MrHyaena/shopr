@@ -12,8 +12,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import logoBlack from "/public/shopr-logo.png";
 import background from "/public/background.jpg";
-import { ErrorWindow } from "../Components/errorWindow";
-import { MessageWindow } from "../Components/messageWindow";
+import { ErrorWindow } from "../Components/responseWindows/errorWindow";
+import { MessageWindow } from "../Components/responseWindows/messageWindow";
 
 export function SignupPage() {
   function SignupForm() {

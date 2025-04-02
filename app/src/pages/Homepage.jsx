@@ -19,15 +19,15 @@ import { Link } from "react-router-dom";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { deleteSubscriptionHandler } from "../functions/deleteSubscriptionHandler";
-import { SubscriptionMissing } from "./subscriptionMissing";
+import { SubscriptionMissing } from "../Components/subscriptionMissing";
 import shopLogo from "/public/shop-solid.png";
 import { deactivateSubscriptionHandler } from "../functions/deactivateSubscriptionHandler";
 import { activateSubscriptionHandler } from "../functions/activateSubscriptionHandler";
 import { useExpiredContext } from "../hooks/useExpiredContext";
-import { ErrorWindowApp } from "./errorWindowApp";
+import { ErrorWindowApp } from "../Components/responseWindows/errorWindowApp";
 const apiURL = import.meta.env.VITE_API_URL;
 
-export function SubscriptionList({ setLoader }) {
+export function Homepage({ setLoader }) {
   const { subscriptions, setSubscriptions } = useSubscriptionContext();
   const { user, setUser } = useAuthContext();
   const { setExpired } = useExpiredContext();

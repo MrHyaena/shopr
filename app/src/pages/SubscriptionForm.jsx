@@ -17,7 +17,7 @@ import { createSubscriptionHandler } from "../functions/createSubscriptionHandle
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { patchSubscriptionHandler } from "../functions/patchSubscriptionHandler";
-import { ErrorWindowApp } from "./errorWindowApp";
+import { ErrorWindowApp } from "../Components/responseWindows/errorWindowApp";
 
 export function SubscriptionForm({ setLoader }) {
   //step state is for changing steps in form

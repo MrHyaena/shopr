@@ -6,11 +6,11 @@ import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { tokenExpired } from "../functions/tokenExpired";
 import { useExpiredContext } from "../hooks/useExpiredContext";
-import { ErrorWindowApp } from "./errorWindowApp";
-import { MessageWindowApp } from "./messageWindowApp";
+import { ErrorWindowApp } from "../Components/responseWindows/errorWindowApp";
+import { MessageWindowApp } from "../Components/responseWindows/messageWindowApp";
 const apiURL = import.meta.env.VITE_API_URL;
 
-export function Contact() {
+export function ContactForm() {
   function Formular() {
     const { subscriptions } = useSubscriptionContext();
     const { setExpired } = useExpiredContext();
