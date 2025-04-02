@@ -1,9 +1,13 @@
-//requirements
+//Hascheck model - for user password reset
+//-------------------------------------------
+
+//Requirements
 const mongoose = require("mongoose");
 
-//user schema for mongoDB
+//Schema init
 const Schema = mongoose.Schema;
 
+//Creating Schema
 const hashcheckSchema = new Schema(
   {
     userId: {
@@ -18,5 +22,5 @@ const hashcheckSchema = new Schema(
   { timestamps: true }
 );
 
-//module export
+//Module export
 module.exports = mongoose.model("Hashcheck", hashcheckSchema);

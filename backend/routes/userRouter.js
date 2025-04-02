@@ -1,50 +1,52 @@
 //Router for user handling
 // ---------------------------------------------------
 
-//requirements
+//Requirements
 const express = require("express");
 require("dotenv").config();
 
-//controller functions
+//Controller functions
 const {
   loginUser,
   signupUser,
   deleteUser,
   updateUser,
-  resetUserEmail,
+  resetUserPasswordEmail,
   resetUserPassword,
   activateUser,
   authorization,
 } = require("../controllers/userController");
-const { requireAuth } = require("../middleware/requireAuth");
 
-//creating router
+//Authorization function
+const { requireUserAuth } = require("../middleware/requireAuth");
+
+//Creating router
 const router = express.Router();
 
 // ---------------------- SERVER ROUTES ----------------------
 
-//authorization - check jwt token
+//Authorization - check jwt token
 router.get("/authorization", authorization);
 
-//login route
+//Login user
 router.post("/login", loginUser);
 
-//signup route
+//Signup user
 router.post("/signup", signupUser);
 
-//delete user
-router.delete("/delete/:id", requireAuth, deleteUser);
+//Deleting user account
+router.delete("/delete/:id", requireUserAuth, deleteUser);
 
-//update user
-router.post("/update", requireAuth, updateUser);
+//Updating user details
+router.post("/update", requireUserAuth, updateUser);
 
-//reset password email
-router.get("/reset/password", resetUserEmail);
+//Sending password reset email
+router.get("/reset/password", resetUserPasswordEmail);
 
-//reset password authorized request
+//Authorized password request
 router.post("/reset/authorized", resetUserPassword);
 
-//activate account authorized request
+//Authorized account activation
 router.get("/activate/authorized", activateUser);
 
 module.exports = router;

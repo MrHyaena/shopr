@@ -1,9 +1,13 @@
-//requirements
+//Subscription model
+//-------------------------------------------
+
+//Requirements
 const mongoose = require("mongoose");
 
-//user schema for mongoDB
+//Schema init
 const Schema = mongoose.Schema;
 
+//Creating Schema
 const subscriptionSchema = new Schema(
   {
     userId: {
@@ -97,5 +101,5 @@ const subscriptionSchema = new Schema(
   { timestamps: true }
 );
 
-//module export
+//Module export
 module.exports = mongoose.model("Subscription", subscriptionSchema);

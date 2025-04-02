@@ -1,12 +1,15 @@
-//Router for subscriptions handling
+//Router for email requests
 // ---------------------------------------------------
 
-//requirements
+//Requirements
 require("dotenv").config();
 const express = require("express");
-const { sendEmail } = require("../email/sendEmail");
-const { emailTemplateUserMessage } = require("../email/emailTemplates");
-const { requireAuth } = require("../middleware/requireAuth");
+
+//Authorization
+const { requireUserAuth } = require("../middleware/requireAuth");
+
+//Controller functions
+const { userSendMessage } = require("../controllers/emailController");
 
 //creating router
 const router = express.Router();
@@ -14,32 +17,6 @@ const router = express.Router();
 // ---------------------- SERVER ROUTES ----------------------
 
 //send user message
-router.post("/usercontact", requireAuth, async (req, res) => {
-  const data = req.body;
-
-  let fromEmail = "zakaznik@shopr.cz";
-  let toEmail = "info@shopr.cz";
-  let subject = "Shopr - Zákaznická zpráva - " + data.subject;
-  let emailBody = emailTemplateUserMessage(
-    data.subject,
-    data.message,
-    data.email,
-    data.subscription
-  );
-
-  try {
-    const response = await sendEmail(
-      fromEmail,
-      toEmail,
-      subject,
-      emailBody,
-      true,
-      data.email
-    );
-    res.status(200).json("Zpráva úspěšně odeslána");
-  } catch {
-    res.status(400).json("Zprávu se nepodařilo odeslat");
-  }
-});
+router.post("/usercontact", requireUserAuth, userSendMessage);
 
 module.exports = router;

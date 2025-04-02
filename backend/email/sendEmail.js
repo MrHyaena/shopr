@@ -1,6 +1,11 @@
+//Function for sending emails
+//------------------------------------
+
+//Requirements
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
+//Send email function
 async function sendEmail(
   fromEmail,
   toEmail,

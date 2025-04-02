@@ -1,9 +1,13 @@
-//requirements
+//Terms agreement model - for loggin user terms and GDPR agreements
+//-------------------------------------------
+
+//Requirements
 const mongoose = require("mongoose");
 
-//user schema for mongoDB
+//Schema init
 const Schema = mongoose.Schema;
 
+//Creating Schema
 const agreementSchema = new Schema(
   {
     firstName: {
@@ -34,5 +38,5 @@ const agreementSchema = new Schema(
   { timestamps: true }
 );
 
-//module export
+//Module export
 module.exports = mongoose.model("Agreement", agreementSchema);

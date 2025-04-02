@@ -37,6 +37,7 @@ export function Contact() {
 
       if (!email || !message || !subject) {
         setError("Prosím, vyplňte předmět, emailovou adresu a zprávu.");
+        setLoader(false);
       }
 
       if (email && message && subject) {

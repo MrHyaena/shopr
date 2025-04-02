@@ -1,23 +1,36 @@
+//Router for subscriptions handling
+// ---------------------------------------------------
+
+//Requirements
 require("dotenv").config();
+const mongoose = require("mongoose");
+
+//Email templates and function
 const {
   emailTemplateDeactivateSubscription,
 } = require("../email/emailTemplates");
 const { sendEmail } = require("../email/sendEmail");
+
+//Pipedrive functions
 const {
   pipedriveApiCallV1,
   pipedriveApiCallV2,
   pipedriveApiCallDeleteV2,
 } = require("../functions/pipedriveApiCall");
+
+//Mongoose Models
 const Subscription = require("../models/subscriptionModel");
 const User = require("../models/userModel");
 
-const mongoose = require("mongoose");
+//Stripe init
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
-//get all subscriptions
+//Get all subscriptions controller function
 const getSubscriptions = async (req, res) => {
+  //Get user ID from request object
   const user_id = req.user._id;
   try {
+    //Find subscriptions and sort them
     const subscriptions = await Subscription.find({ userId: user_id }).sort({
       createdAt: 1,
     });
@@ -32,14 +45,17 @@ const getSubscriptions = async (req, res) => {
   }
 };
 
-//get a single subscription
+//Get one subscription controller function
 const getSubscription = async (req, res) => {
+  //Get id from URL parameters
   const { id } = req.params;
 
+  //Validating subscription ID
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "Takové předplatné neexistuje" });
   }
 
+  //Finding one subscription
   const subscription = await Subscription.findById(id);
 
   if (!subscription) {
@@ -49,8 +65,9 @@ const getSubscription = async (req, res) => {
   res.status(200).json(subscription);
 };
 
-//create new subscription
+//Create new subscription controller function
 const createSubscription = async (req, res) => {
+  //Getting all data from request body
   const {
     userId,
     stripeSubId,
@@ -76,7 +93,7 @@ const createSubscription = async (req, res) => {
     mysteryItem,
   } = req.body;
 
-  //validation
+  //Data validation
   let emptyFields = [];
 
   if (!firstName) {
@@ -128,11 +145,10 @@ const createSubscription = async (req, res) => {
       .json({ error: "Prosím, vyplňte pole" + emptyFields });
   }
 
-  //Creating subscription
+  // ------------- PIPEDRIVE - CREATING SUBSCRIPTION ----------------
   try {
-    // ------------- PIPEDRIVE - creating new deal ----------------
     let subPriceValue = 0;
-
+    //Getting deal value
     switch (subFrequency.toLowerCase()) {
       case "weekly":
         subPriceValue = 400;
@@ -151,16 +167,17 @@ const createSubscription = async (req, res) => {
         break;
     }
 
+    //If deliveryAddress and mysteryMessage are empty
     let deliveryAddress = subDeliveryAddress;
     if (subDeliveryAddress == "") {
       deliveryAddress = "empty";
     }
-
     let mysteryMessage = mysteryItem.message;
     if (mysteryMessage == "") {
       mysteryMessage = "empty";
     }
 
+    //Creating pipedrive payload fro api call
     const payload = {
       title: "Předplatné - " + subName,
       value: Number(subPriceValue),
@@ -212,6 +229,7 @@ const createSubscription = async (req, res) => {
         mysteryItem.categories.join(" / "),
     };
 
+    //Pipedrive api call
     const pipeResponse = await pipedriveApiCallV1("deals", "POST", payload);
 
     const pipeDeal = await pipeResponse.json();
@@ -255,17 +273,19 @@ const createSubscription = async (req, res) => {
   }
 };
 
-//delete subscription
+//Delete subscription controller function
 const deleteSubscription = async (req, res) => {
+  //Getting id from URL params
   const { id } = req.params;
   try {
     // ------------- MONGOOSE - deleting record ----------------
+    //Id validation
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(404).json({ error: "Takové předplatné neexistuje" });
     }
 
+    //Deleting subscription from database
     const subscription = await Subscription.findOneAndDelete({ _id: id });
-
     if (!subscription) {
       throw Error("Takové předplatné neexistuje");
     }
@@ -275,7 +295,6 @@ const deleteSubscription = async (req, res) => {
       "deals/" + subscription.pipedriveDealId,
       "DELETE"
     );
-
     if (!pipeResponse.ok) {
       throw Error(
         "Chyba je na naší straně, omlouváme se. Zkuste to prosím později. (Pipedrive)"
@@ -288,8 +307,9 @@ const deleteSubscription = async (req, res) => {
   }
 };
 
-//update subscription
+//Update subscription controller function
 const updateSubscription = async (req, res) => {
+  //Getting data from request body
   const {
     userId,
     stripeSubId,
@@ -315,8 +335,8 @@ const updateSubscription = async (req, res) => {
     mysteryItem,
   } = req.body;
 
+  //Getting data from URL params
   const { id, frequencyChange, nameChange, websiteChange } = req.params;
-
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "Takové předplatné neexistuje" });
   }
@@ -328,14 +348,13 @@ const updateSubscription = async (req, res) => {
       ...req.body,
     }
   );
-
   if (!subscription) {
     return res.status(400).json({ error: "Takové předplatné neexistuje" });
   }
 
   // ------------- PIPEDRIVE - updating deal ----------------
   let subPriceValue = 0;
-
+  //Getting right deal value
   switch (subFrequency.toLowerCase()) {
     case "weekly":
       subPriceValue = 400;
@@ -354,16 +373,17 @@ const updateSubscription = async (req, res) => {
       break;
   }
 
+  //If deliveryAddress and mysteryMessage are empty
   let deliveryAddress = subDeliveryAddress;
   if (subDeliveryAddress == "") {
     deliveryAddress = "empty";
   }
-
   let mysteryMessage = mysteryItem.message;
   if (mysteryMessage == "") {
     mysteryMessage = "empty";
   }
 
+  //Pipedrive api call payload
   const payload = {
     title: ("Předplatné - " + subName).toString(),
     value: Number(subPriceValue),
@@ -414,6 +434,7 @@ const updateSubscription = async (req, res) => {
     },
   };
 
+  //Pipedrive api call
   const pipeResponse = await pipedriveApiCallV2(
     "deals/" + pipedriveDealId,
     "PATCH",
@@ -431,7 +452,7 @@ const updateSubscription = async (req, res) => {
   // ------------- PIPEDRIVE - updating task ----------------
 
   if (subscription.itemsType == "standard") {
-    //searching for updatable activities
+    //Getting all activities and filtering the ones for updating
     const pipeActivities = await pipedriveApiCallV2("activities", "GET");
     const activitiesJson = await pipeActivities.json();
     const activitiesForUpdate = await activitiesJson.data.filter(
@@ -444,7 +465,7 @@ const updateSubscription = async (req, res) => {
 
     if (activitiesForUpdate.length > 0) {
       let note;
-      //standard note
+      //Note for standard items type
       const linkArray = await subscription.items.map((item, index) => {
         return `<p><a href='https://${item.url}' target='_blank'>Položka: ${
           index + 1
@@ -452,10 +473,12 @@ const updateSubscription = async (req, res) => {
       });
       note = await linkArray.join(" ");
 
+      //Pipedrive api call payload
       const payload = {
         note: note,
       };
 
+      //Bulk activities update
       const pipeDeleteActivitiesBulkcall = await pipedriveApiCallV2(
         "activities/" + activitiesForUpdate[0].id,
         "PATCH",
@@ -465,7 +488,7 @@ const updateSubscription = async (req, res) => {
   }
 
   // ------------- STRIPE - update ----------------
-  //Decide if it is also necessary to call stripe subscription update
+  //Decide if it is also necessary to call stripe subscription update to save resources
   if (
     (frequencyChange == 1 || nameChange == 1 || websiteChange == 1) &&
     active
@@ -490,6 +513,7 @@ const updateSubscription = async (req, res) => {
         break;
     }
 
+    //Get stripe subscriptions data
     const subscriptionObject = await stripe.subscriptions.retrieve(stripeSubId);
 
     let description =
@@ -505,6 +529,7 @@ const updateSubscription = async (req, res) => {
         req.body.subWebsite;
     }
 
+    //Update subscription in stripe
     const response = await stripe.subscriptions.update(stripeSubId, {
       items: [
         {
@@ -520,7 +545,9 @@ const updateSubscription = async (req, res) => {
   res.status(200).json(subscription);
 };
 
+//Deactivate subscription  controller function
 const deactivateSubscription = async (req, res) => {
+  //Get data from request URL parameters
   const { subId, stripeSubId, userId } = req.params;
 
   try {
@@ -534,10 +561,11 @@ const deactivateSubscription = async (req, res) => {
     );
 
     // ---------------------- PIPEDRIVE - updating stage ----------------------
+    //Payload for pipedrive api call
     const payload = {
       stage_id: 2,
     };
-
+    //Pipedrive api call
     const pipeResponse = await pipedriveApiCallV2(
       "deals/" + subscription.pipedriveDealId,
       "PATCH",
@@ -545,10 +573,12 @@ const deactivateSubscription = async (req, res) => {
     );
 
     // ---------------------- PIPEDRIVE - deleting tasks ----------------------
-    const pipeActivities = await pipedriveApiCallV2("activities", "GET");
 
+    //Get all tasks
+    const pipeActivities = await pipedriveApiCallV2("activities", "GET");
     const activitiesJson = await pipeActivities.json();
 
+    //Filter activities for deletion
     const activitiesForDeletion = await activitiesJson.data.filter(
       (item) =>
         item.done == false &&
@@ -556,26 +586,33 @@ const deactivateSubscription = async (req, res) => {
         item.is_deleted == false
     );
 
+    //Return activites IDs
     const activitiesIds = activitiesForDeletion.map((item) => {
       return item.id;
     });
 
+    //Joining activites IDs
     const idsJoin = activitiesIds.join(",");
 
+    //Pipedrive api call for bulk deletion
     const pipeDeleteActivitiesBulkcall = await pipedriveApiCallV1(
       "activities?ids=" + idsJoin,
       "DELETE"
     );
 
+    //Getting all user subscription from database
     const subscriptions = await Subscription.find();
+
+    //Filtering them
     const filteredArray = subscriptions.filter((item) => item.userId == userId);
 
+    //Updating subscriptions array with new data
     const subscriptionArray = Object.values(filteredArray);
 
     // ---------------------- EMAIL - sending deactivation email ----------------------
-
     const user = await User.findById({ _id: subscription.userId });
 
+    //Email payload
     const fromEmail = process.env.SMTP_EMAIL_INFO;
     const toEmail = user.email;
     const subject = "Předplatné deaktivováno";
@@ -584,7 +621,7 @@ const deactivateSubscription = async (req, res) => {
       subscription.subWebsite,
       process.env.PROXY_APP
     );
-
+    //Email send function
     sendEmail(fromEmail, toEmail, subject, emailBody);
 
     res.status(200).json({ subscriptions: subscriptionArray });

@@ -1,9 +1,13 @@
-//requirements
+//Sublog model - for logging subscription items in time of order
+//-------------------------------------------
+
+//Requirements
 const mongoose = require("mongoose");
 
-//user schema for mongoDB
+//User schema for mongoDB
 const Schema = mongoose.Schema;
 
+//Creating Schema
 const sublogSchema = new Schema(
   {
     userID: {
@@ -22,5 +26,5 @@ const sublogSchema = new Schema(
   { timestamps: true }
 );
 
-//module export
+//Module export
 module.exports = mongoose.model("Sublog", sublogSchema);

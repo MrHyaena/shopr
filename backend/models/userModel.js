@@ -1,10 +1,13 @@
+//User model
+//-------------------------------------------
+
 //requirements
-require("dotenv").config();
 const mongoose = require("mongoose");
 
-//user schema for mongoDB
+//Schema init
 const Schema = mongoose.Schema;
 
+//Creating Schema
 const userSchema = new Schema(
   {
     active: {
@@ -57,5 +60,5 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-//module export
+//Module export
 module.exports = mongoose.model("User", userSchema);

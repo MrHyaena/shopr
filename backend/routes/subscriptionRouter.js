@@ -1,11 +1,11 @@
 //Router for subscriptions handling
 // ---------------------------------------------------
 
-//requirements
+//Requirements
 require("dotenv").config();
 const express = require("express");
 
-//controller functions
+//Controller functions
 const {
   createSubscription,
   getSubscriptions,
@@ -14,36 +14,36 @@ const {
   updateSubscription,
   deactivateSubscription,
 } = require("../controllers/subscriptionController");
-const { requireAuth } = require("../middleware/requireAuth");
+const { requireUserAuth } = require("../middleware/requireAuth");
 
-//creating router
+//Creating router
 const router = express.Router();
 
-// -------------------- middleware function -------------------
-//authentication of the user
-router.use(requireAuth);
+// -------------------- middleware functions -------------------
+//authentication of the user - required for every interaction with subscription
+router.use(requireUserAuth);
 
 // ---------------------- SERVER ROUTES ----------------------
 
-//create subscription route
+//Create subscription
 router.post("/", createSubscription);
 
-//update subscription route
+//Update subscription
 router.patch(
   "/:id/:frequencyChange/:nameChange/:websiteChange",
   updateSubscription
 );
 
-//delete subscription route
+//Delete subscription
 router.delete("/:id", deleteSubscription);
 
-//get all subscriptions route
+//Get all subscriptions
 router.get("/", getSubscriptions);
 
-//get one subscription route
+//Get one subscription
 router.get("/:id", getSubscription);
 
-//deactivate subscription route
+//Deactivate subscription - cancel Stripe payments
 router.get("/deactivate/:subId/:stripeSubId/:userId", deactivateSubscription);
 
 module.exports = router;

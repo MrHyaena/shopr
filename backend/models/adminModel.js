@@ -1,9 +1,13 @@
-//requirements
+//Admin model - admin users
+//-------------------------------------------
+
+//Requirements
 const mongoose = require("mongoose");
 
-//user schema for mongoDB
+//Schema init
 const Schema = mongoose.Schema;
 
+//Creating Schema
 const adminSchema = new Schema(
   {
     email: {
@@ -22,5 +26,5 @@ const adminSchema = new Schema(
   { timestamps: true }
 );
 
-//module export
+//Module export
 module.exports = mongoose.model("Admin", adminSchema);

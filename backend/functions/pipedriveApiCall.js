@@ -1,3 +1,9 @@
+//general functions that are not middleware
+//------------------------------------------------------
+
+//------------------------------- PIPEDRIVE FUNCTIONS -------------------------------------------------
+
+//PipedriveApiCallV1 function
 export async function pipedriveApiCallV1(endpoint, method, payload) {
   const response = await fetch(process.env.PIPEDRIVE_URL + "/v1/" + endpoint, {
     method: method,
@@ -12,6 +18,7 @@ export async function pipedriveApiCallV1(endpoint, method, payload) {
   return response;
 }
 
+//PipedriveApiCallV2 function
 export async function pipedriveApiCallV2(endpoint, method, payload) {
   const response = await fetch(
     process.env.PIPEDRIVE_URL + "/api/v2/" + endpoint,
@@ -29,6 +36,7 @@ export async function pipedriveApiCallV2(endpoint, method, payload) {
   return response;
 }
 
+//PipedriveApiCallDeleteV2 function
 export async function pipedriveApiCallDeleteV2(endpoint, method) {
   const response = await fetch(
     process.env.PIPEDRIVE_URL + "/api/v2/" + endpoint,

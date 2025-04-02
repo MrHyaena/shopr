@@ -1,6 +1,7 @@
-//Emaily byly vytvořené skrze software Amazon SES UI Client, který se dá stáhnout na Microsoft store
+//Email were created with Amazon SES UI Client, can be donwloaded from Microsoft Store
 
-//Emaily týkající se předplatných a plateb
+//-------------------------------- SUBSCRIPTION TEMPLATES ---------------------------------------
+//Activate subscription template
 export function emailTemplateActivateSubscription(subName, subWebsite, appUrl) {
   let body = `<!doctype html>
 <html>
@@ -112,6 +113,7 @@ export function emailTemplateActivateSubscription(subName, subWebsite, appUrl) {
   return body;
 }
 
+//Deactivate subscription template
 export function emailTemplateDeactivateSubscription(
   subName,
   subWebsite,
@@ -227,6 +229,7 @@ export function emailTemplateDeactivateSubscription(
   return body;
 }
 
+//Payment completed template
 export function emailTemplatePaymentCompleted(subName, subWebsite, appUrl) {
   let body = `<!doctype html>
 <html>
@@ -336,7 +339,8 @@ export function emailTemplatePaymentCompleted(subName, subWebsite, appUrl) {
   return body;
 }
 
-//Emaily týkající se účtu
+//------------------------------ USER ACCOUNT TEMPLATES ------------------------------------
+//Activate user account template
 export function emailTemplateActivateAccount(activationUrl) {
   let body = `<!doctype html>
 <html>
@@ -437,6 +441,7 @@ export function emailTemplateActivateAccount(activationUrl) {
   return body;
 }
 
+//Change password template
 export function emailTemplatePasswordChange(changeUrl) {
   let body = `<!doctype html>
 <html>
@@ -533,6 +538,7 @@ export function emailTemplatePasswordChange(changeUrl) {
   return body;
 }
 
+//User sends message to our address template
 export function emailTemplateUserMessage(
   subject,
   message,
@@ -597,6 +603,7 @@ export function emailTemplateUserMessage(
   return body;
 }
 
+//User deleted template
 export function emailTemplateDeleteUser(email) {
   let body = `<!doctype html>
 <html>
