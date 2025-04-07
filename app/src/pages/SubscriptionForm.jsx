@@ -858,7 +858,7 @@ export function SubscriptionForm({ setLoader }) {
             <form className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg">
               <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
                 <legend className="text-xl font-semibold text-slate-900">
-                  Nastavení standardní objednávky
+                  Přidejte položky, které chcete objednat
                 </legend>
                 <div className="flex flex-col gap-3">
                   {items.map((item, index) => {
@@ -898,7 +898,7 @@ export function SubscriptionForm({ setLoader }) {
                           <select
                             name="changable"
                             id="changable"
-                            className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                            className="bg-slate-50 border h-full border-slate-300 rounded p-2 text-md font-semibold text-input"
                             value={item.changable}
                             onChange={(e) => {
                               handleChange(e, index);
