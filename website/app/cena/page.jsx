@@ -31,7 +31,7 @@ export default function Price() {
 
             <div className="mt-5 max-w-[1200px] mx-auto flex flex-col items-center">
               <p className="text-5xl font-bold text-textDark text-center">
-                100 Kč
+                87 Kč
               </p>
               <p className="text-lg text-center font-bold text-textDark mb-6">
                 za splněnou objednávku
@@ -55,10 +55,9 @@ export default function Price() {
       <BlackDivider>
         <div className="max-w-wrapper flex flex-col items-center justify-start px-5">
           <p className="text-center xl:text-2xl text-xl text-textLight">
-            Jediná platba, kterou u nás zažijte, je za aktivní předplatné. Za
-            každou vyřízenou objednávku, kterou v jakémkoliv předplatném
-            uděláme, se z karty strhne cena výše. Za týdenní předplatné to bude
-            čtyřikrát týdně, v čtvrtletním zase jednou za tři měsíce.
+            Jediná platba u nás je za aktivní předplatné. Za každou vyřízenou
+            objednávku, kterou v jakémkoliv předplatném uděláme, se z karty
+            strhne cena výše. Nic jiného.
           </p>
         </div>
       </BlackDivider>
@@ -85,7 +84,7 @@ export default function Price() {
           <QuestionShow
             question={"Kdo spravuje mé platební údaje?"}
             answer={
-              "Abychom zajistili co největší bezpečí Vašich platebních údajů, řešíme jejich správu a platby skrze platformu Stripe. Služba Stripe běží po celém světě a jedná se o jednu z největších služeb tohoto typu na trhu."
+              "Abychom zajistili co největší bezpečí Vašich platebních údajů, řešíme jejich správu a platby skrze platformu Stripe. Stripe běží po celém světě a jedná se o jednu z největších a nejkvalitnějších služeb tohoto typu na trhu."
             }
           />
           <QuestionShow

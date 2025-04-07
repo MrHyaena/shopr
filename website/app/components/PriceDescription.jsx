@@ -12,7 +12,7 @@ export default function PriceDescription({ subHeading, description }) {
 
             <div className="mt-5 max-w-[1200px] mx-auto flex flex-col items-center">
               <p className="text-5xl font-bold text-textDark text-center">
-                100 Kč
+                87 Kč
               </p>
               <p className="text-lg text-center font-bold text-textDark mb-6">
                 za splněnou objednávku

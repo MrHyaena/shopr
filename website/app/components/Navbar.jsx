@@ -58,58 +58,7 @@ export function Navbar() {
                     </p>
                   </Link>
                 </li>
-                <li>
-                  <p
-                    className=" flex gap-1 font-bold items-center text-textDark break-keep  text-base hover:text-quad transition-all ease-in-out"
-                    id="togglePriklady"
-                    onMouseOver={toggleExampleShow}
-                  >
-                    Příklady <FontAwesomeIcon icon={faChevronDown} />
-                  </p>
-                  {toggleExample && (
-                    <>
-                      <div
-                        id="priklady"
-                        className="absolute border border-slate-200 p-5 shadow-md mt-5 z-10 bg-white rounded-md"
-                      >
-                        <ul className="flex flex-col gap-5">
-                          <li>
-                            <Link
-                              href="/priklady/doplnky-stravy"
-                              className=" text-base hover:text-quad transition-all ease-in-out"
-                            >
-                              Doplňky stravy
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              href="/priklady/mazlicci"
-                              className=" text-base hover:text-quad transition-all ease-in-out"
-                            >
-                              Mazlíčci
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              href="/priklady/kava-caj-vino"
-                              className=" text-base hover:text-quad transition-all ease-in-out"
-                            >
-                              Káva, čaj a víno
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              href="/priklady/kosmetika"
-                              className=" text-base hover:text-quad transition-all ease-in-out"
-                            >
-                              Kosmetika
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </>
-                  )}
-                </li>
+
                 <li>
                   <Link href="/cena">
                     <p className="font-bold text-textDark  text-base hover:text-quad transition-all ease-in-out">
@@ -117,13 +66,7 @@ export function Navbar() {
                     </p>
                   </Link>
                 </li>
-                <li>
-                  <Link href="/o-nas">
-                    <p className="font-bold text-textDark  text-base hover:text-quad transition-all ease-in-out">
-                      O nás
-                    </p>
-                  </Link>
-                </li>
+
                 <li>
                   <Link href="/otazky">
                     <p className="font-bold text-textDark  text-base hover:text-quad transition-all ease-in-out">
@@ -199,70 +142,7 @@ export function Navbar() {
                       </p>
                     </Link>
                   </li>
-                  <li
-                    onClick={() => {
-                      setToggleMenu(false);
-                    }}
-                  >
-                    <Link
-                      href="/priklady/doplnky-stravy"
-                      className=" text-base text-textLight hover:text-quad transition-all ease-in-out"
-                    >
-                      Příklady
-                    </Link>
-                  </li>
-                  <li>
-                    <ul className="flex flex-col gap-5 ml-5">
-                      <li
-                        onClick={() => {
-                          setToggleMenu(false);
-                        }}
-                      >
-                        <Link
-                          href="/priklady/doplnky-stravy"
-                          className=" text-base text-textLight hover:text-quad transition-all ease-in-out"
-                        >
-                          Doplňky stravy
-                        </Link>
-                      </li>
-                      <li
-                        onClick={() => {
-                          setToggleMenu(false);
-                        }}
-                      >
-                        <Link
-                          href="/priklady/mazlicci"
-                          className=" text-base text-textLight hover:text-quad transition-all ease-in-out"
-                        >
-                          Mazlíčci
-                        </Link>
-                      </li>
-                      <li
-                        onClick={() => {
-                          setToggleMenu(false);
-                        }}
-                      >
-                        <Link
-                          href="/priklady/kava-caj-vino"
-                          className=" text-base text-textLight hover:text-quad transition-all ease-in-out"
-                        >
-                          Káva, čaj a víno
-                        </Link>
-                      </li>
-                      <li
-                        onClick={() => {
-                          setToggleMenu(false);
-                        }}
-                      >
-                        <Link
-                          href="/priklady/kosmetika"
-                          className=" text-base text-textLight hover:text-quad transition-all ease-in-out"
-                        >
-                          Kosmetika
-                        </Link>
-                      </li>
-                    </ul>
-                  </li>
+
                   <li
                     onClick={() => {
                       setToggleMenu(false);
@@ -274,17 +154,7 @@ export function Navbar() {
                       </p>
                     </Link>
                   </li>
-                  <li
-                    onClick={() => {
-                      setToggleMenu(false);
-                    }}
-                  >
-                    <Link href="/o-nas">
-                      <p className="font-bold text-textLight  text-base hover:text-quad transition-all ease-in-out">
-                        O nás
-                      </p>
-                    </Link>
-                  </li>
+
                   <li
                     onClick={() => {
                       setToggleMenu(false);

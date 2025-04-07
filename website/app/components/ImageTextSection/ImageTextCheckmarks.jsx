@@ -24,7 +24,7 @@ export function ImageTextCheckmarks({
                 alt="section-image"
                 width={500}
                 height={500}
-                className="rounded-lg shadow-md"
+                className="rounded-lg shadow-md w-[500px] h-[500px] object-cover"
               />
             </div>
             <div className="flex flex-col gap-5 justify-center items-start">
