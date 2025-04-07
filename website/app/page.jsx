@@ -78,8 +78,8 @@ export default function Home() {
               </Link>
             </div>
             <p className="font-semibold text-textDark z-2 text-sm">
-              Celý uživatelský účet můžete proto vyzkoušet zdarma. Platby
-              začínají až při aktivaci předplatného.
+              Celý uživatelský účet můžete vyzkoušet zdarma. Platby začínají až
+              při aktivaci předplatného.
             </p>
           </div>
 

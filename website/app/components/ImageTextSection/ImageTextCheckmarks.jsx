@@ -16,7 +16,7 @@ export function ImageTextCheckmarks({
   return (
     <>
       <div className=" flex flex-col items-center justify-center">
-        <div className="bg-white self-stretch flex justify-center py-10">
+        <div className="bg-white self-stretch flex justify-center xl:py-10">
           <div className="lg:grid flex flex-col grid-cols-2 max-w-[1300px] min-h-[600px] gap-10 p-5">
             <div className="self-center justify-self-center">
               <Image
@@ -24,7 +24,7 @@ export function ImageTextCheckmarks({
                 alt="section-image"
                 width={500}
                 height={500}
-                className="rounded-lg shadow-md w-[500px] h-[500px] object-cover"
+                className="rounded-lg shadow-md xl:w-[500px] xl:h-[500px] h-[200px]  object-cover"
               />
             </div>
             <div className="flex flex-col gap-5 justify-center items-start">
@@ -36,7 +36,7 @@ export function ImageTextCheckmarks({
               <p>{text}</p>
               <ul className="flex flex-col gap-2">
                 <li>
-                  <p className="flex gap-2 items-center">
+                  <p className="flex xl:flex-row flex-col text-center xl:text-start gap-2 xl:items-center items-center">
                     <FontAwesomeIcon
                       icon={faSquareCheck}
                       className="text-green-600 text-2xl"
@@ -45,7 +45,7 @@ export function ImageTextCheckmarks({
                   </p>
                 </li>
                 <li>
-                  <p className="flex gap-2 items-center">
+                  <p className="flex xl:flex-row flex-col text-center xl:text-start gap-2 xl:items-center items-center">
                     <FontAwesomeIcon
                       icon={faSquareCheck}
                       className="text-green-600 text-2xl"
@@ -54,7 +54,7 @@ export function ImageTextCheckmarks({
                   </p>
                 </li>
                 <li>
-                  <p className="flex gap-2 items-center">
+                  <p className="flex xl:flex-row flex-col text-center xl:text-start gap-2 xl:items-center items-center">
                     <FontAwesomeIcon
                       icon={faSquareCheck}
                       className="text-green-600 text-2xl"
@@ -66,7 +66,7 @@ export function ImageTextCheckmarks({
 
               <a
                 href="https://app.shopr.cz/signup"
-                className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold p-3 text-textButton cursor-pointer"
+                className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold p-3 text-textButton cursor-pointer xl:text-start text-center"
               >
                 {buttonText}
               </a>

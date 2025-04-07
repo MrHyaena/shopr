@@ -15,9 +15,9 @@ export function ExamplesGrid({
 }) {
   return (
     <>
-      <div className="flex flex-col items-center justify-center py-30 bg-white">
-        <div className="max-w-wrapper w-full lg:grid flex-col grid-cols-2 items-center justify-center gap-0">
-          <div className="flex flex-col gap-5">
+      <div className="flex flex-col items-center justify-center xl:py-30 bg-white">
+        <div className="max-w-wrapper w-full lg:grid flex-col grid-cols-2 items-center justify-center gap-0 p-3">
+          <div className="flex flex-col gap-5 xl:text-start text-center">
             <div>
               <h4>{subheading}</h4>
               <h2>{heading}</h2>
@@ -25,8 +25,8 @@ export function ExamplesGrid({
 
             <p>{text}</p>
           </div>
-          <div className=" gap-3 grid grid-cols-2 rounded-3xl rounded-tl-4xl">
-            <div className="mt-10 flex flex-col gap-10">
+          <div className=" gap-3 grid grid-cols-2 rounded-3xl rounded-tl-4xl xl:mt-0 mt-10">
+            <div className="mt-10 flex flex-col gap-10 text-center">
               <div className="flex flex-col gap-3 items-center">
                 <h3 className="text-2xl">{headingOne}</h3>
 
@@ -46,7 +46,7 @@ export function ExamplesGrid({
                 />
               </div>
             </div>
-            <div className=" flex flex-col gap-10">
+            <div className=" flex flex-col gap-10 text-center">
               {" "}
               <div className="flex flex-col gap-3 items-center">
                 <h3 className="text-2xl">{headingThree}</h3>
