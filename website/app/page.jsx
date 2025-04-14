@@ -34,7 +34,7 @@ import { ExamplesGrid } from "./components/Grids/ExamplesGrid";
 export const metadata = {
   title: "Shopr: Předplatné suplementů z jakéhokoliv eshopu",
   description:
-    "Zařídíme pro Vás pravidelnou objednávku suplementů a doplňků stravy z jakéhokoliv eshopu jen chcete.",
+    "Zařídíme pro Vás pravidelnou objednávku suplementů a doplňků stravy z jakéhokoliv eshopu chcete.",
 };
 
 export default function Home() {
