@@ -28,7 +28,7 @@ export function Navbar() {
           className="fixed z-20 lg:flex justify-center w-full hidden animate-fall-down-noBounce h-[80px] mt-[-80px]"
         >
           <div
-            className="bg-white border border-slate-50  py-2 px-10  shadow-lg grid grid-cols-5 items-center w-[100%] z-20"
+            className="bg-white border border-slate-50  py-2 px-10  shadow-lg grid xl:grid-cols-5 lg:grid-cols-4 items-center w-[100%] z-20"
             onMouseLeave={toggleExampleHide}
           >
             <div className="col-span-1 justify-self-start">
@@ -42,18 +42,18 @@ export function Navbar() {
                 />
               </Link>
             </div>
-            <div className="col-span-3 justify-self-center">
+            <div className="xl:col-span-3 col-span-2 justify-self-center">
               <ul className="flex gap-10 text-lg font-bold items-center">
                 <li>
                   <Link href="/">
-                    <p className="font-bold text-textDark text-base hover:text-quad transition-all ease-in-out">
+                    <p className="font-bold text-textDark text-lg hover:text-quad transition-all ease-in-out font-primary">
                       Domů
                     </p>
                   </Link>
                 </li>
                 <li>
                   <Link href="/jak-to-funguje">
-                    <p className="font-bold text-textDark  text-base hover:text-quad transition-all ease-in-out">
+                    <p className="font-bold text-textDark text-lg hover:text-quad transition-all ease-in-out font-primary">
                       Jak to funguje
                     </p>
                   </Link>
@@ -61,7 +61,7 @@ export function Navbar() {
 
                 <li>
                   <Link href="/cena">
-                    <p className="font-bold text-textDark  text-base hover:text-quad transition-all ease-in-out">
+                    <p className="font-bold text-textDark text-lg hover:text-quad transition-all ease-in-out font-primary">
                       Cena
                     </p>
                   </Link>
@@ -69,7 +69,7 @@ export function Navbar() {
 
                 <li>
                   <Link href="/otazky">
-                    <p className="font-bold text-textDark  text-base hover:text-quad transition-all ease-in-out">
+                    <p className="font-bold text-textDark text-lg hover:text-quad transition-all ease-in-out font-primary">
                       Otázky
                     </p>
                   </Link>
@@ -79,12 +79,15 @@ export function Navbar() {
             <div className="col-span-1 flex gap-8 items-center text-base font-bold text-zinc-800 justify-self-end">
               <Link
                 href="https://app.shopr.cz"
-                className="text-lg hover:text-quad transition-all ease-in-out"
+                className="text-lg hover:text-quad transition-all ease-in-out font-primary"
               >
                 Přihlásit se
               </Link>
 
-              <Link href="https://app.shopr.cz/signup" className="buttonSmall">
+              <Link
+                href="https://app.shopr.cz/signup"
+                className="buttonSmall font-primary"
+              >
                 Vytvořit účet
               </Link>
             </div>

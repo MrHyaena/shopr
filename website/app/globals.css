@@ -1,24 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import "tailwindcss";
 
 @layer components {
   h1 {
-    @apply lg:text-6xl/18 font-[700] text-textDark text-5xl;
+    @apply lg:text-6xl/18 font-[700] text-textDark text-5xl font-primary;
   }
 
   h2 {
-    @apply text-5xl font-[700] text-textDark;
+    @apply text-5xl font-[700] text-textDark font-primary;
   }
 
   h3 {
-    @apply text-4xl font-[700] text-textDark;
+    @apply text-4xl font-[700] text-textDark font-primary;
   }
 
   h4 {
-    @apply text-2xl font-[700] text-quad;
+    @apply text-2xl font-[700] text-quad font-primary;
   }
 
   h5 {
-    @apply text-lg font-[700] text-quad;
+    @apply text-lg font-[700] text-quad font-primary;
   }
 
   p {
@@ -26,7 +27,7 @@
   }
 
   .headingSmall {
-    @apply text-2xl font-[700] text-quad;
+    @apply text-2xl font-[700] text-quad  font-primary;
   }
 
   .buttonSmall {
@@ -43,6 +44,8 @@
 }
 
 @theme {
+  --font-primary: "Oswald", "sans-serif";
+
   --color-primary: var(--color-zinc-950);
   --color-secondary: var(--color-zinc-800);
   --color-tertiary: var(--color-rose-700);

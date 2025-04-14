@@ -20,7 +20,7 @@ export function CTAForm() {
           }}
         >
           <h3 className="">
-            Vytvořte si u nás <br />
+            Vytvořte si u nás <br className="hidden lg:block" />
             <span className="text-quad">účet zdarma</span> a všechno si nejprve
             vyzkoušejte!
           </h3>

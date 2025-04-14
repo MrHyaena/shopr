@@ -10,10 +10,6 @@ import clock from "./_img/clock.png";
 import money from "./_img/money.png";
 import stress from "./_img/nostress.png";
 
-import catFood from "./_img/examples/cat-food.png";
-import suplementy from "./_img/examples/suplementy.png";
-import leky from "./_img/examples/leky.png";
-import tea from "./_img/examples/tea.png";
 import PriceDescription from "./components/PriceDescription";
 
 import heroImgTwo from "./_img/homepage/hero.jpg";
@@ -21,7 +17,7 @@ import fruit from "./_img/homepage/fruit.jpg";
 import meat from "./_img/homepage/meat.jpg";
 import minerals from "./_img/homepage/minerals.jpg";
 import peanut from "./_img/homepage/peanut.jpg";
-import box from "./_img/homepage/box.jpg";
+import box from "./_img/homepage/goal.jpg";
 
 import Link from "next/link";
 import { BlackDivider } from "./components/BlackDivider";
@@ -41,15 +37,15 @@ export default function Home() {
   function HeroSection() {
     return (
       <>
-        <div className=" flex flex-col lg:grid grid-cols-5  items-stretch xl:justify-center justify-start overflow-x-hidden lg:p-0 p-5 py-10 lg:py-0">
-          <div className="flex flex-col items-start justify-center h-full gap-5 lg:p-15  col-span-3 max-w-[1000px] justify-self-center animate-scale-up-noBounce-delay">
-            <h1 className="z-2 xl:hidden">
+        <div className=" flex flex-col lg:grid grid-cols-5  items-center xl:justify-center justify-start overflow-x-hidden lg:p-0 p-5 py-10 lg:py-0">
+          <div className="flex flex-col lg:items-start items-center justify-center h-full gap-5 lg:p-15  col-span-3 max-w-[800px] justify-self-center animate-scale-up-noBounce-delay">
+            <h1 className="z-2 xl:hidden text-center">
               Předplatné
               <span className="text-quad">
                 {" "}
-                <br />
-                oblíbených <br />
-                suplementů <br />
+                <br className="hidden lg:block" />
+                oblíbených <br className="hidden lg:block" />
+                suplementů <br className="hidden lg:block" />
               </span>{" "}
               odkudkoliv
             </h1>
@@ -63,13 +59,13 @@ export default function Home() {
               z jakéhokoliv e-shopu chcete
             </h1>
 
-            <p className="font-semibold text-textDark z-2">
+            <p className="font-semibold text-textDark z-2 text-center lg:text-start">
               Vytvoříme pro Vás pravidelnou objednávku na jakémkoliv e-shopu s
               fitness zbožím jen chcete. Jestli Vás už nebaví škrabat zbytky
               proteinu z prázných obalů nebo doufat, že ještě najdete poslední
               kreatin někde pod postelí, pojďte to s námi zkusit.
             </p>
-            <div className="flex gap-5 lg:flex-row flex-col">
+            <div className="flex gap-5 md:flex-row flex-col">
               <a href="https://app.shopr.cz/signup" className="buttonMiddle">
                 Vyzkoušet aplikaci
               </a>
@@ -86,7 +82,7 @@ export default function Home() {
           <Image
             src={heroImgTwo}
             alt="hero"
-            className="lg:block max-h-[700px] hidden col-span-2 object-cover object-left animate-fall-left-noBounce [clip-path:polygon(0%_0%,100%_0%,100%_100%,0%_100%,15%_50%)]"
+            className="lg:block xl:max-h-[700px] h-full hidden col-span-2 object-cover object-left animate-fall-left-noBounce [clip-path:polygon(0%_0%,100%_0%,100%_100%,0%_100%,10%_50%)]"
           />
         </div>
       </>
@@ -98,7 +94,7 @@ export default function Home() {
       <>
         <div className="flex items-center justify-center lg:py-pad py-20 p-5">
           <div className="max-w-wrapper flex flex-col items-center justify-center gap-10">
-            <div className="mx-auto text-center flex flex-col items-center p-5">
+            <div className="mx-auto text-center flex flex-col items-center xl:p-5">
               <p className="headingSmall">Co pro Vás můžeme udělat?</p>
               <h2 className="mt-2 my-5">
                 Méně starostí, více času, konec prázdných balení
@@ -113,9 +109,9 @@ export default function Home() {
                 kdybyste to nechali na nás?
               </p>
             </div>
-            <div className="lg:grid flex flex-col lg:grid-cols-4 md:grid-cols-2 gap-10">
-              <div className="flex flex-col items-center justify-start max-w-[300px] gap-5">
-                <Image src={clock} alt="Ušetříme Vám čas" />
+            <div className="md:grid flex flex-col lg:grid-cols-4 md:grid-cols-2 gap-10 md:px-10">
+              <div className="flex flex-col items-center justify-start max-w-[400px] gap-5 ">
+                <Image src={clock} alt="Ušetříme Vám čas" className="xl:w-50" />
 
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
                   <h4 className="text-textDark text-3xl">
@@ -128,8 +124,12 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col items-center justify-start max-w-[300px] gap-5">
-                <Image src={money} alt="Ušetříte s námi peníze" />
+              <div className="flex flex-col items-center justify-start max-w-[400px] gap-5 ">
+                <Image
+                  src={money}
+                  alt="Ušetříte s námi peníze"
+                  className="xl:w-50"
+                />
 
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
                   <h4 className="text-textDark text-3xl">
@@ -141,12 +141,16 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col items-center justify-start max-w-[300px] gap-5">
-                <Image src={stress} alt="Zbavíme Vás stresu" />
+              <div className="flex flex-col items-center justify-start max-w-[400px] gap-5  ">
+                <Image
+                  src={stress}
+                  alt="Zbavíme Vás stresu"
+                  className="xl:w-50"
+                />
 
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
                   <h4 className="text-textDark text-3xl">
-                    Odstraníme nepotřebný stresu
+                    Odstraníme nepotřebný stres
                   </h4>
                   <p className="text-textDark font-semibold">
                     Dnes nosíme v hlavě spoustu věcí. Nastavením pravidelných
@@ -155,10 +159,11 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col items-center justify-start max-w-[300px] gap-5">
+              <div className="flex flex-col items-center justify-start max-w-[400px] gap-5 ">
                 <Image
                   src={suplement}
                   alt="Už nikdy nebudete řešit prázdné balení"
+                  className="xl:w-50"
                 />
 
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
@@ -171,144 +176,6 @@ export default function Home() {
                     předejít.
                   </p>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  function WhyToTry() {
-    return (
-      <>
-        <div className=" flex flex-col items-center justify-center pt-30">
-          <div className="max-w-wrapper mx-auto text-center flex flex-col items-center p-5 lg:p-0">
-            <p className="headingSmall">Příklady</p>
-            <h2 className="mt-2 my-5">Nechte se inspirovat!</h2>
-            <p className="max-w-[600px]">
-              Máme v našich životech spoustu věcí, u kterých si někdy ani
-              neuvědomujeme, že je potřebujeme na pravidelné bázi.
-            </p>
-            <p className="max-w-[600px] mt-5">
-              Nevíte, s čím bychom Vám mohli pomoct? Nechte se inspirovat!
-            </p>
-          </div>
-        </div>
-        <div className=" flex flex-col items-center justify-center gap-10 ">
-          <div className="bg-white self-stretch flex justify-center py-10">
-            <div className="lg:grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10 p-10">
-              <div className="self-center justify-self-center">
-                <Image
-                  src={suplementy}
-                  alt="Suplementy"
-                  width={500}
-                  height={500}
-                />
-              </div>
-              <div className="flex flex-col gap-5 justify-center items-start">
-                <div>
-                  <p className="text-lg font-bold text-quad">Doplňky stravy</p>
-                  <h3>Fitness suplementy</h3>
-                </div>
-
-                <p>
-                  Pokud se člověk začne zabývat cvičením a stravou, standardně
-                  se dostane k suplementům, které pomáhají například s
-                  regenerací, imunitou a dalšími věcmi. Vitamíny a jiné látky se
-                  ale musí brát pravidelně.
-                </p>
-                <p>
-                  Každému z nás se již určitě stalo, že suplement došel. Co
-                  potom? Model předplatného je zde ideální řešení!
-                </p>
-                <a
-                  href="https://app.shopr.cz/signup"
-                  className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold p-3 text-textButton cursor-pointer"
-                >
-                  Založit uživatelský účet
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="bg-slate-50 self-stretch flex justify-center py-10">
-            <div className="lg:grid flex flex-col-reverse  grid-cols-2 max-w-[1300px] min-h-[600px] gap-10 p-10">
-              <div className="flex flex-col  gap-5 justify-center items-start">
-                <div>
-                  <p className="text-lg font-bold text-quad">Mazlíčci</p>
-                  <h3>Zvířecí žrádlo a pamlsky</h3>
-                </div>
-                <p>
-                  Zvířata jsou součástí našich domovů od nepaměti. Když si
-                  nějaké pořídíme, získáme za nového člena domácnosti
-                  odpovědnost v podobě krmení, venčení, změny podestýlky apod.
-                </p>
-                <p>
-                  My můžeme zajistit, že pro vašeho miláčka budete mít vždy
-                  plnou skříň dobrot a potřeb.
-                </p>
-                <a
-                  href="https://app.shopr.cz/signup"
-                  className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold p-3 text-textButton cursor-pointer"
-                >
-                  Založit uživatelský účet
-                </a>
-              </div>
-              <div className="self-center justify-self-center">
-                <Image src={catFood} alt="Mazlíčci" width={500} height={400} />
-              </div>
-            </div>
-          </div>
-          <div className="bg-white self-stretch flex justify-center py-10">
-            <div className="lg:grid grid-cols-2 max-w-[1300px] min-h-[600px] gap-10 p-10">
-              <div className="self-center justify-self-center">
-                <Image src={tea} alt="Káva a čaj" width={500} height={500} />
-              </div>
-              <div className="flex flex-col gap-5 justify-center items-start">
-                <div>
-                  <p className="text-lg font-bold text-quad">Dobroty</p>
-                  <h3>Káva, čaj a jiné pochutiny</h3>
-                </div>
-
-                <p>
-                  Káva je životabudič před cestou do kanceláře, čaj nás zase
-                  naladí do klidu. Spousta lidí bez nich nevyleze z domu, takže
-                  stabilní zásoba oblíbeného typu je naprostý základ fungování.
-                </p>
-                <p>
-                  My pro vás zařídíme dávku tohoto potěšení na pravidelné bázi.
-                </p>
-                <a
-                  href="https://app.shopr.cz/signup"
-                  className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold p-3 text-textButton cursor-pointer"
-                >
-                  Založit uživatelský účet
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="bg-slate-50 self-stretch flex justify-center py-10">
-            <div className="lg:grid flex flex-col-reverse grid-cols-2 max-w-[1300px] min-h-[600px] gap-10 p-10">
-              <div className="flex flex-col gap-5 justify-center items-start">
-                <div>
-                  <p className="text-lg font-bold text-quad">Léky a zdraví</p>
-                  <h3>Pravidelná objednávka léků</h3>
-                </div>
-                <p>
-                  Stejně jako u suplementů, i u léků je často nutná
-                  pravidelnost. Velká část z nich je dostupná v online
-                  lékárnách, na kterých Vám můžeme zařídit předplatné a
-                  zajistit, že je budete mít vždy po ruce.
-                </p>
-                <a
-                  href="https://app.shopr.cz/signup"
-                  className="bg-quad rounded-md shadow-lg hover:scale-105 transition all ease-in-out text-xl font-semibold py-2 px-3 text-textButton cursor-pointer"
-                >
-                  Založit uživatelský účet
-                </a>
-              </div>
-              <div className="self-center justify-self-center">
-                <Image src={leky} alt="drugs" width={500} height={500} />
               </div>
             </div>
           </div>
@@ -342,7 +209,7 @@ export default function Home() {
         headingThree={"Proteiny"}
         textThree={`Proteiny jsou stavebním kamenem svalů a zásadní součástí zdravého jídelníčku. Podporují regeneraci po fyzické námaze, pomáhají budovat svalovou hmotu a zasytí na dlouhou dobu. Jsou ideální jak pro sportovce, tak pro ty, kteří chtějí mít vyváženou a plnohodnotnou stravu.`}
         imageThree={meat}
-        headingFour={"Dobroty"}
+        headingFour={"Něco dobrého"}
         textFour={`I při zdravém životním stylu si můžete dopřát něco chutného! Proteinové sušenky, smoothie nebo nadýchané palačinky dodají tělu potřebné živiny a zároveň uspokojí chuť na sladké. Skvělá volba pro všechny, kteří chtějí spojit potěšení s vyváženou výživou.`}
         imageFour={peanut}
       />

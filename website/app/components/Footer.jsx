@@ -5,7 +5,7 @@ export default function Footer() {
     <>
       <footer className="flex bg-primary items-center justify-center xl:py-30 py-15 flex-col gap-10">
         <div className="max-w-wrapper flex flex-col items-center gap-8 p-3">
-          <p className="text-2xl font-bold mt-2 text-w text-white text-center">
+          <p className="text-3xl font-bold mt-2 text-w text-white text-center font-primary">
             Budeme se na vás těšit!
           </p>
 

@@ -24,19 +24,19 @@ export function ImageTextCheckmarks({
                 alt="section-image"
                 width={500}
                 height={500}
-                className="rounded-lg shadow-md xl:w-[500px] xl:h-[500px] h-[200px]  object-cover"
+                className="rounded-lg shadow-md xl:w-[500px] xl:h-[500px] h-[200px]  object-cover object-center saturate-50"
               />
             </div>
-            <div className="flex flex-col gap-5 justify-center items-start">
+            <div className="flex flex-col gap-5 justify-center lg:items-start md:items-center md:text-center lg:text-start">
               <div>
-                <p className="text-lg font-bold text-quad">{subHeading}</p>
+                <h5 className="headingSmall">{subHeading}</h5>
                 <h3>{heading}</h3>
               </div>
 
               <p>{text}</p>
               <ul className="flex flex-col gap-2">
                 <li>
-                  <p className="flex xl:flex-row flex-col text-center xl:text-start gap-2 xl:items-center items-center">
+                  <p className="flex xl:flex-row mx:flex-col text-center xl:text-start gap-2 xl:items-center items-center">
                     <FontAwesomeIcon
                       icon={faSquareCheck}
                       className="text-green-600 text-2xl"
@@ -45,7 +45,7 @@ export function ImageTextCheckmarks({
                   </p>
                 </li>
                 <li>
-                  <p className="flex xl:flex-row flex-col text-center xl:text-start gap-2 xl:items-center items-center">
+                  <p className="flex xl:flex-row mx:flex-col text-center xl:text-start gap-2 xl:items-center items-center">
                     <FontAwesomeIcon
                       icon={faSquareCheck}
                       className="text-green-600 text-2xl"
@@ -54,7 +54,7 @@ export function ImageTextCheckmarks({
                   </p>
                 </li>
                 <li>
-                  <p className="flex xl:flex-row flex-col text-center xl:text-start gap-2 xl:items-center items-center">
+                  <p className="flex xl:flex-row mx:flex-col text-center xl:text-start gap-2 xl:items-center items-center">
                     <FontAwesomeIcon
                       icon={faSquareCheck}
                       className="text-green-600 text-2xl"
