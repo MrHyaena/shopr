@@ -102,6 +102,7 @@ async function stripeCreateCheckoutSession(req, res) {
         description: description,
         metadata: { subId: subId, userId: userId },
       },
+      allow_promotion_codes: true,
       consent_collection: { terms_of_service: "required" },
       customer: stripeCustomerId,
       success_url: `${process.env.PROXY_SERVER}/api/stripe/success?session_id={CHECKOUT_SESSION_ID}`,

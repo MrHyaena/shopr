@@ -167,10 +167,10 @@ export function SubscriptionForm({ setLoader }) {
           Vložit osobní údaje <FontAwesomeIcon icon={faUser} />
         </button>
         <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
-          <legend className="text-xl font-semibold text-heading mb-5">
+          <legend className="text-xl font-semibold text-heading">
             Kontaktní údaje
           </legend>
-          <div className="xl:grid grid-cols-2 gap-5 flex flex-col">
+          <div className="xl:grid grid-cols-2 gap-3 flex flex-col">
             <label className="flex flex-col text-heading text-lg font-semibold">
               Jméno
               <input
@@ -226,10 +226,10 @@ export function SubscriptionForm({ setLoader }) {
           </div>
         </fieldset>
         <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
-          <legend className="text-xl font-semibold text-slate-900 mb-5">
+          <legend className="text-xl font-semibold text-slate-900">
             Adresa dodání / Fakturační údaje
           </legend>
-          <div className="xl:grid grid-cols-2 gap-5 flex flex-col">
+          <div className="xl:grid grid-cols-2 gap-3 flex flex-col">
             <label className="flex flex-col text--textDark text-lg font-semibold">
               Adresa
               <input
