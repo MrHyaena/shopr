@@ -24,7 +24,7 @@ export function ImageTextCheckmarks({
                 alt="section-image"
                 width={500}
                 height={500}
-                className="rounded-lg shadow-md xl:w-[500px] xl:h-[500px] h-[200px]  object-cover object-center saturate-50"
+                className="rounded-lg shadow-md lg:w-[500px] lg:h-[500px] h-[200px]  object-cover object-center saturate-50"
               />
             </div>
             <div className="flex flex-col gap-5 justify-center lg:items-start md:items-center md:text-center lg:text-start">
@@ -36,7 +36,7 @@ export function ImageTextCheckmarks({
               <p>{text}</p>
               <ul className="flex flex-col gap-2">
                 <li>
-                  <p className="flex xl:flex-row mx:flex-col text-center xl:text-start gap-2 xl:items-center items-center">
+                  <p className="flex xl:flex-row  mx:text-center text-start xl:text-start gap-2 items-center md:justify-center lg:justify-start">
                     <FontAwesomeIcon
                       icon={faSquareCheck}
                       className="text-green-600 text-2xl"
@@ -45,7 +45,7 @@ export function ImageTextCheckmarks({
                   </p>
                 </li>
                 <li>
-                  <p className="flex xl:flex-row mx:flex-col text-center xl:text-start gap-2 xl:items-center items-center">
+                  <p className="flex xl:flex-row  mx:text-center text-start xl:text-start gap-2 items-center md:justify-center lg:justify-start">
                     <FontAwesomeIcon
                       icon={faSquareCheck}
                       className="text-green-600 text-2xl"
@@ -54,7 +54,7 @@ export function ImageTextCheckmarks({
                   </p>
                 </li>
                 <li>
-                  <p className="flex xl:flex-row mx:flex-col text-center xl:text-start gap-2 xl:items-center items-center">
+                  <p className="flex xl:flex-row  mx:text-center text-start xl:text-start gap-2 items-center md:justify-center lg:justify-start">
                     <FontAwesomeIcon
                       icon={faSquareCheck}
                       className="text-green-600 text-2xl"
