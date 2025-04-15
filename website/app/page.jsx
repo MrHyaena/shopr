@@ -73,7 +73,7 @@ export default function Home() {
                 Jak to funguje?
               </Link>
             </div>
-            <p className="font-semibold text-textDark z-2 text-sm">
+            <p className="font-semibold text-textDark z-2 text-sm text-center lg:text-start">
               Celý uživatelský účet můžete vyzkoušet zdarma. Platby začínají až
               při aktivaci předplatného.
             </p>
@@ -119,7 +119,7 @@ export default function Home() {
                   </h4>
                   <p className="text-textDark font-semibold">
                     Nemusíte trávit hodiny výběrem zboží po e-shopech, ani v
-                    panice běhat do fyzických prodejen. S námi stačí, že si
+                    panice běhat do fyzických prodejen. U nás stačí, že
                     objednávku převezmete.
                   </p>
                 </div>
@@ -133,11 +133,11 @@ export default function Home() {
 
                 <div className="flex flex-col gap-5 justify-center items-center text-center">
                   <h4 className="text-textDark text-3xl">
-                    Zachráníme peníze, podržíme budget
+                    Slevové kódy a ušetřené peníze
                   </h4>
                   <p className="text-textDark font-semibold">
-                    Když nakupujeme, standardně do našich košíků přihazujeme i
-                    zbytečnosti. S naší službou budete mít budget pod kontrolou.
+                    Umíme využít vaše slevové kódy a zákaznické účty, takže
+                    nepřijdete o žádnou akci.
                   </p>
                 </div>
               </div>

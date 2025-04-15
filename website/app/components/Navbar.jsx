@@ -129,7 +129,7 @@ export function Navbar() {
                     }}
                   >
                     <Link href="/">
-                      <p className="font-bold text-textLight  text-base hover:text-quad transition-all ease-in-out">
+                      <p className="font-bold text-textLight  text-base hover:text-quad transition-all ease-in-out font-primary">
                         Domů
                       </p>
                     </Link>
@@ -140,7 +140,7 @@ export function Navbar() {
                     }}
                   >
                     <Link href="/jak-to-funguje">
-                      <p className="font-bold text-textLight  text-base hover:text-quad transition-all ease-in-out">
+                      <p className="font-bold text-textLight  text-base hover:text-quad transition-all ease-in-out font-primary">
                         Jak to funguje
                       </p>
                     </Link>
@@ -152,7 +152,7 @@ export function Navbar() {
                     }}
                   >
                     <Link href="/cena">
-                      <p className="font-bold text-textLight  text-base hover:text-quad transition-all ease-in-out">
+                      <p className="font-bold text-textLight  text-base hover:text-quad transition-all ease-in-out font-primary">
                         Cena
                       </p>
                     </Link>
@@ -164,7 +164,7 @@ export function Navbar() {
                     }}
                   >
                     <Link href="/otazky">
-                      <p className="font-bold text-textLight  text-base hover:text-quad transition-all ease-in-out">
+                      <p className="font-bold text-textLight  text-base hover:text-quad transition-all ease-in-out font-primary">
                         Otázky
                       </p>
                     </Link>
@@ -177,7 +177,7 @@ export function Navbar() {
                   >
                     <Link
                       href="https://app.shopr.cz/signup"
-                      className="bg-quad text-textButton cursor-pointer text-base font-bold py-2 px-3 text-md rounded-md transition-all ease-in-out hover:scale-105  self-stretch"
+                      className="bg-quad text-textButton cursor-pointer text-base font-bold py-2 px-3 text-md rounded-md transition-all ease-in-out hover:scale-105  self-stretch font-primary"
                     >
                       Vytvořit účet
                     </Link>
@@ -191,7 +191,7 @@ export function Navbar() {
                       href="https://app.shopr.cz"
                       className="text-base hover:text-quad transition-all ease-in-out"
                     >
-                      <p className="font-bold text-textLight  text-base hover:text-quad transition-all ease-in-out">
+                      <p className="font-bold text-textLight  text-base hover:text-quad transition-all ease-in-out font-primary">
                         Přihlásit se
                       </p>
                     </Link>
