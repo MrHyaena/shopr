@@ -9,12 +9,13 @@ import { faSpider, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { ScrollToTop } from "./functions/ScrollTopFunction";
 import { AccountDetails } from "./pages/AccountDetails";
 import { SubscriptionForm } from "./pages/SubscriptionForm";
-import { Homepage } from "./pages/Homepage";
 import { LoginPage } from "./pages/LoginPage";
 import { SignupPage } from "./pages/SignupPage";
 import { PasswordReset } from "./pages/PasswordReset";
 import { ContactForm } from "./pages/ContactForm";
 import TagManager from "react-gtm-module";
+import { SubscriptionsList } from "./pages/SubscriptionsList";
+import Homepage from "./pages/Homepage";
 
 function App() {
   const { user } = useAuthContext();
@@ -48,11 +49,15 @@ function App() {
               <Routes>
                 <Route path="*" element={<Homepage setLoader={setLoader} />} />
                 <Route
-                  path="/form"
+                  path="/predplatne"
+                  element={<SubscriptionsList setLoader={setLoader} />}
+                />
+                <Route
+                  path="/formular"
                   element={<SubscriptionForm setLoader={setLoader} />}
                 />
                 <Route
-                  path="/form/:id"
+                  path="/formular/:id"
                   element={<SubscriptionForm setLoader={setLoader} />}
                 />
                 <Route path="/kontakt" element={<ContactForm />} />

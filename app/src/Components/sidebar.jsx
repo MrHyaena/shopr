@@ -5,6 +5,7 @@ import {
   faCircleArrowDown,
   faClipboardQuestion,
   faComment,
+  faHouseUser,
   faNewspaper,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -35,6 +36,36 @@ export function Sidebar() {
   }
 
   function DesktopSidebar() {
+    function Tab({ link, icon, text }) {
+      return (
+        <>
+          {activeButton == link ? (
+            <Link
+              onClick={() => {
+                setActiveButton(link);
+              }}
+              to={link}
+              className="cursor-pointer text-sm font-semibold flex flex-col gap-3 bg-white text-zinc-900 transition-all ease-in-out rounded-xl p-3 py-5 w-full text-center"
+            >
+              <FontAwesomeIcon icon={icon} className="text-xl" />
+              {text}
+            </Link>
+          ) : (
+            <Link
+              onClick={() => {
+                setActiveButton(link);
+              }}
+              to={link}
+              className="cursor-pointer text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 py-5 w-full text-center"
+            >
+              <FontAwesomeIcon icon={icon} className="text-xl" />
+              {text}
+            </Link>
+          )}
+        </>
+      );
+    }
+
     return (
       <div className="min-h-screen hidden xl:block">
         <div className="bg-primary h-screen border-slate-200 shadow-xl shadow-slate-200 text-white sticky top-0">
@@ -43,75 +74,15 @@ export function Sidebar() {
               <img src={logo} alt="logo" className="h-12" />
             </a>
             <div className="flex flex-col items-center gap-2  p-4 row-span-5 self-center">
-              {activeButton == "/" ? (
-                <Link
-                  onClick={() => {
-                    setActiveButton("/");
-                  }}
-                  to="/"
-                  className="cursor-pointer text-sm font-semibold flex flex-col gap-3 bg-white text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
-                >
-                  <FontAwesomeIcon icon={faArrowsSpin} className="text-2xl" />
-                  Moje předplatné
-                </Link>
-              ) : (
-                <Link
-                  onClick={() => {
-                    setActiveButton("/");
-                  }}
-                  to="/"
-                  className="cursor-pointer text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
-                >
-                  <FontAwesomeIcon icon={faArrowsSpin} className="text-2xl" />
-                  Moje předplatné
-                </Link>
-              )}
-              {activeButton == "/osobni-udaje" ? (
-                <Link
-                  onClick={() => {
-                    setActiveButton("/osobni-udaje");
-                  }}
-                  to="/osobni-udaje"
-                  className="cursor-pointer text-sm font-semibold flex flex-col gap-3 bg-white text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
-                >
-                  <FontAwesomeIcon icon={faUser} className="text-2xl" />
-                  Osobní údaje
-                </Link>
-              ) : (
-                <Link
-                  onClick={() => {
-                    setActiveButton("/osobni-udaje");
-                  }}
-                  to="/osobni-udaje"
-                  className="cursor-pointer text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
-                >
-                  <FontAwesomeIcon icon={faUser} className="text-2xl" />
-                  Osobní údaje
-                </Link>
-              )}
-              {activeButton == "/kontakt" ? (
-                <Link
-                  onClick={() => {
-                    setActiveButton("/kontakt");
-                  }}
-                  to="/kontakt"
-                  className="cursor-pointer text-sm font-semibold flex flex-col gap-3 bg-white text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
-                >
-                  <FontAwesomeIcon icon={faComment} className="text-2xl" />
-                  Kontakt
-                </Link>
-              ) : (
-                <Link
-                  onClick={() => {
-                    setActiveButton("/kontakt");
-                  }}
-                  to="/kontakt"
-                  className="cursor-pointer text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-5 w-full text-center"
-                >
-                  <FontAwesomeIcon icon={faComment} className="text-2xl" />
-                  Kontakt
-                </Link>
-              )}
+              <Tab link={"/"} icon={faHouseUser} text={"Hlavní panel"} />
+              <Tab
+                link={"/predplatne"}
+                icon={faArrowsSpin}
+                text={"Předplatné"}
+              />
+              <Tab link={"/osobni-udaje"} icon={faUser} text={"Osobní údaje"} />
+
+              <Tab link={"/kontakt"} icon={faComment} text={"Kontakt"} />
 
               <Link
                 to="https://shopr.cz/otazky"
@@ -161,7 +132,7 @@ export function Sidebar() {
                 onClick={() => {
                   setToggleMenu(false);
                 }}
-                to="/form"
+                to="/formular"
                 className="bg-quad text-textButton cursor-pointer text-base font-bold py-2 px-3 text-md rounded-md transition-all ease-in-out hover:scale-105 self-start"
               >
                 Nové předplatné
@@ -171,6 +142,15 @@ export function Sidebar() {
                   setToggleMenu(false);
                 }}
                 to="/"
+                className="text-base font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
+              >
+                Hlavní panel
+              </Link>
+              <Link
+                onClick={() => {
+                  setToggleMenu(false);
+                }}
+                to="/predplatne"
                 className="text-base font-semibold flex items-center justify-start gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 w-full text-center"
               >
                 Moje předplatné

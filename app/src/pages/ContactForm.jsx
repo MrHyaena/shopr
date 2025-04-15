@@ -2,12 +2,12 @@ import { faArrowRight, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useSubscriptionContext } from "../hooks/useSubscriptionContext";
-import { Link } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { tokenExpired } from "../functions/tokenExpired";
 import { useExpiredContext } from "../hooks/useExpiredContext";
 import { ErrorWindowApp } from "../Components/responseWindows/errorWindowApp";
 import { MessageWindowApp } from "../Components/responseWindows/messageWindowApp";
+import SubHeader from "../Components/subHeader";
 const apiURL = import.meta.env.VITE_API_URL;
 
 export function ContactForm() {
@@ -180,17 +180,11 @@ export function ContactForm() {
   return (
     <>
       <div className="bg-slate-50 xl:p-10 p-3 flex flex-col xl:gap-10 gap-10 xl:pt-10 pt-30 text-textDark">
-        <div className="flex xl:flex-row justify-between xl:items-start flex-col-reverse gap-5">
-          <h1 className="text-3xl font-bold text-heading xl:text-start text-center">
-            Trápí Vás nějaký problém? Napište nám!
-          </h1>
-          <Link
-            to="/"
-            className="bg-quad text-textButton xl:block self-center text-center p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
-          >
-            Zpět
-          </Link>
-        </div>
+        <SubHeader
+          header={"Trápí Vás nějaký problém? Napište nám"}
+          buttonText={"Zpet"}
+          linkTo={"/"}
+        />
         <div className=" flex xl:grid grid-cols-2 flex-col gap-10 xl:pb-0 pb-20">
           <div className="flex flex-col xl:items-start gap-5">
             <h1 className="text-xl font-bold text-heading xl:text-start text-center">
