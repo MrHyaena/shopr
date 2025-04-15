@@ -48,6 +48,10 @@ export function SubscriptionForm({ setLoader }) {
     subFrequency: "weekly",
     subDeliveryMethod: "courier",
     subDeliveryAddress: "",
+    subCoupon: "",
+    subAccount: "false",
+    subAccountLogin: "",
+    subAccountPassword: "",
     itemsType: "empty",
     items: [{ url: "", amount: "", changable: "true" }],
     mysteryItem: { categories: [], message: "", amount: 300 },
@@ -59,33 +63,9 @@ export function SubscriptionForm({ setLoader }) {
   useEffect(() => {
     if (id) {
       const sub = subscriptions.find((element) => element._id == id);
-      const newData = {
-        stripeSubId: sub.stripeSubId,
-        stripeCustomerId: sub.stripeCustomerId,
-        pipedrivePersonId: sub.pipedrivePersonId,
-        pipedriveDealId: sub.pipedriveDealId,
-        active: sub.active,
-        firstName: sub.firstName,
-        secondName: sub.secondName,
-        phone: sub.phone,
-        email: sub.email,
-        address: sub.address,
-        addressNumber: sub.addressNumber,
-        city: sub.city,
-        cityNumber: sub.cityNumber,
-        subName: sub.subName,
-        subWebsite: sub.subWebsite,
-        nextPaymentDate: sub.nextPaymentDate,
-        subFrequency: sub.subFrequency,
-        subDeliveryMethod: sub.subDeliveryMethod,
-        subDeliveryAddress: sub.subDeliveryAddress,
-        itemsType: sub.itemsType,
-        items: sub.items,
-        mysteryItem: sub.mysteryItem,
-      };
 
       setOriginalSub({ ...sub });
-      setFormData({ ...newData });
+      setFormData({ ...sub });
     }
   }, []);
 
@@ -342,7 +322,14 @@ export function SubscriptionForm({ setLoader }) {
     const [subDeliveryAddress, setSubDeliveryAddress] = useState(
       formData.subDeliveryAddress
     );
-
+    const [subAccount, setSubAccount] = useState(formData.subAccount);
+    const [subAccountLogin, setSubAccountLogin] = useState(
+      formData.subAccountLogin
+    );
+    const [subAccountPassword, setSubAccountPassword] = useState(
+      formData.subAccountPassword
+    );
+    const [subCoupon, setSubCoupon] = useState(formData.subCoupon);
     const [error, setError] = useState(null);
 
     function handleNext(e) {
@@ -393,6 +380,10 @@ export function SubscriptionForm({ setLoader }) {
           subFrequency,
           subDeliveryMethod,
           subDeliveryAddress,
+          subAccount,
+          subAccountLogin,
+          subAccountPassword,
+          subCoupon,
         };
 
         setFormData(object);
@@ -403,8 +394,8 @@ export function SubscriptionForm({ setLoader }) {
 
     return (
       <form className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg">
-        <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
-          <legend className="text-xl font-semibold text-heading mb-5">
+        <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-5">
+          <legend className="text-xl font-semibold text-heading">
             Parametry předplatného
           </legend>
           <div className="grid gap-3">
@@ -503,7 +494,76 @@ export function SubscriptionForm({ setLoader }) {
             )}
           </div>
         </fieldset>
-
+        <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-5">
+          <legend className="text-xl font-semibold text-heading">
+            Slevové kódy a uživatelský účet (nepovinné)
+          </legend>
+          <div className="grid gap-3">
+            <label className="flex flex-col text-heading text-lg font-semibold">
+              Chcete-li, abychom používali nějaký slevový kód, napište nám jej
+              do tohoto pole
+              <input
+                value={subCoupon}
+                onChange={(e) => {
+                  setSubCoupon(e.target.value);
+                }}
+                type="text"
+                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                placeholder="JARNISLEVA20"
+              ></input>
+            </label>
+            <label className="flex flex-col text-heading text-lg font-semibold">
+              Máte v eshopu zákaznický účet a chcete, abychom z něj nakupovali
+              kvůli slevám?
+              <select
+                value={subAccount}
+                onChange={(e) => {
+                  setSubAccount(e.target.value);
+                }}
+                name="account"
+                id="account"
+                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+              >
+                <option value="false">Ne</option>
+                <option value="true">Ano</option>
+              </select>
+            </label>
+            {subAccount == "true" && (
+              <>
+                <label className="flex flex-col text-heading text-lg font-semibold">
+                  Přihlašovací jméno nebo email k účtu v eshopu
+                  <div className="w-full mt-2">
+                    <input
+                      required={subAccount == "true"}
+                      value={subAccountLogin}
+                      onChange={(e) => {
+                        setSubAccountLogin(e.target.value);
+                      }}
+                      type="text"
+                      className="bg-slate-50 border border-slate-300 rounded-md p-2 text-md font-semibold text-input w-full"
+                      placeholder="Email nebo přihlašovací jméno k účtu v eshopu"
+                    ></input>
+                  </div>
+                </label>
+                <label className="flex flex-col text-heading text-lg font-semibold">
+                  Přihlašovací heslo k účtu v eshopu
+                  <div className="w-full mt-2">
+                    <input
+                      required={subAccount == "true"}
+                      value={subAccountPassword}
+                      onChange={(e) => {
+                        setSubAccountPassword(e.target.value);
+                      }}
+                      type="text"
+                      className="bg-slate-50 border border-slate-300 rounded-md p-2 text-md font-semibold text-input w-full"
+                      placeholder="Heslo k účtu v eshopu"
+                    ></input>
+                  </div>
+                </label>
+              </>
+            )}
+          </div>
+        </fieldset>
         <div className="flex flex-col gap-5 items-center">
           <div className="flex gap-3">
             <button
@@ -517,6 +577,10 @@ export function SubscriptionForm({ setLoader }) {
                   subFrequency,
                   subDeliveryMethod,
                   subDeliveryAddress,
+                  subCoupon,
+                  subAccount,
+                  subAccountLogin,
+                  subAccountPassword,
                 };
 
                 setFormData(object);
@@ -584,6 +648,17 @@ export function SubscriptionForm({ setLoader }) {
             <p className="text-md font-semibold text-textDark">
               Na výběr máte buď kurýrní službu nebo nějaké odběrné místé. V
               každém případě se však bude jednat o dobírku.
+            </p>
+          </div>
+          <div className="mb-10">
+            <h2 className="text-xl font-semibold mb-4 text-heading">
+              Slevový kód a přístup do zákaznického účtu
+            </h2>
+            <p className="text-md font-semibold text-textDark">
+              Tyto údaje nejsou povinné, nícméně Vám mohou ušetřit spoustu
+              peněz. Slevový kód budeme používat vždy do chvíle, dokud bude
+              funkční. Zákaznický účet budeme využívat výhradně pro nákupy v
+              rámci vašeho předplatného.
             </p>
           </div>
         </div>
@@ -748,6 +823,10 @@ export function SubscriptionForm({ setLoader }) {
         subFrequency: formData.subFrequency,
         subDeliveryMethod: formData.subDeliveryMethod,
         subDeliveryAddress: formData.subDeliveryAddress,
+        subCoupon: formData.subCoupon,
+        subAccount: formData.subAccount,
+        subAccountLogin: formData.subAccountLogin,
+        subAccountPassword: formData.subAccountPassword,
         itemsType: itemsType,
         items: itemsArray,
         mysteryItem: newMysteryItem,
@@ -774,7 +853,6 @@ export function SubscriptionForm({ setLoader }) {
           if (subscription.subFrequency !== originalSub.subWebsite) {
             websiteChange = 1;
           }
-          console.log(frequencyChange);
           patchSubscription(
             subscription,
             id,
