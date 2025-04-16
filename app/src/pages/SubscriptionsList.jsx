@@ -78,7 +78,7 @@ export function SubscriptionsList({ setLoader }) {
 
     const [errorImage, setErrorImage] = useState(false);
 
-    const editURL = "/form/" + _id;
+    const editURL = "/formular/" + _id;
 
     function SubDetailsStandard() {
       return (
@@ -534,7 +534,7 @@ export function SubscriptionsList({ setLoader }) {
 
     return (
       <>
-        <div className="bg-white xl:p-6 p-2 rounded-lg border border-slate-200 shadow-md shadow-slate-200 xl:grid xl:grid-cols-3 grid-cols-5 gap-4 animate-fall-left">
+        <div className="bg-white xl:p-6 p-2 rounded-lg border border-slate-100 shadow-md shadow-slate-200 xl:grid xl:grid-cols-3 grid-cols-5 gap-4 animate-fall-left">
           <div className="mb-3 xl:mb-0 xl:block flex flex-col-reverse xl:col-span-2 col-span-3">
             <div className="xl:flex gap-7 mt-5 xl:mt-0 xl:mb-2">
               <p className="text-textDarker text-[12px] mb-2 font-medium">
@@ -590,7 +590,7 @@ export function SubscriptionsList({ setLoader }) {
                   )}
                 </a>
 
-                <h2 className="xl:text-2xl text-xl text-textDark font-bold xl:mr-5">
+                <h2 className="text-xl text-textDark font-bold xl:mr-5">
                   {subName}
                 </h2>
               </div>
