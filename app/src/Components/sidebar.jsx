@@ -29,7 +29,6 @@ export function Sidebar() {
   }
 
   useEffect(() => {
-    console.log(location);
     setActiveButton(location.pathname);
   }, [location]);
 

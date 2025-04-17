@@ -6,6 +6,7 @@ import {
   faBan,
   faCashRegister,
   faCircleUp,
+  faExclamationTriangle,
   faGear,
   faGlobe,
   faMoneyBill,
@@ -125,12 +126,12 @@ export default function Homepage({ setLoader }) {
               </div>
 
               {item.active ? (
-                <div className="bg-emerald-500 rounded-md flex text-base lg:text-ml items-center justify-center gap-2 px-3 py-1 font-semibold text-white shadow-sm">
+                <div className="bg-emerald-500 rounded-md flex text-base lg:text-sm items-center justify-center gap-2 px-3 py-1 font-semibold text-white shadow-sm">
                   <FontAwesomeIcon icon={faCashRegister} />
                   Aktivní
                 </div>
               ) : (
-                <div className="bg-slate-600 rounded-md flex text-base lg:text-ml items-center justify-center gap-2 px-3 py-1 font-semibold text-white shadow-sm">
+                <div className="bg-slate-600 rounded-md flex text-base lg:text-sm items-center justify-center gap-2 px-3 py-1 font-semibold text-white shadow-sm">
                   <FontAwesomeIcon icon={faCashRegister} />
                   Neaktivní
                 </div>
@@ -337,30 +338,84 @@ export default function Homepage({ setLoader }) {
 
   //Window for subscriptions
   function SubscriptionsWindow() {
+    let subscriptionExist = subscriptions.length > 0;
+    console.log(subscriptionExist);
+
     return (
       <>
-        <div className="col-span-3 row-start-2 row-span-3 flex flex-col gap-5 max-h-[500px] overflow-visible ">
-          <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold text-textDark">
-              Seznam předplatných
-            </h2>
-            <Link
-              to={"/predplatne"}
-              className="bg-quad text-textButton xl:block self-center text-center p-2 text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
-            >
-              Detail předplatných
-            </Link>
-          </div>
+        <div className="col-span-3 row-start-2 row-span-3 flex flex-col gap-5 overflow-visible order-1">
+          {subscriptionExist && (
+            <>
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold text-textDark">
+                  Seznam předplatných
+                </h2>
+                <div className="flex md:flex-row flex-col md:items-center items-start md:gap-5 gap-1">
+                  <Link
+                    to={"/formular"}
+                    className="bg-quad text-textButton xl:block md:self-center self-stretch text-center p-2 md:text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+                  >
+                    Nové předplatné
+                  </Link>
+                  <Link
+                    to={"/predplatne"}
+                    className="bg-quad text-textButton xl:block md:self-center self-stretch text-center p-2 md:text-lg font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+                  >
+                    Detail předplatných
+                  </Link>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 gap-3 pb-10">
+                {subscriptions.map((item) => {
+                  return (
+                    <>
+                      <SubscriptionTab item={item} />
+                    </>
+                  );
+                })}
+              </div>
+            </>
+          )}
 
-          <div className="grid grid-cols-1 gap-3 pb-10">
-            {subscriptions.map((item) => {
-              return (
-                <>
-                  <SubscriptionTab item={item} />
-                </>
-              );
-            })}
-          </div>
+          {!subscriptionExist && (
+            <>
+              <div className="xl:min-h-[600px] max-w-[800px] mx-auto w-full flex justify-center items-center flex-col gap-3 text-center text-textDark font-semibold px-5 animate-scale-up">
+                <h2 className="text-3xl">
+                  Vítáme Vás v uživatelském portálu naší aplikace!
+                </h2>
+                <p className="text-lg hidden xl:block">
+                  Toto je výchozí obrazovka, na které v budoucnu uvidíte všechna
+                  vaše předplatná. I když se teď možná neorientujete, věřte nám,
+                  že to zde není nijak složité. Hlavní panel je na levé straně.
+                  Můžete v něm přejít na různé stránky aplikace nebo se
+                  odhlásit.
+                </p>
+                <p className="text-lg xl:hidden">
+                  Toto je výchozí obrazovka, na které v budoucnu uvidíte všechna
+                  vaše předplatná. I když se teď možná neorientujete, věřte nám,
+                  že to zde není nijak složité. Hlavní panel je na horní straně.
+                  Kliknutím na ikonu v pravém horním rohu otevřete menu. Můžete
+                  v něm přejít na různé stránky aplikace nebo se odhlásit.
+                </p>
+                <h2 className="text-2xl mt-10">Založení předplatného</h2>
+                <p className="text-lg">
+                  Pokud si chcete založit vaše první předplatné, klikněte na
+                  tlačítko níže, které Vás přenese na stránku s formulářem. Po
+                  jeho vyplnění se Vám vytvoří neaktivní předplatné, které už
+                  postačí jen aktivovat.
+                </p>
+                <Link
+                  to={"/form"}
+                  className="bg-quad text-textButton shadow-md shadow-slate-200 mt-3 mb-5 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary"
+                >
+                  Založit předplatné
+                </Link>
+                <p className="text-lg ">
+                  Jestliže máte nějaké otázky, můžete se podívat do našeho FAQ.
+                </p>
+              </div>
+            </>
+          )}
         </div>
       </>
     );
@@ -368,84 +423,137 @@ export default function Homepage({ setLoader }) {
 
   //Window with statistics
   function StatisticsWindow() {
+    let amountPayed = 0;
+    subscriptions.map((item) => {
+      if (item.active == true) {
+        return;
+      }
+
+      if (item.subFrequency == "weekly") {
+        amountPayed = amountPayed + 87 * 4;
+      }
+
+      if (item.subFrequency == "biWeekly") {
+        amountPayed = amountPayed + 87 * 2;
+      }
+
+      if (item.subFrequency == "monthly") {
+        amountPayed = amountPayed + 87;
+      }
+
+      if (item.subFrequency == "biMonthly") {
+        amountPayed = amountPayed + 87 / 2;
+      }
+
+      if (item.subFrequency == "quarterly") {
+        amountPayed = amountPayed + 87 / 4;
+      }
+    });
+
+    function StatisticsTab({ data, text, type, opacity }) {
+      return (
+        <>
+          <div
+            style={{ opacity: opacity }}
+            className="bg-white shadow-md shadow-slate-200 rounded-md border-[1px] border-slate-100 p-5 px-7 flex lg:flex-row flex-col items-center justify-between"
+          >
+            {type == "count" && (
+              <FontAwesomeIcon icon={faShoppingBasket} className="text-3xl" />
+            )}
+            {type == "money" && (
+              <FontAwesomeIcon
+                icon={faMoneyBill}
+                className="text-3xl text-emerald-600"
+              />
+            )}
+            {type == "goal" && (
+              <FontAwesomeIcon
+                icon={faShoppingBasket}
+                className="text-3xl text-amber-500"
+              />
+            )}
+            <div className="flex flex-col lg:items-end items-center text-center lg:text-end justify-center">
+              <h3 className="text-2xl font-bold text-textDark">{data}</h3>
+
+              <h3 className="text-lg font-bold text-textDark">{text}</h3>
+            </div>
+          </div>
+        </>
+      );
+    }
+
     return (
       <>
-        <div className="bg-white shadow-md shadow-slate-200 rounded-md border-[1px] border-slate-100 p-5 px-7 flex items-center justify-between self-start">
-          <FontAwesomeIcon icon={faShoppingBasket} className="text-3xl" />
-          <div className="flex flex-col items-end justify-center">
-            <h3 className="text-2xl font-bold text-textDark">
-              {subscriptions.length}
-            </h3>
-
-            <h3 className="text-lg font-bold text-textDark">
-              Počet předplatných
-            </h3>
-          </div>
-        </div>
-        <div className="bg-white shadow-md shadow-slate-200 rounded-md border-[1px] border-slate-100 p-5 px-7 flex items-center justify-between self-start">
-          <FontAwesomeIcon
-            icon={faMoneyBill}
-            className="text-3xl text-emerald-600"
+        <div className="sm:grid grid-cols-3 col-span-3 gap-5 flex flex-col order-2">
+          <StatisticsTab
+            data={subscriptions.length}
+            text={"Počet předplatných"}
+            type={"count"}
           />
-          <div className="flex flex-col items-end justify-center">
-            <h3 className="text-2xl font-bold text-textDark">0 Kč</h3>
-
-            <h3 className="text-lg font-bold text-textDark">Cena za měsíc</h3>
-          </div>
-        </div>
-        <div className="bg-white shadow-md shadow-slate-200 rounded-md border-[1px] border-slate-100 p-5 px-7 flex items-center justify-between self-start opacity-50">
-          <FontAwesomeIcon
-            icon={faTrophy}
-            className="text-3xl text-amber-500"
+          <StatisticsTab
+            data={amountPayed + " Kč"}
+            text={"Přibližná platba za měsíc"}
+            type={"money"}
           />
-          <div className="flex flex-col items-end justify-center">
-            <h3 className="text-2xl font-bold text-textDark">0</h3>
-
-            <h3 className="text-lg font-bold text-textDark">Body</h3>
-          </div>
+          <StatisticsTab
+            data={0}
+            text={"Vaše body"}
+            type={"goal"}
+            opacity={"50%"}
+          />
         </div>
       </>
     );
   }
 
   function NewsWindow() {
+    function NewsTab({ type, header, text }) {
+      return (
+        <>
+          <div className="">
+            <div className="flex flex-col gap-2">
+              <div className="flex gap-2 items-center">
+                {type == "update" && (
+                  <FontAwesomeIcon
+                    icon={faCircleUp}
+                    className="text-emerald-700"
+                  />
+                )}
+                {type == "alert" && (
+                  <FontAwesomeIcon
+                    icon={faExclamationTriangle}
+                    className="text-amber-600"
+                  />
+                )}
+                <h2 className="font-semibold font-primary">{header}</h2>
+              </div>
+
+              <p className="font-semibold text-textDark text-sm">{text}</p>
+            </div>
+          </div>
+        </>
+      );
+    }
+
     return (
       <>
-        <div className="col-span-1 row-span-2  bg-white shadow-md shadow-slate-200 rounded-md border border-slate-100 p-5">
+        <div className="col-span-1 row-span-2  bg-white shadow-md shadow-slate-200 rounded-md border border-slate-100 p-5 order-3">
           <h2 className="text-2xl font-bold text-textDark mb-5">Novinky</h2>
           <div className="flex flex-col gap-8">
-            <div className="flex flex-col gap-2">
-              <div className="flex gap-2 items-center">
-                <FontAwesomeIcon
-                  icon={faCircleUp}
-                  className="text-emerald-700"
-                />
-                <h2 className="font-semibold font-primary">
-                  Update: Dobírka i online platba
-                </h2>
-              </div>
-              <p className="font-semibold text-textDarker">
-                Doposud bylo možné tvořit předplatné jen na eshopy s dobírkou
+            <NewsTab
+              type={"update"}
+              header={"Update: Dobírka i online platba"}
+              text={`Doposud bylo možné tvořit předplatné jen na eshopy s dobírkou
+              kvůli platbě. Nově máme i systém na zpracování předplatných s
+              online platbou.`}
+            />
+            <NewsTab
+              type={"alert"}
+              header={"Upozornění: Dobírka i online platba"}
+              text={`Doposud bylo možné tvořit předplatné jen na eshopy s dobírkou
                 kvůli platbě. Nově máme i systém na zpracování předplatných s
-                online platbou.
-              </p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex gap-2 items-center">
-                <FontAwesomeIcon
-                  icon={faTriangleExclamation}
-                  className="text-amber-700"
-                />
-                <h2 className="font-semibold">
-                  Upozornění: Dobírka i online platba
-                </h2>
-              </div>
-              <p className="font-semibold text-textDarker">
-                Doposud bylo možné tvořit předplatné jen na eshopy s dobírkou
-                kvůli platbě. Nově máme i systém na zpracování předplatných s
-                online platbou.
-              </p>
-            </div>
+                online platbou.`}
+            />
           </div>
         </div>
       </>
@@ -461,10 +569,11 @@ export default function Homepage({ setLoader }) {
         <SubHeader
           header={"Hlavní panel"}
           buttonText={"Nové předplatné"}
+          buttonHide={true}
           linkTo={"/formular"}
         />
 
-        <div className="w-full grid gap-5 grid-rows-[1fr_4fr_1fr] grid-cols-4">
+        <div className="w-full md:grid flex flex-col gap-5 xl:grid-rows-[1fr_4fr_1fr] grid-cols-4">
           <StatisticsWindow />
           <NewsWindow />
           <SubscriptionsWindow />

@@ -12,7 +12,6 @@ export const SubscriptionContextProvider = ({ children }) => {
   const { setExpired } = useExpiredContext();
 
   useEffect(() => {
-    console.log(user);
     const fetchSubscription = async () => {
       const response = await fetch(apiURL + "/api/subscriptions", {
         method: "GET",
@@ -24,7 +23,6 @@ export const SubscriptionContextProvider = ({ children }) => {
         },
       });
       const json = await response.json();
-      console.log(json);
 
       if (response.ok) {
         setSubscriptions(json);
