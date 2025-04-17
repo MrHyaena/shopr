@@ -79,11 +79,11 @@ export function PasswordReset() {
                 </div>
                 <form className="flex flex-col xl:gap-5 xl:w-[50%] w-full ">
                   <fieldset className="">
-                    <label className="flex flex-col text-textDark text-md font-semibold col-span-6">
+                    <label className="flex flex-col text-textDark  font-semibold col-span-6">
                       Nové heslo:
                       <input
                         type="password"
-                        className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                        className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                         onChange={(e) => {
                           setError(null);
                           setPassword(e.target.value);
@@ -91,11 +91,11 @@ export function PasswordReset() {
                         value={password}
                       ></input>
                     </label>
-                    <label className="flex flex-col text-textDark text-md font-semibold col-span-6">
+                    <label className="flex flex-col text-textDark  font-semibold col-span-6">
                       Heslo znovu:
                       <input
                         type="password"
-                        className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                        className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                         onChange={(e) => {
                           setError(null);
                           setPasswordCheck(e.target.value);

@@ -76,126 +76,131 @@ export function AccountDetails() {
           </div>
         )}
         <form
-          className="flex flex-col gap-5 xl:p-10 p-2 bg-white border border-slate-200 rounded-md self-stretch"
+          className="flex flex-col gap-5 xl:p-5 p-2 bg-white border-slate-200 shadow-md shadow-bg-slate-200 rounded-md self-stretch"
           onSubmit={handleSubmit}
         >
-          <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-5">
-            <legend className="text-xl font-semibold text-slate-900">
+          <fieldset className="bg-white p-3 rounded-md border border-slate-100 flex flex-col gap-3">
+            <legend className="text-lg font-semibold text-slate-900">
               Osobní údaje
             </legend>
             <div className="flex gap-3 xl:grid grid-cols-2 flex-col">
-              <label className="flex flex-col text--textDark text-lg font-semibold">
-                Jméno (povinné):
+              <div>
+                <label className="flex flex-col text-textDark font-semibold">
+                  Jméno (povinné):
+                </label>
                 <input
                   name="firstName"
                   type="text"
-                  className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                   onChange={(e) => {
                     setFirstName(e.target.value);
                   }}
                   value={firstName}
                 ></input>
-              </label>
-              <label className="flex flex-col text--textDark text-lg font-semibold">
-                Příjmení (povinné):
+              </div>
+              <div>
+                <label className="flex flex-col text-textDark font-semibold">
+                  Příjmení (povinné):
+                </label>
                 <input
                   name="secondName"
                   type="text"
-                  className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                   onChange={(e) => {
                     setSecondName(e.target.value);
                   }}
                   value={secondName}
                 ></input>
-              </label>
-            </div>
-            <div className="flex gap-3 xl:grid grid-cols-2 flex-col">
-              <label className="flex flex-col text--textDark text-lg font-semibold">
-                Telefon (povinné):
+              </div>
+              <div>
+                {" "}
+                <label className="flex flex-col text-textDark font-semibold">
+                  Telefon (povinné):
+                </label>
                 <input
                   name="phone"
                   type="number"
-                  className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                   onChange={(e) => {
                     setPhone(e.target.value);
                   }}
                   value={phone}
                 ></input>
-              </label>
-              <label className="flex flex-col text--textDark text-lg font-semibold">
-                Email (nelze měnit):
+              </div>
+              <div>
+                <label className="flex flex-col text-textDark font-semibold">
+                  Email (nelze měnit):
+                </label>
                 <input
                   disabled={true}
                   name="email"
                   type="email"
-                  className="bg-slate-200 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                   onChange={(e) => {
                     setPhone(e.target.value);
                   }}
                   value={email}
                 ></input>
-              </label>
+              </div>
             </div>
           </fieldset>
 
-          <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
-            <legend className="text-xl font-semibold text-slate-900">
+          <fieldset className="bg-white p-3 rounded-md border border-slate-100 flex flex-col gap-3">
+            <legend className="text-lg font-semibold text-slate-900">
               Adresa dodání
             </legend>
             <div className="flex gap-3 xl:grid grid-cols-2 flex-col">
-              <label className="flex flex-col text--textDark text-lg font-semibold">
-                Ulice:
+              <div>
+                <label className="flex flex-col text-textDark font-semibold">
+                  Ulice:
+                </label>
                 <input
                   name="address"
                   type="text"
-                  className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                   onChange={(e) => {
                     setAddress(e.target.value);
                   }}
                   value={address}
                 ></input>
-              </label>
-              <label className="flex flex-col text--textDark text-lg font-semibold">
-                Číslo popisné:
+              </div>
+              <div>
+                <label className="flex flex-col text-textDark font-semibold">
+                  Číslo popisné:
+                </label>
                 <input
                   name="addressNumber"
                   type="text"
-                  className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                   onChange={(e) => {
                     setAddressNumber(e.target.value);
                   }}
                   value={addressNumber}
                 ></input>
-              </label>
-            </div>
-            <div className="flex gap-3 xl:grid grid-cols-2 flex-col">
-              <label className="flex flex-col text--textDark text-lg font-semibold">
-                Město:
+              </div>
+              <div>
+                <label className="flex flex-col text-textDark font-semibold">
+                  Město:
+                </label>
                 <input
                   name="city"
                   type="text"
-                  className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                   onChange={(e) => {
                     setCity(e.target.value);
                   }}
                   value={city}
                 ></input>
-              </label>
-              <label className="flex flex-col text--textDark text-lg font-semibold">
-                PSČ:
+              </div>
+              <div>
+                <label className="flex flex-col text-textDark font-semibold">
+                  PSČ:
+                </label>
                 <input
                   name="cityNumber"
                   type="text"
-                  className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                   onChange={(e) => {
                     setCityNumber(e.target.value);
                   }}
                   value={cityNumber}
                 ></input>
-              </label>
+              </div>
             </div>
           </fieldset>
-          <div className="flex justify-center">
+          <div className="flex flex-col items-center justify-center w-full">
             <button
               disabled={isLoading}
               className="bg-quad cursor-pointer mb-2 text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
@@ -203,8 +208,6 @@ export function AccountDetails() {
             >
               Aktualizovat
             </button>
-          </div>
-          <div className="flex items-center justify-center w-full">
             {error && <ErrorWindowApp error={error} />}
             {message && <MessageWindowApp message={message} />}
           </div>

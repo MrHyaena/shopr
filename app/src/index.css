@@ -21,9 +21,24 @@ h2,
 h3,
 h1,
 h4,
-h5 {
+h5,
+legend,
+a,
+button {
   @apply font-oswald;
   letter-spacing: 0.2px;
+  font-weight: 500;
+}
+
+label {
+  @apply font-oswald font-medium;
+  letter-spacing: 0.3px;
+}
+
+input,
+select,
+textarea {
+  @apply font-semibold text-input p-[6px] bg-slate-50 border border-slate-300 rounded-sm w-full;
 }
 
 @theme {
@@ -51,7 +66,7 @@ h5 {
   --color-messageBg: var(--color-emerald-50);
   --color-messageBorder: var(--color-emerald-200);
 
-  --color-input: var(--color-slate-700);
+  --color-input: var(--color-zinc-9500);
   --color-subIcon: var(--color-slate-500);
   --color-subItem: var(--color-slate-800);
 

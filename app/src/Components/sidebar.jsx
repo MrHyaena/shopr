@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faComments } from "@fortawesome/free-regular-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
 import { useEffect, useState } from "react";
 
@@ -19,6 +19,7 @@ import logo from "/public/shopr-icon-white.png";
 import logoBig from "/public/shopr-logo-white.png";
 
 export function Sidebar() {
+  const location = useLocation();
   const { logout } = useLogout();
   const [activeButton, setActiveButton] = useState("/");
 
@@ -26,6 +27,11 @@ export function Sidebar() {
     const pathname = window.location.pathname;
     setActiveButton(pathname);
   }
+
+  useEffect(() => {
+    console.log(location);
+    setActiveButton(location.pathname);
+  }, [location]);
 
   useEffect(() => {
     setPath();
@@ -133,7 +139,7 @@ export function Sidebar() {
                   setToggleMenu(false);
                 }}
                 to="/formular"
-                className="bg-quad text-textButton cursor-pointer text-base font-bold py-2 px-3 text-md rounded-md transition-all ease-in-out hover:scale-105 self-start"
+                className="bg-quad text-textButton cursor-pointer text-base font-bold py-2 px-3  rounded-md transition-all ease-in-out hover:scale-105 self-start"
               >
                 Nové předplatné
               </Link>

@@ -144,7 +144,7 @@ export default function Homepage({ setLoader }) {
                   onClick={() => {
                     setToggleActivate(true);
                   }}
-                  className=" text-textDark cursor-pointer hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-emerald-500 hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-emerald-500"
+                  className=" text-textDark cursor-pointer hover:text-textButton p-2  font-semibold rounded-md transition-all ease-in-out hover:bg-emerald-500 hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-emerald-500"
                 >
                   Aktivovat předplatné
                   <FontAwesomeIcon icon={faCashRegister} className="hidden" />
@@ -156,7 +156,7 @@ export default function Homepage({ setLoader }) {
                   onClick={() => {
                     setToggleDeactivate(true);
                   }}
-                  className=" text-textDark cursor-pointer hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-quad"
+                  className=" text-textDark cursor-pointer hover:text-textButton p-2  font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-quad"
                 >
                   Deaktivovat předplatné
                   <FontAwesomeIcon icon={faBan} className="hidden" />
@@ -165,7 +165,7 @@ export default function Homepage({ setLoader }) {
             )}
             <Link
               to={"/formular/" + item._id}
-              className=" text-textDark hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-quad"
+              className=" text-textDark hover:text-textButton p-2  font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-quad"
             >
               Upravit
             </Link>
@@ -257,7 +257,7 @@ export default function Homepage({ setLoader }) {
                 terminálu.
               </p>
 
-              <label className="flex flex-row gap-3 text--textDark text-md font-semibold col-span-6">
+              <label className="flex flex-row gap-3 text--textDark  font-semibold col-span-6">
                 <input
                   type="checkbox"
                   className="bg-zinc-50 p-3 rounded-lg border border-slate-200 font-semibold"
@@ -352,7 +352,7 @@ export default function Homepage({ setLoader }) {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 gap-3 pr-3 pb-10">
+          <div className="grid grid-cols-1 gap-3 pb-10">
             {subscriptions.map((item) => {
               return (
                 <>

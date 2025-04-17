@@ -94,12 +94,12 @@ export function SubscriptionsList({ setLoader }) {
               />
               Produkty
             </h3>
-            <div className="xl:grid hidden grid-cols-4 py-2 px-4 text-md font-semibold text-textLight bg-zinc-800">
+            <div className="xl:grid hidden grid-cols-4 py-2 px-4  font-semibold text-textLight bg-zinc-800">
               <p className="col-span-2">URL</p>
               <p className="col-span-1 justify-self-center">Množství</p>
               <p className="col-span-1 justify-self-center">Nahraditelné</p>
             </div>
-            <ul className="text-md hidden font-semibold text-textDark xl:flex flex-col ">
+            <ul className=" hidden font-semibold text-textDark xl:flex flex-col ">
               {items.map((item, index) => {
                 return (
                   <Fragment key={"subItemToBuy" + item.amount + item.url}>
@@ -122,7 +122,7 @@ export function SubscriptionsList({ setLoader }) {
                 );
               })}
             </ul>
-            <ul className="text-md xl:hidden font-semibold text-textDark flex flex-col ">
+            <ul className=" xl:hidden font-semibold text-textDark flex flex-col ">
               {items.map((item, index) => {
                 return (
                   <Fragment key={"subItemToBuy" + item.amount + item.url}>
@@ -365,7 +365,7 @@ export function SubscriptionsList({ setLoader }) {
               Nastavení předplatného
             </h3>
             <div className="flex flex-col font-semibold text-textDark">
-              <div className="grid-cols-2 py-2 px-4 gap-3 text-md font-semibold text-textLight bg-zinc-700 hidden">
+              <div className="grid-cols-2 py-2 px-4 gap-3  font-semibold text-textLight bg-zinc-700 hidden">
                 <p className="col-span-1">Údaj</p>
                 <p className="col-span-1">Hodnota</p>
               </div>
@@ -615,7 +615,7 @@ export function SubscriptionsList({ setLoader }) {
                   onClick={() => {
                     setToggleActivate(true);
                   }}
-                  className=" text-textDark cursor-pointer hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-emerald-500 hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-emerald-500"
+                  className=" text-textDark cursor-pointer hover:text-textButton p-2  font-semibold rounded-md transition-all ease-in-out hover:bg-emerald-500 hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-emerald-500"
                 >
                   Aktivovat předplatné
                   <FontAwesomeIcon icon={faCashRegister} className="hidden" />
@@ -627,7 +627,7 @@ export function SubscriptionsList({ setLoader }) {
                   onClick={() => {
                     setToggleDeactivate(true);
                   }}
-                  className=" text-textDark cursor-pointer hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-quad"
+                  className=" text-textDark cursor-pointer hover:text-textButton p-2  font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-quad"
                 >
                   Deaktivovat předplatné
                   <FontAwesomeIcon icon={faBan} className="hidden" />
@@ -636,7 +636,7 @@ export function SubscriptionsList({ setLoader }) {
             )}
             <Link
               to={editURL}
-              className=" text-textDark hover:text-textButton p-2 text-md font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-quad"
+              className=" text-textDark hover:text-textButton p-2  font-semibold rounded-md transition-all ease-in-out hover:bg-quad hover:shadow-md flex gap-3 items-center border border-slate-100 hover:border-quad"
             >
               Upravit
             </Link>
@@ -644,7 +644,7 @@ export function SubscriptionsList({ setLoader }) {
               onClick={() => {
                 setToggle(!toggle);
               }}
-              className="text-md font-semibold flex gap-3 items-center border hover:text-textButton hover:shadow-md hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2 transition-all ease-in-out cursor-pointer"
+              className=" font-semibold flex gap-3 items-center border hover:text-textButton hover:shadow-md hover:border-quad border-slate-100 text-textDark rounded-md hover:bg-quad p-2 transition-all ease-in-out cursor-pointer"
             >
               {toggle ? "Zavřít" : "Detail"}
             </button>
@@ -810,7 +810,7 @@ export function SubscriptionsList({ setLoader }) {
                 terminálu.
               </p>
 
-              <label className="flex flex-row gap-3 text--textDark text-md font-semibold col-span-6">
+              <label className="flex flex-row gap-3 text--textDark  font-semibold col-span-6">
                 <input
                   type="checkbox"
                   className="bg-zinc-50 p-3 rounded-lg border border-slate-200 font-semibold"

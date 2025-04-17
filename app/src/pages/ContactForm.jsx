@@ -81,15 +81,17 @@ export function ContactForm() {
           </div>
         )}
         <form
-          className="flex flex-col gap-5 xl:p-10 px-5 pt-5 bg-white border border-slate-200 rounded-lg w-full"
+          className="flex flex-col gap-5 xl:p-5 p-2 bg-white border-slate-200 shadow-md shadow-bg-slate-200 rounded-md self-stretch"
           onSubmit={(e) => {
             e.preventDefault();
             handleSend();
           }}
         >
-          <div className="grid gap-5">
-            <label className="flex flex-col text-heading text-lg font-semibold">
-              Email, na který budeme odpovídat
+          <div className="grid gap-3">
+            <div>
+              <label className="flex flex-col text-heading  font-semibold">
+                Email, na který budeme odpovídat
+              </label>
               <input
                 value={email}
                 onChange={(e) => {
@@ -97,11 +99,12 @@ export function ContactForm() {
                   setEmail(e.target.value);
                 }}
                 type="email"
-                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input "
               ></input>
-            </label>
-            <label className="flex flex-col text-heading text-lg font-semibold">
-              Předmět emailu
+            </div>
+            <div>
+              <label className="flex flex-col text-heading  font-semibold">
+                Předmět emailu
+              </label>{" "}
               <input
                 value={subject}
                 onChange={(e) => {
@@ -109,14 +112,14 @@ export function ContactForm() {
                   setSubject(e.target.value);
                 }}
                 type="text"
-                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input "
               ></input>
-            </label>
-            <label className="flex flex-col text-heading text-lg font-semibold">
-              Máte problém s nějakým předplatným?
+            </div>
+            <div>
+              <label className="flex flex-col text-heading  font-semibold">
+                Máte problém s nějakým předplatným?
+              </label>
               <select
                 value={problemToggle}
-                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                 onChange={(e) => {
                   setError(null);
                   setProblemToggle(!problemToggle);
@@ -125,51 +128,52 @@ export function ContactForm() {
                 <option value="false">Ne</option>
                 <option value="true">Ano</option>
               </select>
-            </label>
+            </div>
             {problemToggle && (
-              <label className="flex flex-col text-heading text-lg font-semibold">
-                Vyberte předplatné
-                <select
-                  value={problem}
-                  name="subProblem"
-                  className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
-                  onChange={(e) => {
-                    setError(null);
-                    setProblem(e.target.value);
-                  }}
-                >
-                  <option value="">Vyberte předplatné</option>
-                  {subscriptions.map((sub, index) => {
-                    return (
-                      <option key={"subSelect" + sub._id} value={sub.subName}>
-                        {sub.subName}
-                      </option>
-                    );
-                  })}
-                </select>
-              </label>
+              <div>
+                <label className="flex flex-col text-heading  font-semibold">
+                  Vyberte předplatné
+                  <select
+                    value={problem}
+                    name="subProblem"
+                    onChange={(e) => {
+                      setError(null);
+                      setProblem(e.target.value);
+                    }}
+                  >
+                    <option value="">Vyberte předplatné</option>
+                    {subscriptions.map((sub, index) => {
+                      return (
+                        <option key={"subSelect" + sub._id} value={sub.subName}>
+                          {sub.subName}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </label>
+              </div>
             )}
+            <div>
+              <label className="flex flex-col text-heading font-semibold">
+                Vaše zpráva
+              </label>
+              <textarea
+                value={message}
+                onChange={(e) => {
+                  setError(null);
+                  setMessage(e.target.value);
+                }}
+                className=" min-h-[150px] resize-none w-full"
+              ></textarea>
+            </div>
           </div>
-          <label className="flex flex-col text-heading text-lg font-semibold">
-            Vaše zpráva
-            <textarea
-              value={message}
-              onChange={(e) => {
-                setError(null);
-                setMessage(e.target.value);
-              }}
-              className="bg-slate-50 min-h-[150px] border border-slate-300 rounded p-2 text-md font-semibold text-input resize-none"
-            ></textarea>
-          </label>
 
-          <div className="mx-auto">
+          <div className="flex flex-col items-center justify-center">
             {responseOk == null && (
               <button className="bg-quad cursor-pointer text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200">
                 Odeslat
               </button>
             )}
-          </div>
-          <div className="flex justify-center">
             {error && <ErrorWindowApp error={error} />}
             {responseOk && <MessageWindowApp message={responseOk} />}
           </div>
@@ -182,7 +186,7 @@ export function ContactForm() {
       <div className="bg-slate-50 xl:p-10 p-3 flex flex-col xl:gap-10 gap-10 xl:pt-10 pt-30 text-textDark">
         <SubHeader
           header={"Trápí Vás nějaký problém? Napište nám"}
-          buttonText={"Zpet"}
+          buttonText={"Zpět"}
           linkTo={"/"}
         />
         <div className=" flex xl:grid grid-cols-2 flex-col gap-10 xl:pb-0 pb-20">

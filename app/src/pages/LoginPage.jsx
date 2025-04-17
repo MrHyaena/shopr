@@ -64,24 +64,24 @@ export function LoginPage() {
             id="submitForm"
           >
             <fieldset className=" gap-3 flex flex-col">
-              <label className="flex flex-col text-textDark text-md font-semibold col-span-6">
+              <label className="flex flex-col text-textDark  font-semibold col-span-6">
                 Email:
                 <input
                   name="email"
                   type="email"
-                  className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                  className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}
                   value={email}
                 ></input>
               </label>
-              <label className="flex flex-col text-textDark text-md font-semibold col-span-6">
+              <label className="flex flex-col text-textDark  font-semibold col-span-6">
                 Heslo:
                 <input
                   name="password"
                   type="password"
-                  className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                  className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
@@ -169,12 +169,12 @@ export function LoginPage() {
             {!message ? (
               <>
                 <fieldset className="">
-                  <label className="flex flex-col text-textDark text-md font-semibold col-span-6">
+                  <label className="flex flex-col text-textDark  font-semibold col-span-6">
                     Uživatelský email:
                     <input
                       name="email"
                       type="email"
-                      className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                      className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                       onChange={(e) => {
                         setEmail(e.target.value);
                       }}

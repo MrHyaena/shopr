@@ -136,7 +136,7 @@ export function SubscriptionForm({ setLoader }) {
         onSubmit={(e) => {
           handleNext(e);
         }}
-        className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg"
+        className="flex flex-col gap-5 xl:p-5 p-2 bg-white border-slate-200 shadow-md shadow-bg-slate-200 rounded-md self-stretch"
       >
         <button
           className="buttonRedMedium"
@@ -146,13 +146,15 @@ export function SubscriptionForm({ setLoader }) {
         >
           Vložit osobní údaje <FontAwesomeIcon icon={faUser} />
         </button>
-        <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
+        <fieldset className="bg-white p-3 rounded-md border border-slate-100 gap-10">
           <legend className="text-xl font-semibold text-heading">
             Kontaktní údaje
           </legend>
           <div className="xl:grid grid-cols-2 gap-3 flex flex-col">
-            <label className="flex flex-col text-heading text-lg font-semibold">
-              Jméno
+            <div>
+              <label className="flex flex-col text-heading  font-semibold">
+                Jméno
+              </label>{" "}
               <input
                 placeholder="Jiří"
                 required={true}
@@ -161,11 +163,12 @@ export function SubscriptionForm({ setLoader }) {
                   setFirstName(e.target.value);
                 }}
                 type="text"
-                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
-            </label>
-            <label className="flex flex-col text-heading text-lg font-semibold">
-              Příjmení
+            </div>
+            <div>
+              <label className="flex flex-col text-heading  font-semibold">
+                Příjmení
+              </label>
               <input
                 placeholder="Novotný"
                 required={true}
@@ -174,11 +177,12 @@ export function SubscriptionForm({ setLoader }) {
                   setSecondName(e.target.value);
                 }}
                 type="text"
-                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
-            </label>
-            <label className="flex flex-col text-heading text-lg font-semibold">
-              Telefon
+            </div>
+            <div>
+              <label className="flex flex-col text-heading  font-semibold">
+                Telefon
+              </label>
               <input
                 placeholder="602605331"
                 required={true}
@@ -187,11 +191,12 @@ export function SubscriptionForm({ setLoader }) {
                   setPhone(e.target.value);
                 }}
                 type="number"
-                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
-            </label>
-            <label className="flex flex-col text-heading text-lg font-semibold">
-              Email
+            </div>
+            <div>
+              <label className="flex flex-col text-heading  font-semibold">
+                Email
+              </label>{" "}
               <input
                 placeholder="jirinovotny@gmail.com"
                 required={true}
@@ -200,18 +205,19 @@ export function SubscriptionForm({ setLoader }) {
                   setEmail(e.target.value);
                 }}
                 type="email"
-                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
-            </label>
+            </div>
           </div>
         </fieldset>
-        <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-10">
+        <fieldset className="bg-white p-3 rounded-md border border-slate-100 gap-10">
           <legend className="text-xl font-semibold text-slate-900">
             Adresa dodání / Fakturační údaje
           </legend>
           <div className="xl:grid grid-cols-2 gap-3 flex flex-col">
-            <label className="flex flex-col text--textDark text-lg font-semibold">
-              Adresa
+            <div>
+              <label className="flex flex-col text-heading  font-semibold">
+                Adresa
+              </label>
               <input
                 placeholder="Řeháčova"
                 required={true}
@@ -220,11 +226,12 @@ export function SubscriptionForm({ setLoader }) {
                   setAddress(e.target.value);
                 }}
                 type="text"
-                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
-            </label>
-            <label className="flex flex-col text--textDark text-lg font-semibold">
-              Číslo popisné
+            </div>
+            <div>
+              <label className="flex flex-col text-heading  font-semibold">
+                Číslo popisné
+              </label>{" "}
               <input
                 placeholder="22"
                 required={true}
@@ -233,11 +240,12 @@ export function SubscriptionForm({ setLoader }) {
                   setAddressNumber(e.target.value);
                 }}
                 type="text"
-                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
-            </label>
-            <label className="flex flex-col text--textDark text-lg font-semibold">
-              Město
+            </div>
+            <div>
+              <label className="flex flex-col text-heading  font-semibold">
+                Město
+              </label>{" "}
               <input
                 placeholder="Praha 40"
                 required={true}
@@ -246,11 +254,12 @@ export function SubscriptionForm({ setLoader }) {
                   setCity(e.target.value);
                 }}
                 type="text"
-                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
-            </label>
-            <label className="flex flex-col text--textDark text-lg font-semibold">
-              PSČ
+            </div>
+            <div>
+              <label className="flex flex-col text-heading  font-semibold">
+                PSČ
+              </label>
               <input
                 placeholder="14100"
                 required={true}
@@ -259,12 +268,11 @@ export function SubscriptionForm({ setLoader }) {
                   setCityNumber(e.target.value);
                 }}
                 type="text"
-                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               ></input>
-            </label>
+            </div>
           </div>
         </fieldset>
-        <div className="flex flex-col items-center gap-5">
+        <div className="flex flex-col items-center justify-center gap-5">
           <div className="flex gap-3">
             <Link to="/" className="buttonRedMedium">
               Zrušit
@@ -288,7 +296,7 @@ export function SubscriptionForm({ setLoader }) {
             <h2 className="text-xl font-semibold mb-4 text-heading">
               Proč tyto údaje potřebujeme?
             </h2>
-            <p className="text-md font-semibold text-textDark">
+            <p className=" font-semibold text-textDark">
               Jelikož pro Vás budeme pravidelně vytvářet objednávku na některém
               z e-shopů, potřebujeme znát kontaktní údaje a cílovou adresu
               člověka, který si zásilku převezme. Můžete to být Vy, nebo klidně
@@ -300,7 +308,7 @@ export function SubscriptionForm({ setLoader }) {
             <h2 className="text-xl font-semibold mb-4 text-heading">
               Lze údaje v budoucnu změnit?
             </h2>
-            <p className="text-md font-semibold text-textDark">
+            <p className=" font-semibold text-textDark">
               Samozřejmě. Jakmile si předplatné vytvoříte, můžete to i hned
               vyzkoušet. Stačí v hlavním menu kliknout na tlačítko Upravit u
               daného předplatného a změnit vámi zvolené údaje.
@@ -393,38 +401,57 @@ export function SubscriptionForm({ setLoader }) {
     }
 
     return (
-      <form className="flex flex-col gap-5 xl:p-10 p-4 bg-white border border-slate-200 rounded-lg">
-        <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-5">
+      <form className="flex flex-col gap-5 xl:p-5 p-2 bg-white border-slate-200 shadow-md shadow-bg-slate-200 rounded-md self-stretch justify-start">
+        <fieldset className="bg-white p-3 rounded-md border border-slate-100 gap-5">
           <legend className="text-xl font-semibold text-heading">
             Parametry předplatného
           </legend>
-          <div className="grid gap-3">
-            <label className="flex flex-col text-heading text-lg font-semibold">
-              Název předplatného
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="flex flex-col text-heading text-lg font-semibold">
+                Název předplatného
+              </label>{" "}
               <input
                 value={subName}
                 onChange={(e) => {
                   setSubName(e.target.value);
                 }}
                 type="text"
-                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                 placeholder="Moje první předplatné"
               ></input>
-            </label>
-
-            <label className="flex flex-col text-heading text-lg font-semibold">
-              Webová stránka e-shopu
+            </div>
+            <div>
+              <label className="flex flex-col text-heading text-lg font-semibold">
+                Webová stránka e-shopu
+              </label>
               <input
                 value={subWebsite}
                 onChange={(e) => {
                   setSubWebsite(e.target.value);
                 }}
                 type="text"
-                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                 placeholder="www.eshop.cz"
               ></input>
-            </label>
-            <div className="text-md font-semibold text-textButton shadow-lg flex items-center gap-3 bg-quad xl:p-2 p-4 rounded-lg">
+            </div>
+
+            <div className="col-span-2">
+              <label className="flex flex-col text-heading text-lg font-semibold">
+                Způsob platby
+              </label>
+              <select
+                value={subDeliveryMethod}
+                onChange={(e) => {
+                  setSubDeliveryMethod(e.target.value);
+                }}
+                name="payment"
+                id="payment"
+              >
+                <option value="card">Platební kartou</option>
+                <option value="bank">Bankovním převodem</option>
+                <option value="personal">Dobírkou</option>
+              </select>
+            </div>
+            <div className=" font-semibold text-textButton shadow-lg flex items-center gap-3 bg-quad xl:p-2 p-4 rounded-lg col-span-2">
               <div className="hidden xl:block">
                 <FontAwesomeIcon
                   icon={faTriangleExclamation}
@@ -433,22 +460,22 @@ export function SubscriptionForm({ setLoader }) {
               </div>
               <div>
                 <p>
-                  Je nutné, aby měl e-shop platbu dobírkou/při převzetí. Pokud
-                  e-shop tuto možnost nenabízí, pak nedokážeme vytvořit
-                  předplatné.
+                  Pokud vyberete platbu kartou nebo převodem, objednávku budete
+                  muset po našem zpracování zaplatit. O tom Vás informujeme
+                  emailem a SMS zprávou.
                 </p>
               </div>
             </div>
-
-            <label className="flex flex-col text-heading text-lg font-semibold">
-              Frekvence doručování
+            <div>
+              <label className="flex flex-col text-heading text-lg font-semibold">
+                Frekvence doručování
+              </label>
               <select
                 value={subFrequency}
                 onChange={(e) => {
                   console.log(e.target.value);
                   setSubFrequency(e.target.value);
                 }}
-                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               >
                 <option value="weekly">Jednou za týden</option>
                 <option value="biWeekly">Jednou za dva týdny</option>
@@ -456,10 +483,12 @@ export function SubscriptionForm({ setLoader }) {
                 <option value="biMonthly">Jednou za dva měsíce</option>
                 <option value="quarterly">Jednou za tři měsíce</option>
               </select>
-            </label>
+            </div>
 
-            <label className="flex flex-col text-heading text-lg font-semibold">
-              Způsob doručení
+            <div>
+              <label className="flex flex-col text-heading text-lg font-semibold">
+                Způsob doručení
+              </label>
               <select
                 value={subDeliveryMethod}
                 onChange={(e) => {
@@ -467,54 +496,56 @@ export function SubscriptionForm({ setLoader }) {
                 }}
                 name="delivery"
                 id="delivery"
-                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               >
                 <option value="courier">Nejlevnější kurýr</option>
                 <option value="dropbox">Výdejní místo</option>
               </select>
-            </label>
+            </div>
             {subDeliveryMethod == "dropbox" && (
-              <label className="flex flex-col text-heading text-lg font-semibold">
-                Vložte odkaz na místo, kde chcete objednávku vyzvednout. Adresu
-                či odkaz okopírujte z nabídky v e-shopu.
-                <div className="w-full mt-2">
-                  <input
-                    required={true}
-                    value={subDeliveryAddress}
-                    onChange={(e) => {
-                      setSubDeliveryAddress(e.target.value);
-                    }}
-                    type="text"
-                    className="bg-slate-50 border border-slate-300 rounded-md p-2 text-md font-semibold text-input w-full"
-                    placeholder="https://www.zasilkovna.cz/pobocky/z-box-golcuv-jenikov-5-kvetna-8
+              <div className="col-span-2">
+                <label className="flex flex-col text-heading text-lg font-semibold">
+                  Vložte odkaz na místo, kde chcete objednávku vyzvednout.
+                  Adresu či odkaz okopírujte z nabídky v e-shopu.
+                </label>
+                <input
+                  required={true}
+                  value={subDeliveryAddress}
+                  onChange={(e) => {
+                    setSubDeliveryAddress(e.target.value);
+                  }}
+                  type="text"
+                  placeholder="https://www.zasilkovna.cz/pobocky/z-box-golcuv-jenikov-5-kvetna-8
 "
-                  ></input>
-                </div>
-              </label>
+                ></input>
+              </div>
             )}
           </div>
         </fieldset>
-        <fieldset className="bg-white p-5 rounded-md border border-slate-100 gap-5">
+        <fieldset className="bg-white p-3 rounded-md border border-slate-100 gap-5">
           <legend className="text-xl font-semibold text-heading">
             Slevové kódy a uživatelský účet (nepovinné)
           </legend>
           <div className="grid gap-3">
-            <label className="flex flex-col text-heading text-lg font-semibold">
-              Chcete-li, abychom používali nějaký slevový kód, napište nám jej
-              do tohoto pole
+            <div>
+              {" "}
+              <label className="flex flex-col text-heading text-lg font-semibold">
+                Chcete-li, abychom používali nějaký slevový kód, napište nám jej
+                do tohoto pole
+              </label>
               <input
                 value={subCoupon}
                 onChange={(e) => {
                   setSubCoupon(e.target.value);
                 }}
                 type="text"
-                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                 placeholder="JARNISLEVA20"
               ></input>
-            </label>
-            <label className="flex flex-col text-heading text-lg font-semibold">
-              Máte v eshopu zákaznický účet a chcete, abychom z něj nakupovali
-              kvůli slevám?
+            </div>
+            <div>
+              <label className="flex flex-col text-heading text-lg font-semibold">
+                Máte v eshopu zákaznický účet a chcete, abychom z něj nakupovali
+                kvůli slevám?
+              </label>
               <select
                 value={subAccount}
                 onChange={(e) => {
@@ -522,44 +553,41 @@ export function SubscriptionForm({ setLoader }) {
                 }}
                 name="account"
                 id="account"
-                className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
               >
                 <option value="false">Ne</option>
                 <option value="true">Ano</option>
               </select>
-            </label>
+            </div>
             {subAccount == "true" && (
               <>
-                <label className="flex flex-col text-heading text-lg font-semibold">
-                  Přihlašovací jméno nebo email k účtu v eshopu
-                  <div className="w-full mt-2">
-                    <input
-                      required={subAccount == "true"}
-                      value={subAccountLogin}
-                      onChange={(e) => {
-                        setSubAccountLogin(e.target.value);
-                      }}
-                      type="text"
-                      className="bg-slate-50 border border-slate-300 rounded-md p-2 text-md font-semibold text-input w-full"
-                      placeholder="Email nebo přihlašovací jméno k účtu v eshopu"
-                    ></input>
-                  </div>
-                </label>
-                <label className="flex flex-col text-heading text-lg font-semibold">
-                  Přihlašovací heslo k účtu v eshopu
-                  <div className="w-full mt-2">
-                    <input
-                      required={subAccount == "true"}
-                      value={subAccountPassword}
-                      onChange={(e) => {
-                        setSubAccountPassword(e.target.value);
-                      }}
-                      type="text"
-                      className="bg-slate-50 border border-slate-300 rounded-md p-2 text-md font-semibold text-input w-full"
-                      placeholder="Heslo k účtu v eshopu"
-                    ></input>
-                  </div>
-                </label>
+                <div>
+                  <label className="flex flex-col text-heading text-lg font-semibold">
+                    Přihlašovací jméno nebo email k účtu v eshopu
+                  </label>
+                  <input
+                    required={subAccount == "true"}
+                    value={subAccountLogin}
+                    onChange={(e) => {
+                      setSubAccountLogin(e.target.value);
+                    }}
+                    type="text"
+                    placeholder="Email nebo přihlašovací jméno k účtu v eshopu"
+                  ></input>
+                </div>
+                <div>
+                  <label className="flex flex-col text-heading text-lg font-semibold">
+                    Přihlašovací heslo k účtu v eshopu
+                  </label>{" "}
+                  <input
+                    required={subAccount == "true"}
+                    value={subAccountPassword}
+                    onChange={(e) => {
+                      setSubAccountPassword(e.target.value);
+                    }}
+                    type="text"
+                    placeholder="Heslo k účtu v eshopu"
+                  ></input>
+                </div>
               </>
             )}
           </div>
@@ -599,8 +627,6 @@ export function SubscriptionForm({ setLoader }) {
               Pokračovat
             </button>
           </div>
-
-          {error && <ErrorWindowApp error={error} />}
         </div>
       </form>
     );
@@ -609,52 +635,52 @@ export function SubscriptionForm({ setLoader }) {
   function StepTwoComment() {
     return (
       <>
-        <div className="p-10">
-          <div className="mb-10">
-            <h2 className="text-xl font-semibold mb-4 text-heading">
+        <div className="p-10 flex flex-col gap-5">
+          <div>
+            <h2 className="text-xl font-semibold mb-3 text-heading">
               Nastavte si parametry vašeho předplatného
             </h2>
-            <p className="text-md font-semibold text-textDark">
+            <p className=" font-semibold text-textDark">
               Zde je potřeba nastavit fungování vašeho předplatného. Zadejte
               název, podle kterého se budete oriantovat. Webová stránka e-shopu
               je cílový obchod, na kterém pro Vás zařídíme pravidelné
               objednávky.
             </p>
           </div>
-          <div className="mb-10">
-            <h2 className="text-xl font-semibold mb-4 text-heading">
+          <div>
+            <h2 className="text-xl font-semibold mb-3 text-heading">
               Frekvence doručování
             </h2>
-            <p className="text-md font-semibold text-textDark">
+            <p className=" font-semibold text-textDark">
               Frekvence doručování je stejná jako frekvence plateb. které se Vám
               budou strhávat z karty za naše služby.
             </p>
           </div>
-          <div className="mb-10">
-            <h2 className="text-xl font-semibold mb-4 text-heading">
+          <div>
+            <h2 className="text-xl font-semibold mb-3 text-heading">
               Preferovaný den objednání
             </h2>
-            <p className="text-md font-semibold text-textDark">
+            <p className=" font-semibold text-textDark">
               Jde o den, ve kterém budeme vaši objednávka tvořit. Budeme se vždy
               snažit, abychom tento den dodrželi, nicméně při velkém objemu
               objednávek v jeden den se může stát, že vaše předplatné vyřídíme
               až následující den.
             </p>
           </div>
-          <div className="mb-10">
-            <h2 className="text-xl font-semibold mb-4 text-heading">
+          <div>
+            <h2 className="text-xl font-semibold mb-3 text-heading">
               Způsob doručení
             </h2>
-            <p className="text-md font-semibold text-textDark">
+            <p className=" font-semibold text-textDark">
               Na výběr máte buď kurýrní službu nebo nějaké odběrné místé. V
               každém případě se však bude jednat o dobírku.
             </p>
           </div>
-          <div className="mb-10">
-            <h2 className="text-xl font-semibold mb-4 text-heading">
+          <div>
+            <h2 className="text-xl font-semibold mb-3 text-heading">
               Slevový kód a přístup do zákaznického účtu
             </h2>
-            <p className="text-md font-semibold text-textDark">
+            <p className=" font-semibold text-textDark">
               Tyto údaje nejsou povinné, nícméně Vám mohou ušetřit spoustu
               peněz. Slevový kód budeme používat vždy do chvíle, dokud bude
               funkční. Zákaznický účet budeme využívat výhradně pro nákupy v
@@ -880,7 +906,7 @@ export function SubscriptionForm({ setLoader }) {
                     Přesný soupis produktů, které chcete do pravidelné
                     objednávky
                   </h2>
-                  <p className="text-md font-semibold text-textDark">
+                  <p className=" font-semibold text-textDark">
                     Vytvoříte si objednávku úplně stejně, jako to děláte právě
                     na e-shopu. V objednávce dostanete jenom a pouze produkty,
                     které si sami navolíte.
@@ -902,7 +928,7 @@ export function SubscriptionForm({ setLoader }) {
                   <h2 className="text-xl font-semibold mb-4 text-heading">
                     Mystery balíček plný překvapení
                   </h2>
-                  <p className="text-md font-semibold text-textDark">
+                  <p className=" font-semibold text-textDark">
                     Mystery balíček pro vás vytvoříme my. Vy si pouze zvolíte
                     kategorie, přidáte komentář a zvolíte maximální částku
                     objednávky. Zboží pro Vás budeme náhodně vybírat my.
@@ -945,38 +971,35 @@ export function SubscriptionForm({ setLoader }) {
                         className="xl:grid grid-cols-12 flex flex-col gap-2 maw-w-full"
                         key={"item" + index}
                       >
-                        <label className="flex flex-col text--textDark text-lg font-semibold col-span-6">
-                          Odkaz na položku
+                        <div className="flex flex-col text--textDark text-lg font-semibold col-span-6">
+                          <label>Odkaz na položku</label>{" "}
                           <input
                             name="url"
                             type="text"
-                            className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                             placeholder="www.eshop.cz/hodinky/rolex300"
                             value={item.url}
                             onChange={(e) => {
                               handleChange(e, index);
                             }}
                           ></input>
-                        </label>
-                        <label className="flex flex-col text--textDark text-lg font-semibold col-span-2">
-                          Množství
+                        </div>
+                        <div className="flex flex-col text--textDark text-lg font-semibold col-span-2">
+                          <label>Množství</label>
                           <input
                             name="amount"
                             type="number"
-                            className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
                             placeholder="5"
                             value={item.amount}
                             onChange={(e) => {
                               handleChange(e, index);
                             }}
                           ></input>
-                        </label>
-                        <label className="flex flex-col text-heading text-lg font-semibold col-span-3">
-                          Nahraditelné?
+                        </div>
+                        <div className="flex flex-col text-heading text-lg font-semibold col-span-3">
+                          <label>Nahraditelné?</label>
                           <select
                             name="changable"
                             id="changable"
-                            className="bg-slate-50 border h-full border-slate-300 rounded p-2 text-md font-semibold text-input"
                             value={item.changable}
                             onChange={(e) => {
                               handleChange(e, index);
@@ -985,7 +1008,7 @@ export function SubscriptionForm({ setLoader }) {
                             <option value="true">Ano</option>
                             <option value="false">Ne</option>
                           </select>
-                        </label>
+                        </div>
                         <FontAwesomeIcon
                           icon={faSquareXmark}
                           className="xl:text-xl text-3xl text-red-400 self-end mb-[14px] cursor-textMediumointer cursor-pointer"
@@ -1053,15 +1076,17 @@ export function SubscriptionForm({ setLoader }) {
                 </legend>
                 <div className="flex flex-col gap-3">
                   <div className="flex flex-col gap-2 maw-w-full">
-                    <label className="flex flex-col text-textDark text-lg font-semibold w-full">
-                      Kategorie
+                    <div>
+                      <label className="flex flex-col text-textDark text-lg font-semibold w-full">
+                        Kategorie
+                      </label>
                       <div className="flex flex-col gap-2">
-                        <div className="flex justify-between items-center gap-4 w-full bg-slate-50 border border-slate-300 rounded p-2">
+                        <div className="flex justify-between items-center gap-4 w-full bg-slate-50 border border-slate-300 rounded pr-3">
                           <input
                             value={mysteryCategoriesInput}
                             name="url"
                             type="text"
-                            className=" text-md font-semibold text-input w-full focus:border-slate-100"
+                            className="border-none placeholder:"
                             placeholder="Sušenky"
                             onChange={(e) => {
                               setMysteryCategoriesInput(e.target.value);
@@ -1082,7 +1107,7 @@ export function SubscriptionForm({ setLoader }) {
                         </div>
                         <div className="p-2 rounded-md border border-slate-300 bg-slate-50 flex gap-3 flex-wrap min-h-[100px]">
                           {mysteryCategories.length == 0 ? (
-                            <p className="text-textLighter">
+                            <p className="text-textLighter font-semibold">
                               Zde se zobrazí zvolené kategorie. Pokud žádnou
                               kategorii nevyberete, budeme vybírat zboží ze
                               všech kategorií v e-shopu náhodně.
@@ -1090,7 +1115,7 @@ export function SubscriptionForm({ setLoader }) {
                           ) : (
                             mysteryCategories.map((item, index) => {
                               return (
-                                <button
+                                <p
                                   className=" px-2 py-0 h-8 font-semibold text-textButton bg-rose-800 rounded-md flex items-center gap-1 cursor-pointer shadow-md animate-scale-up-noBounce"
                                   key={item}
                                   onClick={() => {
@@ -1098,20 +1123,22 @@ export function SubscriptionForm({ setLoader }) {
                                   }}
                                 >
                                   {item} <FontAwesomeIcon icon={faXmark} />
-                                </button>
+                                </p>
                               );
                             })
                           )}
                         </div>
                       </div>
-                    </label>
+                    </div>
 
-                    <label className="flex flex-col text--textDark text-lg font-semibold">
-                      Zpráva k objednávce
+                    <div>
+                      <label className="flex flex-col text--textDark text-lg font-semibold">
+                        Zpráva k objednávce
+                      </label>{" "}
                       <textarea
                         value={mysteryItem.message}
                         name="amount"
-                        className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input resize-none"
+                        className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input resize-none"
                         placeholder="Přál bych si kombinaci proteinových tyčinek a ořechů"
                         onChange={(e) => {
                           setMysteryItem({
@@ -1119,16 +1146,17 @@ export function SubscriptionForm({ setLoader }) {
                             message: e.target.value,
                           });
                         }}
-                      ></textarea>
-                    </label>
-                    <label className="flex flex-col text-heading text-lg font-semibold col-span-2">
-                      Maximální cena celé objednávky
+                      />
+                    </div>
+                    <div>
+                      <label className="flex flex-col text-heading text-lg font-semibold col-span-2">
+                        Maximální cena celé objednávky
+                      </label>
                       <div className="grid grid-cols-[100px_1fr] gap-x-5">
                         <input
                           name="changable"
                           id="changable"
                           type="number"
-                          className="bg-slate-50 border border-slate-300 p-2 text-lg font-semibold text-input rounded-md"
                           value={mysteryItem.amount}
                           onChange={(e) => {
                             setMysteryItem({
@@ -1144,7 +1172,7 @@ export function SubscriptionForm({ setLoader }) {
                             }
                           }}
                         />
-                        <div>
+                        <div className="flex flex-col justify-center">
                           <input
                             min={300}
                             max={9999}
@@ -1158,13 +1186,13 @@ export function SubscriptionForm({ setLoader }) {
                               });
                             }}
                           />
-                          <div className="col-start-2 flex items-center justify-between">
-                            <p className=" text-sm">min. 300</p>
-                            <p className=" text-sm">max. 9999</p>
+                          <div className="col-start-2 flex items-center justify-between font-semibold">
+                            <p>min. 300</p>
+                            <p>max. 9999</p>
                           </div>
                         </div>
                       </div>
-                    </label>
+                    </div>
                   </div>
                 </div>
               </fieldset>
@@ -1210,7 +1238,7 @@ export function SubscriptionForm({ setLoader }) {
             <h2 className="text-xl font-semibold mb-4 text-heading">
               Standardní objednávka
             </h2>
-            <p className="text-md font-semibold text-textDark">
+            <p className=" font-semibold text-textDark">
               Standardní objednávku si můžete představit jako typickou
               objednávku z e-shopu, ve které si zvolíte přesně dané produkty.
               Nijak je nebudeme měnit ani upravovat, vše bude ve vašich rukách.
@@ -1220,7 +1248,7 @@ export function SubscriptionForm({ setLoader }) {
             <h2 className="text-xl font-semibold mb-4 text-heading">
               Mystery balíček
             </h2>
-            <p className="text-md font-semibold text-textDark">
+            <p className=" font-semibold text-textDark">
               Mystery balíček je objednávka, do které Vám zvolíme náhodně
               vybrané zboží my. V nastavení zvolíte maximální hodnotu
               objednávky, upřesníte kategorie a necháte případně nějakou zprávu.
@@ -1241,7 +1269,7 @@ export function SubscriptionForm({ setLoader }) {
             <h2 className="text-xl font-semibold mb-4 text-heading">
               Vyberte produkty, které chcete objednávat
             </h2>
-            <p className="text-md font-semibold text-textDark">
+            <p className=" font-semibold text-textDark">
               Teď už je to jednoduché. Najděte si v e-shopu produkty, které
               chcete pravidelně objednávat, překopírujte odkaz do formuláře a
               zvolte množství.
@@ -1251,7 +1279,7 @@ export function SubscriptionForm({ setLoader }) {
             <h2 className="text-xl font-semibold mb-4 text-heading">
               Nahraditelné zboží
             </h2>
-            <p className="text-md font-semibold text-textDark">
+            <p className=" font-semibold text-textDark">
               Někdy se může stát, že zboží nebude naskladněné. Pokud v políčku
               nahraditelné vyberete Ano, pak se zboží pokusíme nahradit stejným
               typem od jiné značky. Jestliže se nám nepovede ani to, předplatné
@@ -1271,7 +1299,7 @@ export function SubscriptionForm({ setLoader }) {
             <h2 className="text-xl font-semibold mb-4 text-heading">
               Zvolte kategorie
             </h2>
-            <p className="text-md font-semibold text-textDark">
+            <p className=" font-semibold text-textDark">
               Zvolením kategorie máte možnost upřesnit typ zboží, který chcete v
               Mystery balíčku mít. Čím více kategorií zvolíte, tím více typů
               produktů do balíčku poskládáme. Pokud nezvolíte ani jednu
@@ -1282,7 +1310,7 @@ export function SubscriptionForm({ setLoader }) {
             <h2 className="text-xl font-semibold mb-4 text-heading">
               Přidejte zpráv
             </h2>
-            <p className="text-md font-semibold text-textDark">
+            <p className=" font-semibold text-textDark">
               Jde o další upřesnění objednávky. Napište nám sem například pokud
               jste na něco alergičtí, nenávidíte chuť skořice apod.
             </p>
@@ -1291,7 +1319,7 @@ export function SubscriptionForm({ setLoader }) {
             <h2 className="text-xl font-semibold mb-4 text-heading">
               Zvolte maximální hodnotu
             </h2>
-            <p className="text-md font-semibold text-textDark">
+            <p className=" font-semibold text-textDark">
               Počítá se včetně včetně doprovodných plateb za dopravu a platbu.
               Nezapočítáváme sem cenu za vyřizování předplatného.
             </p>
@@ -1314,17 +1342,22 @@ export function SubscriptionForm({ setLoader }) {
           </h1>
           <Link
             to="/"
-            className="bg-quad text-textButton mb-5 xl:mb-0 p-3 xl:text-xl text-md font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
+            className="bg-quad text-textButton mb-5 xl:mb-0 p-3 xl:text-xl  font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200"
           >
             Zpět
           </Link>
         </div>
         <div className="grid xl:grid-cols-[1fr_1fr]">
-          {step == 1 && <StepOne />}
-          {step == 1 && <StepOneComment />}
-          {step == 2 && <StepTwo />}
-          {step == 2 && <StepTwoComment />}
+          {step == 1 ||
+            (step == 2 && (
+              <div>
+                {step == 1 && <StepOne />}
+                {step == 2 && <StepTwo />}
+              </div>
+            ))}
           {step == 3 && <StepThree />}
+          {step == 1 && <StepOneComment />}
+          {step == 2 && <StepTwoComment />}
         </div>
       </div>
     </>

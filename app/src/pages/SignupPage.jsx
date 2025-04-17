@@ -105,36 +105,36 @@ export function SignupPage() {
                 <h1 className="text-2xl font-semibold">Zaregistrujte se</h1>
               </div>
               <div className="grid grid-cols-2 gap-3">
-                <label className="flex flex-col text-textDark text-md font-semibold">
+                <label className="flex flex-col text-textDark  font-semibold">
                   Jméno:
                   <input
                     name="firstName"
                     type="text"
-                    className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                    className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                     onChange={(e) => {
                       setFirstName(e.target.value);
                     }}
                     value={firstName}
                   ></input>
                 </label>
-                <label className="flex flex-col text-textDark text-md font-semibold">
+                <label className="flex flex-col text-textDark  font-semibold">
                   Příjmení:
                   <input
                     name="secondName"
                     type="text"
-                    className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                    className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                     onChange={(e) => {
                       setSecondName(e.target.value);
                     }}
                     value={secondName}
                   ></input>
                 </label>
-                <label className="flex flex-col text-textDark text-md font-semibold col-span-2">
+                <label className="flex flex-col text-textDark  font-semibold col-span-2">
                   Telefon:
                   <input
                     name="phone"
                     type="number"
-                    className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                    className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                     onChange={(e) => {
                       if (e.target.value < 1000000000) {
                         setPhone(e.target.value);
@@ -143,36 +143,36 @@ export function SignupPage() {
                     value={phone}
                   ></input>
                 </label>
-                <label className="flex flex-col text-textDark text-md font-semibold col-span-2">
+                <label className="flex flex-col text-textDark  font-semibold col-span-2">
                   Email:
                   <input
                     name="email"
                     type="text"
-                    className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                    className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                     onChange={(e) => {
                       setEmail(e.target.value);
                     }}
                     value={email}
                   ></input>
                 </label>
-                <label className="flex flex-col text-textDark text-md font-semibold">
+                <label className="flex flex-col text-textDark  font-semibold">
                   Heslo:
                   <input
                     name="password"
                     type="password"
-                    className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                    className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                     onChange={(e) => {
                       setPassword(e.target.value);
                     }}
                     value={password}
                   ></input>
                 </label>
-                <label className="flex flex-col text-textDark text-md font-semibold">
+                <label className="flex flex-col text-textDark  font-semibold">
                   Heslo znovu:
                   <input
                     name="passwordCheck"
                     type="password"
-                    className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                    className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                     onChange={(e) => {
                       setPasswordCheck(e.target.value);
                     }}
@@ -207,7 +207,7 @@ export function SignupPage() {
                     checked={terms}
                     value="true"
                     type="checkbox"
-                    className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                    className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                     onChange={(e) => {
                       setTerms(!terms);
                     }}
@@ -223,7 +223,7 @@ export function SignupPage() {
                     checked={marketing}
                     value="true"
                     type="checkbox"
-                    className="bg-slate-50 border border-slate-300 rounded p-2 text-md font-semibold text-input"
+                    className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                     onChange={(e) => {
                       setMarketing(!marketing);
                     }}
@@ -280,7 +280,7 @@ export function SignupPage() {
           chcete.
         </p>
         <a href="https://www.shopr.cz/otazky" target="_blank">
-          <button className="bg-quad p-3 text-md font-semibold text-textLight rounded-md transition-all ease-in-out hover:scale-105 cursor-pointer">
+          <button className="bg-quad p-3  font-semibold text-textLight rounded-md transition-all ease-in-out hover:scale-105 cursor-pointer">
             Často kladené otázky
           </button>
         </a>
