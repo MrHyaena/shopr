@@ -547,13 +547,6 @@ export default function Homepage({ setLoader }) {
               kvůli platbě. Nově máme i systém na zpracování předplatných s
               online platbou.`}
             />
-            <NewsTab
-              type={"alert"}
-              header={"Upozornění: Dobírka i online platba"}
-              text={`Doposud bylo možné tvořit předplatné jen na eshopy s dobírkou
-                kvůli platbě. Nově máme i systém na zpracování předplatných s
-                online platbou.`}
-            />
           </div>
         </div>
       </>

@@ -79,30 +79,32 @@ export function PasswordReset() {
                 </div>
                 <form className="flex flex-col xl:gap-5 xl:w-[50%] w-full ">
                   <fieldset className="">
-                    <label className="flex flex-col text-textDark  font-semibold col-span-6">
-                      Nové heslo:
+                    <div>
+                      <label className="flex flex-col text-textDark  font-semibold col-span-6">
+                        Nové heslo:
+                      </label>{" "}
                       <input
                         type="password"
-                        className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                         onChange={(e) => {
                           setError(null);
                           setPassword(e.target.value);
                         }}
                         value={password}
                       ></input>
-                    </label>
-                    <label className="flex flex-col text-textDark  font-semibold col-span-6">
-                      Heslo znovu:
+                    </div>
+                    <div>
+                      <label className="flex flex-col text-textDark  font-semibold col-span-6">
+                        Heslo znovu:
+                      </label>
                       <input
                         type="password"
-                        className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                         onChange={(e) => {
                           setError(null);
                           setPasswordCheck(e.target.value);
                         }}
                         value={passwordCheck}
                       ></input>
-                    </label>
+                    </div>
                   </fieldset>
                   <button
                     className="bg-quad text-textButton my-3 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 self-stretch"

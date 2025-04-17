@@ -333,13 +333,13 @@ export function AccountDetails() {
 
   return (
     <>
-      <div className="bg-slate-50 xl:p-10 p-3 flex flex-col xl:gap-10 gap-10 xl:pt-10 pt-30 text-textDark">
+      <div className="bg-slate-50 lg:p-10 p-3 flex flex-col lg:gap-10 gap-10 lg:pt-10 pt-30 text-textDark">
         <SubHeader
           header={"Vaše osobní údaje"}
           buttonText={"Zpět"}
           linkTo={"/"}
         />
-        <div className=" flex xl:grid grid-cols-2 flex-col gap-10 xl:pb-0 pb-20">
+        <div className=" flex md:grid grid-cols-2 flex-col gap-10 xl:pb-0 pb-20">
           <div className="flex flex-col xl:items-start gap-5">
             <h1 className="text-xl font-bold text-heading xl:text-start text-center">
               Údaje můžete rovnou upravovat

@@ -41,6 +41,10 @@ textarea {
   @apply font-semibold text-input p-[6px] bg-slate-50 border border-slate-300 rounded-sm w-full;
 }
 
+label input {
+  @apply w-[15px];
+}
+
 @theme {
   --font-oswald: "Oswald", "sans-serif";
   --font-openSans: "Roboto", "sans-serif";

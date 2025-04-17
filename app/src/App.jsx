@@ -42,7 +42,7 @@ function App() {
             </p>
           </div>
         )}
-        <div className="grid xl:grid-cols-[150px_1fr] gap-5 min-h-screen bg-slate-50">
+        <div className="grid lg:grid-cols-[130px_1fr] gap-5 min-h-screen bg-slate-50">
           <Sidebar />
           <div>
             <main>

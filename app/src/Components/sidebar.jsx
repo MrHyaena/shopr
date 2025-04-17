@@ -50,7 +50,7 @@ export function Sidebar() {
                 setActiveButton(link);
               }}
               to={link}
-              className="cursor-pointer text-sm font-semibold flex flex-col gap-3 bg-white text-zinc-900 transition-all ease-in-out rounded-xl p-3 py-5 w-full text-center"
+              className=" cursor-pointer text-sm font-semibold flex flex-col gap-3 bg-white text-zinc-900 transition-all ease-in-out rounded-xl p-3 py-5 w-full text-center"
             >
               <FontAwesomeIcon icon={icon} className="text-xl" />
               {text}
@@ -61,7 +61,7 @@ export function Sidebar() {
                 setActiveButton(link);
               }}
               to={link}
-              className="cursor-pointer text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 py-5 w-full text-center"
+              className=" cursor-pointer text-sm font-semibold flex flex-col gap-3 hover:bg-white hover:text-zinc-900 transition-all ease-in-out rounded-xl p-3 py-5 w-full text-center"
             >
               <FontAwesomeIcon icon={icon} className="text-xl" />
               {text}
@@ -72,7 +72,7 @@ export function Sidebar() {
     }
 
     return (
-      <div className="min-h-screen hidden xl:block">
+      <div className="min-h-screen hidden lg:block">
         <div className="bg-primary h-screen border-slate-200 shadow-xl shadow-slate-200 text-white sticky top-0">
           <div className=" flex flex-col justify-between items-center h-full py-10">
             <a href="https://www.shopr.cz">
@@ -119,7 +119,7 @@ export function Sidebar() {
     const [toggleMenu, setToggleMenu] = useState(false);
 
     return (
-      <div className="xl:hidden fixed top-0 w-full z-50">
+      <div className="lg:hidden fixed top-0 w-full z-50">
         <div className="bg-primary border-slate-200 shadow-slate-200 text-white sticky top-0">
           <div className="flex justify-between p-3">
             <img src={logo} alt="logo" className="h-8" />

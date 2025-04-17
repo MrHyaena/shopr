@@ -64,30 +64,33 @@ export function LoginPage() {
             id="submitForm"
           >
             <fieldset className=" gap-3 flex flex-col">
-              <label className="flex flex-col text-textDark  font-semibold col-span-6">
-                Email:
+              <div>
+                {" "}
+                <label className="flex flex-col text-textDark  font-semibold col-span-6">
+                  Email:
+                </label>
                 <input
                   name="email"
                   type="email"
-                  className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}
                   value={email}
                 ></input>
-              </label>
-              <label className="flex flex-col text-textDark  font-semibold col-span-6">
-                Heslo:
+              </div>
+              <div>
+                <label className="flex flex-col text-textDark  font-semibold col-span-6">
+                  Heslo:
+                </label>
                 <input
                   name="password"
                   type="password"
-                  className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
                   value={password}
                 ></input>
-              </label>
+              </div>
               <p
                 className="font-semibold underline text-textDark text-sm cursor-pointer self-start"
                 onClick={() => {
@@ -97,15 +100,17 @@ export function LoginPage() {
                 Zapomenuté heslo
               </p>
             </fieldset>
-            <label className="flex gap-3 font-medium text-sm text-textDark mx-3 cursor-pointer justify-center">
-              <input
-                value="true"
-                type="checkbox"
-                name="rememberCheckbox"
-                id="rememberCheckbox"
-              />
-              Zapamatovat na 90 dní
-            </label>
+            <div>
+              <label className="flex gap-3 font-medium text-sm text-textDark mx-3 cursor-pointer justify-center items-center">
+                <input
+                  value="true"
+                  type="checkbox"
+                  name="rememberCheckbox"
+                  id="rememberCheckbox"
+                />
+                Zapamatovat na 90 dní
+              </label>
+            </div>
             <button
               className="bg-quad disabled:bg-gray-500 disabled:hover:scale-100 disabled:cursor-default text-textButton py-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200 cursor-pointer"
               type="submit"
@@ -169,18 +174,19 @@ export function LoginPage() {
             {!message ? (
               <>
                 <fieldset className="">
-                  <label className="flex flex-col text-textDark  font-semibold col-span-6">
-                    Uživatelský email:
+                  <div>
+                    <label className="flex flex-col text-textDark  font-semibold col-span-6">
+                      Uživatelský email:
+                    </label>
                     <input
                       name="email"
                       type="email"
-                      className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                       onChange={(e) => {
                         setEmail(e.target.value);
                       }}
                       value={email}
                     ></input>
-                  </label>
+                  </div>
                 </fieldset>
                 <button
                   disabled={isLoading}
@@ -207,7 +213,7 @@ export function LoginPage() {
               </>
             ) : (
               <>
-                <div className="flex items-center justify-center mb-2">
+                <div className="flex items-center justify-center mb-3">
                   <MessageWindow message={message} />
                 </div>
                 <button

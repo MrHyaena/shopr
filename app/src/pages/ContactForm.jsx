@@ -87,109 +87,114 @@ export function ContactForm() {
             handleSend();
           }}
         >
-          <div className="grid gap-3">
-            <div>
-              <label className="flex flex-col text-heading  font-semibold">
-                Email, na který budeme odpovídat
-              </label>
-              <input
-                value={email}
-                onChange={(e) => {
-                  setError(null);
-                  setEmail(e.target.value);
-                }}
-                type="email"
-              ></input>
-            </div>
-            <div>
-              <label className="flex flex-col text-heading  font-semibold">
-                Předmět emailu
-              </label>{" "}
-              <input
-                value={subject}
-                onChange={(e) => {
-                  setError(null);
-                  setSubject(e.target.value);
-                }}
-                type="text"
-              ></input>
-            </div>
-            <div>
-              <label className="flex flex-col text-heading  font-semibold">
-                Máte problém s nějakým předplatným?
-              </label>
-              <select
-                value={problemToggle}
-                onChange={(e) => {
-                  setError(null);
-                  setProblemToggle(!problemToggle);
-                }}
-              >
-                <option value="false">Ne</option>
-                <option value="true">Ano</option>
-              </select>
-            </div>
-            {problemToggle && (
+          <fieldset className="bg-white p-3 rounded-md border border-slate-100 flex flex-col gap-3">
+            <div className="grid gap-3">
               <div>
                 <label className="flex flex-col text-heading  font-semibold">
-                  Vyberte předplatné
-                  <select
-                    value={problem}
-                    name="subProblem"
-                    onChange={(e) => {
-                      setError(null);
-                      setProblem(e.target.value);
-                    }}
-                  >
-                    <option value="">Vyberte předplatné</option>
-                    {subscriptions.map((sub, index) => {
-                      return (
-                        <option key={"subSelect" + sub._id} value={sub.subName}>
-                          {sub.subName}
-                        </option>
-                      );
-                    })}
-                  </select>
+                  Email, na který budeme odpovídat
                 </label>
+                <input
+                  value={email}
+                  onChange={(e) => {
+                    setError(null);
+                    setEmail(e.target.value);
+                  }}
+                  type="email"
+                ></input>
               </div>
-            )}
-            <div>
-              <label className="flex flex-col text-heading font-semibold">
-                Vaše zpráva
-              </label>
-              <textarea
-                value={message}
-                onChange={(e) => {
-                  setError(null);
-                  setMessage(e.target.value);
-                }}
-                className=" min-h-[150px] resize-none w-full"
-              ></textarea>
+              <div>
+                <label className="flex flex-col text-heading  font-semibold">
+                  Předmět emailu
+                </label>{" "}
+                <input
+                  value={subject}
+                  onChange={(e) => {
+                    setError(null);
+                    setSubject(e.target.value);
+                  }}
+                  type="text"
+                ></input>
+              </div>
+              <div>
+                <label className="flex flex-col text-heading  font-semibold">
+                  Máte problém s nějakým předplatným?
+                </label>
+                <select
+                  value={problemToggle}
+                  onChange={(e) => {
+                    setError(null);
+                    setProblemToggle(!problemToggle);
+                  }}
+                >
+                  <option value="false">Ne</option>
+                  <option value="true">Ano</option>
+                </select>
+              </div>
+              {problemToggle && (
+                <div>
+                  <label className="flex flex-col text-heading  font-semibold">
+                    Vyberte předplatné
+                    <select
+                      value={problem}
+                      name="subProblem"
+                      onChange={(e) => {
+                        setError(null);
+                        setProblem(e.target.value);
+                      }}
+                    >
+                      <option value="">Vyberte předplatné</option>
+                      {subscriptions.map((sub, index) => {
+                        return (
+                          <option
+                            key={"subSelect" + sub._id}
+                            value={sub.subName}
+                          >
+                            {sub.subName}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </label>
+                </div>
+              )}
+              <div>
+                <label className="flex flex-col text-heading font-semibold">
+                  Vaše zpráva
+                </label>
+                <textarea
+                  value={message}
+                  onChange={(e) => {
+                    setError(null);
+                    setMessage(e.target.value);
+                  }}
+                  className=" min-h-[150px] resize-none w-full"
+                ></textarea>
+              </div>
             </div>
-          </div>
 
-          <div className="flex flex-col items-center justify-center">
-            {responseOk == null && (
-              <button className="bg-quad cursor-pointer text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200">
-                Odeslat
-              </button>
-            )}
-            {error && <ErrorWindowApp error={error} />}
-            {responseOk && <MessageWindowApp message={responseOk} />}
-          </div>
+            <div className="flex flex-col items-center justify-center">
+              {responseOk == null && (
+                <button className="bg-quad cursor-pointer text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200">
+                  Odeslat
+                </button>
+              )}
+              {error && <ErrorWindowApp error={error} />}
+              {responseOk && <MessageWindowApp message={responseOk} />}
+            </div>
+          </fieldset>
         </form>
       </>
     );
   }
   return (
     <>
-      <div className="bg-slate-50 xl:p-10 p-3 flex flex-col xl:gap-10 gap-10 xl:pt-10 pt-30 text-textDark">
+      <div className="bg-slate-50 lg:p-10 p-3 flex flex-col lg:gap-10 gap-10 lg:pt-10 pt-30 text-textDark">
         <SubHeader
           header={"Trápí Vás nějaký problém? Napište nám"}
           buttonText={"Zpět"}
           linkTo={"/"}
         />
-        <div className=" flex xl:grid grid-cols-2 flex-col gap-10 xl:pb-0 pb-20">
+        <div className=" flex lg:grid grid-cols-2 flex-col gap-10 lg:pb-0 pb-20">
           <div className="flex flex-col xl:items-start gap-5">
             <h1 className="text-xl font-bold text-heading xl:text-start text-center">
               Kontaktní formulář

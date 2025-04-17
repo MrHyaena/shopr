@@ -140,11 +140,13 @@ export function SubscriptionsList({ setLoader }) {
                       <div>
                         {" "}
                         <div className="flex gap-2">
-                          <p className="text-textDark font-bold">Množství:</p>
+                          <h4 className="text-textDark font-bold">Množství:</h4>
                           <p className="">{item.amount}</p>
                         </div>
                         <div className="flex gap-2">
-                          <p className="text-textDark font-bold">Lze změnit:</p>
+                          <h4 className="text-textDark font-bold">
+                            Nahraditelné:
+                          </h4>
                           <p className="">
                             {item.changable == "true" ? "Ano" : "Ne"}
                           </p>
@@ -545,9 +547,9 @@ export function SubscriptionsList({ setLoader }) {
 
     return (
       <>
-        <div className="bg-white xl:p-6 p-2 rounded-lg border border-slate-100 shadow-md shadow-slate-200 xl:grid xl:grid-cols-3 grid-cols-5 gap-4 animate-fall-left">
-          <div className="mb-3 xl:mb-0 xl:block flex flex-col-reverse xl:col-span-2 col-span-3">
-            <div className="xl:flex gap-7 mt-5 xl:mt-0 xl:mb-2">
+        <div className="bg-white lg:p-6 p-2 rounded-lg border border-slate-100 shadow-md shadow-slate-200 lg:grid lg:grid-cols-3 grid-cols-5 gap-4 animate-fall-left">
+          <div className="mb-3 lg:mb-0 lg:block flex flex-col-reverse lg:col-span-2 col-span-3">
+            <div className="lg:flex gap-7 mt-5 lg:mt-0 lg:mb-2">
               <p className="text-textDarker text-[12px] mb-2 font-medium">
                 ID: <span className="text-textLighter">{_id}</span>
               </p>
@@ -577,8 +579,8 @@ export function SubscriptionsList({ setLoader }) {
               </p>
             </div>
 
-            <div className="flex xl:flex-row flex-col-reverse xl:gap-5 gap-2 xl:items-center items-start justify-center xl:justify-start">
-              <div className="flex gap-3 items-center flex-row-reverse xl:flex-row">
+            <div className="flex lg:flex-row flex-col-reverse lg:gap-5 gap-2 lg:items-center items-start justify-center lg:justify-start">
+              <div className="flex gap-3 items-center flex-row-reverse lg:flex-row">
                 <a
                   href={"https://" + subWebsite}
                   target="_blank"
@@ -619,7 +621,7 @@ export function SubscriptionsList({ setLoader }) {
               )}
             </div>
           </div>
-          <div className="flex flex-col xl:flex-row gap-2 xl:gap-6 xl:items-center xl:justify-end justify-center col-span-2 xl:col-span-1">
+          <div className="flex flex-col xl:flex-row gap-2 lg:gap-1 xl:gap-4 lg:items-stretch xl:items-center lg:justify-end justify-center col-span-2 lg:col-span-1">
             {!active ? (
               <>
                 <button

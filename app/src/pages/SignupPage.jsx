@@ -105,36 +105,39 @@ export function SignupPage() {
                 <h1 className="text-2xl font-semibold">Zaregistrujte se</h1>
               </div>
               <div className="grid grid-cols-2 gap-3">
-                <label className="flex flex-col text-textDark  font-semibold">
-                  Jméno:
+                <div>
+                  <label className="flex flex-col text-textDark  font-semibold">
+                    Jméno:
+                  </label>{" "}
                   <input
                     name="firstName"
                     type="text"
-                    className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                     onChange={(e) => {
                       setFirstName(e.target.value);
                     }}
                     value={firstName}
                   ></input>
-                </label>
-                <label className="flex flex-col text-textDark  font-semibold">
-                  Příjmení:
+                </div>
+                <div>
+                  <label className="flex flex-col text-textDark  font-semibold">
+                    Příjmení:
+                  </label>
                   <input
                     name="secondName"
                     type="text"
-                    className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                     onChange={(e) => {
                       setSecondName(e.target.value);
                     }}
                     value={secondName}
                   ></input>
-                </label>
-                <label className="flex flex-col text-textDark  font-semibold col-span-2">
-                  Telefon:
+                </div>
+                <div>
+                  <label className="flex flex-col text-textDark  font-semibold col-span-2">
+                    Telefon:
+                  </label>
                   <input
                     name="phone"
                     type="number"
-                    className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                     onChange={(e) => {
                       if (e.target.value < 1000000000) {
                         setPhone(e.target.value);
@@ -142,43 +145,46 @@ export function SignupPage() {
                     }}
                     value={phone}
                   ></input>
-                </label>
-                <label className="flex flex-col text-textDark  font-semibold col-span-2">
-                  Email:
+                </div>
+                <div>
+                  <label className="flex flex-col text-textDark  font-semibold col-span-2">
+                    Email:
+                  </label>
                   <input
                     name="email"
                     type="text"
-                    className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                     onChange={(e) => {
                       setEmail(e.target.value);
                     }}
                     value={email}
                   ></input>
-                </label>
-                <label className="flex flex-col text-textDark  font-semibold">
-                  Heslo:
+                </div>
+                <div>
+                  <label className="flex flex-col text-textDark  font-semibold">
+                    Heslo:
+                  </label>
                   <input
                     name="password"
                     type="password"
-                    className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                     onChange={(e) => {
                       setPassword(e.target.value);
                     }}
                     value={password}
                   ></input>
-                </label>
-                <label className="flex flex-col text-textDark  font-semibold">
-                  Heslo znovu:
+                </div>
+                <div>
+                  <label className="flex flex-col text-textDark  font-semibold">
+                    Heslo znovu:
+                  </label>
                   <input
                     name="passwordCheck"
                     type="password"
-                    className="bg-slate-50 border border-slate-300 rounded p-2  font-semibold text-input"
                     onChange={(e) => {
                       setPasswordCheck(e.target.value);
                     }}
                     value={passwordCheck}
                   ></input>
-                </label>
+                </div>
               </div>
 
               <div className="flex gap-3 flex-col">

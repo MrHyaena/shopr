@@ -1337,9 +1337,9 @@ export function SubscriptionForm({ setLoader }) {
 
   return (
     <>
-      <div className="bg-slate-50 xl:p-10 p-2 flex flex-col gap-5 xl:pt-10 pt-30">
-        <div className="flex justify-between xl:flex-row flex-col-reverse items-center">
-          <h1 className="xl:text-3xl text-xl font-bold text-heading text-center">
+      <div className="bg-slate-50 lg:p-10 p-2 flex flex-col gap-5 lg:pt-10 pt-30">
+        <div className="flex justify-between lg:flex-row flex-col-reverse items-center">
+          <h1 className="lg:text-3xl text-xl font-bold text-heading text-center">
             {step == 1 && "Osobní a kontaktní údaje"}
             {step == 2 && "Nastavení předplatného"}
             {step == 3 && "Nastavení položek"}
@@ -1351,7 +1351,7 @@ export function SubscriptionForm({ setLoader }) {
             Zpět
           </Link>
         </div>
-        <div className="grid xl:grid-cols-[1fr_1fr]">
+        <div className="grid lg:grid-cols-[1fr_1fr]">
           {(step == 1 || step == 2) && (
             <div>
               {step == 1 && <StepOne />}
