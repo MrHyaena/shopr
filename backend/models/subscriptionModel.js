@@ -85,6 +85,10 @@ const subscriptionSchema = new Schema(
     subDeliveryAddress: {
       type: String,
     },
+    subPayment: {
+      type: String,
+      require: true,
+    },
     subCoupon: {
       type: String,
     },

@@ -57,6 +57,7 @@ export function SubscriptionsList({ setLoader }) {
       nextPaymentDate,
       subDeliveryMethod,
       subDeliveryAddress,
+      subPayment,
       itemsType,
       items,
       mysteryItem,
@@ -200,6 +201,16 @@ export function SubscriptionsList({ setLoader }) {
                   <p>
                     {subDeliveryMethod == "courier" && "Nejlevnější kurýr"}
                     {subDeliveryMethod == "dropbox" && "Box/výdejní místé"}
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 gap-3 py-2 px-4 even:bg-slate-100">
+                  <h4 className="text-heading font-bold text-textDark">
+                    Platební metoda:
+                  </h4>
+                  <p className="break-all">
+                    {subPayment == "card" && "Platební kartou"}
+                    {subPayment == "bank" && "Bankovní převod"}
+                    {subPayment == "personal" && "Dobírka"}
                   </p>
                 </div>
                 <div className="grid grid-cols-2 gap-3 py-2 px-4 even:bg-slate-100">
@@ -654,7 +665,7 @@ export function SubscriptionsList({ setLoader }) {
           {toggle && itemsType == "mystery" ? <SubDetailsMystery /> : <></>}
         </div>
         {toggleDelete && (
-          <div className="fixed top-0 right-0 w-full p-5 h-full bg-primary/50 m-auto flex justify-center items-center">
+          <div className="fixed top-0 right-0 w-full p-5 h-full bg-primary/50 m-auto flex justify-center items-center z-100">
             <div className="gap-5 flex flex-col justify-center items-stretch bg-white p-10 rounded-md max-w-[700px]">
               <h3 className="text-2xl font-bold text-textDark">
                 Smazání předplatného
@@ -725,7 +736,7 @@ export function SubscriptionsList({ setLoader }) {
           </div>
         )}
         {toggleDeactivate && (
-          <div className="fixed top-0 right-0 w-full p-5 h-full bg-primary/50 m-auto flex justify-center items-center">
+          <div className="fixed top-0 right-0 w-full p-5 h-full bg-primary/50 m-auto flex justify-center items-center  z-100">
             <div className="gap-5 flex flex-col justify-center items-stretch bg-white p-10 rounded-md max-w-[700px]">
               <h3 className="text-2xl font-bold text-textDark">
                 Deaktivace předplatného
@@ -798,7 +809,7 @@ export function SubscriptionsList({ setLoader }) {
           </div>
         )}
         {toggleActivate && (
-          <div className="fixed top-0 right-0 w-full p-5 h-full bg-primary/50 m-auto flex justify-center items-center z-30">
+          <div className="fixed top-0 right-0 w-full p-5 h-full bg-primary/50 m-auto flex justify-center items-center z-100">
             <div className="gap-5 flex flex-col justify-center items-stretch bg-white p-10 rounded-md max-w-[700px]">
               <h3 className="text-2xl font-bold text-textDark">
                 Aktivace předplatného

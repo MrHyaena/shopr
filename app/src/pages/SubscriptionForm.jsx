@@ -48,6 +48,7 @@ export function SubscriptionForm({ setLoader }) {
     subFrequency: "weekly",
     subDeliveryMethod: "courier",
     subDeliveryAddress: "",
+    subPayment: "card",
     subCoupon: "",
     subAccount: "false",
     subAccountLogin: "",
@@ -330,6 +331,7 @@ export function SubscriptionForm({ setLoader }) {
     const [subDeliveryAddress, setSubDeliveryAddress] = useState(
       formData.subDeliveryAddress
     );
+    const [subPayment, setSubPayment] = useState(formData.subPayment);
     const [subAccount, setSubAccount] = useState(formData.subAccount);
     const [subAccountLogin, setSubAccountLogin] = useState(
       formData.subAccountLogin
@@ -388,6 +390,7 @@ export function SubscriptionForm({ setLoader }) {
           subFrequency,
           subDeliveryMethod,
           subDeliveryAddress,
+          subPayment,
           subAccount,
           subAccountLogin,
           subAccountPassword,
@@ -439,9 +442,9 @@ export function SubscriptionForm({ setLoader }) {
                 Způsob platby
               </label>
               <select
-                value={subDeliveryMethod}
+                value={subPayment}
                 onChange={(e) => {
-                  setSubDeliveryMethod(e.target.value);
+                  setSubPayment(e.target.value);
                 }}
                 name="payment"
                 id="payment"
@@ -849,6 +852,7 @@ export function SubscriptionForm({ setLoader }) {
         subFrequency: formData.subFrequency,
         subDeliveryMethod: formData.subDeliveryMethod,
         subDeliveryAddress: formData.subDeliveryAddress,
+        subPayment: formData.subPayment,
         subCoupon: formData.subCoupon,
         subAccount: formData.subAccount,
         subAccountLogin: formData.subAccountLogin,
@@ -1348,13 +1352,12 @@ export function SubscriptionForm({ setLoader }) {
           </Link>
         </div>
         <div className="grid xl:grid-cols-[1fr_1fr]">
-          {step == 1 ||
-            (step == 2 && (
-              <div>
-                {step == 1 && <StepOne />}
-                {step == 2 && <StepTwo />}
-              </div>
-            ))}
+          {(step == 1 || step == 2) && (
+            <div>
+              {step == 1 && <StepOne />}
+              {step == 2 && <StepTwo />}
+            </div>
+          )}
           {step == 3 && <StepThree />}
           {step == 1 && <StepOneComment />}
           {step == 2 && <StepTwoComment />}
