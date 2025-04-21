@@ -339,6 +339,76 @@ export function emailTemplatePaymentCompleted(subName, subWebsite, appUrl) {
   return body;
 }
 
+//Subscription processed
+export function emailTemplateSubscriptionProcessed(subName) {
+  return `<!doctype html>
+<html>
+  <body>
+    <div
+      style='background-color:#F5F5F5;color:#262626;font-family:"Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial, sans-serif;font-size:16px;font-weight:400;letter-spacing:0.15008px;line-height:1.5;margin:0;padding:32px 0;min-height:100%;width:100%'
+    >
+      <table
+        align="center"
+        width="100%"
+        style="margin:0 auto;max-width:600px;background-color:#FFFFFF"
+        role="presentation"
+        cellspacing="0"
+        cellpadding="0"
+        border="0"
+      >
+        <tbody>
+          <tr style="width:100%">
+            <td>
+              <div style="height:56px"></div>
+              <div style="padding:16px 24px 16px 24px">
+                <img
+                  alt="logo"
+                  src="cid:logo@nodemailer.com"
+                  style="outline:none;border:none;text-decoration:none;vertical-align:middle;display:inline-block;max-width:100%"
+                />
+              </div>
+              <div style="padding:16px 0px 16px 0px">
+                <hr
+                  style="width:100%;border:none;border-top:1px solid #CCCCCC;margin:0"
+                />
+              </div>
+              <div style="font-weight:normal;padding:16px 24px 16px 24px">
+                Dobrý den!
+              </div>
+              <div
+                style="font-size:22px;font-weight:bold;padding:16px 24px 16px 24px"
+              >
+                Vaše pravidelná objednávka byla zpracována
+              </div>
+              <div style="font-weight:normal;padding:16px 24px 16px 24px">
+                Název předplatného: ${subName}
+              </div>
+              <div style="font-weight:normal;padding:16px 24px 16px 24px">
+                Pokud byste měli jakýkoliv dotaz nebo problém týkající se našeho
+                systému, obraťte se na nás na emailové adrese info@shopr.cz. V
+                případě problému s objednávkou se obraťte přímo na eshop.
+              </div>
+              <div style="font-weight:normal;padding:16px 24px 16px 24px">
+                S pozdravem,
+              </div>
+              <div style="font-weight:normal;padding:16px 24px 16px 24px">
+                Tým Shopr
+              </div>
+              <div style="padding:16px 0px 16px 0px">
+                <hr
+                  style="width:100%;border:none;border-top:1px solid #CCCCCC;margin:0"
+                />
+              </div>
+              <div style="height:56px"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>`;
+}
+
 //------------------------------ USER ACCOUNT TEMPLATES ------------------------------------
 //Activate user account template
 export function emailTemplateActivateAccount(activationUrl) {

@@ -1,4 +1,4 @@
-export async function sendSms() {
+export async function sendSmsOrderComplete(phone) {
   const smsResponse = await fetch("https://api.smsmngr.com/v2/message", {
     method: "POST",
     mode: "cors",
@@ -15,7 +15,7 @@ S pozdravem
 www.shopr.cz`,
       to: [
         {
-          phone_number: "420602606331",
+          phone_number: phone,
         },
       ],
     }),

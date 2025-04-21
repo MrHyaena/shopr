@@ -36,6 +36,7 @@ export function SubscriptionForm({ setLoader }) {
     active: false,
     firstName: "",
     secondName: "",
+    phoneCountry: 420,
     phone: "",
     email: "",
     address: "",
@@ -79,6 +80,7 @@ export function SubscriptionForm({ setLoader }) {
   function StepOne() {
     const [firstName, setFirstName] = useState(formData.firstName);
     const [secondName, setSecondName] = useState(formData.secondName);
+    const [phoneCountry, setPhoneCountry] = useState(420);
     const [phone, setPhone] = useState(formData.phone);
     const [email, setEmail] = useState(formData.email);
     const [address, setAddress] = useState(formData.address);
@@ -106,6 +108,7 @@ export function SubscriptionForm({ setLoader }) {
           ...formData,
           firstName,
           secondName,
+          phoneCountry,
           phone,
           email,
           address,
@@ -182,17 +185,32 @@ export function SubscriptionForm({ setLoader }) {
             </div>
             <div>
               <label className="flex flex-col text-heading  font-semibold">
-                Telefon
+                Předvolba / Telefon
               </label>
-              <input
-                placeholder="602605331"
-                required={true}
-                value={phone}
-                onChange={(e) => {
-                  setPhone(e.target.value);
-                }}
-                type="number"
-              ></input>
+              <div className="grid grid-cols-[1fr_3fr] gap-2">
+                <input
+                  placeholder="602605331"
+                  required={true}
+                  value={phoneCountry}
+                  onChange={(e) => {
+                    if (e.target.value.length < 4) {
+                      setPhoneCountry(e.target.value);
+                    }
+                  }}
+                  type="number"
+                ></input>
+                <input
+                  placeholder="602605331"
+                  required={true}
+                  value={phone}
+                  onChange={(e) => {
+                    if (e.target.value.length < 10) {
+                      setPhone(e.target.value);
+                    }
+                  }}
+                  type="number"
+                ></input>
+              </div>
             </div>
             <div>
               <label className="flex flex-col text-heading  font-semibold">
@@ -840,6 +858,7 @@ export function SubscriptionForm({ setLoader }) {
         active: formData.active,
         firstName: formData.firstName,
         secondName: formData.secondName,
+        phoneCountry: formData.phoneCountry,
         phone: formData.phone,
         email: formData.email,
         address: formData.address,

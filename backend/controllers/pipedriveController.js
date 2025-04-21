@@ -4,6 +4,11 @@
 //Requirements
 require("dotenv").config();
 
+const {
+  emailTemplateSubscriptionProcessed,
+} = require("../email/emailTemplates");
+const { sendEmail } = require("../email/sendEmail");
+const { sendSmsOrderComplete } = require("../functions/sendSms");
 //Models
 const Sublog = require("../models/sublogModel");
 const Subscription = require("../models/subscriptionModel");
@@ -50,6 +55,17 @@ async function pipedriveUpdateActivityWebhook(req, res) {
       const subscription = await Subscription.findOne({
         pipedrivePersonId: personId,
       });
+
+      const fromEmail = process.env.SMTP_EMAIL_INFO;
+      const toEmail = subscription.email;
+      const subject = "Pravidelná objednávka splněna";
+      const emailBody = emailTemplateSubscriptionProcessed(
+        subscription.subName
+      );
+
+      sendEmail(fromEmail, toEmail, subject, emailBody);
+
+      sendSmsOrderComplete(subscription.phoneCountry + subscription.phone);
 
       //Logging the activity completion for future arguments
       const log = Sublog.create({
