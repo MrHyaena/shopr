@@ -78,7 +78,7 @@ export function Sidebar() {
             <a href="https://www.shopr.cz">
               <img src={logo} alt="logo" className="h-12" />
             </a>
-            <div className="flex flex-col items-center gap-2  p-4 row-span-5 self-center">
+            <div className="grid grid-rows-5 items-center gap-2  p-4 row-span-5 self-center">
               <Tab link={"/"} icon={faHouseUser} text={"Hlavní panel"} />
               <Tab
                 link={"/predplatne"}

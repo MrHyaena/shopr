@@ -6,14 +6,17 @@ import {
   faBan,
   faCashRegister,
   faCircleUp,
+  faClockRotateLeft,
   faExclamationTriangle,
   faGear,
   faGlobe,
   faMoneyBill,
   faShoppingBasket,
+  faStopwatch,
   faTriangleExclamation,
   faTrophy,
 } from "@fortawesome/free-solid-svg-icons";
+import { faClock } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import { activateSubscriptionHandler } from "../functions/activateSubscriptionHandler";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -365,7 +368,7 @@ export default function Homepage({ setLoader }) {
                   </Link>
                 </div>
               </div>
-              <div className="grid grid-cols-1 gap-3 pb-10">
+              <div className="grid grid-cols-1 gap-3 md:pb-10">
                 {subscriptions.map((item) => {
                   return (
                     <>
@@ -425,7 +428,7 @@ export default function Homepage({ setLoader }) {
   function StatisticsWindow() {
     let amountPayed = 0;
     subscriptions.map((item) => {
-      if (item.active == true) {
+      if (item.active == false) {
         return;
       }
 
@@ -468,7 +471,7 @@ export default function Homepage({ setLoader }) {
             )}
             {type == "goal" && (
               <FontAwesomeIcon
-                icon={faShoppingBasket}
+                icon={faClockRotateLeft}
                 className="text-3xl text-amber-500"
               />
             )}
@@ -484,7 +487,7 @@ export default function Homepage({ setLoader }) {
 
     return (
       <>
-        <div className="sm:grid grid-cols-3 col-span-3 gap-5 flex flex-col order-2">
+        <div className="sm:grid grid-cols-2 col-span-3 gap-5 flex flex-col order-2">
           <StatisticsTab
             data={subscriptions.length}
             text={"Počet předplatných"}
@@ -494,12 +497,6 @@ export default function Homepage({ setLoader }) {
             data={amountPayed + " Kč"}
             text={"Přibližná platba za měsíc"}
             type={"money"}
-          />
-          <StatisticsTab
-            data={0}
-            text={"Vaše body"}
-            type={"goal"}
-            opacity={"50%"}
           />
         </div>
       </>
@@ -543,8 +540,7 @@ export default function Homepage({ setLoader }) {
             <NewsTab
               type={"update"}
               header={"Update: Dobírka i online platba"}
-              text={`Doposud bylo možné tvořit předplatné jen na eshopy s dobírkou
-              kvůli platbě. Nově máme i systém na zpracování předplatných s
+              text={`Doposud bylo možné tvořit předplatné jen na eshopy s dobírkou. Nově máme i systém na zpracování předplatných s
               online platbou.`}
             />
           </div>
@@ -566,7 +562,7 @@ export default function Homepage({ setLoader }) {
           linkTo={"/formular"}
         />
 
-        <div className="w-full md:grid flex flex-col gap-5 xl:grid-rows-[1fr_4fr_1fr] grid-cols-4">
+        <div className="w-full md:grid flex flex-col md:gap-5 gap-10 xl:grid-rows-[1fr_4fr_1fr] grid-cols-4">
           <StatisticsWindow />
           <NewsWindow />
           <SubscriptionsWindow />

@@ -171,17 +171,16 @@ export function ContactForm() {
                 ></textarea>
               </div>
             </div>
-
-            <div className="flex flex-col items-center justify-center">
-              {responseOk == null && (
-                <button className="bg-quad cursor-pointer text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200">
-                  Odeslat
-                </button>
-              )}
-              {error && <ErrorWindowApp error={error} />}
-              {responseOk && <MessageWindowApp message={responseOk} />}
-            </div>
           </fieldset>
+          <div className="flex flex-col items-center justify-center">
+            {responseOk == null && (
+              <button className="bg-quad cursor-pointer text-textButton p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary shadow-md shadow-slate-200">
+                Odeslat
+              </button>
+            )}
+            {error && <ErrorWindowApp error={error} />}
+            {responseOk && <MessageWindowApp message={responseOk} />}
+          </div>
         </form>
       </>
     );
