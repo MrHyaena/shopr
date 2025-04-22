@@ -74,12 +74,10 @@ export default function Homepage({ setLoader }) {
             <div className="xl:flex gap-7 mt-5 xl:mt-0 xl:mb-2">
               <p className="text-textDarker text-[12px] mb-2 font-medium">
                 Webová stránka:{" "}
-                <a
-                  target="_blank"
-                  href={"https://" + item.subWebsite}
-                  className="text-textLighter"
-                >
-                  {item.subWebsite}
+                <a target="_blank" href={"https://" + item.subWebsite}>
+                  <sapn className="text-textLighter font-sans">
+                    {item.subWebsite}
+                  </sapn>
                 </a>
               </p>
               <p className="text-textDarker text-[12px] mb-2 font-medium">
