@@ -368,15 +368,6 @@ const updateSubscription = async (req, res) => {
     }
   );
 
-  const smsPhone =
-    subscription.phoneCountry.toString() + subscription.phone.toString();
-
-  const smsResponse = await sendSmsOrderComplete(smsPhone);
-
-  if (!subscription) {
-    return res.status(400).json({ error: "Takové předplatné neexistuje" });
-  }
-
   // ------------- PIPEDRIVE - updating deal ----------------
   let subPriceValue = 0;
   //Getting right deal value

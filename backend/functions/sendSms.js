@@ -7,9 +7,9 @@ export async function sendSmsOrderComplete(phone) {
       "x-api-key": process.env.SMSMANAGER_API,
     },
     body: JSON.stringify({
-      body: `Shopr - Objednávka vyřízena
+      body: `Shopr: Objednávka vyřízena
 
-Vaše objednávka čeká na zaplacení. Zkontrolujte email a objednávku zaplaťte.
+Objednávka čeká na zaplacení. Zkontrolujte email a objednávku zaplaťte.
 
 S pozdravem
 www.shopr.cz`,

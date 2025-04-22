@@ -58,7 +58,7 @@ async function pipedriveUpdateActivityWebhook(req, res) {
 
       const fromEmail = process.env.SMTP_EMAIL_INFO;
       const toEmail = subscription.email;
-      const subject = "Pravidelná objednávka splněna";
+      const subject = "Pravidelná objednávka vyřízena";
       const emailBody = emailTemplateSubscriptionProcessed(
         subscription.subName
       );
