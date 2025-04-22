@@ -363,6 +363,7 @@ export function emailTemplateSubscriptionProcessed(subName) {
               <div style="padding:16px 24px 16px 24px">
                 <img
                   alt="logo"
+                  width="100"
                   src="cid:logo@nodemailer.com"
                   style="outline:none;border:none;text-decoration:none;vertical-align:middle;display:inline-block;max-width:100%"
                 />
