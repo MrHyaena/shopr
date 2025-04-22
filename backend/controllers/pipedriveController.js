@@ -65,10 +65,15 @@ async function pipedriveUpdateActivityWebhook(req, res) {
 
       sendEmail(fromEmail, toEmail, subject, emailBody);
 
-      const smsPhone =
-        subscription.phoneCountry.toString() + subscription.phone.toString();
+      if (
+        subscription.subPayment == "card" ||
+        subscription.subPayment == "bank"
+      ) {
+        const smsPhone =
+          subscription.phoneCountry.toString() + subscription.phone.toString();
 
-      const smsResponse = await sendSmsOrderComplete(smsPhone);
+        const smsResponse = await sendSmsOrderComplete(smsPhone);
+      }
 
       //Logging the activity completion for future arguments
       const log = Sublog.create({
