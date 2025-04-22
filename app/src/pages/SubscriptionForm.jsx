@@ -80,7 +80,7 @@ export function SubscriptionForm({ setLoader }) {
   function StepOne() {
     const [firstName, setFirstName] = useState(formData.firstName);
     const [secondName, setSecondName] = useState(formData.secondName);
-    const [phoneCountry, setPhoneCountry] = useState(420);
+    const [phoneCountry, setPhoneCountry] = useState(formData.phoneCountry);
     const [phone, setPhone] = useState(formData.phone);
     const [email, setEmail] = useState(formData.email);
     const [address, setAddress] = useState(formData.address);

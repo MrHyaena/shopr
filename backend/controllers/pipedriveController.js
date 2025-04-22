@@ -65,7 +65,10 @@ async function pipedriveUpdateActivityWebhook(req, res) {
 
       sendEmail(fromEmail, toEmail, subject, emailBody);
 
-      sendSmsOrderComplete(subscription.phoneCountry + subscription.phone);
+      const smsPhone =
+        subscription.phoneCountry.toString() + subscription.phone.toString();
+
+      const smsResponse = await sendSmsOrderComplete(smsPhone);
 
       //Logging the activity completion for future arguments
       const log = Sublog.create({

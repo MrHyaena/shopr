@@ -9,7 +9,7 @@ const express = require("express");
 const {
   pipedriveUpdateActivityWebhook,
 } = require("../controllers/pipedriveController");
-const { sendSms } = require("../functions/sendSms");
+const { sendSmsOrderComplete } = require("../functions/sendSms");
 
 //creating router
 const router = express.Router();
@@ -25,9 +25,9 @@ router.post(
 
 router.post("/sms", async (req, res) => {
   try {
-    const response = await sendSms();
+    const response = await sendSmsOrderComplete("420602606331");
 
-    res.status(200).json("Sms odesláno");
+    res.status(200).json(response);
   } catch (error) {
     res.status(400).json({ zprava: "Někde je problém", error: error.message });
   }

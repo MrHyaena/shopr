@@ -9,7 +9,7 @@ export async function sendSmsOrderComplete(phone) {
     body: JSON.stringify({
       body: `Shopr - Objednávka vyřízena
 
-Vaše objednávka byla vyřízena a čeká na zaplacení. Zkontrolujte Váš email a objednávku zaplaťte.
+Vaše objednávka čeká na zaplacení. Zkontrolujte email a objednávku zaplaťte.
 
 S pozdravem
 www.shopr.cz`,

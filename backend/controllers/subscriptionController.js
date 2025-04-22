@@ -21,6 +21,7 @@ const {
 //Mongoose Models
 const Subscription = require("../models/subscriptionModel");
 const User = require("../models/userModel");
+const { sendSmsOrderComplete } = require("../functions/sendSms");
 
 //Stripe init
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
@@ -366,6 +367,12 @@ const updateSubscription = async (req, res) => {
       ...req.body,
     }
   );
+
+  const smsPhone =
+    subscription.phoneCountry.toString() + subscription.phone.toString();
+
+  const smsResponse = await sendSmsOrderComplete(smsPhone);
+
   if (!subscription) {
     return res.status(400).json({ error: "Takové předplatné neexistuje" });
   }
@@ -460,7 +467,6 @@ const updateSubscription = async (req, res) => {
   );
 
   const pipeDeal = await pipeResponse.json();
-  console.log(pipeDeal);
   if (!pipeResponse.ok) {
     throw Error(
       "Omlouváme se, předplatné nelze vytvořit. Chyba je na naší straně. (Pipedrive)"

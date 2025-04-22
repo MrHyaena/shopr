@@ -38,6 +38,9 @@ const subscriptionSchema = new Schema(
       type: String,
       required: true,
     },
+    phoneCountry: {
+      type: Number,
+    },
     phone: {
       type: Number,
       required: true,
