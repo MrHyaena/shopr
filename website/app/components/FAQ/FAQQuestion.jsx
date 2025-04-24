@@ -105,9 +105,7 @@ export default function FAQQuestion() {
           <div className="flex flex-col gap-8">
             <QuestionToggle
               question={"Můžu udělat předplatné na jakémkoliv eshopu?"}
-              answer={
-                "Předplatné můžete vytvořit na jakémkoliv e-shopu, na kterém je dostupná platba skrze dobírku nebo kartu při převzetí. Jiné omezení není."
-              }
+              answer={"Předplatné můžete vytvořit na jakémkoliv e-shopu."}
             />
             <QuestionToggle
               question={"Do kdy od platby mi objednávku vyřídíte?"}
