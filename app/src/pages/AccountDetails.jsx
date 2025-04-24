@@ -21,6 +21,7 @@ export function AccountDetails() {
     const [email, setEmail] = useState("");
     const [firstName, setFirstName] = useState("");
     const [secondName, setSecondName] = useState("");
+    const [phoneCountry, setPhoneCountry] = useState("");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
     const [addressNumber, setAddressNumber] = useState("");
@@ -33,6 +34,7 @@ export function AccountDetails() {
       setEmail(user.email);
       setFirstName(user.firstName);
       setSecondName(user.secondName);
+      setPhoneCountry(user.phoneCountry);
       setPhone(user.phone);
       setAddress(user.address);
       setAddressNumber(user.addressNumber);
@@ -53,6 +55,7 @@ export function AccountDetails() {
         email,
         firstName,
         secondName,
+        phoneCountry,
         phone,
         address,
         addressNumber,
@@ -115,14 +118,24 @@ export function AccountDetails() {
                 <label className="flex flex-col text-textDark font-semibold">
                   Telefon (povinné):
                 </label>
-                <input
-                  name="phone"
-                  type="number"
-                  onChange={(e) => {
-                    setPhone(e.target.value);
-                  }}
-                  value={phone}
-                ></input>
+                <div className="grid grid-cols-[1fr_3fr] gap-2">
+                  <input
+                    name="phone"
+                    type="number"
+                    onChange={(e) => {
+                      setPhoneCountry(e.target.value);
+                    }}
+                    value={phoneCountry}
+                  ></input>
+                  <input
+                    name="phone"
+                    type="number"
+                    onChange={(e) => {
+                      setPhone(e.target.value);
+                    }}
+                    value={phone}
+                  ></input>
+                </div>
               </div>
               <div>
                 <label className="flex flex-col text-textDark font-semibold">

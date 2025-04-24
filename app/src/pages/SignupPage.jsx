@@ -26,6 +26,7 @@ export function SignupPage() {
 
     const [firstName, setFirstName] = useState("");
     const [secondName, setSecondName] = useState("");
+    const [phoneCountry, setPhoneCountry] = useState(420);
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
     const [addressNumber, setAddressNumber] = useState("");
@@ -67,6 +68,7 @@ export function SignupPage() {
         passwordCheck,
         firstName,
         secondName,
+        phoneCountry,
         phone,
         address,
         addressNumber,
@@ -133,18 +135,31 @@ export function SignupPage() {
                 </div>
                 <div>
                   <label className="flex flex-col text-textDark  font-semibold col-span-2">
-                    Telefon:
+                    Předvolba/Telefon:
                   </label>
-                  <input
-                    name="phone"
-                    type="number"
-                    onChange={(e) => {
-                      if (e.target.value < 1000000000) {
-                        setPhone(e.target.value);
-                      }
-                    }}
-                    value={phone}
-                  ></input>
+
+                  <div className="grid grid-cols-[1fr_2fr] gap-2">
+                    <input
+                      name="phone"
+                      type="number"
+                      onChange={(e) => {
+                        if (e.target.value < 1000) {
+                          setPhoneCountry(e.target.value);
+                        }
+                      }}
+                      value={phoneCountry}
+                    ></input>
+                    <input
+                      name="phone"
+                      type="number"
+                      onChange={(e) => {
+                        if (e.target.value < 1000000000) {
+                          setPhone(e.target.value);
+                        }
+                      }}
+                      value={phone}
+                    ></input>
+                  </div>
                 </div>
                 <div>
                   <label className="flex flex-col text-textDark  font-semibold col-span-2">

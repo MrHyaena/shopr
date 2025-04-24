@@ -35,6 +35,9 @@ const userSchema = new Schema(
     secondName: {
       type: String,
     },
+    phoneCountry: {
+      type: Number,
+    },
     phone: {
       type: Number,
     },

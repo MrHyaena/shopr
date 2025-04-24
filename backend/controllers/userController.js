@@ -45,6 +45,7 @@ const signupUser = async (req, res) => {
     passwordCheck,
     firstName,
     secondName,
+    phoneCountry,
     phone,
     address,
     addressNumber,
@@ -75,6 +76,10 @@ const signupUser = async (req, res) => {
 
     if (!secondName) {
       missingData.push("Příjmení");
+    }
+
+    if (!phoneCountry) {
+      missingData.push("Předvolba");
     }
 
     if (!phone) {
@@ -174,6 +179,7 @@ const signupUser = async (req, res) => {
       stripeCustomerId: customer.id,
       firstName,
       secondName,
+      phoneCountry,
       phone,
       terms,
       marketing,
@@ -250,6 +256,7 @@ const signupUser = async (req, res) => {
       pipedrivePersonId: pipePerson.data.id,
       stripeCustomerId: user.stripeCustomerId,
       email,
+      phoneCountry,
       phone,
       firstName,
       secondName,
@@ -307,6 +314,7 @@ const loginUser = async (req, res) => {
       pipedrivePersonId: user.pipedrivePersonId,
       stripeCustomerId: user.stripeCustomerId,
       email: user.email,
+      phoneCountry: user.phoneCountry,
       phone: user.phone,
       firstName: user.firstName,
       secondName: user.secondName,
@@ -444,6 +452,7 @@ const updateUser = async (req, res) => {
     firstName,
     secondName,
     email,
+    phoneCountry,
     phone,
     address,
     addressNumber,
@@ -485,7 +494,16 @@ const updateUser = async (req, res) => {
     // ------------ MONGOOSE - UPDATING USER --------------
     const updateUser = await User.findByIdAndUpdate(
       { _id: user.id },
-      { firstName, secondName, phone, address, addressNumber, city, cityNumber }
+      {
+        firstName,
+        secondName,
+        phoneCountry,
+        phone,
+        address,
+        addressNumber,
+        city,
+        cityNumber,
+      }
     );
 
     // ------------ PIPEDRIVE - UPDATING CONTACT

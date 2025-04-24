@@ -406,7 +406,7 @@ export default function Homepage({ setLoader }) {
                   postačí jen aktivovat.
                 </p>
                 <Link
-                  to={"/form"}
+                  to={"/formular"}
                   className="bg-quad text-textButton shadow-md shadow-slate-200 mt-3 mb-5 p-3 text-xl font-semibold rounded-md transition-all ease-in-out hover:scale-105 hover:bg-tertiary"
                 >
                   Založit předplatné

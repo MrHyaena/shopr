@@ -36,7 +36,7 @@ export function SubscriptionForm({ setLoader }) {
     active: false,
     firstName: "",
     secondName: "",
-    phoneCountry: 420,
+    phoneCountry: "",
     phone: "",
     email: "",
     address: "",
@@ -127,6 +127,7 @@ export function SubscriptionForm({ setLoader }) {
       e.preventDefault();
       setFirstName(user.firstName);
       setSecondName(user.secondName);
+      setPhoneCountry(user.phoneCountry);
       setPhone(user.phone);
       setEmail(user.email);
       setAddress(user.address);
@@ -189,7 +190,7 @@ export function SubscriptionForm({ setLoader }) {
               </label>
               <div className="grid grid-cols-[1fr_3fr] gap-2">
                 <input
-                  placeholder="602605331"
+                  placeholder="420"
                   required={true}
                   value={phoneCountry}
                   onChange={(e) => {
@@ -481,8 +482,9 @@ export function SubscriptionForm({ setLoader }) {
               </div>
               <div>
                 <p>
-                  Pokud vyberete platbu kartou nebo převodem, objednávku budete
-                  muset po našem zpracování zaplatit. O tom Vás informujeme
+                  Vyberte platební způsob, který eshop nabízí. Pokud zvolíte
+                  platbu kartou nebo převodem, objednávku budete muset po našem
+                  zpracování zaplatit přímo eshopu. O tom Vás informujeme
                   emailem a SMS zprávou.
                 </p>
               </div>
