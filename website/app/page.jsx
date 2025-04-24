@@ -69,7 +69,10 @@ export default function Home() {
               <a href="https://app.shopr.cz/signup" className="buttonMiddle">
                 Vyzkoušet aplikaci
               </a>
-              <Link href="/jak-to-funguje" className="buttonMiddleWhite">
+              <Link
+                href="/jak-to-funguje"
+                className="buttonMiddleWhite text-center"
+              >
                 Jak to funguje?
               </Link>
             </div>
