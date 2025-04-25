@@ -84,6 +84,7 @@ export default function Home() {
 
           <Image
             src={heroImgTwo}
+            loading="eager"
             alt="hero"
             className="lg:block xl:max-h-[700px] h-full hidden col-span-2 object-cover object-left animate-fall-left-noBounce [clip-path:polygon(0%_0%,100%_0%,100%_100%,0%_100%,10%_50%)]"
           />
